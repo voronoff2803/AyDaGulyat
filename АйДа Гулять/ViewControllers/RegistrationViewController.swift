@@ -1,26 +1,25 @@
 //
-//  ViewController.swift
+//  RegistrationViewController.swift
 //  АйДа Гулять
 //
-//  Created by Alexey Voronov on 01.10.2022.
+//  Created by Alexey Voronov on 13.10.2022.
 //
 
 import UIKit
-import Then
 import SnapKit
+import Then
 
 
-class ViewController: AppRootViewController, TextFieldNextable {
+class RegistrationViewController: AppRootViewController, TextFieldNextable {
     var baseConstraints: [Constraint] = []
     var keyboardShowConstraints: [Constraint] = []
-    var testConstraint: Constraint?
     
     let logoImageView = ScalableImageView(image: UIImage.appImage(.logo)).then {
         $0.contentMode = .scaleAspectFit
     }
     let titleLabel = Label().then {
-        $0.text = "Вход"
-        $0.font = $0.font.withSize(22)
+        $0.text = "Регистрация"
+        $0.font = .montserratRegular(size: 22)
     }
     let emailTextField = DefaultTextField().then {
         $0.placeholder = "E-mail"
@@ -31,20 +30,32 @@ class ViewController: AppRootViewController, TextFieldNextable {
     let passwordTextField = PasswordTextField().then {
         $0.placeholder = "Пароль"
     }
-    let forgotPasswordButton = LabelButton().then {
-        $0.setTitle("Забыли пароль?", for: .normal)
+    let registrationButton = DefaultButton().then {
+        $0.setTitle("Зарегистрироваться", for: .normal)
     }
-    let loginButton = DefaultButton().then {
+
+    let noAccountLabel = Label().then {
+        $0.text = "Есть аккаунт?"
+    }
+    let loginButton = LabelButton().then {
         $0.setTitle("Войти", for: .normal)
     }
-    let authGoogle = DefaultButton(style: .bordered, leftIcon: .appImage(.googleIcon)).then {
-        $0.setTitle("Продолжить с Google", for: .normal)
-    }
-    let noAccountLabel = Label().then {
-        $0.text = "Нет аккаунта?"
-    }
-    let registrationButton = LabelButton().then {
-        $0.setTitle("Регистрация", for: .normal)
+    let descriptionLabel = UITextView().then {
+        let attributedString = NSMutableAttributedString(string: "Нажимая кнопку, я соглашаюсь с пользовательским соглашением и даю согласие на обработку персональных данных")
+        let linkAttributes: [NSAttributedString.Key : Any] = [
+            NSAttributedString.Key.foregroundColor: UIColor.appColor(.blue),
+            NSAttributedString.Key.underlineColor: UIColor.appColor(.blue),
+            NSAttributedString.Key.underlineStyle: 0
+        ]
+        attributedString.addAttribute(.link, value: "terms", range: NSRange(location: 31, length: 28))
+        $0.linkTextAttributes = linkAttributes
+        $0.attributedText = attributedString
+        $0.font = .montserratRegular(size: 15)
+        $0.textColor = .appColor(.grayEmpty)
+        $0.textAlignment = .center
+        $0.isEditable = false
+        $0.isUserInteractionEnabled = true
+        $0.backgroundColor = .clear
     }
     
     override var isKeyboardHidden: Bool {
@@ -60,38 +71,35 @@ class ViewController: AppRootViewController, TextFieldNextable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        
+        loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
     }
     
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
         
-        let registerButtonStack = UIStackView(arrangedSubviews: [noAccountLabel, registrationButton])
+        let registerButtonStack = UIStackView(arrangedSubviews: [noAccountLabel, loginButton])
         registerButtonStack.axis = .horizontal
         registerButtonStack.spacing = 8
         
-        [logoImageView, titleLabel, emailTextField, passwordTextField, forgotPasswordButton, loginButton, authGoogle, registerButtonStack].forEach({self.view.addSubview($0)})
+        [logoImageView, titleLabel, emailTextField, passwordTextField, registrationButton, registerButtonStack, descriptionLabel].forEach({self.view.addSubview($0)})
+        
+        descriptionLabel.delegate = self
         
         logoImageView.snp.makeConstraints { make in
             self.baseConstraints.append(make.centerX.equalToSuperview().constraint)
             self.baseConstraints.append(make.top.equalTo(self.view.safeAreaLayoutGuide).inset(30).constraint)
             self.baseConstraints.append(make.width.height.equalTo(83).constraint)
-        }
-
-        logoImageView.snp.makeConstraints { make in
             self.keyboardShowConstraints.append(make.left.equalTo(self.view.safeAreaLayoutGuide).inset(28).priority(.low).constraint)
             self.keyboardShowConstraints.append(make.bottom.equalTo(emailTextField.snp.top).offset(-20).constraint)
-            
             self.keyboardShowConstraints.append(make.width.height.equalTo(30).priority(.low).constraint)
         }
         
         titleLabel.snp.makeConstraints { make in
             self.baseConstraints.append(make.centerX.equalToSuperview().constraint)
             self.baseConstraints.append(make.top.equalTo(logoImageView.snp.bottom).offset(30).constraint)
-        }
-        
-        titleLabel.snp.makeConstraints { make in
             self.keyboardShowConstraints.append(make.centerY.equalTo(logoImageView).priority(.low).constraint)
-            self.keyboardShowConstraints.append(make.left.equalTo(logoImageView.snp.right).offset(8).priority(.low).constraint)
+            self.keyboardShowConstraints.append(make.left.equalTo(self.view.safeAreaLayoutGuide).inset(60).priority(.low).constraint)
         }
         
         self.keyboardShowConstraints.forEach({$0.isActive = false})
@@ -106,27 +114,39 @@ class ViewController: AppRootViewController, TextFieldNextable {
             make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
         }
         
-        forgotPasswordButton.snp.makeConstraints { make in
-            make.left.equalTo(self.view.safeAreaLayoutGuide).inset(28)
-            make.top.equalTo(passwordTextField.snp.bottom).offset(25)
-        }
-        
-        loginButton.snp.makeConstraints { make in
+        registrationButton.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
             make.top.equalTo(passwordTextField.snp.bottom).offset(70)
         }
         
-        keyboardAvoidView = loginButton
+        keyboardAvoidView = registrationButton
         
         registerButtonStack.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(28)
         }
         
-        authGoogle.snp.makeConstraints { make in
-            make.bottom.equalTo(registerButtonStack.snp.top).offset(-21)
-            make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
+        descriptionLabel.snp.makeConstraints { make in
+            make.top.equalTo(registrationButton.snp.bottom).offset(24)
+            make.centerX.equalToSuperview()
+            make.width.equalTo(290)
+            make.height.equalTo(90)
         }
+    }
+    
+    @objc func loginAction() {
+        //loginButton.isLoading.toggle()
+    }
+    
+    @objc func registrationAction() {
+        registrationButton.isLoading.toggle()
     }
 }
 
+
+extension RegistrationViewController: UITextViewDelegate {
+    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
+        print(URL.absoluteString)
+        return false
+    }
+}

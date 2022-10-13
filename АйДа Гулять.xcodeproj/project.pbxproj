@@ -23,7 +23,7 @@
 		0D3C521D28F585A900F91D0C /* TextFieldNextable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C521C28F585A900F91D0C /* TextFieldNextable.swift */; };
 		0D3C521F28F58C2000F91D0C /* UIView+parentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C521E28F58C2000F91D0C /* UIView+parentVC.swift */; };
 		0D50E5D028E8593C006DB37A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D50E5CF28E8593C006DB37A /* AppDelegate.swift */; };
-		0D50E5D428E8593C006DB37A /* ViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D50E5D328E8593C006DB37A /* ViewController.swift */; };
+		0D50E5D428E8593C006DB37A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D50E5D328E8593C006DB37A /* AuthViewController.swift */; };
 		0D50E5D928E8593D006DB37A /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 0D50E5D828E8593D006DB37A /* Assets.xcassets */; };
 		0D50E5DC28E8593D006DB37A /* LaunchScreen.storyboard in Resources */ = {isa = PBXBuildFile; fileRef = 0D50E5DA28E8593D006DB37A /* LaunchScreen.storyboard */; };
 		0D50E5E528E85A9C006DB37A /* SnapKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D50E5E428E85A9C006DB37A /* SnapKit */; };
@@ -34,6 +34,10 @@
 		0D5E66CE28F09D770094C949 /* SplashViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5E66CB28F09D770094C949 /* SplashViewController.swift */; };
 		0D5E66CF28F09D770094C949 /* SplashPresenter.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D5E66CC28F09D770094C949 /* SplashPresenter.swift */; };
 		0D5E66D228F0BB220094C949 /* Lottie in Frameworks */ = {isa = PBXBuildFile; productRef = 0D5E66D128F0BB220094C949 /* Lottie */; };
+		0D81D0AF28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0AE28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift */; };
+		0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */; };
+		0D81D0B328F8734000AB33D3 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */; };
+		0D81D0B528F883F000AB33D3 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B428F883F000AB33D3 /* RegistrationViewController.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -54,7 +58,7 @@
 		0D3C521E28F58C2000F91D0C /* UIView+parentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+parentVC.swift"; sourceTree = "<group>"; };
 		0D50E5CC28E8593C006DB37A /* АйДа Гулять.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "АйДа Гулять.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D50E5CF28E8593C006DB37A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
-		0D50E5D328E8593C006DB37A /* ViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ViewController.swift; sourceTree = "<group>"; };
+		0D50E5D328E8593C006DB37A /* AuthViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewController.swift; sourceTree = "<group>"; };
 		0D50E5D828E8593D006DB37A /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
 		0D50E5DB28E8593D006DB37A /* Base */ = {isa = PBXFileReference; lastKnownFileType = file.storyboard; name = Base; path = Base.lproj/LaunchScreen.storyboard; sourceTree = "<group>"; };
 		0D50E5DD28E8593D006DB37A /* Info.plist */ = {isa = PBXFileReference; lastKnownFileType = text.plist.xml; path = Info.plist; sourceTree = "<group>"; };
@@ -62,6 +66,10 @@
 		0D5E66CA28F09D770094C949 /* SplashAnimator.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashAnimator.swift; sourceTree = "<group>"; };
 		0D5E66CB28F09D770094C949 /* SplashViewController.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashViewController.swift; sourceTree = "<group>"; };
 		0D5E66CC28F09D770094C949 /* SplashPresenter.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SplashPresenter.swift; sourceTree = "<group>"; };
+		0D81D0AE28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverPasswordEmailViewController.swift; sourceTree = "<group>"; };
+		0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeViewController.swift; sourceTree = "<group>"; };
+		0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
+		0D81D0B428F883F000AB33D3 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -117,7 +125,11 @@
 		0D3C521B28F5852500F91D0C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0D50E5D328E8593C006DB37A /* ViewController.swift */,
+				0D50E5D328E8593C006DB37A /* AuthViewController.swift */,
+				0D81D0AE28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift */,
+				0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */,
+				0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */,
+				0D81D0B428F883F000AB33D3 /* RegistrationViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -260,7 +272,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D3C521A28F5836500F91D0C /* AppRootViewController.swift in Sources */,
-				0D50E5D428E8593C006DB37A /* ViewController.swift in Sources */,
+				0D50E5D428E8593C006DB37A /* AuthViewController.swift in Sources */,
+				0D81D0B328F8734000AB33D3 /* NewPasswordViewController.swift in Sources */,
+				0D81D0AF28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift in Sources */,
 				0D2016D328E89789003E673E /* UIFont+customFont.swift in Sources */,
 				0D3C520A28F4A17900F91D0C /* UIImage+assets.swift in Sources */,
 				0D50E5D028E8593C006DB37A /* AppDelegate.swift in Sources */,
@@ -271,7 +285,9 @@
 				0D3C521428F56DEB00F91D0C /* DefaultButton.swift in Sources */,
 				0D3C521028F4AF9100F91D0C /* LabelButton.swift in Sources */,
 				0D3C521828F582CF00F91D0C /* UIViewController+hideKeyboard.swift in Sources */,
+				0D81D0B528F883F000AB33D3 /* RegistrationViewController.swift in Sources */,
 				0D3C521628F57C1200F91D0C /* PasswordTextField.swift in Sources */,
+				0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */,
 				0D5BD10628F5CA1700DD1496 /* ScalableImageView.swift in Sources */,
 				0D5E66CF28F09D770094C949 /* SplashPresenter.swift in Sources */,
 				0D5E66CE28F09D770094C949 /* SplashViewController.swift in Sources */,

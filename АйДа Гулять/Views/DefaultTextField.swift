@@ -11,18 +11,34 @@ import SnapKit
 class DefaultTextField: UITextField {
     private let centerInset: CGPoint = CGPoint(x: 0, y: 0)
     private let bottomBorder = UIView()
+    private let descriptionText = UILabel().then {
+        $0.font = UIFont.montserratRegular(size: 13)
+        $0.numberOfLines = 0
+        $0.textColor = .appColor(.grayEmpty)
+        $0.textAlignment = .left
+    }
+    
+    var descriptionTextString: String = "" {
+        didSet {
+            descriptionText.text = descriptionTextString
+        }
+    }
     
     var fieldState: State = .empty {
         didSet {
             switch fieldState {
             case .empty:
                 bottomBorder.backgroundColor = .appColor(.grayEmpty)
+                descriptionText.textColor = .appColor(.grayEmpty)
             case .fill:
                 bottomBorder.backgroundColor = .appColor(.black)
+                descriptionText.textColor = .appColor(.grayEmpty)
             case .error:
                 bottomBorder.backgroundColor = .appColor(.red)
+                descriptionText.textColor = .appColor(.red)
             case .success:
                 bottomBorder.backgroundColor = .appColor(.green)
+                descriptionText.textColor = .appColor(.grayEmpty)
             }
         }
     }
@@ -60,6 +76,7 @@ class DefaultTextField: UITextField {
         fieldState = {fieldState}()
         
         self.addSubview(bottomBorder)
+        self.addSubview(descriptionText)
         
         bottomBorder.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
@@ -67,8 +84,13 @@ class DefaultTextField: UITextField {
             make.horizontalEdges.equalToSuperview()
         }
         
+        descriptionText.snp.makeConstraints { make in
+            make.top.equalTo(bottomBorder.snp.bottom).offset(6)
+            make.horizontalEdges.equalToSuperview()
+        }
+        
         self.snp.makeConstraints { make in
-            make.height.equalTo(55)
+            make.height.greaterThanOrEqualTo(55)
         }
         
         self.addTarget(self, action: #selector(returnKeyAction), for: .primaryActionTriggered)
@@ -87,7 +109,7 @@ class DefaultTextField: UITextField {
             case .action(let action):
                 action?()
             }
-            self.resignFirstResponder()
+            let _ = self.resignFirstResponder()
         }
     }
     

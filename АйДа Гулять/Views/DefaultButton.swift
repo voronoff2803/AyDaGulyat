@@ -6,11 +6,23 @@
 //
 
 import UIKit
+import Lottie
 
 class DefaultButton: UIButton {
+    private var animationView = AnimationView().then {
+        $0.isHidden = true
+        $0.loopMode = .loop
+        $0.isUserInteractionEnabled = false
+        $0.tag = 22
+    }
+    
     var isLoading = false {
         didSet {
-            
+            UIView.animate(withDuration: 0.2) {
+                self.subviews.filter({$0.tag != 22}).forEach({$0.alpha = self.isLoading ? 0.0 : 1.0})
+            }
+            animationView.isHidden = !isLoading
+            if isLoading { animationView.play() } else { animationView.stop() }
         }
     }
     
@@ -60,7 +72,9 @@ class DefaultButton: UIButton {
         setupUI()
     }
     
-    func setupUI() {
+    private func setupUI() {
+        self.addSubview(animationView)
+        
         self.layer.cornerRadius = 4
         buttonStyle = {buttonStyle}()
         
@@ -68,11 +82,18 @@ class DefaultButton: UIButton {
             make.height.equalTo(55)
         }
         
+        animationView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+            make.height.equalTo(40)
+        }
+        
         self.titleLabel?.font = .montserratRegular(size: 16)
+        
+        let animation = Animation.asset(buttonStyle == .filled ? "loadAnimmationWhite" : "loadAnimmationBlack")
+        animationView.animation = animation
     }
     
-    func addLeftIcon(image: UIImage) {
-        
+    private func addLeftIcon(image: UIImage) {
         let imageView = UIImageView(image: image)
         imageView.translatesAutoresizingMaskIntoConstraints = false
         imageView.sizeToFit()
