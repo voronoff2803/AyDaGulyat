@@ -15,6 +15,12 @@ enum AssetsImage: String {
     case closeEye
     case openEye
     case googleIcon
+    case close
+    case content1
+    case content2
+    case emptyContent
+    case plusContent
+    case cameraButton
 }
 
 extension UIImage {

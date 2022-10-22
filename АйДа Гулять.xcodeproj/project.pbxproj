@@ -7,10 +7,20 @@
 	objects = {
 
 /* Begin PBXBuildFile section */
+		0D20142829001440008C2C90 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20142729001440008C2C90 /* TutorialViewController.swift */; };
+		0D20142A290015A8008C2C90 /* TutorialPageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D201429290015A8008C2C90 /* TutorialPageContentViewController.swift */; };
+		0D20142C290017B7008C2C90 /* AttributedString+markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */; };
+		0D20142F290017FF008C2C90 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D20142E290017FF008C2C90 /* MarkdownKit */; };
+		0D20143129005AC9008C2C90 /* TutorialContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20143029005AC9008C2C90 /* TutorialContentModel.swift */; };
+		0D2014352903F3F3008C2C90 /* Jelly in Frameworks */ = {isa = PBXBuildFile; productRef = 0D2014342903F3F3008C2C90 /* Jelly */; };
+		0D2014372903F4B5008C2C90 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2014362903F4B5008C2C90 /* ProfileViewController.swift */; };
+		0D2014392903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2014382903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift */; };
+		0D20143B290402EC008C2C90 /* PagingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20143A290402EC008C2C90 /* PagingCollectionViewLayout.swift */; };
 		0D2016CF28E896D0003E673E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D2016CD28E8963F003E673E /* Montserrat-SemiBold.ttf */; };
 		0D2016D028E896D0003E673E /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D2016CC28E89636003E673E /* Montserrat-Medium.ttf */; };
 		0D2016D128E896D0003E673E /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D2016CB28E8962D003E673E /* Montserrat-Regular.ttf */; };
 		0D2016D328E89789003E673E /* UIFont+customFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2016D228E89789003E673E /* UIFont+customFont.swift */; };
+		0D227BCB28F9D7180026CDAA /* DefaultAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D227BCA28F9D7180026CDAA /* DefaultAlertViewController.swift */; };
 		0D3C520828F4A17000F91D0C /* UIColor+assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C520728F4A17000F91D0C /* UIColor+assets.swift */; };
 		0D3C520A28F4A17900F91D0C /* UIImage+assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C520928F4A17900F91D0C /* UIImage+assets.swift */; };
 		0D3C520E28F4A88500F91D0C /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C520D28F4A88500F91D0C /* DefaultTextField.swift */; };
@@ -41,10 +51,18 @@
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
+		0D20142729001440008C2C90 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
+		0D201429290015A8008C2C90 /* TutorialPageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageContentViewController.swift; sourceTree = "<group>"; };
+		0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+markdown.swift"; sourceTree = "<group>"; };
+		0D20143029005AC9008C2C90 /* TutorialContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentModel.swift; sourceTree = "<group>"; };
+		0D2014362903F4B5008C2C90 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0D2014382903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAvatarCollectionViewCell.swift; sourceTree = "<group>"; };
+		0D20143A290402EC008C2C90 /* PagingCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewLayout.swift; sourceTree = "<group>"; };
 		0D2016CB28E8962D003E673E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		0D2016CC28E89636003E673E /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		0D2016CD28E8963F003E673E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		0D2016D228E89789003E673E /* UIFont+customFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+customFont.swift"; sourceTree = "<group>"; };
+		0D227BCA28F9D7180026CDAA /* DefaultAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlertViewController.swift; sourceTree = "<group>"; };
 		0D3C520728F4A17000F91D0C /* UIColor+assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+assets.swift"; sourceTree = "<group>"; };
 		0D3C520928F4A17900F91D0C /* UIImage+assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+assets.swift"; sourceTree = "<group>"; };
 		0D3C520D28F4A88500F91D0C /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
@@ -78,7 +96,9 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D50E5E528E85A9C006DB37A /* SnapKit in Frameworks */,
+				0D20142F290017FF008C2C90 /* MarkdownKit in Frameworks */,
 				0D50E5EE28E85CEE006DB37A /* Then in Frameworks */,
+				0D2014352903F3F3008C2C90 /* Jelly in Frameworks */,
 				0D50E5E828E85ABC006DB37A /* Alamofire in Frameworks */,
 				0D5E66D228F0BB220094C949 /* Lottie in Frameworks */,
 			);
@@ -87,6 +107,14 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D20143229005AD3008C2C90 /* Models */ = {
+			isa = PBXGroup;
+			children = (
+				0D20143029005AC9008C2C90 /* TutorialContentModel.swift */,
+			);
+			path = Models;
+			sourceTree = "<group>";
+		};
 		0D2016CE28E89645003E673E /* Resources */ = {
 			isa = PBXGroup;
 			children = (
@@ -107,6 +135,7 @@
 				0D3C520928F4A17900F91D0C /* UIImage+assets.swift */,
 				0D3C521728F582CF00F91D0C /* UIViewController+hideKeyboard.swift */,
 				0D3C521E28F58C2000F91D0C /* UIView+parentVC.swift */,
+				0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -130,6 +159,10 @@
 				0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */,
 				0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */,
 				0D81D0B428F883F000AB33D3 /* RegistrationViewController.swift */,
+				0D227BCA28F9D7180026CDAA /* DefaultAlertViewController.swift */,
+				0D20142729001440008C2C90 /* TutorialViewController.swift */,
+				0D201429290015A8008C2C90 /* TutorialPageContentViewController.swift */,
+				0D2014362903F4B5008C2C90 /* ProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -153,12 +186,14 @@
 		0D50E5CE28E8593C006DB37A /* АйДа Гулять */ = {
 			isa = PBXGroup;
 			children = (
+				0D20143A290402EC008C2C90 /* PagingCollectionViewLayout.swift */,
 				0D5E66C928F09D770094C949 /* SplashScreen */,
 				0D3C520C28F4A52E00F91D0C /* AppRoot */,
+				0D20143229005AD3008C2C90 /* Models */,
 				0D3C521B28F5852500F91D0C /* ViewControllers */,
+				0D50E5EB28E85B9D006DB37A /* Views */,
 				0D3C520B28F4A50D00F91D0C /* Extensions */,
 				0D2016CE28E89645003E673E /* Resources */,
-				0D50E5EB28E85B9D006DB37A /* Views */,
 			);
 			path = "АйДа Гулять";
 			sourceTree = "<group>";
@@ -172,6 +207,7 @@
 				0D3C521128F4B42D00F91D0C /* Label.swift */,
 				0D3C521328F56DEB00F91D0C /* DefaultButton.swift */,
 				0D5BD10528F5CA1700DD1496 /* ScalableImageView.swift */,
+				0D2014382903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -207,6 +243,8 @@
 				0D50E5E728E85ABC006DB37A /* Alamofire */,
 				0D50E5ED28E85CEE006DB37A /* Then */,
 				0D5E66D128F0BB220094C949 /* Lottie */,
+				0D20142E290017FF008C2C90 /* MarkdownKit */,
+				0D2014342903F3F3008C2C90 /* Jelly */,
 			);
 			productName = "АйДа Гулять";
 			productReference = 0D50E5CC28E8593C006DB37A /* АйДа Гулять.app */;
@@ -241,6 +279,8 @@
 				0D50E5E628E85ABC006DB37A /* XCRemoteSwiftPackageReference "Alamofire" */,
 				0D50E5EC28E85CEE006DB37A /* XCRemoteSwiftPackageReference "Then" */,
 				0D5E66D028F0BB220094C949 /* XCRemoteSwiftPackageReference "lottie-ios" */,
+				0D20142D290017FF008C2C90 /* XCRemoteSwiftPackageReference "MarkdownKit" */,
+				0D2014332903F3F3008C2C90 /* XCRemoteSwiftPackageReference "Jelly" */,
 			);
 			productRefGroup = 0D50E5CD28E8593C006DB37A /* Products */;
 			projectDirPath = "";
@@ -274,16 +314,24 @@
 				0D3C521A28F5836500F91D0C /* AppRootViewController.swift in Sources */,
 				0D50E5D428E8593C006DB37A /* AuthViewController.swift in Sources */,
 				0D81D0B328F8734000AB33D3 /* NewPasswordViewController.swift in Sources */,
+				0D20143129005AC9008C2C90 /* TutorialContentModel.swift in Sources */,
 				0D81D0AF28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift in Sources */,
 				0D2016D328E89789003E673E /* UIFont+customFont.swift in Sources */,
 				0D3C520A28F4A17900F91D0C /* UIImage+assets.swift in Sources */,
 				0D50E5D028E8593C006DB37A /* AppDelegate.swift in Sources */,
+				0D20143B290402EC008C2C90 /* PagingCollectionViewLayout.swift in Sources */,
 				0D3C521228F4B42D00F91D0C /* Label.swift in Sources */,
 				0D3C520E28F4A88500F91D0C /* DefaultTextField.swift in Sources */,
+				0D20142C290017B7008C2C90 /* AttributedString+markdown.swift in Sources */,
 				0D3C521F28F58C2000F91D0C /* UIView+parentVC.swift in Sources */,
+				0D20142829001440008C2C90 /* TutorialViewController.swift in Sources */,
 				0D3C520828F4A17000F91D0C /* UIColor+assets.swift in Sources */,
+				0D20142A290015A8008C2C90 /* TutorialPageContentViewController.swift in Sources */,
+				0D2014392903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift in Sources */,
 				0D3C521428F56DEB00F91D0C /* DefaultButton.swift in Sources */,
 				0D3C521028F4AF9100F91D0C /* LabelButton.swift in Sources */,
+				0D227BCB28F9D7180026CDAA /* DefaultAlertViewController.swift in Sources */,
+				0D2014372903F4B5008C2C90 /* ProfileViewController.swift in Sources */,
 				0D3C521828F582CF00F91D0C /* UIViewController+hideKeyboard.swift in Sources */,
 				0D81D0B528F883F000AB33D3 /* RegistrationViewController.swift in Sources */,
 				0D3C521628F57C1200F91D0C /* PasswordTextField.swift in Sources */,
@@ -506,6 +554,22 @@
 /* End XCConfigurationList section */
 
 /* Begin XCRemoteSwiftPackageReference section */
+		0D20142D290017FF008C2C90 /* XCRemoteSwiftPackageReference "MarkdownKit" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/bmoliveira/MarkdownKit";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		0D2014332903F3F3008C2C90 /* XCRemoteSwiftPackageReference "Jelly" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/SebastianBoldt/Jelly";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		0D50E5E328E85A9C006DB37A /* XCRemoteSwiftPackageReference "SnapKit" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/SnapKit/SnapKit";
@@ -541,6 +605,16 @@
 /* End XCRemoteSwiftPackageReference section */
 
 /* Begin XCSwiftPackageProductDependency section */
+		0D20142E290017FF008C2C90 /* MarkdownKit */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D20142D290017FF008C2C90 /* XCRemoteSwiftPackageReference "MarkdownKit" */;
+			productName = MarkdownKit;
+		};
+		0D2014342903F3F3008C2C90 /* Jelly */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D2014332903F3F3008C2C90 /* XCRemoteSwiftPackageReference "Jelly" */;
+			productName = Jelly;
+		};
 		0D50E5E428E85A9C006DB37A /* SnapKit */ = {
 			isa = XCSwiftPackageProductDependency;
 			package = 0D50E5E328E85A9C006DB37A /* XCRemoteSwiftPackageReference "SnapKit" */;

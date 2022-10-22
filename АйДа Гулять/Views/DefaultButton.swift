@@ -29,13 +29,13 @@ class DefaultButton: UIButton {
     var buttonStyle: Style = .filled {
         didSet {
             switch buttonStyle {
-            case .filled:
+            case .filled, .filledAlert:
                 self.setTitleColor(.appColor(.labelOnButton), for: .normal)
                 self.backgroundColor = .appColor(.black)
                 self.layer.borderWidth = 0
-            case .bordered:
+            case .bordered, .borderedAlert:
                 self.setTitleColor(.appColor(.black), for: .normal)
-                self.backgroundColor = .appColor(.backgroundFirst)
+                self.backgroundColor = buttonStyle == .bordered ? .appColor(.backgroundFirst) : .clear
                 self.layer.borderWidth = 1
                 self.layer.borderColor = UIColor.appColor(.grayEmpty).cgColor
             }
@@ -79,7 +79,12 @@ class DefaultButton: UIButton {
         buttonStyle = {buttonStyle}()
         
         self.snp.makeConstraints { make in
-            make.height.equalTo(55)
+            switch buttonStyle {
+            case .filled, .bordered:
+                make.height.equalTo(55)
+            case .filledAlert, .borderedAlert:
+                make.height.equalTo(34)
+            }
         }
         
         animationView.snp.makeConstraints { make in
@@ -87,7 +92,12 @@ class DefaultButton: UIButton {
             make.height.equalTo(40)
         }
         
-        self.titleLabel?.font = .montserratRegular(size: 16)
+        switch buttonStyle {
+        case .filled, .bordered:
+            self.titleLabel?.font = .montserratRegular(size: 16)
+        case .filledAlert, .borderedAlert:
+            self.titleLabel?.font = .montserratRegular(size: 14)
+        }
         
         let animation = Animation.asset(buttonStyle == .filled ? "loadAnimmationWhite" : "loadAnimmationBlack")
         animationView.animation = animation
@@ -119,6 +129,8 @@ class DefaultButton: UIButton {
     enum Style {
         case filled
         case bordered
+        case filledAlert
+        case borderedAlert
     }
 }
 

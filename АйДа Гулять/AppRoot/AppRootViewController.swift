@@ -56,4 +56,13 @@ class AppRootViewController: UIViewController {
             self.view.layoutIfNeeded()
         }
     }
+    
+    func showAlert(buttons: [DefaultButton] = []) {
+        let defaultAlertViewController = DefaultAlertViewController()
+        buttons.forEach({defaultAlertViewController.stackView.addArrangedSubview($0)})
+        
+        let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
+        alertController.setValue(defaultAlertViewController, forKey: "contentViewController")
+        self.present(alertController, animated: true, completion: nil)
+    }
 }

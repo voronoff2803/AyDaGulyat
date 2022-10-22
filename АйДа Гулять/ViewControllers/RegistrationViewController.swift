@@ -136,6 +136,15 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
     
     @objc func loginAction() {
         //loginButton.isLoading.toggle()
+        let firstButton = DefaultButton(style: .filledAlert).then {
+            $0.setTitle("Проверка", for: .normal)
+        }
+        
+        let secondButton = DefaultButton(style: .borderedAlert).then {
+            $0.setTitle("Проверка", for: .normal)
+        }
+        
+        showAlert(buttons: [firstButton, secondButton])
     }
     
     @objc func registrationAction() {

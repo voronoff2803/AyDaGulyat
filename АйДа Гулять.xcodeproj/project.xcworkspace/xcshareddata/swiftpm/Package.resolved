@@ -10,12 +10,30 @@
       }
     },
     {
+      "identity" : "jelly",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/SebastianBoldt/Jelly",
+      "state" : {
+        "revision" : "41d295af01c80b5c8386f852c1fd938b8034fa25",
+        "version" : "2.3.0"
+      }
+    },
+    {
       "identity" : "lottie-ios",
       "kind" : "remoteSourceControl",
       "location" : "https://github.com/airbnb/lottie-ios",
       "state" : {
         "revision" : "314537ec697719fa33a9d48210f4d06a463286d3",
         "version" : "3.4.3"
+      }
+    },
+    {
+      "identity" : "markdownkit",
+      "kind" : "remoteSourceControl",
+      "location" : "https://github.com/bmoliveira/MarkdownKit",
+      "state" : {
+        "revision" : "5056f3305d3499f44d8815530d560b87082e0cf5",
+        "version" : "1.7.1"
       }
     },
     {
