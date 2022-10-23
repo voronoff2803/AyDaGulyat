@@ -8,7 +8,7 @@
 import UIKit
 
 
-class ProfileViewController: UIViewController {
+class ProfileViewController: AppRootViewController {
     var dogs: [DogAvatarModel] = [] {
         didSet {
             self.pageControlView.numberOfPages = dogs.count
@@ -66,6 +66,16 @@ class ProfileViewController: UIViewController {
         
         self.dogsCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .centeredHorizontally, animated: false)
         self.updateCellsLayout()
+        
+        let button1 = DefaultButton(style: .filledAlert).then {
+            $0.setTitle("Разрешить", for: .normal)
+        }
+        
+        let button2 = DefaultButton(style: .borderedAlert).then {
+            $0.setTitle("Не сейчас", for: .normal)
+        }
+        
+        showAlert(buttons: [button1, button2])
     }
     
     @objc private func pageControlHandle(sender: UIPageControl){
@@ -155,16 +165,21 @@ extension ProfileViewController: UICollectionViewDelegate {
         if indexPath.row == dogs.count + 1 {
             dogs.append(DogAvatarModel.empty)
             self.dogsCollectionView.insertItems(at: [indexPath])
+            DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+                self.dogsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
+            }
         } else {
-            if (collectionView.cellForItem(at: indexPath)?.frame.width ?? 0) > 80 {
+            if (collectionView.cellForItem(at: indexPath)?.frame.width ?? 0) > 90 {
                 dogs[indexPath.row - 1] = .normal(.appImage(.content2))
                 if let cell = collectionView.cellForItem(at: indexPath) as? DogAvatarCollectionViewCell {
                     cell.setup(model: dogs[indexPath.row - 1])
                 }
             }
+            
+            self.dogsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
         }
         
-        self.dogsCollectionView.scrollToItem(at: indexPath, at: .centeredHorizontally, animated: true)
-        //pageControlView.currentPage = indexPath.row - 1
+        
+        self.updateCellsLayout()
     }
 }
