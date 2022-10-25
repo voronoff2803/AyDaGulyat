@@ -8,7 +8,11 @@
 import UIKit
 
 class PasswordTextField: DefaultTextField {
-    private let rightAccessoryButton = UIButton(frame: .zero)
+    private let rightAccessoryButton = UIButton(frame: .zero).then {
+        $0.snp.makeConstraints { make in
+            make.width.equalTo(42)
+        }
+    }
     
     var isHiddenContent: Bool = true {
         didSet {

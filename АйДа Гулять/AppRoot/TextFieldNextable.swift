@@ -18,7 +18,7 @@ protocol TextFieldNextable: UIViewController {
 
 extension TextFieldNextable {
     func nextFieldOrActoin(for textField: UITextField) -> TextFieldOrAction {
-        let textFields: [UITextField] = self.view.subviews.compactMap({$0 as? UITextField})
+        let textFields: [UITextField] = self.getAllTextFields(fromView: self.view)
         guard let index = textFields.firstIndex(of: textField),
               (index + 1) < textFields.count
         else {
@@ -28,5 +28,15 @@ extension TextFieldNextable {
         let nextTextField = textFields[index + 1]
         
         return TextFieldOrAction.nextTextField(nextTextField)
+    }
+    
+    private func getAllTextFields(fromView view: UIView)-> [UITextField] {
+        return view.subviews.flatMap { (view) -> [UITextField] in
+            if view is UITextField {
+                return [(view as! UITextField)]
+            } else {
+                return getAllTextFields(fromView: view)
+            }
+        }.compactMap({$0})
     }
 }

@@ -17,30 +17,26 @@ class PagingCollectionViewLayout: UICollectionViewFlowLayout
         {
             let halfWidthOfVC = collectionViewBounds.size.width * 0.5
             let proposedContentOffsetCenterX = proposedContentOffset.x + halfWidthOfVC
-            if let attributesForVisibleCells = self.layoutAttributesForElements(in: collectionViewBounds)
-            {
+            if let attributesForVisibleCells = self.layoutAttributesForElements(in: collectionViewBounds) {
                 var candidateAttribute : UICollectionViewLayoutAttributes?
-                for attributes in attributesForVisibleCells
-                {
+                for attributes in attributesForVisibleCells {
+                    if attributes.indexPath.row == 0 { continue }
+                    if attributes.indexPath.row + 1 == collectionView?.numberOfItems(inSection: 0) { continue }
                     let candAttr : UICollectionViewLayoutAttributes? = candidateAttribute
-                    if candAttr != nil
-                    {
+                    if candAttr != nil {
                         let a = attributes.center.x - proposedContentOffsetCenterX
                         let b = candAttr!.center.x - proposedContentOffsetCenterX
-                        if abs(a) < abs(b)
-                        {
+                        if abs(a) < abs(b) {
                             candidateAttribute = attributes
                         }
                     }
-                    else
-                    {
+                    else {
                         candidateAttribute = attributes
                         continue
                     }
                 }
                 
-                if candidateAttribute != nil
-                {
+                if candidateAttribute != nil {
                     return CGPoint(x: candidateAttribute!.center.x - halfWidthOfVC, y: proposedContentOffset.y);
                 }
             }

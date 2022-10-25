@@ -32,7 +32,10 @@ class AppRootViewController: UIViewController {
             isKeyboardHidden = false
             
             let keyboardRectangle = keyboardFrame.cgRectValue
-            let keyboardHeight = keyboardRectangle.height + 28
+            
+            let isScrollView = keyboardAvoidView?.tag == 22
+            
+            let keyboardHeight = keyboardRectangle.height + (isScrollView ? 0 : 28)
             guard let keyboardAvoidView = keyboardAvoidView else { return }
             
             UIView.animate(withDuration: 0.5, delay: 0.0, options: []) {

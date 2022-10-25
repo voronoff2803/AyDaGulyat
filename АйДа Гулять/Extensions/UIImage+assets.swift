@@ -21,6 +21,7 @@ enum AssetsImage: String {
     case emptyContent
     case plusContent
     case cameraButton
+    case dismiss
 }
 
 extension UIImage {

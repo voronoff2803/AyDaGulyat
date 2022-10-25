@@ -8,6 +8,7 @@
 import UIKit
 import SnapKit
 import Then
+import ActiveLabel
 
 
 class RegistrationViewController: AppRootViewController, TextFieldNextable {
@@ -40,20 +41,19 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
     let loginButton = LabelButton().then {
         $0.setTitle("Войти", for: .normal)
     }
-    let descriptionLabel = UITextView().then {
+    let descriptionLabel = ActiveLabel().then {
         let attributedString = NSMutableAttributedString(string: "Нажимая кнопку, я соглашаюсь с пользовательским соглашением и даю согласие на обработку персональных данных")
-        let linkAttributes: [NSAttributedString.Key : Any] = [
-            NSAttributedString.Key.foregroundColor: UIColor.appColor(.blue),
-            NSAttributedString.Key.underlineColor: UIColor.appColor(.blue),
-            NSAttributedString.Key.underlineStyle: 0
-        ]
-        attributedString.addAttribute(.link, value: "terms", range: NSRange(location: 31, length: 28))
-        $0.linkTextAttributes = linkAttributes
+
+        let customType = ActiveType.custom(pattern: "\\sпользовательским соглашением\\b")
+        
+        $0.enabledTypes = [customType]
         $0.attributedText = attributedString
+        $0.customColor[customType] = .appColor(.blue)
+        $0.customSelectedColor[customType] = .appColor(.blue).withAlphaComponent(0.5)
         $0.font = .montserratRegular(size: 15)
         $0.textColor = .appColor(.grayEmpty)
         $0.textAlignment = .center
-        $0.isEditable = false
+        $0.numberOfLines = 0
         $0.isUserInteractionEnabled = true
         $0.backgroundColor = .clear
     }
@@ -73,6 +73,10 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
         setupUI()
         
         loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
+        
+        descriptionLabel.handleCustomTap(for: descriptionLabel.enabledTypes.first!) { _ in
+            print("show license")
+        }
     }
     
     func setupUI() {
@@ -84,7 +88,7 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
         
         [logoImageView, titleLabel, emailTextField, passwordTextField, registrationButton, registerButtonStack, descriptionLabel].forEach({self.view.addSubview($0)})
         
-        descriptionLabel.delegate = self
+//        descriptionLabel.delegate = self
         
         logoImageView.snp.makeConstraints { make in
             self.baseConstraints.append(make.centerX.equalToSuperview().constraint)

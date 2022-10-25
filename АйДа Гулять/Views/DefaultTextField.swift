@@ -24,33 +24,43 @@ class DefaultTextField: UITextField {
         }
     }
     
-    var fieldState: State = .empty {
+    var fieldState: State = .normal {
         didSet {
             switch fieldState {
-            case .empty:
-                bottomBorder.backgroundColor = .appColor(.grayEmpty)
-                descriptionText.textColor = .appColor(.grayEmpty)
-            case .fill:
-                bottomBorder.backgroundColor = .appColor(.black)
-                descriptionText.textColor = .appColor(.grayEmpty)
             case .error:
                 bottomBorder.backgroundColor = .appColor(.red)
                 descriptionText.textColor = .appColor(.red)
             case .success:
                 bottomBorder.backgroundColor = .appColor(.green)
                 descriptionText.textColor = .appColor(.grayEmpty)
+            case .normal:
+                self.fieldEditState = { self.fieldEditState }()
+            }
+        }
+    }
+    
+    var fieldEditState: EditState = .empty {
+        didSet {
+            guard fieldState == .normal else { return }
+            switch fieldEditState {
+            case .empty:
+                bottomBorder.backgroundColor = .appColor(.grayEmpty)
+                descriptionText.textColor = .appColor(.grayEmpty)
+            case .fill:
+                bottomBorder.backgroundColor = .appColor(.black)
+                descriptionText.textColor = .appColor(.grayEmpty)
             }
         }
     }
     
     override func becomeFirstResponder() -> Bool {
-        self.fieldState = .fill
+        self.fieldEditState = .fill
         
         return super.becomeFirstResponder()
     }
     
     override func resignFirstResponder() -> Bool {
-        self.fieldState = .empty
+        self.fieldEditState = .empty
         
         return super.resignFirstResponder()
     }
@@ -72,11 +82,17 @@ class DefaultTextField: UITextField {
     func setupUI() {
         self.font = .montserratRegular(size: 16)
         self.tintColor = .black
+        self.clearButtonMode = .whileEditing
         
         fieldState = {fieldState}()
         
         self.addSubview(bottomBorder)
         self.addSubview(descriptionText)
+        
+        if let clearButton = self.value(forKeyPath: "_clearButton") as? UIButton {
+            clearButton.setImage(.appImage(.close), for: .normal)
+            clearButton.tintColor = .appColor(.grayEmpty)
+        }
         
         bottomBorder.snp.makeConstraints { make in
             make.bottom.equalToSuperview()
@@ -133,9 +149,13 @@ class DefaultTextField: UITextField {
     }
     
     enum State {
-        case empty
-        case fill
+        case normal
         case error
         case success
+    }
+    
+    enum EditState {
+        case empty
+        case fill
     }
 }

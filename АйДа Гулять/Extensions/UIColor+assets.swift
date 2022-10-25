@@ -16,6 +16,7 @@ enum AssetsColor: String {
     case red
     case labelOnButton
     case backgroundFirst
+    case lightGray
 }
 
 extension UIColor {
