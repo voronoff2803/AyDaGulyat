@@ -32,6 +32,27 @@ class ProfileBigViewController: UIViewController {
         
         tableView.register(TagsTableViewCell.self,
                            forCellReuseIdentifier: TagsTableViewCell.reusableID)
+        
+        tableView.register(DescriptionTableViewCell.self,
+                           forCellReuseIdentifier: DescriptionTableViewCell.reusableID)
+        
+        tableView.register(ContactsTableViewCell.self,
+                           forCellReuseIdentifier: ContactsTableViewCell.reusableID)
+        
+        tableView.register(DogProfileTableViewCell.self,
+                           forCellReuseIdentifier: DogProfileTableViewCell.reusableID)
+        
+        tableView.register(DogProfileSpecsTableViewCell.self,
+                           forCellReuseIdentifier: DogProfileSpecsTableViewCell.reusableID)
+        
+        tableView.register(DogProfileFeaturesTableViewCell.self,
+                           forCellReuseIdentifier: DogProfileFeaturesTableViewCell.reusableID)
+        
+        tableView.register(DogProfileDescriptionTableViewCell.self,
+                           forCellReuseIdentifier: DogProfileDescriptionTableViewCell.reusableID)
+        
+        
+        
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
 
@@ -46,8 +67,6 @@ class ProfileBigViewController: UIViewController {
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        print("viewDidLayoutSubviews")
-        print(tableView.frame)
         tableView.reloadData()
     }
 
@@ -82,6 +101,32 @@ extension ProfileBigViewController: UITableViewDataSource {
                                                           for: indexPath) as! TagsTableViewCell
             cell.tableViewWidth = tableView.frame.width
             return cell
+        case 3:
+            let cell = tableView.dequeueReusableCell(withIdentifier:DescriptionTableViewCell.reusableID,
+                                                          for: indexPath)
+            return cell
+        case 4:
+            let cell = tableView.dequeueReusableCell(withIdentifier:ContactsTableViewCell.reusableID,
+                                                          for: indexPath)
+            return cell
+        case 5:
+            let cell = tableView.dequeueReusableCell(withIdentifier:DogProfileTableViewCell.reusableID,
+                                                          for: indexPath)
+            return cell
+        case 6:
+            let cell = tableView.dequeueReusableCell(withIdentifier:DogProfileSpecsTableViewCell.reusableID,
+                                                          for: indexPath) as! DogProfileSpecsTableViewCell
+            cell.tableViewWidth = tableView.frame.width
+            return cell
+        case 7:
+            let cell = tableView.dequeueReusableCell(withIdentifier:DogProfileFeaturesTableViewCell.reusableID,
+                                                          for: indexPath) as! DogProfileFeaturesTableViewCell
+            cell.tableViewWidth = tableView.frame.width
+            return cell
+        case 8:
+            let cell = tableView.dequeueReusableCell(withIdentifier:DogProfileDescriptionTableViewCell.reusableID,
+                                                          for: indexPath) as! DogProfileDescriptionTableViewCell
+            return cell
         default:
             let cell = tableView.dequeueReusableCell(withIdentifier:BirthDateCollectionViewCell.reusableID,
                                                           for: indexPath)
@@ -90,14 +135,28 @@ extension ProfileBigViewController: UITableViewDataSource {
     }
 
     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 10
+        return 9
     }
 }
 
 
 extension ProfileBigViewController: UITableViewDelegate {
-    func tableView(_ tableView: UITableView, heightForRowAt indexPath: IndexPath) -> CGFloat {
-        return UITableView.automaticDimension
+    func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
+        let index = indexPath.row
+        
+        switch index {
+        case 3:
+            let cell = tableView.cellForRow(at: indexPath) as! DescriptionTableViewCell
+            cell.cellState = (cell.cellState == .normal) ? .extended : .normal
+            tableView.performBatchUpdates(nil)
+            break
+        case 8:
+            let cell = tableView.cellForRow(at: indexPath) as! DogProfileDescriptionTableViewCell
+            cell.cellState = (cell.cellState == .normal) ? .extended : .normal
+            tableView.performBatchUpdates(nil)
+        default:
+            break
+        }
     }
 }
 

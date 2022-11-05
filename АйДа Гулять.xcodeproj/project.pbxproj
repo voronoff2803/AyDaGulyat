@@ -75,6 +75,12 @@
 		0DEC9CEE2912AB91001A8CDA /* Hero in Frameworks */ = {isa = PBXBuildFile; productRef = 0DEC9CED2912AB91001A8CDA /* Hero */; };
 		0DEC9CF02912AC89001A8CDA /* ProfileSmallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEC9CEF2912AC89001A8CDA /* ProfileSmallViewController.swift */; };
 		0DEC9CF22912B46F001A8CDA /* ProfileBigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEC9CF12912B46F001A8CDA /* ProfileBigViewController.swift */; };
+		0DF25AC929168A6F00A279A0 /* DescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25AC829168A6F00A279A0 /* DescriptionTableViewCell.swift */; };
+		0DF25ACB29169C4500A279A0 /* ContactsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25ACA29169C4500A279A0 /* ContactsTableViewCell.swift */; };
+		0DF25ACD2916C4ED00A279A0 /* DogProfileTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25ACC2916C4ED00A279A0 /* DogProfileTableViewCell.swift */; };
+		0DF25ACF2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25ACE2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift */; };
+		0DF25AD12916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25AD02916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift */; };
+		0DF25AD32916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25AD22916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -139,6 +145,12 @@
 		0DE2D02B2910064800CA1F91 /* SearchFieldMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldMapView.swift; sourceTree = "<group>"; };
 		0DEC9CEF2912AC89001A8CDA /* ProfileSmallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSmallViewController.swift; sourceTree = "<group>"; };
 		0DEC9CF12912B46F001A8CDA /* ProfileBigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBigViewController.swift; sourceTree = "<group>"; };
+		0DF25AC829168A6F00A279A0 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		0DF25ACA29169C4500A279A0 /* ContactsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContactsTableViewCell.swift; sourceTree = "<group>"; };
+		0DF25ACC2916C4ED00A279A0 /* DogProfileTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileTableViewCell.swift; sourceTree = "<group>"; };
+		0DF25ACE2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileSpecsTableViewCell.swift; sourceTree = "<group>"; };
+		0DF25AD02916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileFeaturesTableViewCell.swift; sourceTree = "<group>"; };
+		0DF25AD22916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileDescriptionTableViewCell.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -282,6 +294,12 @@
 				0DD0AAED291535CF00E44F80 /* PersonCollectionViewCell.swift */,
 				0DD0AAEF291546D000E44F80 /* BirthDateCollectionViewCell.swift */,
 				0DD0AAF5291599C700E44F80 /* TagsTableViewCell.swift */,
+				0DF25AC829168A6F00A279A0 /* DescriptionTableViewCell.swift */,
+				0DF25ACA29169C4500A279A0 /* ContactsTableViewCell.swift */,
+				0DF25ACC2916C4ED00A279A0 /* DogProfileTableViewCell.swift */,
+				0DF25ACE2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift */,
+				0DF25AD02916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift */,
+				0DF25AD22916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -419,7 +437,9 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DF25ACB29169C4500A279A0 /* ContactsTableViewCell.swift in Sources */,
 				0D13FD6A29058C2500A86E62 /* MapViewController.swift in Sources */,
+				0DF25ACD2916C4ED00A279A0 /* DogProfileTableViewCell.swift in Sources */,
 				0D3C521A28F5836500F91D0C /* AppRootViewController.swift in Sources */,
 				0D50E5D428E8593C006DB37A /* AuthViewController.swift in Sources */,
 				0D13FD6C2905A52600A86E62 /* DogProfileViewController.swift in Sources */,
@@ -433,7 +453,10 @@
 				0D7113D429066FF6005AB9F9 /* Utils.swift in Sources */,
 				0DEC9CF02912AC89001A8CDA /* ProfileSmallViewController.swift in Sources */,
 				0DD24896290C1AFE00311427 /* ListCollectionViewCell.swift in Sources */,
+				0DF25AD12916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift in Sources */,
+				0DF25AD32916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift in Sources */,
 				0DD24892290BEB5F00311427 /* DefaultNavigationViewController.swift in Sources */,
+				0DF25ACF2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift in Sources */,
 				0D2016D328E89789003E673E /* UIFont+customFont.swift in Sources */,
 				0D3C520A28F4A17900F91D0C /* UIImage+assets.swift in Sources */,
 				0DD0AB1C29165F7A00E44F80 /* TagView.swift in Sources */,
@@ -465,6 +488,7 @@
 				0D3C521828F582CF00F91D0C /* UIViewController+hideKeyboard.swift in Sources */,
 				0DD0AB1B29165F7A00E44F80 /* TagListView.swift in Sources */,
 				0D81D0B528F883F000AB33D3 /* RegistrationViewController.swift in Sources */,
+				0DF25AC929168A6F00A279A0 /* DescriptionTableViewCell.swift in Sources */,
 				0D3C521628F57C1200F91D0C /* PasswordTextField.swift in Sources */,
 				0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */,
 				0D5BD10628F5CA1700DD1496 /* ScalableImageView.swift in Sources */,

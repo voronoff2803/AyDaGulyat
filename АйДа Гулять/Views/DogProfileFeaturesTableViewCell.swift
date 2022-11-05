@@ -1,20 +1,19 @@
 //
-//  TagsTableViewCell.swift
+//  DogProfileFeaturesTableViewCell.swift
 //  АйДа Гулять
 //
-//  Created by Alexey Voronov on 04.11.2022.
+//  Created by Alexey Voronov on 05.11.2022.
 //
-
 
 import UIKit
 
-class TagsTableViewCell: UITableViewCell {
-    static let reusableID = "tagsCell"
+class DogProfileFeaturesTableViewCell: UITableViewCell {
+    static let reusableID = "dogProfileFeaturesCell"
     
     var tableViewWidth: CGFloat = 0
     
     let titleLabel = UILabel().then {
-        $0.text = "Увлечения"
+        $0.text = "Особенности"
         $0.font = .montserratRegular(size: 16)
         $0.textColor = .appColor(.grayEmpty)
     }
@@ -57,7 +56,7 @@ class TagsTableViewCell: UITableViewCell {
         selectionStyle = .none
         
         [titleLabel, tagListView].forEach({self.contentView.addSubview($0)})
-        tagListView.addTags(["🏃‍♂️  Бег с собакой", "🎨  Рисование", "📘  Чтение книг", "💩  Политика"])
+        tagListView.addTags(["Диабет"])
         
         titleLabel.snp.makeConstraints { make in
             make.top.equalToSuperview().inset(8)

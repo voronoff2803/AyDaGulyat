@@ -27,6 +27,9 @@ enum AssetsImage: String {
     case chevron
     case searchButton
     case emptyProfile
+    case facebookImage
+    case instImage
+    case vkImage
 }
 
 extension UIImage {

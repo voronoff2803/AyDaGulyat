@@ -15,12 +15,6 @@ import UIKit
 
 @IBDesignable
 open class TagListView: UIView {
-    open override var frame: CGRect {
-        didSet {
-            print("frame", frame)
-        }
-    }
-    
     @IBInspectable open dynamic var textColor: UIColor = .white {
         didSet {
             tagViews.forEach {
@@ -336,7 +330,6 @@ open class TagListView: UIView {
         if rows > 0 {
             height -= marginY
         }
-        print("intrinsicContentSize", CGSize(width: frame.width, height: height), rows)
         return CGSize(width: frame.width, height: height)
     }
     

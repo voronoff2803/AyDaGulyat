@@ -77,7 +77,7 @@ class ProfileSmallViewController: UIViewController {
     
     
     func setupUI() {
-        self.view.backgroundColor = .black
+        self.view.backgroundColor = .appColor(.lightGray)
         
         self.view.addSubview(contentView)
         [shadowView, imageView, profileNameLabel, descriptionLabel, buttonsStackView].forEach({self.contentView.addSubview($0)})

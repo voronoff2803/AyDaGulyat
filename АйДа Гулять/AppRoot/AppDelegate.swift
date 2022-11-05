@@ -1,7 +1,7 @@
 //
 //  AppDelegate.swift
 //  АйДа Гулять
-//
+///Users/alexeyvoronov/Desktop/AyDaGulyat/АйДа Гулять/Utils
 //  Created by Alexey Voronov on 01.10.2022.
 //
 
@@ -16,7 +16,7 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
         window = UIWindow(frame: UIScreen.main.bounds)
-        window?.rootViewController = ProfileBigViewController()
+        window?.rootViewController = ProfileSmallViewController()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
         
