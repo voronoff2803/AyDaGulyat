@@ -22,6 +22,11 @@ enum AssetsImage: String {
     case plusContent
     case cameraButton
     case dismiss
+    case searchIcon
+    case backArrow
+    case chevron
+    case searchButton
+    case emptyProfile
 }
 
 extension UIImage {

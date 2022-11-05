@@ -1,16 +1,14 @@
 //
-//  DefaultTextField.swift
+//  SearchFieldMapView.swift
 //  АйДа Гулять
 //
-//  Created by Alexey Voronov on 11.10.2022.
+//  Created by Alexey Voronov on 31.10.2022.
 //
 
 import UIKit
-import SnapKit
 
-class DefaultTextField: UITextField {
+class SearchFieldMapView: UITextField {
     private let centerInset: CGPoint = CGPoint(x: 0, y: 0)
-    private let bottomBorder = UIView()
     private let descriptionText = UILabel().then {
         $0.font = UIFont.montserratRegular(size: 13)
         $0.numberOfLines = 0
@@ -34,10 +32,8 @@ class DefaultTextField: UITextField {
         didSet {
             switch fieldState {
             case .error:
-                bottomBorder.backgroundColor = .appColor(.red)
                 descriptionText.textColor = .appColor(.red)
             case .success:
-                bottomBorder.backgroundColor = .appColor(.green)
                 descriptionText.textColor = .appColor(.grayEmpty)
             case .normal:
                 self.fieldEditState = { self.fieldEditState }()
@@ -50,10 +46,8 @@ class DefaultTextField: UITextField {
             guard fieldState == .normal else { return }
             switch fieldEditState {
             case .empty:
-                bottomBorder.backgroundColor = .appColor(.lightGray)
                 descriptionText.textColor = .appColor(.grayEmpty)
             case .fill:
-                bottomBorder.backgroundColor = .appColor(.black)
                 descriptionText.textColor = .appColor(.grayEmpty)
             }
         }
@@ -70,7 +64,7 @@ class DefaultTextField: UITextField {
         
         return super.resignFirstResponder()
     }
-
+    
     // MARK: - UITextField
     
     override init(frame: CGRect){
@@ -91,9 +85,13 @@ class DefaultTextField: UITextField {
         self.clearButtonMode = .whileEditing
         self.textColor = .appColor(.black)
         
+        self.backgroundColor = .appColor(.backgroundFirst)
+        self.layer.cornerRadius = 4
+        self.layer.borderColor = UIColor.appColor(.grayEmpty).cgColor
+        self.layer.borderWidth = 1
+        
         fieldState = {fieldState}()
         
-        self.addSubview(bottomBorder)
         self.addSubview(descriptionText)
         
         if let clearButton = self.value(forKeyPath: "_clearButton") as? UIButton {
@@ -101,14 +99,8 @@ class DefaultTextField: UITextField {
             clearButton.tintColor = .appColor(.grayEmpty)
         }
         
-        bottomBorder.snp.makeConstraints { make in
-            make.bottom.equalToSuperview()
-            make.height.equalTo(1.0)
-            make.horizontalEdges.equalToSuperview()
-        }
-        
         descriptionText.snp.makeConstraints { make in
-            make.top.equalTo(bottomBorder.snp.bottom).offset(6)
+            make.top.equalTo(self.snp.bottom).offset(6)
             make.horizontalEdges.equalToSuperview()
         }
         
@@ -137,11 +129,17 @@ class DefaultTextField: UITextField {
     }
     
     func setLeftImage(image: UIImage) {
-        let imageView = UIImageView(frame: CGRect(x: 0, y: 0, width: 20, height: 20))
+        let imageView = UIImageView(frame: .zero)
         imageView.image = image
+        imageView.contentMode = .center
         self.leftView = imageView
+        self.leftView?.transform = .init(translationX: 20, y: 0)
         self.leftView?.tintColor = .appColor(.grayEmpty)
         self.leftViewMode = .always
+    }
+    
+    override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
+        return CGRect(x: 0, y: 0, width: bounds.height, height: bounds.height)
     }
     
     override var intrinsicContentSize: CGSize {
@@ -149,19 +147,20 @@ class DefaultTextField: UITextField {
         result.height = 55
         return result
     }
-
-//    override func textRect(forBounds bounds: CGRect) -> CGRect {
-//        insetTextRect(forBounds: bounds)
-//    }
-//
-//    override func editingRect(forBounds bounds: CGRect) -> CGRect {
-//        insetTextRect(forBounds: bounds)
-//    }
-//
-//    private func insetTextRect(forBounds bounds: CGRect) -> CGRect {
-//        let insetBounds = bounds.insetBy(dx: centerInset.x, dy: centerInset.y)
-//        return insetBounds
-//    }
+    
+    let padding = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 16)
+    
+    override open func textRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+    
+    override open func placeholderRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
+    
+    override open func editingRect(forBounds bounds: CGRect) -> CGRect {
+        return bounds.inset(by: padding)
+    }
     
     enum State {
         case normal

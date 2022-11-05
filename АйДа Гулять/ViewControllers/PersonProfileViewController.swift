@@ -8,6 +8,7 @@
 import UIKit
 
 
+
 class PersonProfileViewController: AppRootViewController, TextFieldNextable {
     let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
@@ -17,6 +18,7 @@ class PersonProfileViewController: AppRootViewController, TextFieldNextable {
     let stackFormView = UIStackView().then {
         $0.axis = .vertical
         $0.spacing = 20
+        $0.distribution = .fill
     }
     
     let nameTextField = DefaultTextField().then {
@@ -25,21 +27,25 @@ class PersonProfileViewController: AppRootViewController, TextFieldNextable {
         $0.autocapitalizationType = .sentences
     }
     
-    let name2TextField = DefaultTextField().then {
-        $0.placeholder = "Кличка"
+    let surnameTextField = DefaultTextField().then {
+        $0.placeholder = "Фамилия"
         $0.autocorrectionType = .no
         $0.autocapitalizationType = .sentences
     }
     
-    let genderControl = UISegmentedControl().then {
-        $0.insertSegment(withTitle: "Девочка", at: 0, animated: false)
-        $0.insertSegment(withTitle: "Мальчик", at: 0, animated: false)
-        $0.selectedSegmentIndex = 0
+    let genderControl = DefaultSegmentedPicker(titleText: "Пол")
+    
+    let dataPicker = DefaultDatePicker(titleText: "День рождения")
+    
+    let dogTypePicker = DefaultPicker(titleText: "Порода")
+    
+    let dogColorPicker = DefaultPicker(titleText: "Окрас")
+    
+    let addTextField = DefaultTextField().then {
+        $0.placeholder = "Дополнительно"
+        $0.autocorrectionType = .no
+        $0.autocapitalizationType = .sentences
     }
-    
-    let dataPicker = UIDatePicker()
-    
-    let dogTypePicker = UIPickerView()
     
     let saveButton = DefaultButton(style: .filled).then {
         $0.setTitle("Сохранить", for: .normal)
@@ -50,13 +56,19 @@ class PersonProfileViewController: AppRootViewController, TextFieldNextable {
         super.viewDidLoad()
 
         setupUI()
+        
+        dogTypePicker.setupValues(values: ["Аффенпинчер", "Бишон фризе", "Бордер-терьер", "Бостон-терьер", "Брюссельский грифон", "Вельштерьер", "Джек-рассел-терьер", "Йоркширский терьер"], selectedIndex: 2)
+        
+        dogColorPicker.setupValues(values: ["Лиловый", "Рыжий", "Палевый", "Осветлённый коричневый", "Красный", "Вельштерьер", "Жёлтый", "Осветлённый рыжий"], selectedIndex: 2)
+        
+        genderControl.setupValues(values: ["Мальчик", "Девочка"], selectedIndex: 0)
     }
     
 
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
         
-        [nameTextField, genderControl, name2TextField, dataPicker, dogTypePicker, saveButton].forEach({stackFormView.addArrangedSubview($0)})
+        [nameTextField, surnameTextField, genderControl, dataPicker, dogTypePicker, dogColorPicker, addTextField, saveButton].forEach({stackFormView.addArrangedSubview($0)})
         
         [stackFormView].forEach({self.scrollView.addSubview($0)})
         [scrollView].forEach({self.view.addSubview($0)})
@@ -72,5 +84,9 @@ class PersonProfileViewController: AppRootViewController, TextFieldNextable {
             make.verticalEdges.equalTo(scrollView.contentLayoutGuide).inset(28)
             make.width.equalTo(scrollView)
         }
+        
+//        dogTypePicker.snp.makeConstraints { make in
+//            make.height.equalTo(55.0)
+//        }
     }
 }

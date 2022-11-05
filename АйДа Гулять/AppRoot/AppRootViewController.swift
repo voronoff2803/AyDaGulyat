@@ -17,6 +17,8 @@ class AppRootViewController: UIViewController {
     override func viewDidLoad() {
         super.viewDidLoad()
         
+        hideKeyboardWhenTappedAround()
+        
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
     }
@@ -65,7 +67,7 @@ class AppRootViewController: UIViewController {
         buttons.forEach({defaultAlertViewController.stackView.addArrangedSubview($0)})
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        alertController.setValue(defaultAlertViewController, forKey: "contentViewController")
+        //alertController.setValue(defaultAlertViewController, forKey: "contentViewController")
         self.present(alertController, animated: true, completion: nil)
     }
 }

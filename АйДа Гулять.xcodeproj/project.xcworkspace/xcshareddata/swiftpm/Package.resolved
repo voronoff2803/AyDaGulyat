@@ -28,12 +28,12 @@
       }
     },
     {
-      "identity" : "jelly",
+      "identity" : "hero",
       "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SebastianBoldt/Jelly",
+      "location" : "https://github.com/HeroTransitions/Hero",
       "state" : {
-        "revision" : "41d295af01c80b5c8386f852c1fd938b8034fa25",
-        "version" : "2.3.0"
+        "revision" : "66a554b21116fccf61b3aa2205a86f6b0cdc9766",
+        "version" : "1.6.2"
       }
     },
     {
@@ -79,15 +79,6 @@
       "state" : {
         "revision" : "d41ef523faef0f911369f79c0b96815d9dbb6d7a",
         "version" : "3.0.0"
-      }
-    },
-    {
-      "identity" : "uitabcontrol",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/hugo-pivaral/UITabControl",
-      "state" : {
-        "revision" : "88f8996f5f805b46c7e68318836f8167b13d452b",
-        "version" : "1.0.0"
       }
     }
   ],

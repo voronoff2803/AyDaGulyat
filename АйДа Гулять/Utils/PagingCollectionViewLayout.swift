@@ -29,8 +29,7 @@ class PagingCollectionViewLayout: UICollectionViewFlowLayout
                         if abs(a) < abs(b) {
                             candidateAttribute = attributes
                         }
-                    }
-                    else {
+                    } else {
                         candidateAttribute = attributes
                         continue
                     }

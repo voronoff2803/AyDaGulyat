@@ -8,6 +8,8 @@
 import UIKit
 
 class DogAvatarCollectionViewCell: UICollectionViewCell {
+    var shadowLayer: CAShapeLayer!
+    
     var image: UIImage? = nil {
         didSet {
             imageView.image = image
@@ -18,7 +20,7 @@ class DogAvatarCollectionViewCell: UICollectionViewCell {
         $0.image = .appImage(.cameraButton)
     }
     
-    private let imageView = UIImageView().then {
+    let imageView = UIImageView().then {
         $0.layer.borderWidth = 2
         $0.layer.borderColor = UIColor.appColor(.grayEmpty).cgColor
         $0.clipsToBounds = true
@@ -71,6 +73,25 @@ class DogAvatarCollectionViewCell: UICollectionViewCell {
             self.isHidden = false
             self.cameraButton.isHidden = false
             self.image = .appImage(.emptyContent)
+        }
+    }
+    
+    override func layoutSubviews() {
+        super.layoutSubviews()
+        
+        if shadowLayer == nil {
+            shadowLayer = CAShapeLayer()
+            shadowLayer.path = UIBezierPath(roundedRect: bounds, cornerRadius: 55).cgPath
+            shadowLayer.fillColor = UIColor.clear.cgColor
+            
+            shadowLayer.shadowColor = UIColor.darkGray.cgColor
+            shadowLayer.shadowPath = shadowLayer.path
+            shadowLayer.shadowOffset = CGSize(width: 10.0, height: 10.0)
+            shadowLayer.shadowOpacity = 0.2
+            shadowLayer.shadowRadius = 16
+            
+            layer.insertSublayer(shadowLayer, at: 0)
+            //layer.insertSublayer(shadowLayer, below: nil) // also works
         }
     }
     

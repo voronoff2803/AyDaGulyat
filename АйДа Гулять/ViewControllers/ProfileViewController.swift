@@ -50,10 +50,6 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         $0.isUserInteractionEnabled = false
     }
     
-    let redView = UIView().then {
-        $0.backgroundColor = .red
-    }
-    
     let dismissButton = UIButton(type: .system).then {
         $0.setImage(.appImage(.dismiss), for: .normal)
         $0.tintColor = .appColor(.grayEmpty)
@@ -110,7 +106,9 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         $0.showsVerticalScrollIndicator = false
         $0.decelerationRate = .fast
         $0.clipsToBounds = false
+        $0.bounces = true
     }
+    
     
     var selectedDogIndex: Int = 0 {
         didSet {
@@ -216,14 +214,27 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
                 if let indexPath = dogsCollectionView.indexPath(for: cell) {
                     selectedDogIndex = indexPath.row - 1
                 }
-                UIView.animate(withDuration: 0.1) {
+                UIView.animate(withDuration: 0.1, delay: 0.0, options: [.beginFromCurrentState]) {
                     cell.cameraButton.alpha = 1.0
                 }
             } else {
-                UIView.animate(withDuration: 0.1) {
+                UIView.animate(withDuration: 0.1, delay: 0.0, options: [.beginFromCurrentState]) {
                     cell.cameraButton.alpha = 0.0
                 }
             }
+            
+            if offsetPercentage > 0.7 {
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: [.beginFromCurrentState]) {
+                    cell.imageView.layer.borderWidth = 0
+                    cell.shadowLayer.opacity = 1.0
+                }
+            } else {
+                UIView.animate(withDuration: 0.2, delay: 0.0, options: [.beginFromCurrentState]) {
+                    cell.imageView.layer.borderWidth = 3
+                    cell.shadowLayer.opacity = 0.0
+                }
+            }
+                
         }
     }
     
