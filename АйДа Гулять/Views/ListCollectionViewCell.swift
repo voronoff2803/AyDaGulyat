@@ -15,10 +15,12 @@ class ListTableViewCell: UITableViewCell {
         $0.textAlignment = .left
     }
     
+    
+    let checkmarkIcon = UIImageView(image: .appImage(.checkmark))
+    
     var isCurrent: Bool = false {
         didSet {
-            self.backgroundColor = self.isCurrent ? .appColor(.black) : .clear
-            self.contentLabel.textColor = self.isCurrent ? .white : .appColor(.black)
+            checkmarkIcon.isHidden = isCurrent ? false : true
         }
     }
     
@@ -43,7 +45,7 @@ class ListTableViewCell: UITableViewCell {
     }
     
     private func setupUI() {
-        [contentLabel].forEach({ contentView.addSubview($0) })
+        [contentLabel, checkmarkIcon].forEach({ contentView.addSubview($0) })
         
         self.tintColor = .appColor(.black)
         self.backgroundColor = .clear
@@ -51,6 +53,11 @@ class ListTableViewCell: UITableViewCell {
         contentLabel.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(contentView.safeAreaLayoutGuide).inset(28)
             make.centerY.equalToSuperview()
+        }
+        
+        checkmarkIcon.snp.makeConstraints { make in
+            make.centerY.equalToSuperview()
+            make.right.equalToSuperview().inset(18)
         }
     }
 }

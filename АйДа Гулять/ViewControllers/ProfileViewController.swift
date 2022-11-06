@@ -17,16 +17,50 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
     
     var state: ProfileViewController.State = .dogProfile {
         didSet {
+            switch self.state {
+            case .dogProfile:
+                self.dogsCollectionView.transform = .init(translationX: 50, y: 0)
+                self.profileImageView.transform = .identity
+            case .personProfile:
+                self.dogsCollectionView.transform = .identity
+                self.profileImageView.transform = .init(translationX: -50, y: 0)
+            }
+            
             UIView.animate(withDuration: 0.1) {
                 switch self.state {
                 case .dogProfile:
                     self.dogProfileSelectedConstraint?.isActive = true
                     self.personProfileSelectedConstraint?.isActive = false
+                    self.dogsCollectionView.isHidden = false
+                    self.pageControlView.isHidden = false
+                    self.dogsCollectionView.alpha = 1.0
+                    self.pageControlView.alpha = 1.0
+                    self.shadowView.alpha = 0.0
+                    self.profileImageView.alpha = 0.0
+                    self.dogsCollectionView.transform = .identity
+                    self.profileImageView.transform = .init(translationX: -50, y: 0)
                 case .personProfile:
                     self.dogProfileSelectedConstraint?.isActive = false
                     self.personProfileSelectedConstraint?.isActive = true
+                    self.dogsCollectionView.alpha = 0.0
+                    self.pageControlView.alpha = 0.0
+                    self.shadowView.isHidden = false
+                    self.profileImageView.isHidden = false
+                    self.shadowView.alpha = 1.0
+                    self.profileImageView.alpha = 1.0
+                    self.dogsCollectionView.transform = .init(translationX: 50, y: 0)
+                    self.profileImageView.transform = .identity
                 }
                 self.modeSelector.layoutSubviews()
+            } completion: { _ in
+                switch self.state {
+                case .dogProfile:
+                    self.shadowView.isHidden = true
+                    self.profileImageView.isHidden = true
+                case .personProfile:
+                    self.dogsCollectionView.isHidden = true
+                    self.pageControlView.isHidden = true
+                }
             }
         }
     }
@@ -78,6 +112,31 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         $0.backgroundColor = .appColor(.lightGray)
     }
     
+    let profileImageView = UIImageView().then {
+        $0.clipsToBounds = true
+        $0.contentMode = .scaleAspectFill
+        $0.layer.cornerRadius = 55
+        $0.isHidden = true
+        $0.image = .appImage(.emptyProfile)
+    }
+    
+    
+    var shadowView = UIView().then {
+        let shadowLayer = CAShapeLayer()
+        shadowLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 110, height: 110),
+                                        cornerRadius: 55).cgPath
+        shadowLayer.fillColor = UIColor.clear.cgColor
+        
+        shadowLayer.shadowColor = UIColor.darkGray.cgColor
+        shadowLayer.shadowPath = shadowLayer.path
+        shadowLayer.shadowOffset = CGSize(width: 10.0, height: 10.0)
+        shadowLayer.shadowOpacity = 0.2
+        shadowLayer.shadowRadius = 16
+        
+        $0.layer.insertSublayer(shadowLayer, at: 0)
+        $0.isHidden = true
+    }
+    
     var dogProfileSelectedConstraint: Constraint?
     var personProfileSelectedConstraint: Constraint?
     
@@ -93,11 +152,10 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
 //    }
     
     let dogsCollectionView = UICollectionView(frame: .zero,
-                                                 collectionViewLayout:
-                                                    PagingCollectionViewLayout().then {
-                                                        $0.scrollDirection = .horizontal
-                                                        $0.itemSize = .init(width: 110, height: 110)
-                                                        $0.minimumLineSpacing = 10
+                                              collectionViewLayout: SnapCenterLayout(isLastUnreachable: true).then {
+        $0.scrollDirection = .horizontal
+        $0.itemSize = .init(width: 110, height: 110)
+        $0.minimumLineSpacing = 10
         $0.sectionInset = .init(top: 0, left: UIScreen.main.bounds.width / 2 - 55,
                                 bottom: 0, right:  UIScreen.main.bounds.width / 2 - 55)
     }).then {
@@ -124,7 +182,10 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         dogsCollectionView.dataSource = self
         dogsCollectionView.delegate = self
         dogsCollectionView.reloadData()
-        dogsCollectionView.alpha = 0.0
+        DispatchQueue.main.async {
+            self.dogsCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
+            self.updateCellsLayout()
+        }
         
         dismissButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         
@@ -149,16 +210,16 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
     override func viewWillAppear(_ animated: Bool) {
         super.viewWillAppear(animated)
         
-        if selectedDogIndex == 0 {
-            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
-                self.dogsCollectionView.scrollToItem(at: IndexPath(row: 1, section: 0), at: .centeredHorizontally, animated: false)
-                self.updateCellsLayout()
-                
-                UIView.animate(withDuration: 0.1) {
-                    self.dogsCollectionView.alpha = 1.0
-                }
-            }
-        }
+//        if selectedDogIndex == 0 {
+//            DispatchQueue.main.asyncAfter(deadline: .now() + 0.1) {
+//                self.dogsCollectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
+//                self.updateCellsLayout()
+//                
+//                UIView.animate(withDuration: 0.1) {
+//                    self.dogsCollectionView.alpha = 1.0
+//                }
+//            }
+//        }
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -250,7 +311,7 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
     func setupUI() {
         self.view.addSubview(contentView)
         
-        [dogsCollectionView, pageControlView, dismissButton, pageView, modeSelector].forEach({self.view.addSubview($0)})
+        [dogsCollectionView, pageControlView, dismissButton, pageView, modeSelector, shadowView, profileImageView].forEach({self.view.addSubview($0)})
         
         modeSelector.addSubview(selectedLineViewBackground)
         modeSelector.addSubview(selectedLineView)
@@ -266,7 +327,7 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         pageView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
             make.top.equalTo(modeSelector.snp.bottom)
-            make.bottom.equalToSuperview().priority(.low)
+            make.bottom.equalTo(view.safeAreaLayoutGuide).priority(.low)
         }
         
         pageView.tag = 22
@@ -305,25 +366,34 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
             make.bottom.equalTo(modeSelector)
             make.horizontalEdges.equalTo(modeSelector)
         }
+        
+        profileImageView.snp.makeConstraints { make in
+            make.height.width.equalTo(110)
+            make.centerX.equalToSuperview()
+            make.centerY.equalTo(contentView.snp.top)
+        }
+        
+        shadowView.snp.makeConstraints { make in
+            make.center.equalTo(profileImageView)
+            make.size.equalTo(profileImageView)
+        }
     }
 }
 
 
 extension ProfileViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
-        return dogs.count + 2
+        return dogs.count + 1
     }
     
     func collectionView(_ collectionView: UICollectionView, cellForItemAt indexPath: IndexPath) -> UICollectionViewCell {
         let cell = collectionView.dequeueReusableCell(withReuseIdentifier: "cell", for: indexPath) as! DogAvatarCollectionViewCell
         
         switch indexPath.row {
-        case 0:
-            cell.setup(model: DogAvatarModel.spacer)
-        case dogs.count + 1:
+        case dogs.count:
             cell.setup(model: DogAvatarModel.add)
         default:
-            cell.setup(model: dogs[indexPath.row - 1])
+            cell.setup(model: dogs[indexPath.row])
         }
         
         
@@ -339,7 +409,7 @@ extension ProfileViewController: UICollectionViewDelegate {
     
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         
-        if indexPath.row == dogs.count + 1 {
+        if indexPath.row == dogs.count {
             dogs.append(DogAvatarModel.empty)
             self.dogsCollectionView.insertItems(at: [indexPath])
             DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
@@ -347,9 +417,9 @@ extension ProfileViewController: UICollectionViewDelegate {
             }
         } else {
             if (collectionView.cellForItem(at: indexPath)?.frame.width ?? 0) > 90 {
-                dogs[indexPath.row - 1] = .normal(.appImage(.content2))
+                dogs[indexPath.row] = .normal(.appImage(.content2))
                 if let cell = collectionView.cellForItem(at: indexPath) as? DogAvatarCollectionViewCell {
-                    cell.setup(model: dogs[indexPath.row - 1])
+                    cell.setup(model: dogs[indexPath.row])
                 }
             }
             

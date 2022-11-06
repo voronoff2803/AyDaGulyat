@@ -16,7 +16,7 @@
 		0D20143129005AC9008C2C90 /* TutorialContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20143029005AC9008C2C90 /* TutorialContentModel.swift */; };
 		0D2014372903F4B5008C2C90 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2014362903F4B5008C2C90 /* ProfileViewController.swift */; };
 		0D2014392903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2014382903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift */; };
-		0D20143B290402EC008C2C90 /* PagingCollectionViewLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20143A290402EC008C2C90 /* PagingCollectionViewLayout.swift */; };
+		0D20143B290402EC008C2C90 /* SnapCenterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20143A290402EC008C2C90 /* SnapCenterLayout.swift */; };
 		0D2016CF28E896D0003E673E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D2016CD28E8963F003E673E /* Montserrat-SemiBold.ttf */; };
 		0D2016D028E896D0003E673E /* Montserrat-Medium.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D2016CC28E89636003E673E /* Montserrat-Medium.ttf */; };
 		0D2016D128E896D0003E673E /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D2016CB28E8962D003E673E /* Montserrat-Regular.ttf */; };
@@ -81,6 +81,8 @@
 		0DF25ACF2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25ACE2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift */; };
 		0DF25AD12916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25AD02916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift */; };
 		0DF25AD32916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25AD22916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift */; };
+		0DF25AD529179D6D00A279A0 /* DogProfileCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25AD429179D6D00A279A0 /* DogProfileCollectionViewCell.swift */; };
+		0DF25AD72917BB1C00A279A0 /* MapButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DF25AD62917BB1C00A279A0 /* MapButton.swift */; };
 /* End PBXBuildFile section */
 
 /* Begin PBXFileReference section */
@@ -92,7 +94,7 @@
 		0D20143029005AC9008C2C90 /* TutorialContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentModel.swift; sourceTree = "<group>"; };
 		0D2014362903F4B5008C2C90 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
 		0D2014382903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAvatarCollectionViewCell.swift; sourceTree = "<group>"; };
-		0D20143A290402EC008C2C90 /* PagingCollectionViewLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PagingCollectionViewLayout.swift; sourceTree = "<group>"; };
+		0D20143A290402EC008C2C90 /* SnapCenterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapCenterLayout.swift; sourceTree = "<group>"; };
 		0D2016CB28E8962D003E673E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
 		0D2016CC28E89636003E673E /* Montserrat-Medium.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Medium.ttf"; sourceTree = "<group>"; };
 		0D2016CD28E8963F003E673E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
@@ -151,6 +153,8 @@
 		0DF25ACE2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileSpecsTableViewCell.swift; sourceTree = "<group>"; };
 		0DF25AD02916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileFeaturesTableViewCell.swift; sourceTree = "<group>"; };
 		0DF25AD22916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileDescriptionTableViewCell.swift; sourceTree = "<group>"; };
+		0DF25AD429179D6D00A279A0 /* DogProfileCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileCollectionViewCell.swift; sourceTree = "<group>"; };
+		0DF25AD62917BB1C00A279A0 /* MapButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapButton.swift; sourceTree = "<group>"; };
 /* End PBXFileReference section */
 
 /* Begin PBXFrameworksBuildPhase section */
@@ -288,6 +292,7 @@
 				0D3C520F28F4AF9100F91D0C /* LabelButton.swift */,
 				0D3C521128F4B42D00F91D0C /* Label.swift */,
 				0D3C521328F56DEB00F91D0C /* DefaultButton.swift */,
+				0DF25AD62917BB1C00A279A0 /* MapButton.swift */,
 				0D5BD10528F5CA1700DD1496 /* ScalableImageView.swift */,
 				0D2014382903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift */,
 				0DD24895290C1AFE00311427 /* ListCollectionViewCell.swift */,
@@ -300,6 +305,7 @@
 				0DF25ACE2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift */,
 				0DF25AD02916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift */,
 				0DF25AD22916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift */,
+				0DF25AD429179D6D00A279A0 /* DogProfileCollectionViewCell.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -318,7 +324,7 @@
 			isa = PBXGroup;
 			children = (
 				0DD0AB062915A7A700E44F80 /* TagView */,
-				0D20143A290402EC008C2C90 /* PagingCollectionViewLayout.swift */,
+				0D20143A290402EC008C2C90 /* SnapCenterLayout.swift */,
 				0D7113D329066FF6005AB9F9 /* Utils.swift */,
 			);
 			path = Utils;
@@ -445,6 +451,7 @@
 				0D13FD6C2905A52600A86E62 /* DogProfileViewController.swift in Sources */,
 				0D81D0B328F8734000AB33D3 /* NewPasswordViewController.swift in Sources */,
 				0D7113E82906F2D5005AB9F9 /* TestVCViewController.swift in Sources */,
+				0DF25AD529179D6D00A279A0 /* DogProfileCollectionViewCell.swift in Sources */,
 				0DD0AB1A29165F7A00E44F80 /* CloseButton.swift in Sources */,
 				0D20143129005AC9008C2C90 /* TutorialContentModel.swift in Sources */,
 				0DD24894290BEB7C00311427 /* UIViewController+embedInNavigation.swift in Sources */,
@@ -462,7 +469,7 @@
 				0DD0AB1C29165F7A00E44F80 /* TagView.swift in Sources */,
 				0D50E5D028E8593C006DB37A /* AppDelegate.swift in Sources */,
 				0DD2489C290D7B9500311427 /* DefaultDatePicker.swift in Sources */,
-				0D20143B290402EC008C2C90 /* PagingCollectionViewLayout.swift in Sources */,
+				0D20143B290402EC008C2C90 /* SnapCenterLayout.swift in Sources */,
 				0D7113E12906A918005AB9F9 /* AgreementViewController.swift in Sources */,
 				0D3C521228F4B42D00F91D0C /* Label.swift in Sources */,
 				0D3C520E28F4A88500F91D0C /* DefaultTextField.swift in Sources */,
@@ -476,6 +483,7 @@
 				0DD24890290BDF5E00311427 /* ListSearchViewController.swift in Sources */,
 				0D20142A290015A8008C2C90 /* TutorialPageContentViewController.swift in Sources */,
 				0D2014392903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift in Sources */,
+				0DF25AD72917BB1C00A279A0 /* MapButton.swift in Sources */,
 				0DD0AAF6291599C700E44F80 /* TagsTableViewCell.swift in Sources */,
 				0D7113EA2906FC8C005AB9F9 /* PersonProfileViewController.swift in Sources */,
 				0D3C521428F56DEB00F91D0C /* DefaultButton.swift in Sources */,

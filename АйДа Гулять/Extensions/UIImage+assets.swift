@@ -30,6 +30,9 @@ enum AssetsImage: String {
     case facebookImage
     case instImage
     case vkImage
+    case richArrow
+    case mapPositionButton
+    case checkmark
 }
 
 extension UIImage {

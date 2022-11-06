@@ -148,7 +148,7 @@ extension ListSearchViewController: UITableViewDelegate {
         
         self.view.endEditing(false)
         
-        DispatchQueue.main.asyncAfter(deadline: .now() + 0.2) {
+        DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
             self.dismiss(animated: true, completion: nil)
         }
     }

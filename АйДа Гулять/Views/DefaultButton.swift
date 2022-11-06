@@ -42,12 +42,17 @@ class DefaultButton: UIButton {
         }
     }
     
-    init(style: Style, leftIcon: UIImage? = nil) {
+    init(style: Style, leftIcon: UIImage? = nil, rightIcon: UIImage? = nil) {
         super.init(frame: .zero)
         self.buttonStyle = style
         if let leftIcon = leftIcon {
             self.addLeftIcon(image: leftIcon)
         }
+        
+        if let rightIcon = rightIcon {
+            self.addRightIcon(image: rightIcon)
+        }
+        
         setupUI()
     }
     
@@ -74,6 +79,8 @@ class DefaultButton: UIButton {
     
     private func setupUI() {
         self.addSubview(animationView)
+        
+        self.tintColor = .appColor(.black)
         
         self.layer.cornerRadius = 4
         buttonStyle = {buttonStyle}()
@@ -115,6 +122,24 @@ class DefaultButton: UIButton {
         
         NSLayoutConstraint.activate([
             imageView.trailingAnchor.constraint(equalTo: self.titleLabel!.leadingAnchor, constant: -8),
+            imageView.centerYAnchor.constraint(equalTo: self.titleLabel!.centerYAnchor, constant: 0),
+        ])
+    
+    }
+    
+    
+    private func addRightIcon(image: UIImage) {
+        let imageView = UIImageView(image: image)
+        imageView.translatesAutoresizingMaskIntoConstraints = false
+        imageView.sizeToFit()
+        
+        addSubview(imageView)
+        
+        let length = CGFloat(22)
+        titleEdgeInsets.left -= length
+        
+        NSLayoutConstraint.activate([
+            imageView.leadingAnchor.constraint(equalTo: self.titleLabel!.trailingAnchor, constant: 8),
             imageView.centerYAnchor.constraint(equalTo: self.titleLabel!.centerYAnchor, constant: 0),
         ])
     

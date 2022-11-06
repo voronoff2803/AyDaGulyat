@@ -71,20 +71,22 @@ class ProfileSmallViewController: UIViewController {
         
         self.setupUI()
         
-        contentView.addGestureRecognizer(UIPanGestureRecognizer(target: self, action: #selector(handlePan(gr:))))
+        let panGesture = UIPanGestureRecognizer(target: self, action: #selector(handlePan(gr:)))
+        panGesture.delegate = self
+        
+        contentView.addGestureRecognizer(panGesture)
         profileImage = .appImage(.emptyProfile)
     }
     
     
     func setupUI() {
-        self.view.backgroundColor = .appColor(.lightGray)
+        self.view.backgroundColor = .clear
         
         self.view.addSubview(contentView)
         [shadowView, imageView, profileNameLabel, descriptionLabel, buttonsStackView].forEach({self.contentView.addSubview($0)})
         
         contentView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
-            print(self.view.safeAreaInsets.top)
             make.height.equalTo(self.view.safeAreaLayoutGuide)
         }
         
@@ -115,10 +117,16 @@ class ProfileSmallViewController: UIViewController {
         }
     }
     
+    var isInAnimation = false
+    
     @objc func handlePan(gr: UIPanGestureRecognizer) {
         let translationY = -gr.translation(in: view).y
         switch gr.state {
         case .began:
+            if gr.velocity(in: self.view).y > 0 { return }
+            
+            isInAnimation = true
+            
             let vc = ProfileBigViewController()
             
             contentView.hero.id = "contentView"
@@ -132,7 +140,7 @@ class ProfileSmallViewController: UIViewController {
             
             vc.view.hero.modifiers = [.source(heroID: "heroID")]
             
-            vc.modalPresentationStyle = .fullScreen
+            vc.modalPresentationStyle = .overFullScreen
             vc.hero.modalAnimationType = .none
             vc.hero.isEnabled = true
             
@@ -146,6 +154,16 @@ class ProfileSmallViewController: UIViewController {
             } else {
                 Hero.shared.cancel()
             }
+            
+            isInAnimation = false
         }
+    }
+}
+
+
+extension ProfileSmallViewController: UIGestureRecognizerDelegate {
+    func gestureRecognizer(_ gestureRecognizer: UIGestureRecognizer, shouldRecognizeSimultaneouslyWith otherGestureRecognizer: UIGestureRecognizer) -> Bool {
+
+        return !isInAnimation
     }
 }
