@@ -11,6 +11,8 @@ import Hero
 
 
 class ProfileBigViewController: UIViewController {
+    weak var mapView: UIView?
+    
     var isUserDrag = false
     
     let tableView = UITableView().then {
@@ -166,7 +168,10 @@ extension ProfileBigViewController: UIScrollViewDelegate {
         let inset = scrollView.bounds.origin.y
         
         if inset < -50, isUserDrag {
-            if !Hero.shared.isTransitioning { dismiss(animated: true, completion: nil)}
+            if !Hero.shared.isTransitioning {
+                dismiss(animated: true, completion: nil)
+                mapView?.isHidden = false
+            }
         }
 //
 //        if inset < 0, isUserDrag {

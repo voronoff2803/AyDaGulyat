@@ -8,6 +8,7 @@
 import UIKit
 import Jelly
 import SnapKit
+import Combine
 
 class MapViewController: UIViewController, TextFieldNextable {
     enum State {
@@ -15,6 +16,10 @@ class MapViewController: UIViewController, TextFieldNextable {
         case normal
         case showDogs
     }
+    
+    private var subscriptions = Set<AnyCancellable>()
+    
+    var searchResultCount = 0
     
     var bottomMapPositionButton: Constraint!
     var bottomCallToActionButton: Constraint!
@@ -57,6 +62,13 @@ class MapViewController: UIViewController, TextFieldNextable {
         $0.isHidden = true
     }
     
+    var resultTableView = UITableView().then {
+        $0.backgroundColor = .clear
+        $0.rowHeight = 60
+        $0.isHidden = true
+        $0.hero.modifiers = [.cascade]
+    }
+    
     var currentState: MapViewController.State = .normal {
         didSet {
             if oldValue == currentState { return }
@@ -75,6 +87,9 @@ class MapViewController: UIViewController, TextFieldNextable {
                 if oldValue == .showDogs {
                     setCollectionView(show: false)
                 }
+                
+                resultTableView.isHidden = false
+                resultTableView.reloadData()
             case .normal:
                 if searchButton.isHidden == true {
                     self.searchButton.isHidden = false
@@ -92,6 +107,8 @@ class MapViewController: UIViewController, TextFieldNextable {
                 if oldValue == .showDogs {
                     setCollectionView(show: false)
                 }
+                
+                resultTableView.isHidden = true
             case .showDogs:
                 if oldValue == .search {
                     self.searchButton.isHidden = false
@@ -107,6 +124,15 @@ class MapViewController: UIViewController, TextFieldNextable {
                 }
                 
                 setCollectionView(show: true)
+                resultTableView.isHidden = true
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.3) { [weak self] in
+                    self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .left, animated: true)
+                }
+                
+                DispatchQueue.main.asyncAfter(deadline: .now() + 0.6) { [weak self] in
+                    self?.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: true)
+                }
             }
         }
     }
@@ -115,6 +141,7 @@ class MapViewController: UIViewController, TextFieldNextable {
         super.viewDidLoad()
         
         setupUI()
+        setupBindings()
         
         searchField.delegate = self
         searchButton.addTarget(self, action: #selector(setStateSearch), for: .touchUpInside)
@@ -131,6 +158,21 @@ class MapViewController: UIViewController, TextFieldNextable {
         currentState = {currentState}()
         
         callToActionButton.addTarget(self, action: #selector(callToAction), for: .touchUpInside)
+        
+        resultTableView.register(ResultTableViewCell.self, forCellReuseIdentifier: "cell")
+        resultTableView.dataSource = self
+        resultTableView.delegate = self
+        
+        self.hero.isEnabled = true
+    }
+    
+    func setupBindings() {
+        searchField.textPublisher
+            .sink(receiveValue: { value in
+                self.searchResultCount = value?.count ?? 0
+                self.resultTableView.reloadData()
+            })
+            .store(in: &subscriptions)
     }
     
     override func viewDidAppear(_ animated: Bool) {
@@ -141,12 +183,14 @@ class MapViewController: UIViewController, TextFieldNextable {
 //        }
         
         //showProfile()
+        showMyProfile()
+        //showInisibleZoneConfigurator()
     }
     
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
         
-        [mapView, searchField, searchButton, collectionView].forEach({ self.view.addSubview($0) })
+        [mapView, searchField, searchButton, collectionView, resultTableView].forEach({ self.view.addSubview($0) })
         
         [callToActionButton, mapPositionButton].forEach({mapView.addSubview($0)})
         
@@ -178,6 +222,12 @@ class MapViewController: UIViewController, TextFieldNextable {
             make.right.equalToSuperview().inset(16)
             bottomMapPositionButton = make.bottom.equalTo(view.safeAreaLayoutGuide).inset(16).constraint
         }
+        
+        resultTableView.snp.makeConstraints { make in
+            make.top.equalTo(searchField.snp.bottom)
+            make.horizontalEdges.equalToSuperview().inset(16)
+            make.bottom.equalToSuperview()
+        }
     }
     
     
@@ -197,6 +247,7 @@ class MapViewController: UIViewController, TextFieldNextable {
         let presentedVC = ProfileSmallViewController()
         presentedVC.modalPresentationStyle = .popover
         
+        presentedVC.mapView = view
         
         present(presentedVC, animated: true)
     }
@@ -204,7 +255,7 @@ class MapViewController: UIViewController, TextFieldNextable {
     func setCollectionView(show: Bool) {
         self.collectionView.transform = show ? .init(translationX: 0, y: 240) : .identity
         self.collectionView.isHidden = false
-        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: [.layoutSubviews]) {
+        UIView.animate(withDuration: 0.4, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: []) {
             self.collectionView.transform = show ? .identity : .init(translationX: 0, y: 240)
             self.bottomMapPositionButton.update(inset: show ? 236 : 16)
             self.bottomCallToActionButton.update(inset: show ? 236 : 16)
@@ -216,8 +267,8 @@ class MapViewController: UIViewController, TextFieldNextable {
     
     func showInisibleZoneConfigurator() {
         let presentedVC = InvisibleZoneConfigurateViewController()
-        
-        //present(presentedVC, animated: false)
+
+        present(presentedVC, animated: false)
         
         
 //        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
@@ -268,5 +319,23 @@ extension MapViewController: DogProfileCollectionViewCellDelegate {
         
     }
     
+    
+}
+
+
+extension MapViewController: UITableViewDataSource {
+    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+        return currentState == .search ? searchResultCount : 0
+    }
+    
+    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+        let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ResultTableViewCell
+        return cell
+    }
+}
+
+
+
+extension MapViewController: UITableViewDelegate {
     
 }

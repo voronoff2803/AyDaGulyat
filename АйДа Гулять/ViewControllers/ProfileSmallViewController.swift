@@ -9,6 +9,8 @@ import UIKit
 import Hero
 
 class ProfileSmallViewController: UIViewController {
+    weak var mapView: UIView?
+    
     var shadowView = UIView().then {
         let shadowLayer = CAShapeLayer()
         shadowLayer.path = UIBezierPath(roundedRect: CGRect(x: 0, y: 0, width: 110, height: 110),
@@ -75,7 +77,18 @@ class ProfileSmallViewController: UIViewController {
         panGesture.delegate = self
         
         contentView.addGestureRecognizer(panGesture)
-        profileImage = .appImage(.emptyProfile)
+        profileImage = .appImage(.content3)
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
+            if !Hero.shared.isTransitioning {
+                UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0) {
+                    self?.view.transform = .init(translationX: 0, y: -10)
+                }
+                UIView.animate(withDuration: 0.7, delay: 0.2, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0) {
+                    self?.view.transform = .identity
+                }
+            }
+        }
     }
     
     
@@ -93,6 +106,7 @@ class ProfileSmallViewController: UIViewController {
         imageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.centerY.equalTo(contentView.snp.top)
+            make.height.width.equalTo(110)
         }
         
         shadowView.snp.makeConstraints { make in
@@ -141,10 +155,16 @@ class ProfileSmallViewController: UIViewController {
             vc.view.hero.modifiers = [.source(heroID: "heroID")]
             
             vc.modalPresentationStyle = .overFullScreen
+            
+            vc.mapView = mapView
             vc.hero.modalAnimationType = .none
             vc.hero.isEnabled = true
             
-            present(vc, animated: true)
+            present(vc, animated: true) {
+                if vc.view.window != nil {
+                    self.mapView?.isHidden = true
+                }
+            }
         case .changed:
             Hero.shared.update(translationY / view.bounds.height)
         default:

@@ -33,6 +33,7 @@ enum AssetsImage: String {
     case richArrow
     case mapPositionButton
     case checkmark
+    case content3
 }
 
 extension UIImage {

@@ -106,6 +106,8 @@ class DefaultPicker: UIControl {
         
         selectorViewController.title = textLabel.text
         
-        self.parentViewController?.present(selectorViewController.embeddedInNavigation(), animated: true)
+        self.parentViewController?.present(selectorViewController.embeddedInNavigation().then {
+            $0.modalPresentationStyle = .fullScreen
+        }, animated: true)
     }
 }

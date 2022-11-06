@@ -29,6 +29,12 @@ class InvisibleZoneConfigurateViewController: UIViewController {
         $0.insertSegment(withTitle: "100 м", at: 0, animated: false)
         $0.insertSegment(withTitle: "50 м", at: 0, animated: false)
         $0.selectedSegmentIndex = 0
+        
+        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
+        $0.setTitleTextAttributes(titleTextAttributes, for: .normal)
+        $0.setTitleTextAttributes(titleTextAttributes, for: .selected)
+        $0.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratRegular(size: 14)], for: .normal)
+        $0.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium(size: 14)], for: .selected)
     }
     
     let saveButton = DefaultButton(style: .bordered).then {
@@ -54,8 +60,9 @@ class InvisibleZoneConfigurateViewController: UIViewController {
         super.viewDidLoad()
         
         self.contentView.isHidden = true
-        
         self.setupUI()
+        
+        saveButton.addTarget(self, action: #selector(saveAction), for: .touchUpInside)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -67,7 +74,7 @@ class InvisibleZoneConfigurateViewController: UIViewController {
         
         if self.isBeingPresented {
             self.contentView.transform = .init(translationX: 0, y: self.contentView.frame.height)
-            UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveEaseOut]) {
+            UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: []) {
                 self.contentView.transform = .identity
             }
         }
@@ -81,12 +88,6 @@ class InvisibleZoneConfigurateViewController: UIViewController {
         
         self.view.addSubview(contentView)
         [titleLabel, descriptionLabel, segmentedControl, saveButton].forEach({ self.contentView.addSubview($0) })
-        
-        let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
-        segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
-        segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .selected)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratRegular(size: 14)], for: .normal)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium(size: 14)], for: .selected)
         
 //        segmentedControl.addTarget(self, action: #selector(selectAction(sender:)), for: .valueChanged)
         
@@ -109,6 +110,7 @@ class InvisibleZoneConfigurateViewController: UIViewController {
             make.centerX.equalToSuperview()
             make.top.equalTo(descriptionLabel.snp.bottom).offset(28)
             make.width.equalTo(260)
+            make.height.equalTo(45)
         }
         
         saveButton.snp.makeConstraints { make in
@@ -118,8 +120,12 @@ class InvisibleZoneConfigurateViewController: UIViewController {
         }
     }
     
+    @objc func saveAction() {
+        self.dismiss(animated: true, completion: nil)
+    }
+    
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
-        UIView.animate(withDuration: 0.3, delay: 0.0, options: [.curveEaseIn]) {
+        UIView.animate(withDuration: 0.5, delay: 0.0, usingSpringWithDamping: 0.8, initialSpringVelocity: 0.0, options: []) {
             self.contentView.transform = .init(translationX: 0, y: self.contentView.frame.height)
         } completion: { _ in
             super.dismiss(animated: false, completion: completion)

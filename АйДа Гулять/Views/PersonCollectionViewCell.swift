@@ -69,7 +69,7 @@ class PersonCollectionViewCell: UITableViewCell {
         
         selectionStyle = .none
         
-        profileImage = .appImage(.emptyProfile)
+        profileImage = .appImage(.content3)
         
         [imageAvatarView, profileNameLabel, descriptionLabel, buttonsStackView, dividerView].forEach({self.contentView.addSubview($0)})
         
