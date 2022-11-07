@@ -300,7 +300,7 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
     }
     
     func selectDogAvatar(at index: Int) {
-        pageControlView.currentPage = index
+        pageControlView.currentPage = index + 1
     }
     
     @objc func dismissAction() {
