@@ -12,6 +12,8 @@ import SnapKit
 class AuthViewController: AppRootViewController, TextFieldNextable {
     var baseConstraints: [Constraint] = []
     var keyboardShowConstraints: [Constraint] = []
+    let coordinator: Coordinator
+    private var viewModel: AuthViewModel!
     
     let logoImageView = ScalableImageView(image: UIImage.appImage(.logo)).then {
         $0.contentMode = .scaleAspectFit
@@ -53,6 +55,16 @@ class AuthViewController: AppRootViewController, TextFieldNextable {
             let scale: CGFloat = 16/22
             titleLabel.transform = isKeyboardHidden ? .identity : .init(scaleX: scale, y: scale)
         }
+    }
+    
+    init(coordinator: Coordinator, viewModel: AuthViewModel) {
+        self.coordinator = coordinator
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {

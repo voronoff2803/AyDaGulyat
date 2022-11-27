@@ -1,86 +1,142 @@
 {
-  "pins" : [
-    {
-      "identity" : "activelabel.swift",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/optonaut/ActiveLabel.swift",
-      "state" : {
-        "revision" : "36949c1a69ef8b40574da20c9e24b115f387b1cf",
-        "version" : "1.1.5"
+  "object": {
+    "pins": [
+      {
+        "package": "ActiveLabel",
+        "repositoryURL": "https://github.com/optonaut/ActiveLabel.swift",
+        "state": {
+          "branch": null,
+          "revision": "36949c1a69ef8b40574da20c9e24b115f387b1cf",
+          "version": "1.1.5"
+        }
+      },
+      {
+        "package": "Alamofire",
+        "repositoryURL": "https://github.com/Alamofire/Alamofire",
+        "state": {
+          "branch": null,
+          "revision": "78424be314842833c04bc3bef5b72e85fff99204",
+          "version": "5.6.4"
+        }
+      },
+      {
+        "package": "Apollo",
+        "repositoryURL": "https://github.com/apollographql/apollo-ios.git",
+        "state": {
+          "branch": null,
+          "revision": "014660b14262df15f0d2c7b7e973d0a53be27b7e",
+          "version": "1.0.5"
+        }
+      },
+      {
+        "package": "ApolloCombine",
+        "repositoryURL": "https://github.com/joel-perry/ApolloCombine",
+        "state": {
+          "branch": null,
+          "revision": "db27268fb25e3dc487b7256b7c6f93c9dcbeb78b",
+          "version": "0.6.0"
+        }
+      },
+      {
+        "package": "CombineCocoa",
+        "repositoryURL": "https://github.com/CombineCommunity/CombineCocoa",
+        "state": {
+          "branch": null,
+          "revision": "7300c75ff9e072aa7fd0fccefcc88f74aae9bf56",
+          "version": "0.4.1"
+        }
+      },
+      {
+        "package": "Hero",
+        "repositoryURL": "https://github.com/HeroTransitions/Hero",
+        "state": {
+          "branch": null,
+          "revision": "66a554b21116fccf61b3aa2205a86f6b0cdc9766",
+          "version": "1.6.2"
+        }
+      },
+      {
+        "package": "InflectorKit",
+        "repositoryURL": "https://github.com/mattt/InflectorKit",
+        "state": {
+          "branch": null,
+          "revision": "d8cbcc04972690aaa5fc760a2b9ddb3e9f0decd7",
+          "version": "1.0.0"
+        }
+      },
+      {
+        "package": "Lottie",
+        "repositoryURL": "https://github.com/airbnb/lottie-ios",
+        "state": {
+          "branch": null,
+          "revision": "b4bd0604ded9574807f41b4004b57dd1226a30a4",
+          "version": "3.5.0"
+        }
+      },
+      {
+        "package": "MarkdownKit",
+        "repositoryURL": "https://github.com/bmoliveira/MarkdownKit",
+        "state": {
+          "branch": null,
+          "revision": "5056f3305d3499f44d8815530d560b87082e0cf5",
+          "version": "1.7.1"
+        }
+      },
+      {
+        "package": "ShowTime",
+        "repositoryURL": "https://github.com/KaneCheshire/ShowTime.git",
+        "state": {
+          "branch": null,
+          "revision": "f4e976931fc5f9b7a7d011f40c62a250c4ff53ab",
+          "version": "2.5.3"
+        }
+      },
+      {
+        "package": "SnapKit",
+        "repositoryURL": "https://github.com/SnapKit/SnapKit",
+        "state": {
+          "branch": null,
+          "revision": "f222cbdf325885926566172f6f5f06af95473158",
+          "version": "5.6.0"
+        }
+      },
+      {
+        "package": "SQLite.swift",
+        "repositoryURL": "https://github.com/stephencelis/SQLite.swift.git",
+        "state": {
+          "branch": null,
+          "revision": "4d543d811ee644fa4cc4bfa0be996b4dd6ba0f54",
+          "version": "0.13.3"
+        }
+      },
+      {
+        "package": "swift-argument-parser",
+        "repositoryURL": "https://github.com/apple/swift-argument-parser.git",
+        "state": {
+          "branch": null,
+          "revision": "fddd1c00396eed152c45a46bea9f47b98e59301d",
+          "version": "1.2.0"
+        }
+      },
+      {
+        "package": "swift-collections",
+        "repositoryURL": "https://github.com/apple/swift-collections",
+        "state": {
+          "branch": null,
+          "revision": "f504716c27d2e5d4144fa4794b12129301d17729",
+          "version": "1.0.3"
+        }
+      },
+      {
+        "package": "Then",
+        "repositoryURL": "https://github.com/devxoul/Then",
+        "state": {
+          "branch": null,
+          "revision": "d41ef523faef0f911369f79c0b96815d9dbb6d7a",
+          "version": "3.0.0"
+        }
       }
-    },
-    {
-      "identity" : "alamofire",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/Alamofire/Alamofire",
-      "state" : {
-        "revision" : "8dd85aee02e39dd280c75eef88ffdb86eed4b07b",
-        "version" : "5.6.2"
-      }
-    },
-    {
-      "identity" : "combinecocoa",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/CombineCommunity/CombineCocoa",
-      "state" : {
-        "revision" : "7300c75ff9e072aa7fd0fccefcc88f74aae9bf56",
-        "version" : "0.4.1"
-      }
-    },
-    {
-      "identity" : "hero",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/HeroTransitions/Hero",
-      "state" : {
-        "revision" : "66a554b21116fccf61b3aa2205a86f6b0cdc9766",
-        "version" : "1.6.2"
-      }
-    },
-    {
-      "identity" : "lottie-ios",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/airbnb/lottie-ios",
-      "state" : {
-        "revision" : "314537ec697719fa33a9d48210f4d06a463286d3",
-        "version" : "3.4.3"
-      }
-    },
-    {
-      "identity" : "markdownkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/bmoliveira/MarkdownKit",
-      "state" : {
-        "revision" : "5056f3305d3499f44d8815530d560b87082e0cf5",
-        "version" : "1.7.1"
-      }
-    },
-    {
-      "identity" : "showtime",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/KaneCheshire/ShowTime.git",
-      "state" : {
-        "revision" : "f4e976931fc5f9b7a7d011f40c62a250c4ff53ab",
-        "version" : "2.5.3"
-      }
-    },
-    {
-      "identity" : "snapkit",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/SnapKit/SnapKit",
-      "state" : {
-        "revision" : "f222cbdf325885926566172f6f5f06af95473158",
-        "version" : "5.6.0"
-      }
-    },
-    {
-      "identity" : "then",
-      "kind" : "remoteSourceControl",
-      "location" : "https://github.com/devxoul/Then",
-      "state" : {
-        "revision" : "d41ef523faef0f911369f79c0b96815d9dbb6d7a",
-        "version" : "3.0.0"
-      }
-    }
-  ],
-  "version" : 2
+    ]
+  },
+  "version": 1
 }

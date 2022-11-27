@@ -79,6 +79,11 @@ class ProfileSmallViewController: UIViewController {
         contentView.addGestureRecognizer(panGesture)
         profileImage = .appImage(.content3)
         
+        setupHintAnimation()
+    }
+    
+    
+    func setupHintAnimation() {
         DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) { [weak self] in
             if !Hero.shared.isTransitioning {
                 UIView.animate(withDuration: 0.7, delay: 0.0, usingSpringWithDamping: 0.4, initialSpringVelocity: 0.0) {
@@ -131,6 +136,12 @@ class ProfileSmallViewController: UIViewController {
         }
     }
     
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        
+        self.navigationController?.setNavigationBarHidden(true, animated: true)
+    }
+    
     var isInAnimation = false
     
     @objc func handlePan(gr: UIPanGestureRecognizer) {
@@ -159,6 +170,10 @@ class ProfileSmallViewController: UIViewController {
             vc.mapView = mapView
             vc.hero.modalAnimationType = .none
             vc.hero.isEnabled = true
+            
+            navigationController?.hero.isEnabled = true
+            navigationController?.hero.modalAnimationType = .none
+            navigationController?.pushViewController(vc, animated: true)
             
             present(vc, animated: true) {
                 if vc.view.window != nil {

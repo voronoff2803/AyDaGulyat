@@ -71,8 +71,8 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
         $0.setTitle("Запросить код еще раз", for: .normal)
     }
     
-    let activityIndicator = AnimationView().then {
-        let animation = Animation.asset("animationActivityBlack")
+    let activityIndicator = LottieAnimationView().then {
+        let animation = LottieAnimation.asset("animationActivityBlack")
         $0.loopMode = .loop
         $0.animation = animation
     }

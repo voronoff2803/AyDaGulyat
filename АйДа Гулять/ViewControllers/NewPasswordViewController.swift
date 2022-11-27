@@ -41,6 +41,8 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
     init(viewModel: AuthViewModel) {
         super.init(nibName: nil, bundle: nil)
         self.viewModel = viewModel
+        
+        viewModel.loginUser(email: "test", password: "test")
     }
     
     required init?(coder: NSCoder) {
@@ -84,7 +86,7 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
             passwordFirstTextField.fieldState = .error
             passwordSecondTextField.fieldState = .normal
         case .differentPassword:
-            passwordFirstTextField.fieldState = .error
+            passwordFirstTextField.fieldState = .normal
             passwordSecondTextField.fieldState = .error
         case .normal:
             passwordFirstTextField.fieldState = .success

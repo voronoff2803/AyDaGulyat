@@ -6,7 +6,6 @@
 //
 
 import UIKit
-import Jelly
 import SnapKit
 import Combine
 
@@ -52,7 +51,7 @@ class MapViewController: UIViewController, TextFieldNextable {
                                           collectionViewLayout: SnapCenterLayout().then {
         $0.itemSize = CGSize(width: UIScreen.main.bounds.width - 16 * 2, height: 200)
         $0.minimumLineSpacing = 8
-        $0.sectionInset = UIEdgeInsets(top: 0, left: UIScreen.main.bounds.width / 2 - 100, bottom: 16, right: 16)
+        $0.sectionInset = UIEdgeInsets(top: 0, left: 16, bottom: 16, right: 16)
         $0.scrollDirection = .horizontal
     }).then {
         $0.backgroundColor = .clear
@@ -183,7 +182,7 @@ class MapViewController: UIViewController, TextFieldNextable {
 //        }
         
         //showProfile()
-        showMyProfile()
+        //showMyProfile()
         //showInisibleZoneConfigurator()
     }
     

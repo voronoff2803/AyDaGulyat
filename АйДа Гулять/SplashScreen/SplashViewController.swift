@@ -15,7 +15,7 @@ class SplashViewController: UIViewController {
     
     let logoImageView = UIImageView(image: UIImage.appImage(.logo))
     let logoLabelImageView = UIImageView(image: UIImage.appImage(.logoLabel))
-    let animationView = AnimationView()
+    let animationView = LottieAnimationView()
     
     var frazeString: String?
     
@@ -63,7 +63,7 @@ class SplashViewController: UIViewController {
     }
     
     func setupUI() {
-        let animation = Animation.asset("splashAnimationBlack")
+        let animation = LottieAnimation.asset("splashAnimationBlack")
         animationView.animation = animation
         if logoIsHidden {
             animationView.currentProgress = 1.0

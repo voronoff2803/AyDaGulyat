@@ -9,7 +9,7 @@ import UIKit
 import Lottie
 
 class DefaultButton: UIButton {
-    private var animationView = AnimationView().then {
+    private var animationView = LottieAnimationView().then {
         $0.isHidden = true
         $0.loopMode = .loop
         $0.isUserInteractionEnabled = false
@@ -106,7 +106,7 @@ class DefaultButton: UIButton {
             self.titleLabel?.font = .montserratRegular(size: 14)
         }
         
-        let animation = Animation.asset(buttonStyle == .filled ? "loadAnimmationWhite" : "loadAnimmationBlack")
+        let animation = LottieAnimation.asset(buttonStyle == .filled ? "loadAnimmationWhite" : "loadAnimmationBlack")
         animationView.animation = animation
     }
     

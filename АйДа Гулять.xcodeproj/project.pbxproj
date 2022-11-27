@@ -58,6 +58,8 @@
 		0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */; };
 		0D81D0B328F8734000AB33D3 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */; };
 		0D81D0B528F883F000AB33D3 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B428F883F000AB33D3 /* RegistrationViewController.swift */; };
+		0DB4D9CB292FACA40098307C /* Apollo in Frameworks */ = {isa = PBXBuildFile; productRef = 0DB4D9CA292FACA40098307C /* Apollo */; };
+		0DB4D9CD292FACA40098307C /* ApolloWebSocket in Frameworks */ = {isa = PBXBuildFile; productRef = 0DB4D9CC292FACA40098307C /* ApolloWebSocket */; };
 		0DD0AAEE291535CF00E44F80 /* PersonCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD0AAED291535CF00E44F80 /* PersonCollectionViewCell.swift */; };
 		0DD0AAF0291546D000E44F80 /* BirthDateCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD0AAEF291546D000E44F80 /* BirthDateCollectionViewCell.swift */; };
 		0DD0AAF6291599C700E44F80 /* TagsTableViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD0AAF5291599C700E44F80 /* TagsTableViewCell.swift */; };
@@ -71,6 +73,18 @@
 		0DD24898290D57E800311427 /* DefaultPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD24897290D57E800311427 /* DefaultPicker.swift */; };
 		0DD2489A290D758200311427 /* DefaultSegmentedPicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD24899290D758200311427 /* DefaultSegmentedPicker.swift */; };
 		0DD2489C290D7B9500311427 /* DefaultDatePicker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD2489B290D7B9500311427 /* DefaultDatePicker.swift */; };
+		0DDE7F00292FB4B5006CEE22 /* Aida in Frameworks */ = {isa = PBXBuildFile; productRef = 0DDE7EFF292FB4B5006CEE22 /* Aida */; };
+		0DDE7F07292FBFF5006CEE22 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F06292FBFF5006CEE22 /* APIService.swift */; };
+		0DDE7F0A2931392E006CEE22 /* ApolloCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 0DDE7F092931392E006CEE22 /* ApolloCombine */; };
+		0DDE7F0C2933C98D006CEE22 /* GQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F0B2933C98D006CEE22 /* GQLError.swift */; };
+		0DDE7F122933D649006CEE22 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F112933D649006CEE22 /* MyProfileViewModel.swift */; };
+		0DDE7F142933DB00006CEE22 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F132933DB00006CEE22 /* MyProfileViewController.swift */; };
+		0DDE7F182933E6C1006CEE22 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F172933E6C1006CEE22 /* Coordinator.swift */; };
+		0DDE7F1A2933E9FF006CEE22 /* Coordinatable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F192933E9FF006CEE22 /* Coordinatable.swift */; };
+		0DDE7F26293419F4006CEE22 /* ResetPasswordMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F23293419F4006CEE22 /* ResetPasswordMutation.graphql.swift */; };
+		0DDE7F27293419F4006CEE22 /* LoginUserMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F24293419F4006CEE22 /* LoginUserMutation.graphql.swift */; };
+		0DDE7F28293419F4006CEE22 /* CreateUserMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F25293419F4006CEE22 /* CreateUserMutation.graphql.swift */; };
+		0DDE7F2B29341EA5006CEE22 /* TokenInterceptor.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F2A29341EA5006CEE22 /* TokenInterceptor.swift */; };
 		0DE2D02C2910064800CA1F91 /* SearchFieldMapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE2D02B2910064800CA1F91 /* SearchFieldMapView.swift */; };
 		0DEC9CEE2912AB91001A8CDA /* Hero in Frameworks */ = {isa = PBXBuildFile; productRef = 0DEC9CED2912AB91001A8CDA /* Hero */; };
 		0DEC9CF02912AC89001A8CDA /* ProfileSmallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEC9CEF2912AC89001A8CDA /* ProfileSmallViewController.swift */; };
@@ -145,6 +159,17 @@
 		0DD24897290D57E800311427 /* DefaultPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPicker.swift; sourceTree = "<group>"; };
 		0DD24899290D758200311427 /* DefaultSegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSegmentedPicker.swift; sourceTree = "<group>"; };
 		0DD2489B290D7B9500311427 /* DefaultDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDatePicker.swift; sourceTree = "<group>"; };
+		0DDE7EFB292FB3F0006CEE22 /* aidaSPM */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = aidaSPM; sourceTree = "<group>"; };
+		0DDE7F06292FBFF5006CEE22 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
+		0DDE7F0B2933C98D006CEE22 /* GQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQLError.swift; sourceTree = "<group>"; };
+		0DDE7F112933D649006CEE22 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
+		0DDE7F132933DB00006CEE22 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
+		0DDE7F172933E6C1006CEE22 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
+		0DDE7F192933E9FF006CEE22 /* Coordinatable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinatable.swift; sourceTree = "<group>"; };
+		0DDE7F23293419F4006CEE22 /* ResetPasswordMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordMutation.graphql.swift; path = "АйДа Гулять/ResetPasswordMutation.graphql.swift"; sourceTree = SOURCE_ROOT; };
+		0DDE7F24293419F4006CEE22 /* LoginUserMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginUserMutation.graphql.swift; path = "АйДа Гулять/LoginUserMutation.graphql.swift"; sourceTree = SOURCE_ROOT; };
+		0DDE7F25293419F4006CEE22 /* CreateUserMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateUserMutation.graphql.swift; path = "АйДа Гулять/CreateUserMutation.graphql.swift"; sourceTree = SOURCE_ROOT; };
+		0DDE7F2A29341EA5006CEE22 /* TokenInterceptor.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TokenInterceptor.swift; sourceTree = "<group>"; };
 		0DE2D02B2910064800CA1F91 /* SearchFieldMapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldMapView.swift; sourceTree = "<group>"; };
 		0DEC9CEF2912AC89001A8CDA /* ProfileSmallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSmallViewController.swift; sourceTree = "<group>"; };
 		0DEC9CF12912B46F001A8CDA /* ProfileBigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBigViewController.swift; sourceTree = "<group>"; };
@@ -165,14 +190,18 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D50E5E528E85A9C006DB37A /* SnapKit in Frameworks */,
+				0DB4D9CD292FACA40098307C /* ApolloWebSocket in Frameworks */,
 				0D20142F290017FF008C2C90 /* MarkdownKit in Frameworks */,
 				0D50E5EE28E85CEE006DB37A /* Then in Frameworks */,
 				0D50E5E828E85ABC006DB37A /* Alamofire in Frameworks */,
 				0D7113ED29070663005AB9F9 /* ShowTime in Frameworks */,
+				0DB4D9CB292FACA40098307C /* Apollo in Frameworks */,
 				0D7113DB29067E94005AB9F9 /* CombineCocoa in Frameworks */,
 				0D5E66D228F0BB220094C949 /* Lottie in Frameworks */,
 				0DEC9CEE2912AB91001A8CDA /* Hero in Frameworks */,
 				0D7113DF2906A62E005AB9F9 /* ActiveLabel in Frameworks */,
+				0DDE7F0A2931392E006CEE22 /* ApolloCombine in Frameworks */,
+				0DDE7F00292FB4B5006CEE22 /* Aida in Frameworks */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -218,8 +247,10 @@
 			children = (
 				0D50E5DD28E8593D006DB37A /* Info.plist */,
 				0D50E5CF28E8593C006DB37A /* AppDelegate.swift */,
+				0DDE7F172933E6C1006CEE22 /* Coordinator.swift */,
 				0D3C521928F5836500F91D0C /* AppRootViewController.swift */,
 				0D3C521C28F585A900F91D0C /* TextFieldNextable.swift */,
+				0DDE7F192933E9FF006CEE22 /* Coordinatable.swift */,
 			);
 			path = AppRoot;
 			sourceTree = "<group>";
@@ -246,6 +277,7 @@
 				0D6C0D23290EC22900BF4A14 /* InvisibleZoneConfigurateViewController.swift */,
 				0DEC9CEF2912AC89001A8CDA /* ProfileSmallViewController.swift */,
 				0DEC9CF12912B46F001A8CDA /* ProfileBigViewController.swift */,
+				0DDE7F132933DB00006CEE22 /* MyProfileViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -253,8 +285,10 @@
 		0D50E5C328E8593C006DB37A = {
 			isa = PBXGroup;
 			children = (
+				0DDE7EFA292FB3F0006CEE22 /* Packages */,
 				0D50E5CE28E8593C006DB37A /* АйДа Гулять */,
 				0D50E5CD28E8593C006DB37A /* Products */,
+				0DDE7EFE292FB4B5006CEE22 /* Frameworks */,
 			);
 			sourceTree = "<group>";
 		};
@@ -269,6 +303,7 @@
 		0D50E5CE28E8593C006DB37A /* АйДа Гулять */ = {
 			isa = PBXGroup;
 			children = (
+				0DDE7F05292FBFE3006CEE22 /* Services */,
 				0D7113D229066FEB005AB9F9 /* Utils */,
 				0D5E66C928F09D770094C949 /* SplashScreen */,
 				0D3C520C28F4A52E00F91D0C /* AppRoot */,
@@ -337,6 +372,7 @@
 			isa = PBXGroup;
 			children = (
 				0D7113D529067616005AB9F9 /* AuthViewModel.swift */,
+				0DDE7F112933D649006CEE22 /* MyProfileViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -349,6 +385,51 @@
 				0DD0AB1929165F7A00E44F80 /* TagView.swift */,
 			);
 			path = TagView;
+			sourceTree = "<group>";
+		};
+		0DDE7EFA292FB3F0006CEE22 /* Packages */ = {
+			isa = PBXGroup;
+			children = (
+				0DDE7EFB292FB3F0006CEE22 /* aidaSPM */,
+			);
+			name = Packages;
+			sourceTree = "<group>";
+		};
+		0DDE7EFE292FB4B5006CEE22 /* Frameworks */ = {
+			isa = PBXGroup;
+			children = (
+			);
+			name = Frameworks;
+			sourceTree = "<group>";
+		};
+		0DDE7F02292FB51D006CEE22 /* ServiceGraphQLApollo */ = {
+			isa = PBXGroup;
+			children = (
+				0DDE7F29293419FB006CEE22 /* Auth */,
+			);
+			name = ServiceGraphQLApollo;
+			path = ..;
+			sourceTree = "<group>";
+		};
+		0DDE7F05292FBFE3006CEE22 /* Services */ = {
+			isa = PBXGroup;
+			children = (
+				0DDE7F02292FB51D006CEE22 /* ServiceGraphQLApollo */,
+				0DDE7F06292FBFF5006CEE22 /* APIService.swift */,
+				0DDE7F2A29341EA5006CEE22 /* TokenInterceptor.swift */,
+				0DDE7F0B2933C98D006CEE22 /* GQLError.swift */,
+			);
+			path = Services;
+			sourceTree = "<group>";
+		};
+		0DDE7F29293419FB006CEE22 /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				0DDE7F25293419F4006CEE22 /* CreateUserMutation.graphql.swift */,
+				0DDE7F24293419F4006CEE22 /* LoginUserMutation.graphql.swift */,
+				0DDE7F23293419F4006CEE22 /* ResetPasswordMutation.graphql.swift */,
+			);
+			name = Auth;
 			sourceTree = "<group>";
 		};
 /* End PBXGroup section */
@@ -377,6 +458,10 @@
 				0D7113DE2906A62E005AB9F9 /* ActiveLabel */,
 				0D7113EC29070663005AB9F9 /* ShowTime */,
 				0DEC9CED2912AB91001A8CDA /* Hero */,
+				0DB4D9CA292FACA40098307C /* Apollo */,
+				0DB4D9CC292FACA40098307C /* ApolloWebSocket */,
+				0DDE7EFF292FB4B5006CEE22 /* Aida */,
+				0DDE7F092931392E006CEE22 /* ApolloCombine */,
 			);
 			productName = "АйДа Гулять";
 			productReference = 0D50E5CC28E8593C006DB37A /* АйДа Гулять.app */;
@@ -416,6 +501,8 @@
 				0D7113DD2906A62E005AB9F9 /* XCRemoteSwiftPackageReference "ActiveLabel" */,
 				0D7113EB29070663005AB9F9 /* XCRemoteSwiftPackageReference "ShowTime" */,
 				0DEC9CEC2912AB91001A8CDA /* XCRemoteSwiftPackageReference "Hero" */,
+				0DB4D9C9292FACA40098307C /* XCRemoteSwiftPackageReference "apollo-ios" */,
+				0DDE7F082931392E006CEE22 /* XCRemoteSwiftPackageReference "ApolloCombine" */,
 			);
 			productRefGroup = 0D50E5CD28E8593C006DB37A /* Products */;
 			projectDirPath = "";
@@ -446,6 +533,7 @@
 			isa = PBXSourcesBuildPhase;
 			buildActionMask = 2147483647;
 			files = (
+				0DDE7F2B29341EA5006CEE22 /* TokenInterceptor.swift in Sources */,
 				0DF25ACB29169C4500A279A0 /* ContactsTableViewCell.swift in Sources */,
 				0D13FD6A29058C2500A86E62 /* MapViewController.swift in Sources */,
 				0DF25ACD2916C4ED00A279A0 /* DogProfileTableViewCell.swift in Sources */,
@@ -464,15 +552,19 @@
 				0DEC9CF02912AC89001A8CDA /* ProfileSmallViewController.swift in Sources */,
 				0DF25ADB2917FB6800A279A0 /* ResultTableViewCell.swift in Sources */,
 				0DD24896290C1AFE00311427 /* ListCollectionViewCell.swift in Sources */,
+				0DDE7F142933DB00006CEE22 /* MyProfileViewController.swift in Sources */,
 				0DF25AD12916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift in Sources */,
 				0DF25AD32916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift in Sources */,
 				0DD24892290BEB5F00311427 /* DefaultNavigationViewController.swift in Sources */,
 				0DF25ACF2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift in Sources */,
+				0DDE7F122933D649006CEE22 /* MyProfileViewModel.swift in Sources */,
 				0D2016D328E89789003E673E /* UIFont+customFont.swift in Sources */,
 				0D3C520A28F4A17900F91D0C /* UIImage+assets.swift in Sources */,
+				0DDE7F1A2933E9FF006CEE22 /* Coordinatable.swift in Sources */,
 				0DD0AB1C29165F7A00E44F80 /* TagView.swift in Sources */,
 				0D50E5D028E8593C006DB37A /* AppDelegate.swift in Sources */,
 				0DD2489C290D7B9500311427 /* DefaultDatePicker.swift in Sources */,
+				0DDE7F27293419F4006CEE22 /* LoginUserMutation.graphql.swift in Sources */,
 				0D20143B290402EC008C2C90 /* SnapCenterLayout.swift in Sources */,
 				0D7113E12906A918005AB9F9 /* AgreementViewController.swift in Sources */,
 				0D3C521228F4B42D00F91D0C /* Label.swift in Sources */,
@@ -483,6 +575,7 @@
 				0DE2D02C2910064800CA1F91 /* SearchFieldMapView.swift in Sources */,
 				0D20142829001440008C2C90 /* TutorialViewController.swift in Sources */,
 				0DEC9CF22912B46F001A8CDA /* ProfileBigViewController.swift in Sources */,
+				0DDE7F26293419F4006CEE22 /* ResetPasswordMutation.graphql.swift in Sources */,
 				0D3C520828F4A17000F91D0C /* UIColor+assets.swift in Sources */,
 				0DD24890290BDF5E00311427 /* ListSearchViewController.swift in Sources */,
 				0D20142A290015A8008C2C90 /* TutorialPageContentViewController.swift in Sources */,
@@ -504,10 +597,14 @@
 				0D3C521628F57C1200F91D0C /* PasswordTextField.swift in Sources */,
 				0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */,
 				0D5BD10628F5CA1700DD1496 /* ScalableImageView.swift in Sources */,
+				0DDE7F182933E6C1006CEE22 /* Coordinator.swift in Sources */,
+				0DDE7F28293419F4006CEE22 /* CreateUserMutation.graphql.swift in Sources */,
 				0D5E66CF28F09D770094C949 /* SplashPresenter.swift in Sources */,
 				0D5E66CE28F09D770094C949 /* SplashViewController.swift in Sources */,
+				0DDE7F07292FBFF5006CEE22 /* APIService.swift in Sources */,
 				0D3C521D28F585A900F91D0C /* TextFieldNextable.swift in Sources */,
 				0DD0AAEE291535CF00E44F80 /* PersonCollectionViewCell.swift in Sources */,
+				0DDE7F0C2933C98D006CEE22 /* GQLError.swift in Sources */,
 				0D5E66CD28F09D770094C949 /* SplashAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
@@ -788,6 +885,22 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		0DB4D9C9292FACA40098307C /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
+			requirement = {
+				kind = upToNextMinorVersion;
+				minimumVersion = 1.0.0;
+			};
+		};
+		0DDE7F082931392E006CEE22 /* XCRemoteSwiftPackageReference "ApolloCombine" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/joel-perry/ApolloCombine";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 0.6.0;
+			};
+		};
 		0DEC9CEC2912AB91001A8CDA /* XCRemoteSwiftPackageReference "Hero" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/HeroTransitions/Hero";
@@ -838,6 +951,25 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0D7113EB29070663005AB9F9 /* XCRemoteSwiftPackageReference "ShowTime" */;
 			productName = ShowTime;
+		};
+		0DB4D9CA292FACA40098307C /* Apollo */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0DB4D9C9292FACA40098307C /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = Apollo;
+		};
+		0DB4D9CC292FACA40098307C /* ApolloWebSocket */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0DB4D9C9292FACA40098307C /* XCRemoteSwiftPackageReference "apollo-ios" */;
+			productName = ApolloWebSocket;
+		};
+		0DDE7EFF292FB4B5006CEE22 /* Aida */ = {
+			isa = XCSwiftPackageProductDependency;
+			productName = Aida;
+		};
+		0DDE7F092931392E006CEE22 /* ApolloCombine */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0DDE7F082931392E006CEE22 /* XCRemoteSwiftPackageReference "ApolloCombine" */;
+			productName = ApolloCombine;
 		};
 		0DEC9CED2912AB91001A8CDA /* Hero */ = {
 			isa = XCSwiftPackageProductDependency;

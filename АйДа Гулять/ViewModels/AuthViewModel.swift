@@ -7,6 +7,8 @@
 
 import Foundation
 import Combine
+import Apollo
+import ApolloCombine
 
 
 class AuthViewModel: ObservableObject {
@@ -25,7 +27,10 @@ class AuthViewModel: ObservableObject {
     func setupBindings() {
         $newPasswordFirst
             .removeDuplicates()
-            .combineLatest($newPasswordSecond.removeDuplicates())
+            .combineLatest(
+                $newPasswordSecond
+                    .removeDuplicates()
+            )
             .sink(receiveValue: {first, second in
                 self.validatePasswords(first: first, second: second)
             })
@@ -54,6 +59,21 @@ class AuthViewModel: ObservableObject {
         }
         
         newPasswordState = .normal
+    }
+    
+    func loginUser(email: String, password: String) {
+        APIService.shared.loginUser(email: email, password: password)
+            .sink { req in
+                switch req {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { res in
+                print(res)
+            }
+            .store(in: &subscriptions)
     }
 }
 

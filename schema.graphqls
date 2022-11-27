@@ -1,0 +1,753 @@
+"""
+A directive used by the Apollo iOS client to annotate operations or fragments that should be used exclusively for generating local cache mutations instead of as standard operations.
+"""
+directive @apollo_client_ios_localCacheMutation on QUERY | MUTATION | SUBSCRIPTION | FRAGMENT_DEFINITION
+
+"""GraphQL queries"""
+type Query {
+  myRelationships(sort: [UserRelationshipSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): UserRelationshipConnection
+  myPoiApprovals(sort: [PointOfInterestApprovalsSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): PointOfInterestApprovalsConnection
+  myDogsRelationships(sort: [DogRelationshipSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): DogRelationshipConnection
+  dogImages(dogId: UUID): [DogImage]
+  myImages: [ProfileImage]
+  poiImages(poiId: UUID): [DogImage]
+  userComplaints(sort: [UserComplaintSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): UserComplaintConnection
+  poiComplaints(sort: [PointOfInterestComplaintSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): PointOfInterestComplaintConnection
+  me: User
+  myProfile: Profile
+  myDogs: [Dog]
+  myTrips(sort: [TripSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): TripConnection
+  myPoi(sort: [PointOfInterestSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): PointOfInterestConnection
+  errorCodes: [ErrorCodes]
+  pageByAlias(alias: String): Page
+  pagesByGroup(group: String): [Page]
+  staticHobby: [StaticDataHobby]
+  staticBreed: [StaticDataDogBreed]
+  staticColor: [StaticDataDogColor]
+  staticSpecial: [StaticDataDogSpecialization]
+  staticFeatures: [StaticDataDogFeatures]
+  staticReason: [StaticDataComplaintReason]
+  staticDanger: [StaticDataDanger]
+}
+
+type UserRelationshipConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [UserRelationshipEdge]!
+}
+
+"""
+The Relay compliant `PageInfo` type, containing data necessary to paginate this connection.
+"""
+type PageInfo {
+  """When paginating forwards, are there more items?"""
+  hasNextPage: Boolean!
+
+  """When paginating backwards, are there more items?"""
+  hasPreviousPage: Boolean!
+
+  """When paginating backwards, the cursor to continue."""
+  startCursor: String
+
+  """When paginating forwards, the cursor to continue."""
+  endCursor: String
+}
+
+"""A Relay edge containing a `UserRelationship` and its cursor."""
+type UserRelationshipEdge {
+  """The item at the end of the edge"""
+  node: UserRelationship
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""User relationships data"""
+type UserRelationship implements Node {
+  """The ID of the object"""
+  id: ID!
+  fromUserId: UUID!
+  toUserId: UUID!
+  type: UserRelationshipEnum!
+}
+
+"""An object with an ID"""
+interface Node {
+  """The ID of the object"""
+  id: ID!
+}
+
+"""
+Leverages the internal Python implementation of UUID (uuid.UUID) to provide native UUID objects
+in fields, resolvers and input.
+"""
+scalar UUID
+
+"""User friendship statuses"""
+enum UserRelationshipEnum {
+  FRIENDSHIP
+  FROM_INVITED_TO
+  FROM_BLOCKED_BY_TO
+  FROM_STALKS_TO
+}
+
+"""An enumeration."""
+enum UserRelationshipSortEnum {
+  ID_ASC
+  ID_DESC
+  FROM_USER_ID_ASC
+  FROM_USER_ID_DESC
+  TO_USER_ID_ASC
+  TO_USER_ID_DESC
+  TYPE_ASC
+  TYPE_DESC
+}
+
+type PointOfInterestApprovalsConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [PointOfInterestApprovalsEdge]!
+}
+
+"""A Relay edge containing a `PointOfInterestApprovals` and its cursor."""
+type PointOfInterestApprovalsEdge {
+  """The item at the end of the edge"""
+  node: PointOfInterestApprovals
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""POI approvals data"""
+type PointOfInterestApprovals implements Node {
+  """The ID of the object"""
+  id: ID!
+  userId: UUID!
+  poiId: UUID!
+}
+
+"""An enumeration."""
+enum PointOfInterestApprovalsSortEnum {
+  ID_ASC
+  ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  POI_ID_ASC
+  POI_ID_DESC
+}
+
+type DogRelationshipConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [DogRelationshipEdge]!
+}
+
+"""A Relay edge containing a `DogRelationship` and its cursor."""
+type DogRelationshipEdge {
+  """The item at the end of the edge"""
+  node: DogRelationship
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Dog relationships data"""
+type DogRelationship implements Node {
+  """The ID of the object"""
+  id: ID!
+  userId: UUID!
+  dogId: UUID!
+  targetUserId: UUID
+  targetDogId: UUID
+  type: DogRelationshipEnum!
+}
+
+"""Dog relationship statuses"""
+enum DogRelationshipEnum {
+  LIKES
+  DISLIKES
+}
+
+"""An enumeration."""
+enum DogRelationshipSortEnum {
+  ID_ASC
+  ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  DOG_ID_ASC
+  DOG_ID_DESC
+  TARGET_USER_ID_ASC
+  TARGET_USER_ID_DESC
+  TARGET_DOG_ID_ASC
+  TARGET_DOG_ID_DESC
+  TYPE_ASC
+  TYPE_DESC
+}
+
+"""Dog image"""
+type DogImage {
+  imgSource: String!
+  imgSmall: String
+  imgMedium: String
+  imgBig: String
+  id: UUID!
+  userId: UUID!
+  dogId: UUID!
+}
+
+"""Profile image"""
+type ProfileImage {
+  imgSource: String!
+  imgSmall: String
+  imgMedium: String
+  imgBig: String
+  id: UUID!
+  userId: UUID!
+}
+
+type UserComplaintConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [UserComplaintEdge]!
+}
+
+"""A Relay edge containing a `UserComplaint` and its cursor."""
+type UserComplaintEdge {
+  """The item at the end of the edge"""
+  node: UserComplaint
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""User complaints"""
+type UserComplaint implements Node {
+  comment: String!
+
+  """The ID of the object"""
+  id: ID!
+  userId: UUID!
+  targetUserId: UUID!
+  messagee: String!
+
+  """Object state"""
+  resolutionState: ResolutionEnum!
+
+  """Complain resolution timestamp"""
+  resolvedAt: DateTime!
+}
+
+"""An enumeration."""
+enum ResolutionEnum {
+  TBD
+  NO_ACTION
+  ITEM_DELETE
+  ITEM_EDIT
+  USER_BAN
+  FALSE_ALARM
+}
+
+"""
+The `DateTime` scalar type represents a DateTime
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar DateTime
+
+"""An enumeration."""
+enum UserComplaintSortEnum {
+  COMMENT_ASC
+  COMMENT_DESC
+  ID_ASC
+  ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  TARGET_USER_ID_ASC
+  TARGET_USER_ID_DESC
+  MESSAGEE_ASC
+  MESSAGEE_DESC
+  RESOLUTION_STATE_ASC
+  RESOLUTION_STATE_DESC
+  RESOLVED_AT_ASC
+  RESOLVED_AT_DESC
+}
+
+type PointOfInterestComplaintConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [PointOfInterestComplaintEdge]!
+}
+
+"""A Relay edge containing a `PointOfInterestComplaint` and its cursor."""
+type PointOfInterestComplaintEdge {
+  """The item at the end of the edge"""
+  node: PointOfInterestComplaint
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""POI complaints"""
+type PointOfInterestComplaint implements Node {
+  comment: String!
+
+  """The ID of the object"""
+  id: ID!
+  userId: UUID!
+  targetUserId: UUID!
+  targetPoiId: UUID!
+  messagee: String!
+
+  """Object state"""
+  resolutionState: ResolutionEnum!
+
+  """Complain resolution timestamp"""
+  resolvedAt: DateTime!
+}
+
+"""An enumeration."""
+enum PointOfInterestComplaintSortEnum {
+  COMMENT_ASC
+  COMMENT_DESC
+  ID_ASC
+  ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  TARGET_USER_ID_ASC
+  TARGET_USER_ID_DESC
+  TARGET_POI_ID_ASC
+  TARGET_POI_ID_DESC
+  MESSAGEE_ASC
+  MESSAGEE_DESC
+  RESOLUTION_STATE_ASC
+  RESOLUTION_STATE_DESC
+  RESOLVED_AT_ASC
+  RESOLVED_AT_DESC
+}
+
+"""User data"""
+type User {
+  id: UUID!
+  email: String!
+}
+
+"""Profile data"""
+type Profile {
+  userId: UUID!
+  firstName: String
+  lastName: String
+  sex: SexEnum
+  birthDate: Date
+  telNumber: String
+  about: String
+  hobby: JSONString
+  blindSpotLat: Float
+  blindSpotLng: Float
+  blindSpotRadius: Float
+  notificattionsEnabled: Boolean!
+  showPhoneNumber: Boolean!
+  showBirthDate: Boolean!
+  chipSearcheable: Boolean!
+  phoneSearcheable: Boolean!
+  social: JSONString
+  settings: JSONString
+}
+
+"""Sex, 2 pcs"""
+enum SexEnum {
+  MALE
+  FEMALE
+}
+
+"""
+The `Date` scalar type represents a Date
+value as specified by
+[iso8601](https://en.wikipedia.org/wiki/ISO_8601).
+"""
+scalar Date
+
+"""
+Allows use of a JSON String for input / output from the GraphQL schema.
+
+Use of this type is *not recommended* as you lose the benefits of having a defined, static
+schema (one of the key benefits of GraphQL).
+"""
+scalar JSONString
+
+"""Dog data"""
+type Dog {
+  id: UUID!
+  userId: UUID!
+  name: String
+  sex: SexEnum
+  birthDate: Date
+  stamp: String
+  chip: String
+  about: String
+  breed: JSONString
+  color: JSONString
+  specialization: JSONString
+  features: JSONString
+  social: JSONString
+}
+
+type TripConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [TripEdge]!
+}
+
+"""A Relay edge containing a `Trip` and its cursor."""
+type TripEdge {
+  """The item at the end of the edge"""
+  node: Trip
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""Trip data"""
+type Trip implements Node {
+  """The ID of the object"""
+  id: ID!
+  userId: UUID!
+  startAt: DateTime
+  lastDataAt: DateTime
+  endAt: DateTime
+  distanceKm: Float
+  path: String!
+  lowresPath: String!
+  doNotDisturb: Boolean!
+}
+
+"""An enumeration."""
+enum TripSortEnum {
+  ID_ASC
+  ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  START_AT_ASC
+  START_AT_DESC
+  LAST_DATA_AT_ASC
+  LAST_DATA_AT_DESC
+  END_AT_ASC
+  END_AT_DESC
+  DISTANCE_KM_ASC
+  DISTANCE_KM_DESC
+  PATH_ASC
+  PATH_DESC
+  LOWRES_PATH_ASC
+  LOWRES_PATH_DESC
+  DO_NOT_DISTURB_ASC
+  DO_NOT_DISTURB_DESC
+}
+
+type PointOfInterestConnection {
+  """Pagination data for this connection."""
+  pageInfo: PageInfo!
+
+  """Contains the nodes in this connection."""
+  edges: [PointOfInterestEdge]!
+}
+
+"""A Relay edge containing a `PointOfInterest` and its cursor."""
+type PointOfInterestEdge {
+  """The item at the end of the edge"""
+  node: PointOfInterest
+
+  """A cursor for use in pagination"""
+  cursor: String!
+}
+
+"""POI data"""
+type PointOfInterest implements Node {
+  """The ID of the object"""
+  id: ID!
+  userId: UUID!
+  dogId: UUID
+  type: PointOfInterestTypesEnum!
+  lat: Float!
+  lng: Float!
+}
+
+"""Types of points of interest"""
+enum PointOfInterestTypesEnum {
+  DANGER
+  LOST_DOG
+  FOUND_DOG
+}
+
+"""An enumeration."""
+enum PointOfInterestSortEnum {
+  ID_ASC
+  ID_DESC
+  USER_ID_ASC
+  USER_ID_DESC
+  DOG_ID_ASC
+  DOG_ID_DESC
+  TYPE_ASC
+  TYPE_DESC
+  LAT_ASC
+  LAT_DESC
+  LNG_ASC
+  LNG_DESC
+}
+
+"""Application error codes"""
+enum ErrorCodes {
+  JWT_REQUIRED
+  JWT_DECODE_ERROR
+  JWT_FORMAT
+  JWT_EXPIRED
+  JWT_TYPE_MISMATCH
+  JWT_NO_USER
+  JWT_USER_NOT_FOUND
+  JWT_FAILED_REFRESH
+  EMAIL_ALREADY_REGISTERED
+  EMAIL_INCORRECT_FORMAT
+  PASSWORD_WEAK
+  VALIDATION_CODE_WRONG
+  VALIDATION_CODE_OLD
+  VALIDATION_TOO_MANY_RETRIES
+  WRONG_PASSWORD
+  EMAIL_UNREGISTERED
+}
+
+"""Page data"""
+type Page {
+  id: UUID!
+  valueRu: String!
+  alias: String!
+  group: String
+}
+
+"""User Hobby data"""
+type StaticDataHobby {
+  id: UUID!
+  valueRu: String!
+}
+
+"""Dog breed data"""
+type StaticDataDogBreed {
+  id: UUID!
+  valueRu: String!
+}
+
+"""Dog color data"""
+type StaticDataDogColor {
+  id: UUID!
+  valueRu: String!
+}
+
+"""Dog specialization data"""
+type StaticDataDogSpecialization {
+  id: UUID!
+  valueRu: String!
+}
+
+"""Dog features data"""
+type StaticDataDogFeatures {
+  id: UUID!
+  valueRu: String!
+}
+
+"""Complaint reasons"""
+type StaticDataComplaintReason {
+  id: UUID!
+  valueRu: String!
+}
+
+"""Danger sources"""
+type StaticDataDanger {
+  id: UUID!
+  valueRu: String!
+}
+
+"""GraphQL operations"""
+type Mutation {
+  createPoi(id: String!): Dummy
+  updatePoi(id: String!): Dummy
+  deletePoi(id: String!): Dummy
+  approvePoi(id: String!): Dummy
+  reportPoi(id: String!): Dummy
+  createDog(id: String!): Dummy
+  updateDog(id: String!): Dummy
+  deleteDog(id: String!): Dummy
+  likeDog(id: String!): Dummy
+  dislikeDog(id: String!): Dummy
+  resetDog(id: String!): Dummy
+  updateProfile(id: String!): Dummy
+  reportProfile(id: String!): Dummy
+  offerFriendship(id: String!): Dummy
+  acceptFriendship(id: String!): Dummy
+  declineFriendship(id: String!): Dummy
+  blockUser(id: String!): Dummy
+  stalkUser(id: String!): Dummy
+
+  """User creation mutation"""
+  createUser(email: String!, password: String!): CreateUser
+
+  """User password update mutation"""
+  updatePassword(newPassword: String!, oldPassword: String!): UpdatePassword
+
+  """Send password reset email to the user"""
+  resetPassword(email: String!): SendPasswordReset
+
+  """Valudation code (re)send"""
+  sendCode(id: UUID): ResendValidationCode
+
+  """Validate the code & confirm the registration"""
+  validateCode(code: String!, id: String!): ValidateCode
+
+  """User login"""
+  loginUser(email: String!, password: String!): LoginUser
+
+  """Refresh JWT access token"""
+  refreshToken: RefreshToken
+
+  """Profile image creation"""
+  createProfileImage(file: Upload!): CreateProfileImage
+
+  """Profile image removal"""
+  deleteProfileImage(id: String!): DeleteProfileImage
+
+  """Dog image creation"""
+  createDogImage(file: Upload!): CreateDogImage
+
+  """Dog image removal"""
+  deleteDogImage(id: String!): DeleteDogImage
+
+  """PoI image creation"""
+  createPoiImage(file: Upload!): CreatePoiImage
+
+  """PoI image removal"""
+  deletePoiImage(id: String!): DeletePoiImage
+  updatePosition(lat: Float!, lng: Float!): UpdatePosition
+  createTrip(dogs: [UUID]): CreateTrip
+  updateTrip(id: ID!, path: String!): UpdateTrip
+  endTrip(id: ID!): EndTrip
+  deleteTrip(id: String!): DeleteTrip
+}
+
+type Dummy {
+  success: Boolean
+}
+
+"""User creation mutation"""
+type CreateUser {
+  success: Boolean
+  id: UUID
+}
+
+"""User password update mutation"""
+type UpdatePassword {
+  success: Boolean
+  id: UUID
+}
+
+"""Send password reset email to the user"""
+type SendPasswordReset {
+  success: Boolean
+  id: UUID
+}
+
+"""Valudation code (re)send"""
+type ResendValidationCode {
+  success: Boolean
+  id: UUID
+}
+
+"""Validate the code & confirm the registration"""
+type ValidateCode {
+  success: Boolean
+  id: UUID
+}
+
+"""User login"""
+type LoginUser {
+  accessToken: String
+  refreshToken: String
+}
+
+"""Refresh JWT access token"""
+type RefreshToken {
+  accessToken: String
+}
+
+"""Profile image creation"""
+type CreateProfileImage {
+  success: Boolean
+  id: UUID
+}
+
+"""
+Create scalar that ignores normal serialization/deserialization, since
+that will be handled by the multipart request spec
+"""
+scalar Upload
+
+"""Profile image removal"""
+type DeleteProfileImage {
+  success: Boolean
+  id: UUID
+}
+
+"""Dog image creation"""
+type CreateDogImage {
+  success: Boolean
+  id: UUID
+}
+
+"""Dog image removal"""
+type DeleteDogImage {
+  success: Boolean
+  id: UUID
+}
+
+"""PoI image creation"""
+type CreatePoiImage {
+  success: Boolean
+  id: UUID
+}
+
+"""PoI image removal"""
+type DeletePoiImage {
+  success: Boolean
+  id: UUID
+}
+
+type UpdatePosition {
+  success: Boolean
+}
+
+type CreateTrip {
+  success: Boolean
+  id: UUID
+}
+
+type UpdateTrip {
+  success: Boolean
+  id: UUID
+}
+
+type EndTrip {
+  success: Boolean
+  id: UUID
+}
+
+type DeleteTrip {
+  success: Boolean
+  id: UUID
+}

@@ -1,0 +1,20 @@
+mutation LoginUser($email: String!, $password: String!) {
+  loginUser(email: $email, password: $password) {
+    accessToken
+    refreshToken
+  }
+}
+
+mutation CreateUser($email: String!, $password: String!) {
+  createUser(email: $email, password: $password) {
+    success
+    id
+  }
+}
+
+mutation ResetPassword($email: String!) {
+  resetPassword(email: $email) {
+    id
+    success
+  }
+}

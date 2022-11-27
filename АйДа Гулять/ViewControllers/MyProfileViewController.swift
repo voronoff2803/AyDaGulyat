@@ -1,16 +1,19 @@
 //
-//  ProfileBigViewController.swift
+//  MyProfileViewController.swift
 //  АйДа Гулять
 //
-//  Created by Alexey Voronov on 02.11.2022.
+//  Created by Alexey Voronov on 27.11.2022.
 //
 
 import UIKit
 import Hero
+import Combine
+import CombineCocoa
 
 
-class ProfileBigViewController: UIViewController {
-    weak var mapView: UIView?
+class MyProfileViewController: UIViewController {
+    private var subscriptions = Set<AnyCancellable>()
+    private var viewModel: MyProfileViewModel!
     
     var isUserDrag = false
     
@@ -18,6 +21,15 @@ class ProfileBigViewController: UIViewController {
         $0.bounces = true
         $0.separatorStyle = .none
         $0.backgroundColor = .clear
+    }
+    
+    init(viewModel: MyProfileViewModel) {
+        super.init(nibName: nil, bundle: nil)
+        self.viewModel = viewModel
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
     }
     
     override func viewDidLoad() {
@@ -89,7 +101,7 @@ class ProfileBigViewController: UIViewController {
 }
 
 
-extension ProfileBigViewController: UITableViewDataSource {
+extension MyProfileViewController: UITableViewDataSource {
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let index = indexPath.row
         switch index {
@@ -145,7 +157,7 @@ extension ProfileBigViewController: UITableViewDataSource {
 }
 
 
-extension ProfileBigViewController: UITableViewDelegate {
+extension MyProfileViewController: UITableViewDelegate {
     func tableView(_ tableView: UITableView, didSelectRowAt indexPath: IndexPath) {
         let index = indexPath.row
         
@@ -166,21 +178,7 @@ extension ProfileBigViewController: UITableViewDelegate {
 }
 
 
-extension ProfileBigViewController: UIScrollViewDelegate {
-    func scrollViewDidScroll(_ scrollView: UIScrollView) {
-        let inset = scrollView.bounds.origin.y
-        
-        if inset < -50, isUserDrag {
-            if !Hero.shared.isTransitioning {
-                dismiss(animated: true, completion: nil)
-                mapView?.isHidden = false
-            }
-        }
-//
-//        if inset < 0, isUserDrag {
-//            Hero.shared.update((-inset - 50) / 300)
-//        }
-    }
+extension MyProfileViewController: UIScrollViewDelegate {
     
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         isUserDrag = true

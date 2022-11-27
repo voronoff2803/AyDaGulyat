@@ -34,6 +34,10 @@ enum AssetsImage: String {
     case mapPositionButton
     case checkmark
     case content3
+    case tabMap
+    case tabProfile
+    case tabProfileSelected
+    case tabMapSelected
 }
 
 extension UIImage {
