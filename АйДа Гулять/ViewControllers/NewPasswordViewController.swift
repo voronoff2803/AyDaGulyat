@@ -11,7 +11,6 @@ import CombineCocoa
 
 class NewPasswordViewController: AppRootViewController, TextFieldNextable {
     enum State {
-        case empty
         case weakPassword
         case differentPassword
         case normal
@@ -19,10 +18,17 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
     
     private var subscriptions = Set<AnyCancellable>()
     private var viewModel: AuthViewModel!
+    let coordinator: Coordinator
     
     let logoImageView = ScalableImageView(image: UIImage.appImage(.logo)).then {
         $0.contentMode = .scaleAspectFit
     }
+    
+    let backButton = UIButton(type: .system).then {
+        $0.setImage(.appImage(.backArrow), for: .normal)
+        $0.tintColor = .appColor(.black)
+    }
+    
     let titleLabel = Label().then {
         $0.text = "Введите новый пароль"
         $0.font = .montserratRegular(size: 22)
@@ -38,11 +44,10 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
         $0.setTitle("Войти", for: .normal)
     }
     
-    init(viewModel: AuthViewModel) {
-        super.init(nibName: nil, bundle: nil)
+    init(coordinator: Coordinator, viewModel: AuthViewModel) {
+        self.coordinator = coordinator
         self.viewModel = viewModel
-        
-        viewModel.loginUser(email: "test", password: "test")
+        super.init(nibName: nil, bundle: nil)
     }
     
     required init?(coder: NSCoder) {
@@ -55,12 +60,19 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
         
         setupUI()
         setupBindings()
+        
+        backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
     }
     
     func setupBindings() {
+        viewModel.$newPasswordState
+            .sink { value in
+                self.setState(state: value)
+            }
+            .store(in: &subscriptions)
         passwordFirstTextField.textPublisher
             .sink(receiveValue: { value in
-                self.viewModel.newPasswordFirst = value ?? ""
+                self.viewModel.password = value ?? ""
             })
             .store(in: &subscriptions)
         
@@ -69,19 +81,10 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
                 self.viewModel.newPasswordSecond = value ?? ""
             })
             .store(in: &subscriptions)
-        
-        viewModel.$newPasswordState
-            .sink { value in
-                self.setState(state: value)
-            }
-            .store(in: &subscriptions)
     }
     
     func setState(state: NewPasswordViewController.State) {
         switch state {
-        case .empty:
-            passwordFirstTextField.fieldState = .normal
-            passwordSecondTextField.fieldState = .normal
         case .weakPassword:
             passwordFirstTextField.fieldState = .error
             passwordSecondTextField.fieldState = .normal
@@ -97,7 +100,7 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
         
-        [logoImageView, titleLabel, passwordFirstTextField, passwordSecondTextField, loginButton].forEach({self.view.addSubview($0)})
+        [logoImageView, titleLabel, passwordFirstTextField, passwordSecondTextField, loginButton, backButton].forEach({self.view.addSubview($0)})
         
         logoImageView.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -121,5 +124,9 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
             make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
         }
         keyboardAvoidView = loginButton
+    }
+    
+    @objc func backAction() {
+        coordinator.route(to: .back, from: self, parameters: nil)
     }
 }

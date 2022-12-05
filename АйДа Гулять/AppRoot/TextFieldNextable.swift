@@ -9,20 +9,25 @@ import UIKit
 
 enum TextFieldOrAction {
     case nextTextField(UITextField)
-    case action( (() -> ())? )
+    case action
 }
 
 protocol TextFieldNextable: UIViewController {
     func nextFieldOrActoin(for textField: UITextField) -> TextFieldOrAction
+    func nextAction()
 }
 
 extension TextFieldNextable {
+    func nextAction() {}
+    
     func nextFieldOrActoin(for textField: UITextField) -> TextFieldOrAction {
+        nextAction()
+        
         let textFields: [UITextField] = self.getAllTextFields(fromView: self.view)
         guard let index = textFields.firstIndex(of: textField),
               (index + 1) < textFields.count
         else {
-            return TextFieldOrAction.action(nil)
+            return TextFieldOrAction.action
         }
         
         let nextTextField = textFields[index + 1]

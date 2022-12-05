@@ -33,7 +33,7 @@ class APIService {
         }
     }
     
-    private(set) lazy var client = {
+    private(set) lazy var client: ApolloClient = {
         let endpointURL = URL(string: "https://aida.lol/graphql")!
         let store = ApolloStore()
         let interceptorProvider = NetworkInterceptorsProvider(
@@ -45,7 +45,7 @@ class APIService {
         )
         
         return ApolloClient(networkTransport: networkTransport, store: store)
-    }
+    }()
     
     var isAuthenticated: Bool {
         access_token != ""
@@ -53,7 +53,7 @@ class APIService {
     
     //Auth
     
-    func loginUser(email: String, password: String) -> AnyPublisher<Bool, GQLError> {
+    func authLoginUser(email: String, password: String) -> AnyPublisher<Bool, GQLError> {
         client.performPublisher(mutation: LoginUserMutation(email: email, password: password))
             .tryMap { res in
                 guard let refresh_token = res.data?.loginUser?.refreshToken,
@@ -73,10 +73,46 @@ class APIService {
     }
     
     
-    func createUser(email: String, password: String) -> AnyPublisher<Bool, GQLError> {
+    func authCreateUser(email: String, password: String) -> AnyPublisher<String, GQLError> {
         client.performPublisher(mutation: CreateUserMutation(email: email, password: password))
             .tryMap { res in
-                guard res.data?.createUser?.success == true
+                guard res.data?.createUser?.success == true,
+                      let userId = res.data?.createUser?.id
+                else {
+                    throw GQLError(message: res.errors?.first?.localizedDescription ?? "\(#function) method error")
+                }
+                return userId
+            }
+            .mapError({ error in
+                return error as? GQLError ?? GQLError(message: error.localizedDescription)
+            })
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    
+    func authResetCodeSend(email: String) -> AnyPublisher<String, GQLError> {
+        client.performPublisher(mutation: SendResetMutation(email: email))
+            .tryMap { res in
+                guard res.data?.sendReset?.success == true,
+                      let userId = res.data?.sendReset?.id
+                else {
+                    throw GQLError(message: res.errors?.first?.localizedDescription ?? "\(#function) method error")
+                }
+                return userId
+            }
+            .mapError({ error in
+                return error as? GQLError ?? GQLError(message: error.localizedDescription)
+            })
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    
+    func authResetPassword(newPassword: String) -> AnyPublisher<Bool, GQLError> {
+        client.performPublisher(mutation: ResetPasswordMutation(newPassword: newPassword))
+            .tryMap { res in
+                guard res.data?.resetPassword?.success == true
                 else {
                     throw GQLError(message: res.errors?.first?.localizedDescription ?? "\(#function) method error")
                 }
@@ -90,13 +126,32 @@ class APIService {
     }
     
     
-    func resetPassword(email: String) -> AnyPublisher<Bool, GQLError> {
-        client.performPublisher(mutation: ResetPasswordMutation(email: email))
+    func authSendCode(id: String) -> AnyPublisher<Bool, GQLError> {
+        client.performPublisher(mutation: SendCodeMutation(id: GraphQLNullable.some(id)))
             .tryMap { res in
-                guard res.data?.resetPassword?.success == true
+                guard res.data?.sendCode?.success == true
                 else {
                     throw GQLError(message: res.errors?.first?.localizedDescription ?? "\(#function) method error")
                 }
+                return true
+            }
+            .mapError({ error in
+                return error as? GQLError ?? GQLError(message: error.localizedDescription)
+            })
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    func authValidateCode(code: String, id: String) -> AnyPublisher<Bool, GQLError> {
+        client.performPublisher(mutation: ValidateCodeMutation(code: code, validateCodeId: id))
+            .tryMap { res in
+                guard let refresh_token = res.data?.validateCode?.refreshToken,
+                      let access_token = res.data?.validateCode?.accessToken
+                else {
+                    throw GQLError(message: res.errors?.first?.localizedDescription ?? "\(#function) method error")
+                }
+                self.refresh_token = refresh_token
+                self.access_token = access_token
                 return true
             }
             .mapError({ error in

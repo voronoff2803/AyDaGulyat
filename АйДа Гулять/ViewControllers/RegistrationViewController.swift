@@ -9,11 +9,21 @@ import UIKit
 import SnapKit
 import Then
 import ActiveLabel
+import Combine
 
 
 class RegistrationViewController: AppRootViewController, TextFieldNextable {
+    enum State {
+        case empty
+        case success
+        case normal(Bool, Bool)
+    }
+    
+    private var subscriptions = Set<AnyCancellable>()
     var baseConstraints: [Constraint] = []
     var keyboardShowConstraints: [Constraint] = []
+    let coordinator: Coordinator
+    private var viewModel: AuthViewModel!
     
     let logoImageView = ScalableImageView(image: UIImage.appImage(.logo)).then {
         $0.contentMode = .scaleAspectFit
@@ -30,6 +40,7 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
     }
     let passwordTextField = PasswordTextField().then {
         $0.placeholder = "Пароль"
+        $0.descriptionTextString = "Минимум 6 символов, строчные и заглавные буквы, цифры, символы"
     }
     let registrationButton = DefaultButton().then {
         $0.setTitle("Зарегистрироваться", for: .normal)
@@ -68,15 +79,42 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
         }
     }
     
+    init(coordinator: Coordinator, viewModel: AuthViewModel) {
+        self.coordinator = coordinator
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
+    func setState(newState: RegistrationViewController.State) {
+        switch newState {
+        case .success:
+            coordinator.route(to: .code, from: self, parameters: nil)
+        case .normal(let validEmail, let validPassword):
+            emailTextField.fieldState = validEmail ? .success : .error
+            passwordTextField.fieldState = validPassword ? .success : .error
+        case .empty:
+            emailTextField.fieldState = .normal
+            passwordTextField.fieldState = .normal
+        }
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupBindings()
         
-        loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
+        registrationButton.addTarget(self, action: #selector(registrationAction), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(authAction), for: .touchUpInside)
         
         descriptionLabel.handleCustomTap(for: descriptionLabel.enabledTypes.first!) { _ in
             print("show license")
         }
+        
+        passwordTextField.action = { self.viewModel.registrationUser() }
     }
     
     func setupUI() {
@@ -138,21 +176,53 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
         }
     }
     
-    @objc func loginAction() {
-        //loginButton.isLoading.toggle()
-        let firstButton = DefaultButton(style: .filledAlert).then {
-            $0.setTitle("Проверка", for: .normal)
-        }
+    func setupBindings() {
+        viewModel.$registrationState
+            .sink { value in
+                self.setState(newState: value)
+            }
+            .store(in: &subscriptions)
+        viewModel.loadingPublisher
+            .sink { [weak self] isLoading in
+                self?.registrationButton.isLoading = isLoading
+            }
+            .store(in: &subscriptions)
+        viewModel.errorPublisher
+            .sink { [weak self] error in
+                self?.showError(message: error.localizedDescription)
+            }
+            .store(in: &subscriptions)
         
-        let secondButton = DefaultButton(style: .borderedAlert).then {
-            $0.setTitle("Проверка", for: .normal)
-        }
+        viewModel.$email
+            .sink { value in
+                self.emailTextField.text = value
+            }
+            .store(in: &subscriptions)
         
-        showAlert(buttons: [firstButton, secondButton])
+        viewModel.$password
+            .sink { value in
+                self.passwordTextField.text = value
+            }
+            .store(in: &subscriptions)
+        emailTextField.textPublisher
+            .sink(receiveValue: { value in
+                self.viewModel.email = value ?? ""
+            })
+            .store(in: &subscriptions)
+        
+        passwordTextField.textPublisher
+            .sink(receiveValue: { value in
+                self.viewModel.password = value ?? ""
+            })
+            .store(in: &subscriptions)
     }
     
     @objc func registrationAction() {
-        registrationButton.isLoading.toggle()
+        viewModel.registrationUser()
+    }
+    
+    @objc func authAction() {
+        self.navigationController?.popToRootViewController(animated: true)
     }
 }
 

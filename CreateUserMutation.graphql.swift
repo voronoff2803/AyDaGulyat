@@ -59,11 +59,11 @@ public class CreateUserMutation: GraphQLMutation {
 
       public static var __parentType: ParentType { Aida.Objects.CreateUser }
       public static var __selections: [Selection] { [
-        .field("success", Bool?.self),
+        .field("success", Bool.self),
         .field("id", Aida.UUID?.self),
       ] }
 
-      public var success: Bool? { __data["success"] }
+      public var success: Bool { __data["success"] }
       public var id: Aida.UUID? { __data["id"] }
     }
   }

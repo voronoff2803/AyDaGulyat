@@ -7,31 +7,18 @@
 
 import UIKit
 import Lottie
+import Combine
 
 class EmailCodeViewController: AppRootViewController, TextFieldNextable {
-    var state: EmailCodeViewController.State = .codeInput {
-        didSet {
-            switch state {
-            case .codeInput:
-                descriptionLabel.isHidden = false
-                retryButton.isHidden = true
-                activityIndicator.isHidden = true
-                activityIndicator.stop()
-            case .requestCodeAgain:
-                descriptionLabel.isHidden = true
-                retryButton.isHidden = false
-                activityIndicator.isHidden = true
-                activityIndicator.stop()
-            case .loading:
-                descriptionLabel.isHidden = true
-                retryButton.isHidden = true
-                activityIndicator.isHidden = false
-                activityIndicator.play()
-            }
-            
-        }
+    enum State {
+        case codeInput
+        case requestCodeAgain
+        case success
     }
     
+    private var subscriptions = Set<AnyCancellable>()
+    private var viewModel: AuthViewModel!
+    let coordinator: Coordinator
     
     let titleLabel = Label().then {
         $0.text = "Введите код доступа, который пришел на почту"
@@ -71,17 +58,37 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
         $0.setTitle("Запросить код еще раз", for: .normal)
     }
     
+    let backButton = UIButton(type: .system).then {
+        $0.setImage(.appImage(.backArrow), for: .normal)
+        $0.tintColor = .appColor(.black)
+    }
+    
     let activityIndicator = LottieAnimationView().then {
         let animation = LottieAnimation.asset("animationActivityBlack")
         $0.loopMode = .loop
         $0.animation = animation
     }
     
+    init(coordinator: Coordinator, viewModel: AuthViewModel) {
+        self.coordinator = coordinator
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
-        updateTime(seconds: 2)
+        setupBindings()
+        
+        viewModel.requestCode()
+        
+        retryButton.addTarget(self, action: #selector(requestCodeAgainAction), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
     }
     
     
@@ -97,7 +104,7 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
             .foregroundColor: UIColor.appColor(.blue)
         ]
         let posfixCount = attributedString.length
-        print(posfixCount)
+
         attributedString.addAttributes(attributes1, range: NSRange(location: 31, length: posfixCount - 31))
         
         descriptionLabel.attributedText = attributedString
@@ -106,9 +113,8 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
     
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
-        self.state = {self.state}()
         
-        [titleLabel, codeTextField, descriptionLabel, retryButton, activityIndicator].forEach({self.view.addSubview($0)})
+        [titleLabel, codeTextField, descriptionLabel, retryButton, activityIndicator, backButton].forEach({self.view.addSubview($0)})
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
@@ -138,11 +144,62 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
         
         keyboardAvoidView = codeTextField
     }
-
-    enum State {
-        case codeInput
-        case requestCodeAgain
-        case loading
+    
+    func setupBindings() {
+        viewModel.$timerSeconds
+            .sink { seconds in
+                self.updateTime(seconds: seconds)
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.$codeState
+            .sink { newState in
+                self.setState(newState: newState)
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.loadingPublisher
+            .sink { [weak self] isLoading in
+                self?.view.endEditing(true)
+                self?.activityIndicator.isHidden = isLoading ? false : true
+                isLoading ? self?.activityIndicator.play() : self?.activityIndicator.stop()
+            }
+            .store(in: &subscriptions)
+        viewModel.errorPublisher
+            .sink { [weak self] error in
+                self?.showError(message: error.localizedDescription)
+            }
+            .store(in: &subscriptions)
+        
+        codeTextField.textPublisher
+            .sink(receiveValue: { value in
+                self.viewModel.code = value ?? ""
+            })
+            .store(in: &subscriptions)
     }
-
+    
+    @objc func requestCodeAgainAction() {
+        viewModel.requestCode()
+    }
+    
+    func setState(newState: EmailCodeViewController.State) {
+        switch newState {
+        case .codeInput:
+            descriptionLabel.isHidden = false
+            retryButton.isHidden = true
+            activityIndicator.isHidden = true
+            activityIndicator.stop()
+        case .requestCodeAgain:
+            descriptionLabel.isHidden = true
+            retryButton.isHidden = false
+            activityIndicator.isHidden = true
+            activityIndicator.stop()
+        case .success:
+            self.dismiss(animated: true)
+        }
+    }
+    
+    @objc func backAction() {
+        coordinator.route(to: .back, from: self, parameters: nil)
+    }
 }

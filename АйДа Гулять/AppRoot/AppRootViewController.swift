@@ -62,12 +62,22 @@ class AppRootViewController: UIViewController {
         }
     }
     
-    func showAlert(buttons: [DefaultButton] = []) {
-        let defaultAlertViewController = DefaultAlertViewController()
+    func showAlert(label: String, message: String, buttons: [DefaultButton] = []) {
+        if self.view.window == nil { return }
+        
+        let defaultAlertViewController = DefaultAlertViewController(label: label, message: message)
         buttons.forEach({defaultAlertViewController.stackView.addArrangedSubview($0)})
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)
-        //alertController.setValue(defaultAlertViewController, forKey: "contentViewController")
+        alertController.setValue(defaultAlertViewController, forKey: "contentViewController")
         self.present(alertController, animated: true, completion: nil)
+    }
+    
+    func showError(message: String) {
+        showAlert(label: "Гав-гав!", message: message, buttons: [
+            DefaultButton(style: .filledAlert).then {
+                $0.setTitle("Продолжить", for: .normal)
+            }
+        ])
     }
 }

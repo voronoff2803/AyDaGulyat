@@ -121,8 +121,8 @@ class SearchFieldMapView: UITextField {
             switch textFieldOrAction {
             case .nextTextField(let textField):
                 textField.becomeFirstResponder()
-            case .action(let action):
-                action?()
+            case .action:
+                break
             }
             let _ = self.resignFirstResponder()
         }

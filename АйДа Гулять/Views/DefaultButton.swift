@@ -7,6 +7,7 @@
 
 import UIKit
 import Lottie
+import Combine
 
 class DefaultButton: UIButton {
     private var animationView = LottieAnimationView().then {
@@ -90,7 +91,7 @@ class DefaultButton: UIButton {
             case .filled, .bordered:
                 make.height.equalTo(55)
             case .filledAlert, .borderedAlert:
-                make.height.equalTo(34)
+                make.height.equalTo(45)
             }
         }
         

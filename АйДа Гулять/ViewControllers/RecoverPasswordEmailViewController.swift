@@ -6,8 +6,20 @@
 //
 
 import UIKit
+import Combine
 
 class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextable {
+    enum State {
+        case normal
+        case wrongEmail
+        case success
+    }
+    
+    let coordinator: Coordinator
+    let viewModel: AuthViewModel
+    
+    private var subscriptions = Set<AnyCancellable>()
+    
     let titleLabel = Label().then {
         $0.text = "Отправим код доступа на почту"
         $0.font = .montserratRegular(size: 22)
@@ -26,21 +38,39 @@ class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextab
         $0.setTitle("Отправить", for: .normal)
     }
     
+    let backButton = UIButton(type: .system).then {
+        $0.setImage(.appImage(.backArrow), for: .normal)
+        $0.tintColor = .appColor(.black)
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
 
         setupUI()
+        setupBindings()
+        
+        sendButton.addTarget(self, action: #selector(sendAction), for: .touchUpInside)
+        backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
     }
     
+    init(coordinator: Coordinator, viewModel: AuthViewModel) {
+        self.coordinator = coordinator
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
     
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
         
-        [titleLabel, emailTextField, sendButton].forEach({self.view.addSubview($0)})
+        [titleLabel, emailTextField, sendButton, backButton].forEach({self.view.addSubview($0)})
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(50)
+            make.bottom.equalTo(emailTextField.snp.top).offset(-50)
             make.horizontalEdges.equalToSuperview().inset(28)
         }
         
@@ -54,17 +84,61 @@ class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextab
             make.horizontalEdges.equalToSuperview().inset(28)
         }
         
+        backButton.snp.makeConstraints { make in
+            make.top.left.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+        
         keyboardAvoidView = sendButton
     }
-
-    /*
-    // MARK: - Navigation
-
-    // In a storyboard-based application, you will often want to do a little preparation before navigation
-    override func prepare(for segue: UIStoryboardSegue, sender: Any?) {
-        // Get the new view controller using segue.destination.
-        // Pass the selected object to the new view controller.
+    
+    func setState(newState: RecoverPasswordEmailViewController.State) {
+        switch newState {
+        case .success:
+            coordinator.route(to: .code, from: self, parameters: nil)
+        case .normal:
+            emailTextField.fieldState = .normal
+        case .wrongEmail:
+            emailTextField.fieldState = .error
+        }
     }
-    */
 
+    func setupBindings() {
+        viewModel.loadingPublisher
+            .sink { [weak self] isLoading in
+                self?.sendButton.isLoading = isLoading
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.errorPublisher
+            .sink { [weak self] error in
+                self?.showError(message: error.localizedDescription)
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.$recoverPasswordEmailState
+            .sink { value in
+                self.setState(newState: value)
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.$email
+            .sink { value in
+                self.emailTextField.text = value
+            }
+            .store(in: &subscriptions)
+        
+        emailTextField.textPublisher
+            .sink { value in
+                self.viewModel.email = value ?? ""
+            }
+            .store(in: &subscriptions)
+    }
+    
+    @objc func sendAction() {
+        viewModel.sendCodeEmail()
+    }
+    
+    @objc func backAction() {
+        coordinator.route(to: .back, from: self, parameters: nil)
+    }
 }

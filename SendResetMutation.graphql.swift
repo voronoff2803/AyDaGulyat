@@ -4,16 +4,16 @@
 @_exported import ApolloAPI
 import Aida
 
-public class ResetPasswordMutation: GraphQLMutation {
-  public static let operationName: String = "ResetPassword"
+public class SendResetMutation: GraphQLMutation {
+  public static let operationName: String = "SendReset"
   public static let document: DocumentType = .notPersisted(
     definition: .init(
       """
-      mutation ResetPassword($email: String!) {
-        resetPassword(email: $email) {
+      mutation SendReset($email: String!) {
+        sendReset(email: $email) {
           __typename
-          id
           success
+          id
         }
       }
       """
@@ -33,27 +33,27 @@ public class ResetPasswordMutation: GraphQLMutation {
 
     public static var __parentType: ParentType { Aida.Objects.Mutation }
     public static var __selections: [Selection] { [
-      .field("resetPassword", ResetPassword?.self, arguments: ["email": .variable("email")]),
+      .field("sendReset", SendReset?.self, arguments: ["email": .variable("email")]),
     ] }
 
     /// Send password reset email to the user
-    public var resetPassword: ResetPassword? { __data["resetPassword"] }
+    public var sendReset: SendReset? { __data["sendReset"] }
 
-    /// ResetPassword
+    /// SendReset
     ///
     /// Parent Type: `SendPasswordReset`
-    public struct ResetPassword: Aida.SelectionSet {
+    public struct SendReset: Aida.SelectionSet {
       public let __data: DataDict
       public init(data: DataDict) { __data = data }
 
       public static var __parentType: ParentType { Aida.Objects.SendPasswordReset }
       public static var __selections: [Selection] { [
+        .field("success", Bool.self),
         .field("id", Aida.UUID?.self),
-        .field("success", Bool?.self),
       ] }
 
+      public var success: Bool { __data["success"] }
       public var id: Aida.UUID? { __data["id"] }
-      public var success: Bool? { __data["success"] }
     }
   }
 }

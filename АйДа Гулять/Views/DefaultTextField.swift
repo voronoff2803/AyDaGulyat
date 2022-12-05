@@ -18,6 +18,8 @@ class DefaultTextField: UITextField {
         $0.textAlignment = .left
     }
     
+    var action: (() -> ())?
+    
     override var placeholder: String? {
         didSet {
             self.attributedPlaceholder = NSAttributedString(string:self.placeholder != nil ? self.placeholder! : "", attributes:[NSAttributedString.Key.foregroundColor: UIColor.appColor(.grayEmpty)])
@@ -32,6 +34,10 @@ class DefaultTextField: UITextField {
     
     var fieldState: State = .normal {
         didSet {
+            if text?.isEmpty == true {
+                self.fieldEditState = { self.fieldEditState }()
+                return
+            }
             switch fieldState {
             case .error:
                 bottomBorder.backgroundColor = .appColor(.red)
@@ -45,19 +51,31 @@ class DefaultTextField: UITextField {
         }
     }
     
+    override var text: String? {
+        didSet {
+            fieldState = { fieldState }()
+        }
+    }
+    
     var fieldEditState: EditState = .empty {
         didSet {
-            guard fieldState == .normal else { return }
             switch fieldEditState {
             case .empty:
-                bottomBorder.backgroundColor = .appColor(.lightGray)
-                descriptionText.textColor = .appColor(.grayEmpty)
+                if fieldState == .normal {
+                    bottomBorder.backgroundColor = .appColor(.lightGray)
+                    descriptionText.textColor = .appColor(.grayEmpty)
+                }
             case .fill:
                 bottomBorder.backgroundColor = .appColor(.black)
                 descriptionText.textColor = .appColor(.grayEmpty)
             }
+            
+            if oldValue != fieldEditState {
+                fieldState = { fieldState }()
+            }
         }
     }
+    
     
     override func becomeFirstResponder() -> Bool {
         self.fieldEditState = .fill
@@ -117,6 +135,10 @@ class DefaultTextField: UITextField {
         }
         
         self.addTarget(self, action: #selector(returnKeyAction), for: .primaryActionTriggered)
+        
+        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: self, queue: nil) { [weak self] _ in
+            self?.textDidChange()
+        }
     }
     
     @objc func returnKeyAction() {
@@ -129,8 +151,8 @@ class DefaultTextField: UITextField {
             switch textFieldOrAction {
             case .nextTextField(let textField):
                 textField.becomeFirstResponder()
-            case .action(let action):
-                action?()
+            case .action:
+                self.action?()
             }
             let _ = self.resignFirstResponder()
         }
@@ -148,6 +170,12 @@ class DefaultTextField: UITextField {
         var result = super.intrinsicContentSize
         result.height = 55
         return result
+    }
+    
+    func textDidChange() {
+        if text == "" {
+            self.fieldState = .normal
+        }
     }
 
 //    override func textRect(forBounds bounds: CGRect) -> CGRect {

@@ -7,9 +7,18 @@
 
 import UIKit
 import SnapKit
+import Combine
 
 
 class AuthViewController: AppRootViewController, TextFieldNextable {
+    enum State {
+        case normal
+        case emailWorng
+        case passwordWrong
+        case success
+    }
+    
+    private var subscriptions = Set<AnyCancellable>()
     var baseConstraints: [Constraint] = []
     var keyboardShowConstraints: [Constraint] = []
     let coordinator: Coordinator
@@ -70,9 +79,29 @@ class AuthViewController: AppRootViewController, TextFieldNextable {
     override func viewDidLoad() {
         super.viewDidLoad()
         setupUI()
+        setupBindings()
         
         loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
         authGoogle.addTarget(self, action: #selector(googleAction), for: .touchUpInside)
+        forgotPasswordButton.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)
+        registrationButton.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
+        passwordTextField.action = { self.loginAction() }
+    }
+    
+    func setState(newState: AuthViewController.State) {
+        switch newState {
+        case .success:
+            coordinator.route(to: .done, from: self, parameters: nil)
+        case .normal:
+            emailTextField.fieldState = .normal
+            passwordTextField.fieldState = .normal
+        case .emailWorng:
+            emailTextField.fieldState = .error
+            passwordTextField.fieldState = .normal
+        case .passwordWrong:
+            emailTextField.fieldState = .normal
+            passwordTextField.fieldState = .error
+        }
     }
     
     func setupUI() {
@@ -135,12 +164,61 @@ class AuthViewController: AppRootViewController, TextFieldNextable {
         }
     }
     
+    func setupBindings() {
+        viewModel.$authState
+            .sink { value in
+                self.setState(newState: value)
+            }
+            .store(in: &subscriptions)
+        viewModel.loadingPublisher
+            .sink { [weak self] isLoading in
+                self?.loginButton.isLoading = isLoading
+            }
+            .store(in: &subscriptions)
+        viewModel.errorPublisher
+            .sink { [weak self] error in
+                self?.showError(message: error.localizedDescription)
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.$email
+            .sink { value in
+                self.emailTextField.text = value
+            }
+            .store(in: &subscriptions)
+        
+        viewModel.$password
+            .sink { value in
+                self.passwordTextField.text = value
+            }
+            .store(in: &subscriptions)
+        emailTextField.textPublisher
+            .sink(receiveValue: { value in
+                self.viewModel.email = value ?? ""
+            })
+            .store(in: &subscriptions)
+        
+        passwordTextField.textPublisher
+            .sink(receiveValue: { value in
+                self.viewModel.password = value ?? ""
+            })
+            .store(in: &subscriptions)
+    }
+    
     @objc func loginAction() {
-        loginButton.isLoading.toggle()
+        viewModel.loginUser()
     }
     
     @objc func googleAction() {
         authGoogle.isLoading.toggle()
+    }
+    
+    @objc func forgotPassword() {
+        coordinator.route(to: .forgotPassword, from: self, parameters: nil)
+    }
+    
+    @objc func registerAction() {
+        coordinator.route(to: .registration, from: self, parameters: nil)
     }
 }
 

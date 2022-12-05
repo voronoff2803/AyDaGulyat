@@ -5,6 +5,9 @@ directive @apollo_client_ios_localCacheMutation on QUERY | MUTATION | SUBSCRIPTI
 
 """GraphQL queries"""
 type Query {
+  exception: Boolean
+  error: Boolean
+  errorCodes: [ErrorCodes]
   myRelationships(sort: [UserRelationshipSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): UserRelationshipConnection
   myPoiApprovals(sort: [PointOfInterestApprovalsSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): PointOfInterestApprovalsConnection
   myDogsRelationships(sort: [DogRelationshipSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): DogRelationshipConnection
@@ -18,7 +21,6 @@ type Query {
   myDogs: [Dog]
   myTrips(sort: [TripSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): TripConnection
   myPoi(sort: [PointOfInterestSortEnum] = [ID_ASC], before: String, after: String, first: Int, last: Int): PointOfInterestConnection
-  errorCodes: [ErrorCodes]
   pageByAlias(alias: String): Page
   pagesByGroup(group: String): [Page]
   staticHobby: [StaticDataHobby]
@@ -28,6 +30,27 @@ type Query {
   staticFeatures: [StaticDataDogFeatures]
   staticReason: [StaticDataComplaintReason]
   staticDanger: [StaticDataDanger]
+}
+
+"""Application error codes"""
+enum ErrorCodes {
+  GENERIC_ERROR
+  JWT_REQUIRED
+  JWT_DECODE_ERROR
+  JWT_FORMAT
+  JWT_EXPIRED
+  JWT_TYPE_MISMATCH
+  JWT_NO_USER
+  JWT_USER_NOT_FOUND
+  JWT_FAILED_REFRESH
+  EMAIL_ALREADY_REGISTERED
+  EMAIL_INCORRECT_FORMAT
+  PASSWORD_WEAK
+  VALIDATION_CODE_WRONG
+  VALIDATION_CODE_OLD
+  VALIDATION_TOO_MANY_RETRIES
+  WRONG_PASSWORD
+  EMAIL_UNREGISTERED
 }
 
 type UserRelationshipConnection {
@@ -505,26 +528,6 @@ enum PointOfInterestSortEnum {
   LNG_DESC
 }
 
-"""Application error codes"""
-enum ErrorCodes {
-  JWT_REQUIRED
-  JWT_DECODE_ERROR
-  JWT_FORMAT
-  JWT_EXPIRED
-  JWT_TYPE_MISMATCH
-  JWT_NO_USER
-  JWT_USER_NOT_FOUND
-  JWT_FAILED_REFRESH
-  EMAIL_ALREADY_REGISTERED
-  EMAIL_INCORRECT_FORMAT
-  PASSWORD_WEAK
-  VALIDATION_CODE_WRONG
-  VALIDATION_CODE_OLD
-  VALIDATION_TOO_MANY_RETRIES
-  WRONG_PASSWORD
-  EMAIL_UNREGISTERED
-}
-
 """Page data"""
 type Page {
   id: UUID!
@@ -577,24 +580,30 @@ type StaticDataDanger {
 
 """GraphQL operations"""
 type Mutation {
-  createPoi(id: String!): Dummy
-  updatePoi(id: String!): Dummy
-  deletePoi(id: String!): Dummy
-  approvePoi(id: String!): Dummy
-  reportPoi(id: String!): Dummy
-  createDog(id: String!): Dummy
-  updateDog(id: String!): Dummy
-  deleteDog(id: String!): Dummy
-  likeDog(id: String!): Dummy
-  dislikeDog(id: String!): Dummy
-  resetDog(id: String!): Dummy
-  updateProfile(id: String!): Dummy
-  reportProfile(id: String!): Dummy
-  offerFriendship(id: String!): Dummy
-  acceptFriendship(id: String!): Dummy
-  declineFriendship(id: String!): Dummy
-  blockUser(id: String!): Dummy
-  stalkUser(id: String!): Dummy
+  createPoi(id: UUID!): Dummy
+  updatePoi(id: UUID!): Dummy
+  deletePoi(id: UUID!): Dummy
+  approvePoi(id: UUID!): Dummy
+  reportPoi(id: UUID!): Dummy
+  createDog(id: UUID!): Dummy
+  updateDog(id: UUID!): Dummy
+  deleteDog(id: UUID!): Dummy
+  likeDog(id: UUID!): Dummy
+  dislikeDog(id: UUID!): Dummy
+  resetDog(id: UUID!): Dummy
+
+  """Update profile"""
+  updateProfile(chipSearcheable: Boolean!, firstName: String, lastName: String, notificattionsEnabled: Boolean!, phoneSearcheable: Boolean!, showBirthDate: Boolean!, showPhoneNumber: Boolean!): UpdateProfile
+
+  """Report user profile"""
+  reportProfile(id: ID!, message: String!): ReportProfile
+
+  """Offer friendship"""
+  offerFriendship(id: ID!): OfferFriendship
+  acceptFriendship(id: UUID!): Dummy
+  declineFriendship(id: UUID!): Dummy
+  blockUser(id: UUID!): Dummy
+  stalkUser(id: UUID!): Dummy
 
   """User creation mutation"""
   createUser(email: String!, password: String!): CreateUser
@@ -603,7 +612,10 @@ type Mutation {
   updatePassword(newPassword: String!, oldPassword: String!): UpdatePassword
 
   """Send password reset email to the user"""
-  resetPassword(email: String!): SendPasswordReset
+  sendReset(email: String!): SendPasswordReset
+
+  """User password reset (available via reset token)"""
+  resetPassword(newPassword: String!): ResetPassword
 
   """Valudation code (re)send"""
   sendCode(id: UUID): ResendValidationCode
@@ -621,23 +633,33 @@ type Mutation {
   createProfileImage(file: Upload!): CreateProfileImage
 
   """Profile image removal"""
-  deleteProfileImage(id: String!): DeleteProfileImage
+  deleteProfileImage(id: UUID!): DeleteProfileImage
 
   """Dog image creation"""
   createDogImage(file: Upload!): CreateDogImage
 
   """Dog image removal"""
-  deleteDogImage(id: String!): DeleteDogImage
+  deleteDogImage(id: UUID!): DeleteDogImage
 
   """PoI image creation"""
   createPoiImage(file: Upload!): CreatePoiImage
 
   """PoI image removal"""
-  deletePoiImage(id: String!): DeletePoiImage
+  deletePoiImage(id: UUID!): DeletePoiImage
   updatePosition(lat: Float!, lng: Float!): UpdatePosition
-  createTrip(dogs: [UUID]): CreateTrip
-  updateTrip(id: ID!, path: String!): UpdateTrip
+
+  """Create trip"""
+  createTrip(doNotDisturb: Boolean!, dogs: [UUID]!): CreateTrip
+
+  """Update trip"""
+  updateTrip(distanceKm: Float, doNotDisturb: Boolean!, id: ID!, lowresPath: String, path: String!): UpdateTrip
+
+  """
+  Complete the trip, you will not be able to update it after completition
+  """
   endTrip(id: ID!): EndTrip
+
+  """Delete trip"""
   deleteTrip(id: String!): DeleteTrip
 }
 
@@ -645,34 +667,58 @@ type Dummy {
   success: Boolean
 }
 
+"""Update profile"""
+type UpdateProfile {
+  success: Boolean!
+  id: UUID
+}
+
+"""Report user profile"""
+type ReportProfile {
+  success: Boolean!
+  id: UUID
+}
+
+"""Offer friendship"""
+type OfferFriendship {
+  success: Boolean!
+  id: UUID
+}
+
 """User creation mutation"""
 type CreateUser {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
 """User password update mutation"""
 type UpdatePassword {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
 """Send password reset email to the user"""
 type SendPasswordReset {
-  success: Boolean
+  success: Boolean!
+  id: UUID
+}
+
+"""User password reset (available via reset token)"""
+type ResetPassword {
+  success: Boolean!
   id: UUID
 }
 
 """Valudation code (re)send"""
 type ResendValidationCode {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
 """Validate the code & confirm the registration"""
 type ValidateCode {
-  success: Boolean
-  id: UUID
+  accessToken: String
+  refreshToken: String
 }
 
 """User login"""
@@ -688,7 +734,7 @@ type RefreshToken {
 
 """Profile image creation"""
 type CreateProfileImage {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
@@ -700,31 +746,31 @@ scalar Upload
 
 """Profile image removal"""
 type DeleteProfileImage {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
 """Dog image creation"""
 type CreateDogImage {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
 """Dog image removal"""
 type DeleteDogImage {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
 """PoI image creation"""
 type CreatePoiImage {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
 """PoI image removal"""
 type DeletePoiImage {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
@@ -732,22 +778,28 @@ type UpdatePosition {
   success: Boolean
 }
 
+"""Create trip"""
 type CreateTrip {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
+"""Update trip"""
 type UpdateTrip {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
+"""
+Complete the trip, you will not be able to update it after completition
+"""
 type EndTrip {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }
 
+"""Delete trip"""
 type DeleteTrip {
-  success: Boolean
+  success: Boolean!
   id: UUID
 }

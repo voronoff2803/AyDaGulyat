@@ -22,12 +22,13 @@ class PasswordTextField: DefaultTextField {
         }
     }
     
-    func textDidChange() {
-        self.rightAccessoryButton.alpha = (text?.isEmpty ?? true) ? 0.4 : 1.0
+    override func textDidChange() {
+        super.textDidChange()
+        self.rightAccessoryButton.alpha = (text?.isEmpty ?? true) ? 0.3 : 1.0
     }
     
     override func setupUI() {
-        self.textContentType = .password
+        self.textContentType = .oneTimeCode
         self.autocorrectionType = .no
         self.rightView = rightAccessoryButton
         self.rightViewMode = .always
@@ -35,10 +36,6 @@ class PasswordTextField: DefaultTextField {
         rightAccessoryButton.addTarget(self, action: #selector(rightButtonAction), for: .touchUpInside)
         
         isHiddenContent = {isHiddenContent}()
-        
-        NotificationCenter.default.addObserver(forName: UITextField.textDidChangeNotification, object: self, queue: nil) { [weak self] _ in
-            self?.textDidChange()
-        }
         
         textDidChange()
         
