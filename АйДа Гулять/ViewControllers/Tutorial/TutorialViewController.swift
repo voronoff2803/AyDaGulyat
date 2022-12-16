@@ -8,7 +8,7 @@
 import UIKit
 
 class TutorialViewController: UIViewController {
-    let closeButton = UIButton().then {
+    let closeButton = UIButton(type: .system).then {
         $0.setImage(.appImage(.close), for: .normal)
         $0.tintColor = .appColor(.grayEmpty)
     }
@@ -25,6 +25,13 @@ class TutorialViewController: UIViewController {
         $0.isUserInteractionEnabled = false
     }
     
+    let viewModel: TutorialViewModel
+    
+    init(viewModel: TutorialViewModel) {
+        self.viewModel = viewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
     let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     lazy var pageView: UIView! = {
         self.pageViewController.view
@@ -39,7 +46,13 @@ class TutorialViewController: UIViewController {
     let tutorialModels: [TutorialContentModel] = [TutorialContentModel(labelText: "Нажми на любой значок, **увидишь фото собаки**. Нажми еще раз и **перейдешь в профиль** хозяина", imageName: "content1"),
                                                   TutorialContentModel(labelText: "Тест", imageName: "content1"),
                                                   TutorialContentModel(labelText: "Тест22332423", imageName: "content1")]
+    
 
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -53,6 +66,11 @@ class TutorialViewController: UIViewController {
         pageView.addGestureRecognizer(tapGesture)
         
         setupUI()
+        closeButton.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+    }
+    
+    @objc func dismissAction() {
+        viewModel.dismiss()
     }
     
     func setupUI() {

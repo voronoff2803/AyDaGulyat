@@ -16,6 +16,14 @@ class AuthViewModel: ObservableObject {
     
     private let activityIndicator = ActivityIndicator()
     private let errorIndicator = ErrorIndicator()
+    
+    weak var authViewController: AuthViewController?
+    weak var recoverPasswordEmailViewController: RecoverPasswordEmailViewController?
+    weak var emailCodeViewController: EmailCodeViewController?
+    weak var newPasswordViewController: NewPasswordViewController?
+    weak var registrationViewController: RegistrationViewController?
+    
+    let coordinator: Coordinator
 
     var loadingPublisher: AnyPublisher<Bool, Never> {
         activityIndicator.loading.eraseToAnyPublisher()
@@ -26,6 +34,7 @@ class AuthViewModel: ObservableObject {
     }
     
     var userID = ""
+    var isPasswordReset = false
     
     let timer = Timer.publish(every: 1.0, on: .main, in: .common).autoconnect()
     @Published var timerSeconds = 0
@@ -51,7 +60,8 @@ class AuthViewModel: ObservableObject {
     
     @Published var recoverPasswordEmailState: RecoverPasswordEmailViewController.State = .normal
     
-    init() {
+    init(coordinator: Coordinator) {
+        self.coordinator = coordinator
         setupBindings()
     }
     
@@ -78,6 +88,7 @@ class AuthViewModel: ObservableObject {
             .store(in: &subscriptions)
         
         $code
+            .removeDuplicates()
             .sink { value in
                 if value.count >= 6 {
                     self.sendCode()
@@ -154,7 +165,8 @@ class AuthViewModel: ObservableObject {
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
                 if res {
-                    self.authState = .success
+                    guard let authViewController = self.authViewController else { return }
+                    self.coordinator.route(context: authViewController, to: .dismiss, parameters: nil)
                 }
             })
             .store(in: &subscriptions)
@@ -166,7 +178,8 @@ class AuthViewModel: ObservableObject {
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
                 self.userID = res
-                self.registrationState = .success
+                guard let registrationViewController = self.registrationViewController else { return }
+                self.coordinator.route(context: registrationViewController, to: .code, parameters: nil)
             })
             .store(in: &subscriptions)
     }
@@ -176,34 +189,54 @@ class AuthViewModel: ObservableObject {
             .trackActivity(activityIndicator)
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
-                self.codeState = .success
-            })
-            .store(in: &subscriptions)
-    }
-    
-    func requestCode() {
-        self.codeState = .codeInput
-        timerSeconds = 120
-        APIService.shared.authSendCode(id: userID)
-            .trackActivity(activityIndicator)
-            .trackError(errorIndicator)
-            .sink(receiveValue: { res in
-                if !res {
-                    self.codeState = .requestCodeAgain
+                guard let emailCodeViewController = self.emailCodeViewController else { return }
+                if self.isPasswordReset {
+                    self.coordinator.route(context: emailCodeViewController, to: .newPassword, parameters: nil)
+                } else {
+                    self.coordinator.route(context: emailCodeViewController, to: .dismiss, parameters: nil)
                 }
             })
             .store(in: &subscriptions)
     }
     
     func sendCodeEmail() {
-        APIService.shared.authResetCodeSend(email: email)
+        timerSeconds = 120
+        self.codeState = .codeInput
+        APIService.shared.authSendCode(email: email)
             .trackActivity(activityIndicator)
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
                 self.userID = res
-                self.recoverPasswordEmailState = .success
+                
+                guard let emailCodeViewController = self.emailCodeViewController else { return }
+                self.coordinator.route(context: emailCodeViewController, to: .code, parameters: nil)
             })
             .store(in: &subscriptions)
+    }
+    
+    func setNewPassword() {
+        if password != newPasswordSecond { return }
+        print(password, newPasswordSecond)
+        APIService.shared.authResetPassword(newPassword: password)
+            .trackActivity(activityIndicator)
+            .trackError(errorIndicator)
+            .sink(receiveValue: { res in
+                guard let newPasswordViewController = self.newPasswordViewController else { return }
+                self.coordinator.route(context: newPasswordViewController, to: .dismiss, parameters: nil)
+            })
+            .store(in: &subscriptions)
+    }
+    
+    func toForgotPassword() {
+        guard let authViewController = authViewController else { return }
+        isPasswordReset = true
+        coordinator.route(context: authViewController, to: .forgotPassword, parameters: nil)
+    }
+    
+    func toRegistration() {
+        guard let authViewController = authViewController else { return }
+        isPasswordReset = false
+        coordinator.route(context: authViewController, to: .registration, parameters: nil)
     }
     
     deinit {

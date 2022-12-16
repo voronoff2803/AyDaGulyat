@@ -8,6 +8,6 @@
 import Foundation
 
 
-protocol Coordinatable {
-    var coordinator: Coordinator { get }
-}
+//protocol Coordinatable {
+//    var coordinator: Coordinator { get }
+//}

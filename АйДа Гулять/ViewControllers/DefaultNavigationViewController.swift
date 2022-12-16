@@ -45,6 +45,13 @@ class DefaultNavigationViewController: UINavigationController {
         navigationBar.prefersLargeTitles = false
     }
     
+    
+    override func viewDidLayoutSubviews() {
+        super.viewDidLayoutSubviews()
+        let height = CGFloat(56)
+        navigationBar.frame = CGRect(x: 0, y: view.safeAreaInsets.top, width: view.frame.width, height: height)
+    }
+    
     override func pushViewController(_ viewController: UIViewController, animated: Bool) {
         super.pushViewController(viewController, animated: animated)
         

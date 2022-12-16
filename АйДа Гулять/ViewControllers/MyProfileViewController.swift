@@ -11,7 +11,7 @@ import Combine
 import CombineCocoa
 
 
-class MyProfileViewController: UIViewController {
+class MyProfileViewController: AppRootViewController {
     private var subscriptions = Set<AnyCancellable>()
     private var viewModel: MyProfileViewModel!
     
@@ -70,7 +70,6 @@ class MyProfileViewController: UIViewController {
         tableView.rowHeight = UITableView.automaticDimension
 
         tableView.dataSource = self
-        tableView.delegate = self
     }
     
     

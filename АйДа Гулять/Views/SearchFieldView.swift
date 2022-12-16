@@ -1,13 +1,14 @@
 //
-//  SearchFieldMapView.swift
+//  SearchFieldView.swift
 //  АйДа Гулять
 //
-//  Created by Alexey Voronov on 31.10.2022.
+//  Created by Alexey Voronov on 13.12.2022.
 //
 
+import Foundation
 import UIKit
 
-class SearchFieldMapView: UITextField {
+class SearchFieldView: UITextField {
     private let centerInset: CGPoint = CGPoint(x: 0, y: 0)
     private let descriptionText = UILabel().then {
         $0.font = UIFont.montserratRegular(size: 13)
@@ -80,14 +81,14 @@ class SearchFieldMapView: UITextField {
     }
     
     func setupUI() {
-        self.font = .montserratRegular(size: 16)
+        self.font = .montserratRegular(size: 14)
         self.tintColor = .black
         self.clearButtonMode = .whileEditing
         self.textColor = .appColor(.black)
         
-        self.backgroundColor = .appColor(.backgroundFirst)
+        //self.backgroundColor = .appColor(.lightGray)
         self.layer.cornerRadius = 4
-        self.layer.borderColor = UIColor.appColor(.grayEmpty).cgColor
+        self.layer.borderColor = UIColor.appColor(.lightGray).cgColor
         self.layer.borderWidth = 1
         
         fieldState = {fieldState}()
@@ -105,7 +106,7 @@ class SearchFieldMapView: UITextField {
         }
         
         self.snp.makeConstraints { make in
-            make.height.greaterThanOrEqualTo(55)
+            make.height.greaterThanOrEqualTo(55).priority(.medium)
         }
         
         self.addTarget(self, action: #selector(returnKeyAction), for: .primaryActionTriggered)
@@ -128,16 +129,6 @@ class SearchFieldMapView: UITextField {
         }
     }
     
-    func setLeftImage(image: UIImage) {
-        let imageView = UIImageView(frame: .zero)
-        imageView.image = image
-        imageView.contentMode = .center
-        self.leftView = imageView
-        self.leftView?.transform = .init(translationX: 20, y: 0)
-        self.leftView?.tintColor = .appColor(.grayEmpty)
-        self.leftViewMode = .always
-    }
-    
     override func leftViewRect(forBounds bounds: CGRect) -> CGRect {
         return CGRect(x: 0, y: 0, width: bounds.height, height: bounds.height)
     }
@@ -145,11 +136,11 @@ class SearchFieldMapView: UITextField {
     override var intrinsicContentSize: CGSize {
         var result = super.intrinsicContentSize
         result.height = 55
-        result.width = .infinity
+        result.width = UIScreen.main.bounds.width
         return result
     }
     
-    let padding = UIEdgeInsets(top: 0, left: 36, bottom: 0, right: 16)
+    let padding = UIEdgeInsets(top: 0, left: 16, bottom: 0, right: 16)
     
     override open func textRect(forBounds bounds: CGRect) -> CGRect {
         return bounds.inset(by: padding)

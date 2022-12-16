@@ -28,6 +28,18 @@ public final class ErrorIndicator {
             .catch { _ in Empty(completeImmediately: true) }
             .eraseToAnyPublisher()
         }
+        
+        func asPublisherWithFailure() -> AnyPublisher<Source.Output, Source.Failure> {
+            source.handleEvents(receiveCompletion: { completion in
+                switch completion {
+                case .finished:
+                    break
+                case .failure(let error):
+                    errorAction(error)
+                }
+            })
+            .eraseToAnyPublisher()
+        }
     }
     
     @Published
@@ -47,11 +59,23 @@ public final class ErrorIndicator {
             self.lock.unlock()
         }.asPublisher()
     }
+    
+    public func trackErrorOfPublisherWithFailure<Source: Publisher>(source: Source) -> AnyPublisher<Source.Output, Source.Failure> {
+        return ActivityToken(source: source) { error in
+            self.lock.lock()
+            self.relay = error
+            self.lock.unlock()
+        }.asPublisherWithFailure()
+    }
 }
 
 extension Publisher {
     public func trackError(_ errorIndicator: ErrorIndicator) -> AnyPublisher<Self.Output, Never> {
         errorIndicator.trackErrorOfPublisher(source: self)
+    }
+    
+    public func trackErrorWithFailure(_ errorIndicator: ErrorIndicator) -> AnyPublisher<Self.Output, Self.Failure> {
+        errorIndicator.trackErrorOfPublisherWithFailure(source: self)
     }
 }
 

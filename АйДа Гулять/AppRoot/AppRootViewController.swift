@@ -21,6 +21,7 @@ class AppRootViewController: UIViewController {
         
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
+
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -73,11 +74,28 @@ class AppRootViewController: UIViewController {
         self.present(alertController, animated: true, completion: nil)
     }
     
-    func showError(message: String) {
-        showAlert(label: "Гав-гав!", message: message, buttons: [
-            DefaultButton(style: .filledAlert).then {
-                $0.setTitle("Продолжить", for: .normal)
+    func showError(error: Error) {
+        if let baseError = error as? BaseError {
+            if baseError.isShowable == true {
+                showAlert(label: "Гав-гав!", message: baseError.message, buttons: [
+                    DefaultButton(style: .filledAlert).then {
+                        $0.setTitle("Продолжить", for: .normal)
+                    }
+                ])
             }
-        ])
+        }
+    }
+    
+    lazy var searchBar: UITextField = SearchFieldView()
+    
+    func showSearch() {
+        searchBar.placeholder = "Что будем искать?"
+        
+        self.navigationController?.navigationBar.topItem?.titleView = searchBar
+        let backButton = UIBarButtonItem()
+        backButton.image = UIImage.appImage(.backArrow)
+        backButton.tintColor = .appColor(.black)
+        
+        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = backButton
     }
 }

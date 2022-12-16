@@ -1,0 +1,22 @@
+query MyProfile {
+  myProfile {
+    userId
+    firstName
+    lastName
+    sex
+    birthDate
+    telNumber
+    about
+    hobby
+    blindSpotLat
+    blindSpotLng
+    blindSpotRadius
+    notificattionsEnabled
+    showPhoneNumber
+    showBirthDate
+    chipSearcheable
+    phoneSearcheable
+    social
+    settings
+  }
+}

@@ -27,7 +27,6 @@ public final class ActivityIndicator {
             }, receiveRequest: { _ in
                 beginAction()
             }).eraseToAnyPublisher()
-            
         }
     }
     
@@ -49,7 +48,6 @@ public final class ActivityIndicator {
         } finishAction: {
             self.decrement()
         }.asPublisher()
-
     }
     
     private func increment() {

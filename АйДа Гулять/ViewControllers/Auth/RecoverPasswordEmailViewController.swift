@@ -12,10 +12,8 @@ class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextab
     enum State {
         case normal
         case wrongEmail
-        case success
     }
     
-    let coordinator: Coordinator
     let viewModel: AuthViewModel
     
     private var subscriptions = Set<AnyCancellable>()
@@ -53,10 +51,11 @@ class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextab
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
     }
     
-    init(coordinator: Coordinator, viewModel: AuthViewModel) {
-        self.coordinator = coordinator
+    init(viewModel: AuthViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        viewModel.recoverPasswordEmailViewController = self
     }
     
     required init?(coder: NSCoder) {
@@ -70,7 +69,7 @@ class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextab
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.bottom.equalTo(emailTextField.snp.top).offset(-50)
+            make.bottom.equalTo(emailTextField.snp.top).offset(-60)
             make.horizontalEdges.equalToSuperview().inset(28)
         }
         
@@ -93,8 +92,6 @@ class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextab
     
     func setState(newState: RecoverPasswordEmailViewController.State) {
         switch newState {
-        case .success:
-            coordinator.route(to: .code, from: self, parameters: nil)
         case .normal:
             emailTextField.fieldState = .normal
         case .wrongEmail:
@@ -111,7 +108,7 @@ class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextab
         
         viewModel.errorPublisher
             .sink { [weak self] error in
-                self?.showError(message: error.localizedDescription)
+                self?.showError(error: error)
             }
             .store(in: &subscriptions)
         
@@ -139,6 +136,6 @@ class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextab
     }
     
     @objc func backAction() {
-        coordinator.route(to: .back, from: self, parameters: nil)
+        viewModel.coordinator.route(context: self, to: .back, parameters: nil)
     }
 }

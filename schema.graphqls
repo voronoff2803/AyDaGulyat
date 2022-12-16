@@ -51,6 +51,7 @@ enum ErrorCodes {
   VALIDATION_TOO_MANY_RETRIES
   WRONG_PASSWORD
   EMAIL_UNREGISTERED
+  USER_NOT_ACTIVATED
 }
 
 type UserRelationshipConnection {
@@ -593,7 +594,7 @@ type Mutation {
   resetDog(id: UUID!): Dummy
 
   """Update profile"""
-  updateProfile(chipSearcheable: Boolean!, firstName: String, lastName: String, notificattionsEnabled: Boolean!, phoneSearcheable: Boolean!, showBirthDate: Boolean!, showPhoneNumber: Boolean!): UpdateProfile
+  updateProfile(about: String, birthDate: Date!, blindSpotLat: Float, blindSpotLng: Float, blindSpotRadius: Float, chipSearcheable: Boolean!, firstName: String, hobby: JSONString!, lastName: String, notificattionsEnabled: Boolean!, phoneSearcheable: Boolean!, settings: JSONString!, sex: SexEnum!, showBirthDate: Boolean!, showPhoneNumber: Boolean!, social: JSONString!, telNumber: String): UpdateProfile
 
   """Report user profile"""
   reportProfile(id: ID!, message: String!): ReportProfile
@@ -618,7 +619,7 @@ type Mutation {
   resetPassword(newPassword: String!): ResetPassword
 
   """Valudation code (re)send"""
-  sendCode(id: UUID): ResendValidationCode
+  sendCode(email: String): ResendValidationCode
 
   """Validate the code & confirm the registration"""
   validateCode(code: String!, id: String!): ValidateCode

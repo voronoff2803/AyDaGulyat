@@ -11,6 +11,11 @@
 		0D0B1302293CF64D003D5751 /* ErrorIndicator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D0B1301293CF64D003D5751 /* ErrorIndicator.swift */; };
 		0D13FD6A29058C2500A86E62 /* MapViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13FD6929058C2400A86E62 /* MapViewController.swift */; };
 		0D13FD6C2905A52600A86E62 /* DogProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13FD6B2905A52600A86E62 /* DogProfileViewController.swift */; };
+		0D15F8702947DF3F0081AD4A /* UIWindow+topVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F86F2947DF3F0081AD4A /* UIWindow+topVC.swift */; };
+		0D15F8722947F2DD0081AD4A /* SearchFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F8712947F2DD0081AD4A /* SearchFieldView.swift */; };
+		0D15F8772948DB070081AD4A /* RefreshTokenMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F8762948DB070081AD4A /* RefreshTokenMutation.graphql.swift */; };
+		0D15F8792948E1AF0081AD4A /* MyProfileQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F8782948E1AF0081AD4A /* MyProfileQuery.graphql.swift */; };
+		0D15F87C2949A0850081AD4A /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F87B2949A0850081AD4A /* TutorialViewModel.swift */; };
 		0D20142829001440008C2C90 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20142729001440008C2C90 /* TutorialViewController.swift */; };
 		0D20142A290015A8008C2C90 /* TutorialPageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D201429290015A8008C2C90 /* TutorialPageContentViewController.swift */; };
 		0D20142C290017B7008C2C90 /* AttributedString+markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */; };
@@ -85,7 +90,7 @@
 		0DDE7F00292FB4B5006CEE22 /* Aida in Frameworks */ = {isa = PBXBuildFile; productRef = 0DDE7EFF292FB4B5006CEE22 /* Aida */; };
 		0DDE7F07292FBFF5006CEE22 /* APIService.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F06292FBFF5006CEE22 /* APIService.swift */; };
 		0DDE7F0A2931392E006CEE22 /* ApolloCombine in Frameworks */ = {isa = PBXBuildFile; productRef = 0DDE7F092931392E006CEE22 /* ApolloCombine */; };
-		0DDE7F0C2933C98D006CEE22 /* GQLError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F0B2933C98D006CEE22 /* GQLError.swift */; };
+		0DDE7F0C2933C98D006CEE22 /* BaseError.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F0B2933C98D006CEE22 /* BaseError.swift */; };
 		0DDE7F122933D649006CEE22 /* MyProfileViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F112933D649006CEE22 /* MyProfileViewModel.swift */; };
 		0DDE7F142933DB00006CEE22 /* MyProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F132933DB00006CEE22 /* MyProfileViewController.swift */; };
 		0DDE7F182933E6C1006CEE22 /* Coordinator.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DDE7F172933E6C1006CEE22 /* Coordinator.swift */; };
@@ -111,6 +116,11 @@
 		0D0B1301293CF64D003D5751 /* ErrorIndicator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ErrorIndicator.swift; sourceTree = "<group>"; };
 		0D13FD6929058C2400A86E62 /* MapViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapViewController.swift; sourceTree = "<group>"; };
 		0D13FD6B2905A52600A86E62 /* DogProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileViewController.swift; sourceTree = "<group>"; };
+		0D15F86F2947DF3F0081AD4A /* UIWindow+topVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+topVC.swift"; sourceTree = "<group>"; };
+		0D15F8712947F2DD0081AD4A /* SearchFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldView.swift; sourceTree = "<group>"; };
+		0D15F8762948DB070081AD4A /* RefreshTokenMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTokenMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D15F8782948E1AF0081AD4A /* MyProfileQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D15F87B2949A0850081AD4A /* TutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
 		0D20142729001440008C2C90 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		0D201429290015A8008C2C90 /* TutorialPageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageContentViewController.swift; sourceTree = "<group>"; };
 		0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+markdown.swift"; sourceTree = "<group>"; };
@@ -176,7 +186,7 @@
 		0DD2489B290D7B9500311427 /* DefaultDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDatePicker.swift; sourceTree = "<group>"; };
 		0DDE7EFB292FB3F0006CEE22 /* aidaSPM */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = aidaSPM; sourceTree = "<group>"; };
 		0DDE7F06292FBFF5006CEE22 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
-		0DDE7F0B2933C98D006CEE22 /* GQLError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GQLError.swift; sourceTree = "<group>"; };
+		0DDE7F0B2933C98D006CEE22 /* BaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseError.swift; sourceTree = "<group>"; };
 		0DDE7F112933D649006CEE22 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
 		0DDE7F132933DB00006CEE22 /* MyProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewController.swift; sourceTree = "<group>"; };
 		0DDE7F172933E6C1006CEE22 /* Coordinator.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Coordinator.swift; sourceTree = "<group>"; };
@@ -220,6 +230,35 @@
 /* End PBXFrameworksBuildPhase section */
 
 /* Begin PBXGroup section */
+		0D15F8752948D3720081AD4A /* MyProfile */ = {
+			isa = PBXGroup;
+			children = (
+				0D15F8782948E1AF0081AD4A /* MyProfileQuery.graphql.swift */,
+			);
+			name = MyProfile;
+			sourceTree = "<group>";
+		};
+		0D15F87A2948F57C0081AD4A /* Auth */ = {
+			isa = PBXGroup;
+			children = (
+				0D50E5D328E8593C006DB37A /* AuthViewController.swift */,
+				0D81D0AE28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift */,
+				0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */,
+				0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */,
+				0D81D0B428F883F000AB33D3 /* RegistrationViewController.swift */,
+			);
+			path = Auth;
+			sourceTree = "<group>";
+		};
+		0D15F87D2949A0FD0081AD4A /* Tutorial */ = {
+			isa = PBXGroup;
+			children = (
+				0D20142729001440008C2C90 /* TutorialViewController.swift */,
+				0D201429290015A8008C2C90 /* TutorialPageContentViewController.swift */,
+			);
+			path = Tutorial;
+			sourceTree = "<group>";
+		};
 		0D20143229005AD3008C2C90 /* Models */ = {
 			isa = PBXGroup;
 			children = (
@@ -250,6 +289,7 @@
 				0D3C521E28F58C2000F91D0C /* UIView+parentVC.swift */,
 				0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */,
 				0DD24893290BEB7C00311427 /* UIViewController+embedInNavigation.swift */,
+				0D15F86F2947DF3F0081AD4A /* UIWindow+topVC.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -272,16 +312,11 @@
 		0D3C521B28F5852500F91D0C /* ViewControllers */ = {
 			isa = PBXGroup;
 			children = (
-				0D50E5D328E8593C006DB37A /* AuthViewController.swift */,
+				0D15F87D2949A0FD0081AD4A /* Tutorial */,
+				0D15F87A2948F57C0081AD4A /* Auth */,
 				0D7113E02906A918005AB9F9 /* AgreementViewController.swift */,
-				0D81D0AE28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift */,
-				0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */,
-				0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */,
-				0D81D0B428F883F000AB33D3 /* RegistrationViewController.swift */,
 				0D227BCA28F9D7180026CDAA /* DefaultAlertViewController.swift */,
-				0D20142729001440008C2C90 /* TutorialViewController.swift */,
 				0D2014362903F4B5008C2C90 /* ProfileViewController.swift */,
-				0D201429290015A8008C2C90 /* TutorialPageContentViewController.swift */,
 				0D13FD6B2905A52600A86E62 /* DogProfileViewController.swift */,
 				0D7113E92906FC8C005AB9F9 /* PersonProfileViewController.swift */,
 				0D7113E72906F2D5005AB9F9 /* TestVCViewController.swift */,
@@ -335,6 +370,7 @@
 			isa = PBXGroup;
 			children = (
 				0DE2D02B2910064800CA1F91 /* SearchFieldMapView.swift */,
+				0D15F8712947F2DD0081AD4A /* SearchFieldView.swift */,
 				0D3C520D28F4A88500F91D0C /* DefaultTextField.swift */,
 				0DD24897290D57E800311427 /* DefaultPicker.swift */,
 				0DD24899290D758200311427 /* DefaultSegmentedPicker.swift */,
@@ -386,6 +422,7 @@
 			isa = PBXGroup;
 			children = (
 				0D7113D529067616005AB9F9 /* AuthViewModel.swift */,
+				0D15F87B2949A0850081AD4A /* TutorialViewModel.swift */,
 				0DDE7F112933D649006CEE22 /* MyProfileViewModel.swift */,
 			);
 			path = ViewModels;
@@ -420,6 +457,7 @@
 			isa = PBXGroup;
 			children = (
 				0DDE7F29293419FB006CEE22 /* Auth */,
+				0D15F8752948D3720081AD4A /* MyProfile */,
 			);
 			name = ServiceGraphQLApollo;
 			path = ..;
@@ -431,7 +469,7 @@
 				0DDE7F02292FB51D006CEE22 /* ServiceGraphQLApollo */,
 				0DDE7F06292FBFF5006CEE22 /* APIService.swift */,
 				0DDE7F2A29341EA5006CEE22 /* TokenInterceptor.swift */,
-				0DDE7F0B2933C98D006CEE22 /* GQLError.swift */,
+				0DDE7F0B2933C98D006CEE22 /* BaseError.swift */,
 			);
 			path = Services;
 			sourceTree = "<group>";
@@ -446,6 +484,7 @@
 				0D3C7C97293AC6BB00C4C2F9 /* SendResetMutation.graphql.swift */,
 				0D3C7C99293AC6BB00C4C2F9 /* UpdatePasswordMutation.graphql.swift */,
 				0D3C7C98293AC6BB00C4C2F9 /* ValidateCodeMutation.graphql.swift */,
+				0D15F8762948DB070081AD4A /* RefreshTokenMutation.graphql.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -565,6 +604,7 @@
 				0DF25AD529179D6D00A279A0 /* DogProfileCollectionViewCell.swift in Sources */,
 				0DD0AB1A29165F7A00E44F80 /* CloseButton.swift in Sources */,
 				0D20143129005AC9008C2C90 /* TutorialContentModel.swift in Sources */,
+				0D15F8722947F2DD0081AD4A /* SearchFieldView.swift in Sources */,
 				0DD24894290BEB7C00311427 /* UIViewController+embedInNavigation.swift in Sources */,
 				0D81D0AF28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift in Sources */,
 				0D6C0D24290EC22900BF4A14 /* InvisibleZoneConfigurateViewController.swift in Sources */,
@@ -583,6 +623,7 @@
 				0D3C7C9C293AC6BB00C4C2F9 /* SendCodeMutation.graphql.swift in Sources */,
 				0D3C520A28F4A17900F91D0C /* UIImage+assets.swift in Sources */,
 				0D3C7C9E293AC6BB00C4C2F9 /* SendResetMutation.graphql.swift in Sources */,
+				0D15F8772948DB070081AD4A /* RefreshTokenMutation.graphql.swift in Sources */,
 				0DDE7F1A2933E9FF006CEE22 /* Coordinatable.swift in Sources */,
 				0DD0AB1C29165F7A00E44F80 /* TagView.swift in Sources */,
 				0D50E5D028E8593C006DB37A /* AppDelegate.swift in Sources */,
@@ -592,6 +633,7 @@
 				0D7113E12906A918005AB9F9 /* AgreementViewController.swift in Sources */,
 				0D3C521228F4B42D00F91D0C /* Label.swift in Sources */,
 				0D3C520E28F4A88500F91D0C /* DefaultTextField.swift in Sources */,
+				0D15F8792948E1AF0081AD4A /* MyProfileQuery.graphql.swift in Sources */,
 				0DD24898290D57E800311427 /* DefaultPicker.swift in Sources */,
 				0D20142C290017B7008C2C90 /* AttributedString+markdown.swift in Sources */,
 				0D3C521F28F58C2000F91D0C /* UIView+parentVC.swift in Sources */,
@@ -618,6 +660,7 @@
 				0DD0AB1B29165F7A00E44F80 /* TagListView.swift in Sources */,
 				0D3C7C9D293AC6BB00C4C2F9 /* ResetPasswordMutation.graphql.swift in Sources */,
 				0D81D0B528F883F000AB33D3 /* RegistrationViewController.swift in Sources */,
+				0D15F87C2949A0850081AD4A /* TutorialViewModel.swift in Sources */,
 				0DF25AC929168A6F00A279A0 /* DescriptionTableViewCell.swift in Sources */,
 				0D3C521628F57C1200F91D0C /* PasswordTextField.swift in Sources */,
 				0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */,
@@ -627,8 +670,9 @@
 				0D5E66CE28F09D770094C949 /* SplashViewController.swift in Sources */,
 				0DDE7F07292FBFF5006CEE22 /* APIService.swift in Sources */,
 				0D3C521D28F585A900F91D0C /* TextFieldNextable.swift in Sources */,
+				0D15F8702947DF3F0081AD4A /* UIWindow+topVC.swift in Sources */,
 				0DD0AAEE291535CF00E44F80 /* PersonCollectionViewCell.swift in Sources */,
-				0DDE7F0C2933C98D006CEE22 /* GQLError.swift in Sources */,
+				0DDE7F0C2933C98D006CEE22 /* BaseError.swift in Sources */,
 				0D5E66CD28F09D770094C949 /* SplashAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;

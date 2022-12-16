@@ -22,6 +22,8 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
 
   public static func objectType(forTypename typename: String) -> Object? {
     switch typename {
+    case "Query": return Aida.Objects.Query
+    case "Profile": return Aida.Objects.Profile
     case "Mutation": return Aida.Objects.Mutation
     case "CreateUser": return Aida.Objects.CreateUser
     case "LoginUser": return Aida.Objects.LoginUser
@@ -30,6 +32,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "UpdatePassword": return Aida.Objects.UpdatePassword
     case "SendPasswordReset": return Aida.Objects.SendPasswordReset
     case "ResendValidationCode": return Aida.Objects.ResendValidationCode
+    case "RefreshToken": return Aida.Objects.RefreshToken
     default: return nil
     }
   }

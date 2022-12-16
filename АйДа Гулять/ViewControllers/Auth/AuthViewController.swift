@@ -1,35 +1,32 @@
 //
-//  RegistrationViewController.swift
+//  ViewController.swift
 //  АйДа Гулять
 //
-//  Created by Alexey Voronov on 13.10.2022.
+//  Created by Alexey Voronov on 01.10.2022.
 //
 
 import UIKit
 import SnapKit
-import Then
-import ActiveLabel
 import Combine
 
 
-class RegistrationViewController: AppRootViewController, TextFieldNextable {
+class AuthViewController: AppRootViewController, TextFieldNextable {
     enum State {
-        case empty
-        case success
-        case normal(Bool, Bool)
+        case normal
+        case emailWorng
+        case passwordWrong
     }
     
     private var subscriptions = Set<AnyCancellable>()
     var baseConstraints: [Constraint] = []
     var keyboardShowConstraints: [Constraint] = []
-    let coordinator: Coordinator
     private var viewModel: AuthViewModel!
     
     let logoImageView = ScalableImageView(image: UIImage.appImage(.logo)).then {
         $0.contentMode = .scaleAspectFit
     }
     let titleLabel = Label().then {
-        $0.text = "Регистрация"
+        $0.text = "Вход"
         $0.font = .montserratRegular(size: 22)
     }
     let emailTextField = DefaultTextField().then {
@@ -40,33 +37,21 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
     }
     let passwordTextField = PasswordTextField().then {
         $0.placeholder = "Пароль"
-        $0.descriptionTextString = "Минимум 6 символов, строчные и заглавные буквы, цифры, символы"
     }
-    let registrationButton = DefaultButton().then {
-        $0.setTitle("Зарегистрироваться", for: .normal)
+    let forgotPasswordButton = LabelButton().then {
+        $0.setTitle("Забыли пароль?", for: .normal)
     }
-
-    let noAccountLabel = Label().then {
-        $0.text = "Есть аккаунт?"
-    }
-    let loginButton = LabelButton().then {
+    let loginButton = DefaultButton().then {
         $0.setTitle("Войти", for: .normal)
     }
-    let descriptionLabel = ActiveLabel().then {
-        let attributedString = NSMutableAttributedString(string: "Нажимая кнопку, я соглашаюсь с пользовательским соглашением и даю согласие на обработку персональных данных")
-
-        let customType = ActiveType.custom(pattern: "\\sпользовательским соглашением\\b")
-        
-        $0.enabledTypes = [customType]
-        $0.attributedText = attributedString
-        $0.customColor[customType] = .appColor(.blue)
-        $0.customSelectedColor[customType] = .appColor(.blue).withAlphaComponent(0.5)
-        $0.font = .montserratRegular(size: 15)
-        $0.textColor = .appColor(.grayEmpty)
-        $0.textAlignment = .center
-        $0.numberOfLines = 0
-        $0.isUserInteractionEnabled = true
-        $0.backgroundColor = .clear
+    let authGoogle = DefaultButton(style: .bordered, leftIcon: .appImage(.googleIcon)).then {
+        $0.setTitle("Продолжить с Google", for: .normal)
+    }
+    let noAccountLabel = Label().then {
+        $0.text = "Нет аккаунта?"
+    }
+    let registrationButton = LabelButton().then {
+        $0.setTitle("Регистрация", for: .normal)
     }
     
     override var isKeyboardHidden: Bool {
@@ -79,27 +64,15 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
         }
     }
     
-    init(coordinator: Coordinator, viewModel: AuthViewModel) {
-        self.coordinator = coordinator
+    init(viewModel: AuthViewModel, coordinator: Coordinator) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        viewModel.authViewController = self
     }
     
     required init?(coder: NSCoder) {
         fatalError("init(coder:) has not been implemented")
-    }
-    
-    func setState(newState: RegistrationViewController.State) {
-        switch newState {
-        case .success:
-            coordinator.route(to: .code, from: self, parameters: nil)
-        case .normal(let validEmail, let validPassword):
-            emailTextField.fieldState = validEmail ? .success : .error
-            passwordTextField.fieldState = validPassword ? .success : .error
-        case .empty:
-            emailTextField.fieldState = .normal
-            passwordTextField.fieldState = .normal
-        }
     }
     
     override func viewDidLoad() {
@@ -107,26 +80,35 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
         setupUI()
         setupBindings()
         
-        registrationButton.addTarget(self, action: #selector(registrationAction), for: .touchUpInside)
-        loginButton.addTarget(self, action: #selector(authAction), for: .touchUpInside)
-        
-        descriptionLabel.handleCustomTap(for: descriptionLabel.enabledTypes.first!) { _ in
-            print("show license")
+        loginButton.addTarget(self, action: #selector(loginAction), for: .touchUpInside)
+        authGoogle.addTarget(self, action: #selector(googleAction), for: .touchUpInside)
+        forgotPasswordButton.addTarget(self, action: #selector(forgotPassword), for: .touchUpInside)
+        registrationButton.addTarget(self, action: #selector(registerAction), for: .touchUpInside)
+        passwordTextField.action = { self.loginAction() }
+    }
+    
+    func setState(newState: AuthViewController.State) {
+        switch newState {
+        case .normal:
+            emailTextField.fieldState = .normal
+            passwordTextField.fieldState = .normal
+        case .emailWorng:
+            emailTextField.fieldState = .error
+            passwordTextField.fieldState = .normal
+        case .passwordWrong:
+            emailTextField.fieldState = .normal
+            passwordTextField.fieldState = .error
         }
-        
-        passwordTextField.action = { self.viewModel.registrationUser() }
     }
     
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
         
-        let registerButtonStack = UIStackView(arrangedSubviews: [noAccountLabel, loginButton])
+        let registerButtonStack = UIStackView(arrangedSubviews: [noAccountLabel, registrationButton])
         registerButtonStack.axis = .horizontal
         registerButtonStack.spacing = 8
         
-        [logoImageView, titleLabel, emailTextField, passwordTextField, registrationButton, registerButtonStack, descriptionLabel].forEach({self.view.addSubview($0)})
-        
-//        descriptionLabel.delegate = self
+        [logoImageView, titleLabel, emailTextField, passwordTextField, forgotPasswordButton, loginButton, authGoogle, registerButtonStack].forEach({self.view.addSubview($0)})
         
         logoImageView.snp.makeConstraints { make in
             self.baseConstraints.append(make.centerX.equalToSuperview().constraint)
@@ -156,40 +138,43 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
             make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
         }
         
-        registrationButton.snp.makeConstraints { make in
+        forgotPasswordButton.snp.makeConstraints { make in
+            make.left.equalTo(self.view.safeAreaLayoutGuide).inset(28)
+            make.top.equalTo(passwordTextField.snp.bottom).offset(25)
+        }
+        
+        loginButton.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
             make.top.equalTo(passwordTextField.snp.bottom).offset(70)
         }
         
-        keyboardAvoidView = registrationButton
+        keyboardAvoidView = loginButton
         
         registerButtonStack.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
             make.bottom.equalTo(self.view.safeAreaLayoutGuide).inset(28)
         }
         
-        descriptionLabel.snp.makeConstraints { make in
-            make.top.equalTo(registrationButton.snp.bottom).offset(24)
-            make.centerX.equalToSuperview()
-            make.width.equalTo(290)
-            make.height.equalTo(90)
+        authGoogle.snp.makeConstraints { make in
+            make.bottom.equalTo(registerButtonStack.snp.top).offset(-21)
+            make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
         }
     }
     
     func setupBindings() {
-        viewModel.$registrationState
+        viewModel.$authState
             .sink { value in
                 self.setState(newState: value)
             }
             .store(in: &subscriptions)
         viewModel.loadingPublisher
             .sink { [weak self] isLoading in
-                self?.registrationButton.isLoading = isLoading
+                self?.loginButton.isLoading = isLoading
             }
             .store(in: &subscriptions)
         viewModel.errorPublisher
             .sink { [weak self] error in
-                self?.showError(message: error.localizedDescription)
+                self?.showError(error: error)
             }
             .store(in: &subscriptions)
         
@@ -217,19 +202,20 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
             .store(in: &subscriptions)
     }
     
-    @objc func registrationAction() {
-        viewModel.registrationUser()
+    @objc func loginAction() {
+        viewModel.loginUser()
     }
     
-    @objc func authAction() {
-        self.navigationController?.popToRootViewController(animated: true)
+    @objc func googleAction() {
+        authGoogle.isLoading.toggle()
+    }
+    
+    @objc func forgotPassword() {
+        viewModel.toForgotPassword()
+    }
+    
+    @objc func registerAction() {
+        viewModel.toRegistration()
     }
 }
 
-
-extension RegistrationViewController: UITextViewDelegate {
-    func textView(_ textView: UITextView, shouldInteractWith URL: URL, in characterRange: NSRange, interaction: UITextItemInteraction) -> Bool {
-        print(URL.absoluteString)
-        return false
-    }
-}

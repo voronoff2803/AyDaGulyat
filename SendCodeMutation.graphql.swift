@@ -9,8 +9,8 @@ public class SendCodeMutation: GraphQLMutation {
   public static let document: DocumentType = .notPersisted(
     definition: .init(
       """
-      mutation SendCode($id: UUID) {
-        sendCode(id: $id) {
+      mutation SendCode($email: String) {
+        sendCode(email: $email) {
           __typename
           success
           id
@@ -19,13 +19,13 @@ public class SendCodeMutation: GraphQLMutation {
       """
     ))
 
-  public var id: GraphQLNullable<Aida.UUID>
+  public var email: GraphQLNullable<String>
 
-  public init(id: GraphQLNullable<Aida.UUID>) {
-    self.id = id
+  public init(email: GraphQLNullable<String>) {
+    self.email = email
   }
 
-  public var __variables: Variables? { ["id": id] }
+  public var __variables: Variables? { ["email": email] }
 
   public struct Data: Aida.SelectionSet {
     public let __data: DataDict
@@ -33,7 +33,7 @@ public class SendCodeMutation: GraphQLMutation {
 
     public static var __parentType: ParentType { Aida.Objects.Mutation }
     public static var __selections: [Selection] { [
-      .field("sendCode", SendCode?.self, arguments: ["id": .variable("id")]),
+      .field("sendCode", SendCode?.self, arguments: ["email": .variable("email")]),
     ] }
 
     /// Valudation code (re)send

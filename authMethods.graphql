@@ -40,9 +40,16 @@ mutation SendReset($email: String!) {
   }
 }
 
-mutation SendCode($id: UUID) {
-  sendCode(id: $id) {
+mutation SendCode($email: String) {
+  sendCode(email: $email) {
     success
     id
+  }
+}
+
+
+mutation RefreshToken {
+  refreshToken {
+    accessToken
   }
 }

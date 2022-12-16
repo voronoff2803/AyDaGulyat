@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 
+typealias ActionCallback = (Coordinator.Route) -> ()
 
 class Coordinator {
     enum Route {
@@ -17,15 +18,35 @@ class Coordinator {
         case registration
         case code
         case forgotPassword
+        case tutorial
+        case dismiss
         case back
+        case popToRoot
     }
     
     enum ViewModel {
         case auth
     }
     
-    var rootViewController: UIViewController!
+    init() {
+        APIService.shared.delegate = self
+    }
     
+    var rootViewController: UIViewController!
+    var currentViewController: UIViewController {
+        get {
+            currentViewControllerCache ?? rootViewController
+        }
+        set {
+            currentViewControllerCache = newValue
+        }
+    }
+    
+    private var currentViewControllerCache: UIViewController?
+    
+    // Auth
+    
+    var isNewPasswordNeeded = false
     var authViewModel: AuthViewModel {
         return authViewModelCache ?? createViewModel(viewModel: .auth) as! AuthViewModel
     }
@@ -34,48 +55,90 @@ class Coordinator {
     func createViewModel(viewModel: ViewModel) -> AnyObject {
         switch viewModel {
         case .auth:
-            authViewModelCache = { AuthViewModel() }()
+            authViewModelCache = { AuthViewModel(coordinator: self) }()
             return authViewModelCache!
         }
     }
     
-    func route(to route: Coordinator.Route, from context: UIViewController, parameters: Any?) {
-        switch route {
-        case .done:
-            context.dismiss(animated: true)
-            
-            // Auth
-        case .auth:
-            let authViewController = AuthViewController(coordinator: self, viewModel: authViewModel).embeddedInHiddenNavigation()
-            authViewController.modalPresentationStyle = .fullScreen
-            context.present(authViewController, animated: true)
-        case .newPassword:
-            let newPasswordViewController = NewPasswordViewController(coordinator: self, viewModel: authViewModel)
-            context.navigationController?.pushViewController(newPasswordViewController, animated: true)
-        case .registration:
-            let registrationViewController = RegistrationViewController(coordinator: self, viewModel: authViewModel)
-            context.navigationController?.pushViewController(registrationViewController, animated: true)
-        case .code:
-            let emailCodeViewController = EmailCodeViewController(coordinator: self, viewModel: authViewModel)
-            context.navigationController?.pushViewController(emailCodeViewController, animated: true)
-        case .forgotPassword:
-            let recoverEmailViewController = RecoverPasswordEmailViewController(coordinator: self, viewModel: authViewModel)
-            context.navigationController?.pushViewController(recoverEmailViewController, animated: true)
-        case .back:
-            context.navigationController?.popViewController(animated: true)
+    func present(context: UIViewController, viewController: UIViewController, breakNavigation: Bool = false) {
+        viewController.modalPresentationStyle = .fullScreen
+        
+        if breakNavigation {
+            context.present(viewController, animated: true)
+        } else {
+            if let nav = context.navigationController {
+                nav.pushViewController(viewController, animated: true)
+            } else {
+                context.present(viewController, animated: true)
+            }
         }
     }
     
-    func setupRootVC() -> UIViewController {
+    func route(context: UIViewController, to route: Coordinator.Route, parameters: Any?) {
+        DispatchQueue.main.async {
+            switch route {
+            case .done:
+                context.dismiss(animated: true)
+            case .back:
+                if let nav = context.navigationController {
+                    nav.popViewController(animated: true)
+                } else {
+                    context.dismiss(animated: true)
+                }
+            case .dismiss:
+                context.dismiss(animated: true)
+            case .popToRoot:
+                if let nav = context.navigationController {
+                    nav.popToRootViewController(animated: true)
+                }
+                
+                // Tutorial
+            case .tutorial:
+                let tutuorialViewController = TutorialViewController(viewModel: TutorialViewModel())
+                self.present(context: context, viewController: tutuorialViewController, breakNavigation: true)
+                
+                // Auth
+            case .auth:
+                let authViewController = AuthViewController(viewModel: self.authViewModel, coordinator: self).embeddedInHiddenNavigation()
+                self.present(context: context, viewController: authViewController, breakNavigation: true)
+            case .newPassword:
+                let newPasswordViewController = NewPasswordViewController(viewModel: self.authViewModel)
+                self.present(context: context, viewController: newPasswordViewController)
+            case .registration:
+                self.isNewPasswordNeeded = false
+                let registrationViewController = RegistrationViewController(viewModel: self.authViewModel)
+                self.present(context: context, viewController: registrationViewController)
+            case .code:
+                let emailCodeViewController = EmailCodeViewController(viewModel: self.authViewModel)
+                self.present(context: context, viewController: emailCodeViewController, breakNavigation:
+                                !(context is EmailCodeViewController ||
+                                  context is RegistrationViewController))
+            case .forgotPassword:
+                self.isNewPasswordNeeded = true
+                let recoverEmailViewController = RecoverPasswordEmailViewController(viewModel: self.authViewModel)
+                self.present(context: context, viewController: recoverEmailViewController)
+            }
+        }
+    }
+    
+    func createRootVC() -> UIViewController {
         rootViewController = setupTabBarVC()
         return rootViewController
     }
     
+    func start() {
+        //showAuthIfNeed()
+        //showTutorial()
+    }
+    
     func showAuthIfNeed() {
         if !APIService.shared.isAuthenticated {
-            route(to: .auth, from: rootViewController, parameters: nil)
-            //route(to: .code, from: rootViewController, parameters: nil)
+            route(context: rootViewController, to: .auth, parameters: nil)
         }
+    }
+    
+    func showTutorial() {
+        route(context: rootViewController, to: .tutorial, parameters: nil)
     }
     
     private func setupTabBarVC() -> UITabBarController {
@@ -105,5 +168,19 @@ class Coordinator {
         profileViewController.tabBarItem = UITabBarItem(title: nil, image: .appImage(.tabProfile), selectedImage: .appImage(.tabProfileSelected))
         
         return [profileViewController, mapViewController]
+    }
+}
+
+
+extension Coordinator: APIServiceDelegate {
+    func processError(error: BaseError) -> Bool {
+        switch error.message {
+        //case "ErrorCodes.USER_NOT_ACTIVATED": route(to: .code, parameters: nil)
+        case "ErrorCodes.JWT_REQUIRED":
+            route(context: rootViewController, to: .auth, parameters: nil)
+            return true
+        default:
+            return false
+        }
     }
 }

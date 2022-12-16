@@ -22,17 +22,17 @@ class MyProfileViewModel: ObservableObject {
     }
     
     func fetchData() {
-//        APIService.shared.myProfile()
-//            .sink { req in
-//                switch req {
-//                case .finished:
-//                    print("finished")
-//                case .failure(let error):
-//                    print("error: \(error.localizedDescription)")
-//                }
-//            } receiveValue: { res in
-//                print(res)
-//            }
-//            .store(in: &subscriptions)
+        APIService.shared.myProfile()
+            .sink { req in
+                switch req {
+                case .finished:
+                    print("finished")
+                case .failure(let error):
+                    print("error: \(error.localizedDescription)")
+                }
+            } receiveValue: { res in
+                print(res)
+            }
+            .store(in: &subscriptions)
     }
 }

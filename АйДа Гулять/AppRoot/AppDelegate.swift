@@ -9,20 +9,19 @@ import UIKit
 
 @main
 class AppDelegate: UIResponder, UIApplicationDelegate {
-    var window: UIWindow?
+    lazy var window: UIWindow? = UIWindow(frame: UIScreen.main.bounds)
     
     lazy var splashPresenter = SplashPresenter(window: self.window!)
     let coordinator = Coordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
-        window = UIWindow(frame: UIScreen.main.bounds)
-        
-        window?.rootViewController = coordinator.setupRootVC()
+        window?.rootViewController = coordinator.createRootVC()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
         
+        coordinator.start()
+        
         present()
-        coordinator.showAuthIfNeed()
         
         return true
     }

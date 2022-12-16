@@ -18,7 +18,6 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
     
     private var subscriptions = Set<AnyCancellable>()
     private var viewModel: AuthViewModel!
-    let coordinator: Coordinator
     
     let logoImageView = ScalableImageView(image: UIImage.appImage(.logo)).then {
         $0.contentMode = .scaleAspectFit
@@ -41,13 +40,14 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
         $0.placeholder = "Подтверждение пароля"
     }
     let loginButton = DefaultButton().then {
-        $0.setTitle("Войти", for: .normal)
+        $0.setTitle("Продолжить", for: .normal)
     }
     
-    init(coordinator: Coordinator, viewModel: AuthViewModel) {
-        self.coordinator = coordinator
+    init(viewModel: AuthViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        viewModel.newPasswordViewController = self
     }
     
     required init?(coder: NSCoder) {
@@ -62,6 +62,7 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
         setupBindings()
         
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
+        loginButton.addTarget(self, action: #selector(continueAction), for: .touchUpInside)
     }
     
     func setupBindings() {
@@ -80,6 +81,17 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
             .sink(receiveValue: { value in
                 self.viewModel.newPasswordSecond = value ?? ""
             })
+            .store(in: &subscriptions)
+        
+        viewModel.loadingPublisher
+            .sink { [weak self] isLoading in
+                self?.loginButton.isLoading = isLoading
+            }
+            .store(in: &subscriptions)
+        viewModel.errorPublisher
+            .sink { [weak self] error in
+                self?.showError(error: error)
+            }
             .store(in: &subscriptions)
     }
     
@@ -127,6 +139,10 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
     }
     
     @objc func backAction() {
-        coordinator.route(to: .back, from: self, parameters: nil)
+        viewModel.coordinator.route(context: self, to: .back, parameters: nil)
+    }
+    
+    @objc func continueAction() {
+        viewModel.setNewPassword()
     }
 }

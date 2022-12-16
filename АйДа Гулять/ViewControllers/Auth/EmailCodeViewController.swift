@@ -13,12 +13,11 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
     enum State {
         case codeInput
         case requestCodeAgain
-        case success
+        case loading
     }
     
     private var subscriptions = Set<AnyCancellable>()
     private var viewModel: AuthViewModel!
-    let coordinator: Coordinator
     
     let titleLabel = Label().then {
         $0.text = "Введите код доступа, который пришел на почту"
@@ -69,10 +68,11 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
         $0.animation = animation
     }
     
-    init(coordinator: Coordinator, viewModel: AuthViewModel) {
-        self.coordinator = coordinator
+    init(viewModel: AuthViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
+        
+        viewModel.emailCodeViewController = self
     }
     
     required init?(coder: NSCoder) {
@@ -84,8 +84,6 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
 
         setupUI()
         setupBindings()
-        
-        viewModel.requestCode()
         
         retryButton.addTarget(self, action: #selector(requestCodeAgainAction), for: .touchUpInside)
         backButton.addTarget(self, action: #selector(backAction), for: .touchUpInside)
@@ -118,7 +116,7 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
         
         titleLabel.snp.makeConstraints { make in
             make.centerX.equalToSuperview()
-            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(50)
+            make.bottom.equalTo(codeTextField.snp.top).offset(-60)
             make.horizontalEdges.equalToSuperview().inset(28)
         }
         
@@ -142,6 +140,10 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
             make.centerX.equalToSuperview()
         }
         
+        backButton.snp.makeConstraints { make in
+            make.top.left.equalTo(view.safeAreaLayoutGuide).inset(16)
+        }
+        
         keyboardAvoidView = codeTextField
     }
     
@@ -160,14 +162,12 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
         
         viewModel.loadingPublisher
             .sink { [weak self] isLoading in
-                self?.view.endEditing(true)
-                self?.activityIndicator.isHidden = isLoading ? false : true
-                isLoading ? self?.activityIndicator.play() : self?.activityIndicator.stop()
+                self?.setState(newState: isLoading ? .loading : .codeInput)
             }
             .store(in: &subscriptions)
         viewModel.errorPublisher
             .sink { [weak self] error in
-                self?.showError(message: error.localizedDescription)
+                self?.showError(error: error)
             }
             .store(in: &subscriptions)
         
@@ -179,7 +179,7 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
     }
     
     @objc func requestCodeAgainAction() {
-        viewModel.requestCode()
+        viewModel.sendCodeEmail()
     }
     
     func setState(newState: EmailCodeViewController.State) {
@@ -194,12 +194,16 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
             retryButton.isHidden = false
             activityIndicator.isHidden = true
             activityIndicator.stop()
-        case .success:
-            self.dismiss(animated: true)
+        case .loading:
+            descriptionLabel.isHidden = true
+            retryButton.isHidden = true
+            activityIndicator.isHidden = false
+            view.endEditing(true)
+            activityIndicator.play()
         }
     }
     
     @objc func backAction() {
-        coordinator.route(to: .back, from: self, parameters: nil)
+        viewModel.coordinator.route(context: self, to: .back, parameters: nil)
     }
 }
