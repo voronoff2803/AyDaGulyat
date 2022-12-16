@@ -107,8 +107,3 @@ class RefreshBearerTokenInterceptor: ApolloInterceptor {
         }
     }
 }
-
-
-// Проверить восстанавление пасса
-// Добавить экран мой профиль по МВВМ
-// 

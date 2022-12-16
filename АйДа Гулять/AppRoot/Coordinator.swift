@@ -162,7 +162,7 @@ class Coordinator {
     
     private func setpViewControllers() -> [UIViewController] {
         let mapViewController = MapViewController()
-        let profileViewController = MyProfileViewController(viewModel: MyProfileViewModel()).embeddedInNavigation()
+        let profileViewController = MyProfileViewController(viewModel: MyProfileViewModel(coordinator: self)).embeddedInNavigation()
         
         mapViewController.tabBarItem = UITabBarItem(title: nil, image: .appImage(.tabMap), selectedImage: .appImage(.tabMapSelected))
         profileViewController.tabBarItem = UITabBarItem(title: nil, image: .appImage(.tabProfile), selectedImage: .appImage(.tabProfileSelected))

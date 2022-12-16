@@ -7,7 +7,7 @@
 
 import UIKit
 
-class BirthDateCollectionViewCell: UITableViewCell {
+class BirthDateTableViewCell: UITableViewCell {
     static let reusableID = "birthDateCell"
     
     let titleLabel = UILabel().then {

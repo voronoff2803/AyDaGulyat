@@ -7,8 +7,17 @@
 
 import UIKit
 
-class PersonCollectionViewCell: UITableViewCell {
-    static let reusableID = "personCell"
+class PersonTableViewCell: UITableViewCell {
+    var item: MyProfileViewModelItem? {
+        didSet {
+            guard let item = item as? PersonCellViewModelItem else {
+                return
+            }
+            
+            profileNameLabel.text = item.name
+            //pictureImageView?.image = UIImage(named: item.pictureUrl)
+        }
+    }
     
     var profileImage: UIImage? = nil {
         didSet {
@@ -103,5 +112,24 @@ class PersonCollectionViewCell: UITableViewCell {
             make.bottom.equalToSuperview()
             make.height.equalTo(0.3)
         }
+    }
+}
+
+
+class PersonCellViewModelItem: MyProfileViewModelItem {
+    var type: MyProfileViewModel.ItemType {
+        return .person
+    }
+    
+    var rowCount: Int {
+        return 1
+    }
+    
+    var name: String
+    var pictureUrl: String
+    
+    init(name: String, pictureUrl: String) {
+        self.name = name
+        self.pictureUrl = pictureUrl
     }
 }
