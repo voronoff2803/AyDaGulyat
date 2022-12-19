@@ -67,8 +67,6 @@ class AuthViewController: AppRootViewController, TextFieldNextable {
     init(viewModel: AuthViewModel, coordinator: Coordinator) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
-        viewModel.authViewController = self
     }
     
     required init?(coder: NSCoder) {
@@ -194,7 +192,7 @@ class AuthViewController: AppRootViewController, TextFieldNextable {
                 self.viewModel.email = value ?? ""
             })
             .store(in: &subscriptions)
-        
+
         passwordTextField.textPublisher
             .sink(receiveValue: { value in
                 self.viewModel.password = value ?? ""
@@ -203,7 +201,7 @@ class AuthViewController: AppRootViewController, TextFieldNextable {
     }
     
     @objc func loginAction() {
-        viewModel.loginUser()
+        viewModel.loginUser(context: self)
     }
     
     @objc func googleAction() {
@@ -211,11 +209,11 @@ class AuthViewController: AppRootViewController, TextFieldNextable {
     }
     
     @objc func forgotPassword() {
-        viewModel.toForgotPassword()
+        viewModel.toForgotPassword(context: self)
     }
     
     @objc func registerAction() {
-        viewModel.toRegistration()
+        viewModel.toRegistration(context: self)
     }
 }
 

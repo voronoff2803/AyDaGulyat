@@ -8,11 +8,20 @@
 import UIKit
 
 class DefaultPicker: UIControl {
+    var isManySelectable: Bool
     var values: [String] = []
     var selectedIndex: Int? = nil {
         didSet {
             if let index = selectedIndex, index >= 0, index < values.count {
                 self.currentTextLabel.text = values[index]
+            }
+        }
+    }
+    
+    var selectedIndexes: Set<Int> = [] {
+        didSet {
+            if !selectedIndexes.isEmpty {
+                self.currentTextLabel.text = "(\(selectedIndexes.count))"
             }
         }
     }
@@ -40,8 +49,9 @@ class DefaultPicker: UIControl {
         $0.backgroundColor = .appColor(.lightGray)
     }
     
-    init(titleText: String) {
+    init(titleText: String, isManySelectable: Bool = false) {
         textLabel.text = titleText
+        self.isManySelectable = isManySelectable
         
         super.init(frame: .zero)
         
@@ -49,24 +59,27 @@ class DefaultPicker: UIControl {
     }
     
     override init(frame: CGRect){
+        self.isManySelectable = false
         super.init(frame: frame)
-        
         setupUI()
     }
     
     required init?(coder: NSCoder) {
+        self.isManySelectable = false
         super.init(coder: coder)
-        
         setupUI()
     }
     
-    func setupValues(values: [String], selectedIndex: Int? = nil) {
+    func setupValues(values: [String], selectedIndex: Int? = nil, selectedIndexes: Set<Int> = []) {
         self.values = values
         self.selectedIndex = selectedIndex
+        self.selectedIndexes = selectedIndexes
     }
     
     func setupUI() {
         self.backgroundColor = .appColor(.backgroundFirst)
+        
+        
         
         let tapGetureRecognizer = UITapGestureRecognizer(target: self, action: #selector(selectAction))
         self.addGestureRecognizer(tapGetureRecognizer)
@@ -100,14 +113,29 @@ class DefaultPicker: UIControl {
 
 
     @objc func selectAction() {
-        let selectorViewController  = ListSearchViewController(items: self.values, selectedIndex: selectedIndex) { index in
-            self.selectedIndex = index
+        if isManySelectable {
+            let selectorViewController = ListSearchViewControllerMany(items: self.values, selectedIndexes: self.selectedIndexes) { indexes in
+                self.selectedIndexes = indexes
+            }
+            
+            selectorViewController.title = textLabel.text
+            
+            self.parentViewController?.present(selectorViewController.embeddedInNavigation().then {
+                $0.modalPresentationStyle = .overFullScreen
+            }, animated: true)
+            
+        } else {
+            
+            let selectorViewController = ListSearchViewController(items: self.values, selectedIndex: selectedIndex) { index in
+                self.selectedIndex = index
+            }
+            
+            selectorViewController.title = textLabel.text
+            
+            self.parentViewController?.present(selectorViewController.embeddedInNavigation().then {
+                $0.modalPresentationStyle = .overFullScreen
+            }, animated: true)
+            
         }
-        
-        selectorViewController.title = textLabel.text
-        
-        self.parentViewController?.present(selectorViewController.embeddedInNavigation().then {
-            $0.modalPresentationStyle = .fullScreen
-        }, animated: true)
     }
 }

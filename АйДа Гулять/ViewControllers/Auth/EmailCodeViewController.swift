@@ -71,8 +71,6 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
     init(viewModel: AuthViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
-        viewModel.emailCodeViewController = self
     }
     
     required init?(coder: NSCoder) {
@@ -179,7 +177,7 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
     }
     
     @objc func requestCodeAgainAction() {
-        viewModel.sendCodeEmail()
+        viewModel.sendCodeEmail(context: self)
     }
     
     func setState(newState: EmailCodeViewController.State) {

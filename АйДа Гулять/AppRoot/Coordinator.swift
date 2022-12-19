@@ -12,6 +12,9 @@ typealias ActionCallback = (Coordinator.Route) -> ()
 
 class Coordinator {
     enum Route {
+        case dismiss
+        case back
+        case popToRoot
         case auth
         case newPassword
         case done
@@ -19,9 +22,7 @@ class Coordinator {
         case code
         case forgotPassword
         case tutorial
-        case dismiss
-        case back
-        case popToRoot
+        case profileEdit
     }
     
     enum ViewModel {
@@ -60,8 +61,8 @@ class Coordinator {
         }
     }
     
-    func present(context: UIViewController, viewController: UIViewController, breakNavigation: Bool = false) {
-        viewController.modalPresentationStyle = .fullScreen
+    func present(context: UIViewController, viewController: UIViewController, breakNavigation: Bool = false, modalPresentationStyle: UIModalPresentationStyle = .fullScreen) {
+        viewController.modalPresentationStyle = modalPresentationStyle
         
         if breakNavigation {
             context.present(viewController, animated: true)
@@ -117,6 +118,12 @@ class Coordinator {
                 self.isNewPasswordNeeded = true
                 let recoverEmailViewController = RecoverPasswordEmailViewController(viewModel: self.authViewModel)
                 self.present(context: context, viewController: recoverEmailViewController)
+                
+                
+                // MyProfile
+            case .profileEdit:
+                let profileEditViewController = ProfileEditViewController()
+                self.present(context: context, viewController: profileEditViewController, breakNavigation: true, modalPresentationStyle: .pageSheet)
             }
         }
     }

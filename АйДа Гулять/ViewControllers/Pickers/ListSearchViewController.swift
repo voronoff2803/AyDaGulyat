@@ -9,13 +9,13 @@ import UIKit
 import Combine
 
 class ListSearchViewController: UIViewController, TextFieldNextable {
+    private var subscriptions = Set<AnyCancellable>()
+    
     var items: [(Int, String)] {
         didSet {
             self.resultTableView.reloadData()
         }
     }
-    
-    private var subscriptions = Set<AnyCancellable>()
     
     var searchString: String = "" {
         didSet {

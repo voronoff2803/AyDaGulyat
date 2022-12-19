@@ -9,6 +9,7 @@ import Foundation
 import Combine
 import Apollo
 import ApolloCombine
+import UIKit
 
 
 class AuthViewModel: ObservableObject {
@@ -17,11 +18,11 @@ class AuthViewModel: ObservableObject {
     private let activityIndicator = ActivityIndicator()
     private let errorIndicator = ErrorIndicator()
     
-    weak var authViewController: AuthViewController?
-    weak var recoverPasswordEmailViewController: RecoverPasswordEmailViewController?
-    weak var emailCodeViewController: EmailCodeViewController?
-    weak var newPasswordViewController: NewPasswordViewController?
-    weak var registrationViewController: RegistrationViewController?
+//    weak var authViewController: AuthViewController?
+//    weak var recoverPasswordEmailViewController: RecoverPasswordEmailViewController?
+//    weak var emailCodeViewController: EmailCodeViewController?
+//    weak var newPasswordViewController: NewPasswordViewController?
+//    weak var registrationViewController: RegistrationViewController?
     
     let coordinator: Coordinator
 
@@ -83,15 +84,6 @@ class AuthViewModel: ObservableObject {
                     self.timerSeconds -= 1
                 } else if self.codeState == .codeInput {
                     self.codeState = .requestCodeAgain
-                }
-            }
-            .store(in: &subscriptions)
-        
-        $code
-            .removeDuplicates()
-            .sink { value in
-                if value.count >= 6 {
-                    self.sendCode()
                 }
             }
             .store(in: &subscriptions)
@@ -159,47 +151,44 @@ class AuthViewModel: ObservableObject {
         registrationState = .normal(true, true)
     }
     
-    func loginUser() {
+    func loginUser(context: UIViewController) {
         APIService.shared.authLoginUser(email: email, password: password)
             .trackActivity(activityIndicator)
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
                 if res {
-                    guard let authViewController = self.authViewController else { return }
-                    self.coordinator.route(context: authViewController, to: .dismiss, parameters: nil)
+                    self.coordinator.route(context: context, to: .dismiss, parameters: nil)
                 }
             })
             .store(in: &subscriptions)
     }
     
-    func registrationUser() {
+    func registrationUser(context: UIViewController) {
         APIService.shared.authCreateUser(email: email, password: password)
             .trackActivity(activityIndicator)
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
                 self.userID = res
-                guard let registrationViewController = self.registrationViewController else { return }
-                self.coordinator.route(context: registrationViewController, to: .code, parameters: nil)
+                self.coordinator.route(context: context, to: .code, parameters: nil)
             })
             .store(in: &subscriptions)
     }
     
-    func sendCode() {
+    func sendCode(context: UIViewController) {
         APIService.shared.authValidateCode(code: code, id: userID)
             .trackActivity(activityIndicator)
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
-                guard let emailCodeViewController = self.emailCodeViewController else { return }
                 if self.isPasswordReset {
-                    self.coordinator.route(context: emailCodeViewController, to: .newPassword, parameters: nil)
+                    self.coordinator.route(context: context, to: .newPassword, parameters: nil)
                 } else {
-                    self.coordinator.route(context: emailCodeViewController, to: .dismiss, parameters: nil)
+                    self.coordinator.route(context: context, to: .dismiss, parameters: nil)
                 }
             })
             .store(in: &subscriptions)
     }
     
-    func sendCodeEmail() {
+    func sendCodeEmail(context: UIViewController) {
         timerSeconds = 120
         self.codeState = .codeInput
         APIService.shared.authSendCode(email: email)
@@ -208,35 +197,31 @@ class AuthViewModel: ObservableObject {
             .sink(receiveValue: { res in
                 self.userID = res
                 
-                guard let emailCodeViewController = self.emailCodeViewController else { return }
-                self.coordinator.route(context: emailCodeViewController, to: .code, parameters: nil)
+                self.coordinator.route(context: context, to: .code, parameters: nil)
             })
             .store(in: &subscriptions)
     }
     
-    func setNewPassword() {
+    func setNewPassword(context: UIViewController) {
         if password != newPasswordSecond { return }
         print(password, newPasswordSecond)
         APIService.shared.authResetPassword(newPassword: password)
             .trackActivity(activityIndicator)
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
-                guard let newPasswordViewController = self.newPasswordViewController else { return }
-                self.coordinator.route(context: newPasswordViewController, to: .dismiss, parameters: nil)
+                self.coordinator.route(context: context, to: .dismiss, parameters: nil)
             })
             .store(in: &subscriptions)
     }
     
-    func toForgotPassword() {
-        guard let authViewController = authViewController else { return }
+    func toForgotPassword(context: UIViewController) {
         isPasswordReset = true
-        coordinator.route(context: authViewController, to: .forgotPassword, parameters: nil)
+        coordinator.route(context: context, to: .forgotPassword, parameters: nil)
     }
     
-    func toRegistration() {
-        guard let authViewController = authViewController else { return }
+    func toRegistration(context: UIViewController) {
         isPasswordReset = false
-        coordinator.route(context: authViewController, to: .registration, parameters: nil)
+        coordinator.route(context: context, to: .registration, parameters: nil)
     }
     
     deinit {

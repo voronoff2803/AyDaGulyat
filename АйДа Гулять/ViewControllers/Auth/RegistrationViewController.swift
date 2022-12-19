@@ -80,8 +80,6 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
     init(viewModel: AuthViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
-        viewModel.registrationViewController = self
     }
     
     required init?(coder: NSCoder) {
@@ -217,7 +215,7 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
     }
     
     @objc func registrationAction() {
-        viewModel.registrationUser()
+        viewModel.registrationUser(context: self)
     }
     
     @objc func authAction() {

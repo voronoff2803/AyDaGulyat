@@ -46,8 +46,6 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
     init(viewModel: AuthViewModel) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
-        
-        viewModel.newPasswordViewController = self
     }
     
     required init?(coder: NSCoder) {
@@ -143,6 +141,6 @@ class NewPasswordViewController: AppRootViewController, TextFieldNextable {
     }
     
     @objc func continueAction() {
-        viewModel.setNewPassword()
+        viewModel.setNewPassword(context: self)
     }
 }

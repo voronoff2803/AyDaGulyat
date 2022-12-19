@@ -235,7 +235,7 @@ class MapViewController: UIViewController, TextFieldNextable {
     }
     
     func showMyProfile() {
-        let presentedVC = ProfileViewController()
+        let presentedVC = ProfileEditViewController()
         presentedVC.modalPresentationStyle = .popover
         
         

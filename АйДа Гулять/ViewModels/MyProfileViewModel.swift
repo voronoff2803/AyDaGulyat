@@ -44,20 +44,29 @@ class MyProfileViewModel: NSObject, ObservableObject {
     init(coordinator: Coordinator) {
         self.coordinator = coordinator
         super.init()
-        fetchData()
     }
     
-    func fetchData() {
+    func fetchData(context: AppRootViewController) {
         APIService.shared.myProfile()
             .sink { req in
                 switch req {
                 case .finished:
                     print("finished")
                 case .failure(let error):
-                    print("error: \(error.localizedDescription)")
+                    context.showError(error: error)
                 }
             } receiveValue: { res in
-                guard let myProfile = res.myProfile else { return }
+                guard let myProfile = res.myProfile else {
+                    
+                    context.showAlert(label: "Познакомимся?",
+                                      message: "Для начала нужно заполнить информацию о себе и своем питомце",
+                                      buttons: [DefaultButton(style: .filledAlert, leftIcon: nil, rightIcon: nil).then {
+                                            $0.setTitle("Продолжить", for: .normal)
+                    }]) {
+                        self.coordinator.route(context: context, to: .profileEdit, parameters: nil)
+                    }
+                    return
+                }
                 print(myProfile)
                 self.showData(myProfile: myProfile)
             }

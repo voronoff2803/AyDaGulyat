@@ -33,7 +33,7 @@ class DogProfileViewController: AppRootViewController, TextFieldNextable {
     
     let dogColorPicker = DefaultPicker(titleText: "Окрас")
     
-    let addTextField = DefaultTextField().then {
+    let addTextField = UITextField().then {
         $0.placeholder = "Дополнительно"
         $0.autocorrectionType = .no
         $0.autocapitalizationType = .sentences
@@ -58,6 +58,8 @@ class DogProfileViewController: AppRootViewController, TextFieldNextable {
         dogColorPicker.setupValues(values: ["Лиловый", "Рыжий", "Палевый", "Осветлённый коричневый", "Красный", "Вельштерьер", "Жёлтый", "Осветлённый рыжий"], selectedIndex: 2)
         
         genderControl.setupValues(values: ["Мальчик", "Девочка"], selectedIndex: 0)
+        
+        scrollView.delegate = self
     }
     
 
@@ -84,5 +86,14 @@ class DogProfileViewController: AppRootViewController, TextFieldNextable {
 //        dogTypePicker.snp.makeConstraints { make in
 //            make.height.equalTo(55.0)
 //        }
+    }
+}
+
+
+
+
+extension DogProfileViewController: UIScrollViewDelegate {
+    func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
+        view.endEditing(true)
     }
 }

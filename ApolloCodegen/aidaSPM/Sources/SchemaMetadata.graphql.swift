@@ -33,6 +33,13 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     case "SendPasswordReset": return Aida.Objects.SendPasswordReset
     case "ResendValidationCode": return Aida.Objects.ResendValidationCode
     case "RefreshToken": return Aida.Objects.RefreshToken
+    case "StaticDataDogSpecialization": return Aida.Objects.StaticDataDogSpecialization
+    case "StaticDataComplaintReason": return Aida.Objects.StaticDataComplaintReason
+    case "StaticDataHobby": return Aida.Objects.StaticDataHobby
+    case "StaticDataDogFeatures": return Aida.Objects.StaticDataDogFeatures
+    case "StaticDataDanger": return Aida.Objects.StaticDataDanger
+    case "StaticDataDogColor": return Aida.Objects.StaticDataDogColor
+    case "StaticDataDogBreed": return Aida.Objects.StaticDataDogBreed
     default: return nil
     }
   }

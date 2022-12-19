@@ -38,7 +38,7 @@ class AppRootViewController: UIViewController {
             
             let isScrollView = keyboardAvoidView?.tag == 22
             
-            let keyboardHeight = keyboardRectangle.height + (isScrollView ? 0 : 28)
+            let keyboardHeight = keyboardRectangle.height + (isScrollView ? 18 : 28)
             guard let keyboardAvoidView = keyboardAvoidView else { return }
             
             UIView.animate(withDuration: 0.5, delay: 0.0, options: []) {
@@ -50,6 +50,12 @@ class AppRootViewController: UIViewController {
                     self.keyboardConstraint?.isActive = true
                 }
                 self.view.layoutIfNeeded()
+            } completion: { _ in
+                if let firstResponder = self.view.firstResponder {
+                    if let scView = firstResponder.scrollView {
+                        scView.scrollRectToVisible(firstResponder.frame.insetBy(dx: .zero, dy: -30), animated: true)
+                    }
+                }
             }
         }
     }
@@ -63,10 +69,10 @@ class AppRootViewController: UIViewController {
         }
     }
     
-    func showAlert(label: String, message: String, buttons: [DefaultButton] = []) {
+    func showAlert(label: String, message: String, buttons: [DefaultButton] = [], completion: (() -> Void)? = nil) {
         if self.view.window == nil { return }
         
-        let defaultAlertViewController = DefaultAlertViewController(label: label, message: message)
+        let defaultAlertViewController = DefaultAlertViewController(label: label, message: message, completion: completion)
         buttons.forEach({defaultAlertViewController.stackView.addArrangedSubview($0)})
         
         let alertController = UIAlertController(title: nil, message: nil, preferredStyle: .alert)

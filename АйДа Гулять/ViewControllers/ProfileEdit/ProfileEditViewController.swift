@@ -9,13 +9,13 @@ import UIKit
 import SnapKit
 
 
-class ProfileViewController: AppRootViewController, TextFieldNextable {
+class ProfileEditViewController: AppRootViewController, TextFieldNextable {
     enum State {
         case dogProfile
         case personProfile
     }
     
-    var state: ProfileViewController.State = .dogProfile {
+    var state: ProfileEditViewController.State = .personProfile {
         didSet {
             switch self.state {
             case .dogProfile:
@@ -71,6 +71,10 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         }
     }
     
+    let cameraButton = UIImageView().then {
+        $0.image = .appImage(.cameraButton)
+    }
+    
     let contentView = UIView().then {
         $0.backgroundColor = .appColor(.backgroundFirst)
         $0.layer.cornerRadius = 20
@@ -113,7 +117,7 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
     }
     
     let profileImageView = UIImageView().then {
-        $0.clipsToBounds = true
+        $0.clipsToBounds = false
         $0.contentMode = .scaleAspectFill
         $0.layer.cornerRadius = 55
         $0.isHidden = true
@@ -194,7 +198,6 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         pageControlView.addTarget(self, action: #selector(pageControlHandle), for: .valueChanged)
         pageViewController.delegate = self
         pageViewController.dataSource = self
-        pageViewController.setViewControllers([DogProfileViewController()], direction: .forward, animated: false)
         
         self.dogs = [.empty]
         
@@ -205,6 +208,10 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         selectPersonButton.addTarget(self, action: #selector(selectPersonAction), for: .touchUpInside)
     
         setupUI()
+        
+        state = { self.state }()
+        
+        pageViewController.setViewControllers([PersonEditViewController()], direction: .forward, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -236,6 +243,12 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
 //        showAlert(buttons: [button1, button2])
     }
     
+    override func viewDidDisappear(_ animated: Bool) {
+        super.viewDidDisappear(animated)
+
+        NotificationCenter.default.post(name: .userProfileUpdate, object: "nil")
+    }
+    
     @objc private func pageControlHandle(sender: UIPageControl){
         //dogsCollectionView.scrollToItem(at: IndexPath(row: sender.currentPage + 1, section: 0), at: .centeredHorizontally, animated: true)
         print(sender.currentPage)
@@ -252,7 +265,7 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         if state == .personProfile { return }
         
         state = .personProfile
-        pageViewController.setViewControllers([PersonProfileViewController()], direction: .reverse, animated: true)
+        pageViewController.setViewControllers([PersonEditViewController()], direction: .reverse, animated: true)
     }
     
     func updateCellsLayout()  {
@@ -316,12 +329,19 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
         modeSelector.addSubview(selectedLineViewBackground)
         modeSelector.addSubview(selectedLineView)
         
+        self.profileImageView.addSubview(cameraButton)
+        
         self.view.backgroundColor = .clear
         
         modeSelector.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview().inset(28)
             make.top.equalTo(pageControlView.snp.bottom).offset(0)
             make.height.equalTo(60)
+        }
+        
+        cameraButton.snp.makeConstraints { make in
+            make.centerX.equalTo(self.profileImageView)
+            make.centerY.equalTo(self.profileImageView.snp.bottom)
         }
         
         pageView.snp.makeConstraints { make in
@@ -381,7 +401,7 @@ class ProfileViewController: AppRootViewController, TextFieldNextable {
 }
 
 
-extension ProfileViewController: UICollectionViewDataSource {
+extension ProfileEditViewController: UICollectionViewDataSource {
     func collectionView(_ collectionView: UICollectionView, numberOfItemsInSection section: Int) -> Int {
         return dogs.count + 1
     }
@@ -402,7 +422,7 @@ extension ProfileViewController: UICollectionViewDataSource {
 }
 
 
-extension ProfileViewController: UICollectionViewDelegate {
+extension ProfileEditViewController: UICollectionViewDelegate {
     func scrollViewDidScroll(_ scrollView: UIScrollView) {
         self.updateCellsLayout()
     }
@@ -432,11 +452,11 @@ extension ProfileViewController: UICollectionViewDelegate {
 }
 
 
-extension ProfileViewController: UIPageViewControllerDataSource {
+extension ProfileEditViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        if viewController is PersonProfileViewController { return nil }
+        if viewController is PersonEditViewController { return nil }
         
-        return PersonProfileViewController()
+        return PersonEditViewController()
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
@@ -447,7 +467,7 @@ extension ProfileViewController: UIPageViewControllerDataSource {
 }
 
 
-extension ProfileViewController: UIPageViewControllerDelegate {
+extension ProfileEditViewController: UIPageViewControllerDelegate {
     func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
         guard completed, let contentViewController = pageViewController.viewControllers?.first else { return }
         

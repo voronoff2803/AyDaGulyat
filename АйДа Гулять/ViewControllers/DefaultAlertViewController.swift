@@ -8,9 +8,12 @@
 import UIKit
 
 class DefaultAlertViewController: UIViewController {
-    init(label: String, message: String) {
+    var completion: (() -> ())?
+    
+    init(label: String, message: String, completion: (() -> ())? = nil) {
         super.init(nibName: nil, bundle: nil)
         
+        self.completion = completion
         titleLabel.text = label
         descriptionLabel.text = message
     }
@@ -67,6 +70,7 @@ class DefaultAlertViewController: UIViewController {
     }
     
     @objc func dismissAction() {
+        self.completion?()
         self.dismiss(animated: true)
     }
 }

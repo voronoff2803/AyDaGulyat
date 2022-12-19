@@ -1,0 +1,48 @@
+query StaticSpecial {
+  staticSpecial {
+    id
+    valueRu
+  }
+}
+
+query StaticReason {
+  staticReason {
+    id
+    valueRu
+  }
+}
+
+query StaticHobby {
+  staticHobby {
+    id
+    valueRu
+  }
+}
+
+query StaticFeatures {
+  staticFeatures {
+    id
+    valueRu
+  }
+}
+
+query StaticDanger {
+  staticDanger {
+    id
+    valueRu
+  }
+}
+
+query StaticColor {
+  staticColor {
+    id
+    valueRu
+  }
+}
+
+query StaticBreed {
+  staticBreed {
+    id
+    valueRu
+  }
+}

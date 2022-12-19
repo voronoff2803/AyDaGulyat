@@ -67,8 +67,8 @@ class DefaultSegmentedPicker: UIControl {
         let titleTextAttributes = [NSAttributedString.Key.foregroundColor: UIColor.black]
         segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .normal)
         segmentedControl.setTitleTextAttributes(titleTextAttributes, for: .selected)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratRegular(size: 14)], for: .normal)
-        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium(size: 14)], for: .selected)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratRegular(size: 16)], for: .normal)
+        segmentedControl.setTitleTextAttributes([NSAttributedString.Key.font: UIFont.montserratMedium(size: 16)], for: .selected)
         
         segmentedControl.addTarget(self, action: #selector(selectAction(sender:)), for: .valueChanged)
         

@@ -13,15 +13,13 @@
 		0D13FD6C2905A52600A86E62 /* DogProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D13FD6B2905A52600A86E62 /* DogProfileViewController.swift */; };
 		0D15F8702947DF3F0081AD4A /* UIWindow+topVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F86F2947DF3F0081AD4A /* UIWindow+topVC.swift */; };
 		0D15F8722947F2DD0081AD4A /* SearchFieldView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F8712947F2DD0081AD4A /* SearchFieldView.swift */; };
-		0D15F8772948DB070081AD4A /* RefreshTokenMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F8762948DB070081AD4A /* RefreshTokenMutation.graphql.swift */; };
-		0D15F8792948E1AF0081AD4A /* MyProfileQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F8782948E1AF0081AD4A /* MyProfileQuery.graphql.swift */; };
 		0D15F87C2949A0850081AD4A /* TutorialViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D15F87B2949A0850081AD4A /* TutorialViewModel.swift */; };
 		0D20142829001440008C2C90 /* TutorialViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20142729001440008C2C90 /* TutorialViewController.swift */; };
 		0D20142A290015A8008C2C90 /* TutorialPageContentViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D201429290015A8008C2C90 /* TutorialPageContentViewController.swift */; };
 		0D20142C290017B7008C2C90 /* AttributedString+markdown.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */; };
 		0D20142F290017FF008C2C90 /* MarkdownKit in Frameworks */ = {isa = PBXBuildFile; productRef = 0D20142E290017FF008C2C90 /* MarkdownKit */; };
 		0D20143129005AC9008C2C90 /* TutorialContentModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20143029005AC9008C2C90 /* TutorialContentModel.swift */; };
-		0D2014372903F4B5008C2C90 /* ProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2014362903F4B5008C2C90 /* ProfileViewController.swift */; };
+		0D2014372903F4B5008C2C90 /* ProfileEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2014362903F4B5008C2C90 /* ProfileEditViewController.swift */; };
 		0D2014392903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2014382903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift */; };
 		0D20143B290402EC008C2C90 /* SnapCenterLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D20143A290402EC008C2C90 /* SnapCenterLayout.swift */; };
 		0D2016CF28E896D0003E673E /* Montserrat-SemiBold.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D2016CD28E8963F003E673E /* Montserrat-SemiBold.ttf */; };
@@ -40,13 +38,6 @@
 		0D3C521A28F5836500F91D0C /* AppRootViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C521928F5836500F91D0C /* AppRootViewController.swift */; };
 		0D3C521D28F585A900F91D0C /* TextFieldNextable.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C521C28F585A900F91D0C /* TextFieldNextable.swift */; };
 		0D3C521F28F58C2000F91D0C /* UIView+parentVC.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C521E28F58C2000F91D0C /* UIView+parentVC.swift */; };
-		0D3C7C9C293AC6BB00C4C2F9 /* SendCodeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C7C95293AC6BB00C4C2F9 /* SendCodeMutation.graphql.swift */; };
-		0D3C7C9D293AC6BB00C4C2F9 /* ResetPasswordMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C7C96293AC6BB00C4C2F9 /* ResetPasswordMutation.graphql.swift */; };
-		0D3C7C9E293AC6BB00C4C2F9 /* SendResetMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C7C97293AC6BB00C4C2F9 /* SendResetMutation.graphql.swift */; };
-		0D3C7C9F293AC6BB00C4C2F9 /* ValidateCodeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C7C98293AC6BB00C4C2F9 /* ValidateCodeMutation.graphql.swift */; };
-		0D3C7CA0293AC6BB00C4C2F9 /* UpdatePasswordMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C7C99293AC6BB00C4C2F9 /* UpdatePasswordMutation.graphql.swift */; };
-		0D3C7CA1293AC6BB00C4C2F9 /* LoginUserMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C7C9A293AC6BB00C4C2F9 /* LoginUserMutation.graphql.swift */; };
-		0D3C7CA2293AC6BB00C4C2F9 /* CreateUserMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C7C9B293AC6BB00C4C2F9 /* CreateUserMutation.graphql.swift */; };
 		0D495BB3294C9DFC0052187F /* UITableViewCell+identifier.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D495BB2294C9DFC0052187F /* UITableViewCell+identifier.swift */; };
 		0D50E5D028E8593C006DB37A /* AppDelegate.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D50E5CF28E8593C006DB37A /* AppDelegate.swift */; };
 		0D50E5D428E8593C006DB37A /* AuthViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D50E5D328E8593C006DB37A /* AuthViewController.swift */; };
@@ -67,8 +58,33 @@
 		0D7113DF2906A62E005AB9F9 /* ActiveLabel in Frameworks */ = {isa = PBXBuildFile; productRef = 0D7113DE2906A62E005AB9F9 /* ActiveLabel */; };
 		0D7113E12906A918005AB9F9 /* AgreementViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7113E02906A918005AB9F9 /* AgreementViewController.swift */; };
 		0D7113E82906F2D5005AB9F9 /* TestVCViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7113E72906F2D5005AB9F9 /* TestVCViewController.swift */; };
-		0D7113EA2906FC8C005AB9F9 /* PersonProfileViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7113E92906FC8C005AB9F9 /* PersonProfileViewController.swift */; };
+		0D7113EA2906FC8C005AB9F9 /* PersonEditViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7113E92906FC8C005AB9F9 /* PersonEditViewController.swift */; };
 		0D7113ED29070663005AB9F9 /* ShowTime in Frameworks */ = {isa = PBXBuildFile; productRef = 0D7113EC29070663005AB9F9 /* ShowTime */; };
+		0D7C5132294E77D2007D0D3C /* NotificationNamesExtension.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5131294E77D2007D0D3C /* NotificationNamesExtension.swift */; };
+		0D7C5134294E8103007D0D3C /* ProfileEditViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5133294E8103007D0D3C /* ProfileEditViewModel.swift */; };
+		0D7C5137294E8D22007D0D3C /* ListSearchViewControllerMany.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5136294E8D22007D0D3C /* ListSearchViewControllerMany.swift */; };
+		0D7C513E294E9C4E007D0D3C /* InternalTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C513B294E9C4E007D0D3C /* InternalTextView.swift */; };
+		0D7C513F294E9C4E007D0D3C /* NextGrowingTextView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C513C294E9C4E007D0D3C /* NextGrowingTextView.swift */; };
+		0D7C5140294E9C4E007D0D3C /* SizingContainerView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C513D294E9C4E007D0D3C /* SizingContainerView.swift */; };
+		0D7C5143294EA3C7007D0D3C /* UIView+firstResponderGet.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5142294EA3C7007D0D3C /* UIView+firstResponderGet.swift */; };
+		0D7C5147294F7B0A007D0D3C /* MyProfileQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5146294F7B0A007D0D3C /* MyProfileQuery.graphql.swift */; };
+		0D7C5157294F7B1A007D0D3C /* StaticDangerQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5148294F7B1A007D0D3C /* StaticDangerQuery.graphql.swift */; };
+		0D7C5158294F7B1A007D0D3C /* StaticHobbyQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5149294F7B1A007D0D3C /* StaticHobbyQuery.graphql.swift */; };
+		0D7C5159294F7B1A007D0D3C /* SendResetMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C514A294F7B1A007D0D3C /* SendResetMutation.graphql.swift */; };
+		0D7C515A294F7B1A007D0D3C /* RefreshTokenMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C514B294F7B1A007D0D3C /* RefreshTokenMutation.graphql.swift */; };
+		0D7C515B294F7B1A007D0D3C /* ResetPasswordMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C514C294F7B1A007D0D3C /* ResetPasswordMutation.graphql.swift */; };
+		0D7C515C294F7B1A007D0D3C /* LoginUserMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C514D294F7B1A007D0D3C /* LoginUserMutation.graphql.swift */; };
+		0D7C515D294F7B1A007D0D3C /* StaticSpecialQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C514E294F7B1A007D0D3C /* StaticSpecialQuery.graphql.swift */; };
+		0D7C515E294F7B1A007D0D3C /* StaticFeaturesQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C514F294F7B1A007D0D3C /* StaticFeaturesQuery.graphql.swift */; };
+		0D7C515F294F7B1A007D0D3C /* StaticReasonQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5150294F7B1A007D0D3C /* StaticReasonQuery.graphql.swift */; };
+		0D7C5160294F7B1A007D0D3C /* SendCodeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5151294F7B1A007D0D3C /* SendCodeMutation.graphql.swift */; };
+		0D7C5161294F7B1A007D0D3C /* CreateUserMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5152294F7B1A007D0D3C /* CreateUserMutation.graphql.swift */; };
+		0D7C5162294F7B1A007D0D3C /* ValidateCodeMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5153294F7B1A007D0D3C /* ValidateCodeMutation.graphql.swift */; };
+		0D7C5163294F7B1A007D0D3C /* StaticBreedQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5154294F7B1A007D0D3C /* StaticBreedQuery.graphql.swift */; };
+		0D7C5164294F7B1A007D0D3C /* UpdatePasswordMutation.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5155294F7B1A007D0D3C /* UpdatePasswordMutation.graphql.swift */; };
+		0D7C5165294F7B1A007D0D3C /* StaticColorQuery.graphql.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C5156294F7B1A007D0D3C /* StaticColorQuery.graphql.swift */; };
+		0D7C516929507A42007D0D3C /* APIService+Auth.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C516829507A42007D0D3C /* APIService+Auth.swift */; };
+		0D7C516E29508365007D0D3C /* StaticItemsModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D7C516D29508365007D0D3C /* StaticItemsModel.swift */; };
 		0D81D0AF28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0AE28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift */; };
 		0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */; };
 		0D81D0B328F8734000AB33D3 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */; };
@@ -119,14 +135,12 @@
 		0D13FD6B2905A52600A86E62 /* DogProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogProfileViewController.swift; sourceTree = "<group>"; };
 		0D15F86F2947DF3F0081AD4A /* UIWindow+topVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIWindow+topVC.swift"; sourceTree = "<group>"; };
 		0D15F8712947F2DD0081AD4A /* SearchFieldView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SearchFieldView.swift; sourceTree = "<group>"; };
-		0D15F8762948DB070081AD4A /* RefreshTokenMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = RefreshTokenMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
-		0D15F8782948E1AF0081AD4A /* MyProfileQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = MyProfileQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
 		0D15F87B2949A0850081AD4A /* TutorialViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewModel.swift; sourceTree = "<group>"; };
 		0D20142729001440008C2C90 /* TutorialViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialViewController.swift; sourceTree = "<group>"; };
 		0D201429290015A8008C2C90 /* TutorialPageContentViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialPageContentViewController.swift; sourceTree = "<group>"; };
 		0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "AttributedString+markdown.swift"; sourceTree = "<group>"; };
 		0D20143029005AC9008C2C90 /* TutorialContentModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TutorialContentModel.swift; sourceTree = "<group>"; };
-		0D2014362903F4B5008C2C90 /* ProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileViewController.swift; sourceTree = "<group>"; };
+		0D2014362903F4B5008C2C90 /* ProfileEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewController.swift; sourceTree = "<group>"; };
 		0D2014382903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DogAvatarCollectionViewCell.swift; sourceTree = "<group>"; };
 		0D20143A290402EC008C2C90 /* SnapCenterLayout.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SnapCenterLayout.swift; sourceTree = "<group>"; };
 		0D2016CB28E8962D003E673E /* Montserrat-Regular.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-Regular.ttf"; sourceTree = "<group>"; };
@@ -145,13 +159,6 @@
 		0D3C521928F5836500F91D0C /* AppRootViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppRootViewController.swift; sourceTree = "<group>"; };
 		0D3C521C28F585A900F91D0C /* TextFieldNextable.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TextFieldNextable.swift; sourceTree = "<group>"; };
 		0D3C521E28F58C2000F91D0C /* UIView+parentVC.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+parentVC.swift"; sourceTree = "<group>"; };
-		0D3C7C95293AC6BB00C4C2F9 /* SendCodeMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendCodeMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
-		0D3C7C96293AC6BB00C4C2F9 /* ResetPasswordMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ResetPasswordMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
-		0D3C7C97293AC6BB00C4C2F9 /* SendResetMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SendResetMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
-		0D3C7C98293AC6BB00C4C2F9 /* ValidateCodeMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ValidateCodeMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
-		0D3C7C99293AC6BB00C4C2F9 /* UpdatePasswordMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = UpdatePasswordMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
-		0D3C7C9A293AC6BB00C4C2F9 /* LoginUserMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = LoginUserMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
-		0D3C7C9B293AC6BB00C4C2F9 /* CreateUserMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CreateUserMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
 		0D495BB2294C9DFC0052187F /* UITableViewCell+identifier.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableViewCell+identifier.swift"; sourceTree = "<group>"; };
 		0D50E5CC28E8593C006DB37A /* АйДа Гулять.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = "АйДа Гулять.app"; sourceTree = BUILT_PRODUCTS_DIR; };
 		0D50E5CF28E8593C006DB37A /* AppDelegate.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppDelegate.swift; sourceTree = "<group>"; };
@@ -168,7 +175,33 @@
 		0D7113D529067616005AB9F9 /* AuthViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AuthViewModel.swift; sourceTree = "<group>"; };
 		0D7113E02906A918005AB9F9 /* AgreementViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AgreementViewController.swift; sourceTree = "<group>"; };
 		0D7113E72906F2D5005AB9F9 /* TestVCViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TestVCViewController.swift; sourceTree = "<group>"; };
-		0D7113E92906FC8C005AB9F9 /* PersonProfileViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonProfileViewController.swift; sourceTree = "<group>"; };
+		0D7113E92906FC8C005AB9F9 /* PersonEditViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PersonEditViewController.swift; sourceTree = "<group>"; };
+		0D7C5131294E77D2007D0D3C /* NotificationNamesExtension.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NotificationNamesExtension.swift; sourceTree = "<group>"; };
+		0D7C5133294E8103007D0D3C /* ProfileEditViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileEditViewModel.swift; sourceTree = "<group>"; };
+		0D7C5136294E8D22007D0D3C /* ListSearchViewControllerMany.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSearchViewControllerMany.swift; sourceTree = "<group>"; };
+		0D7C513B294E9C4E007D0D3C /* InternalTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = InternalTextView.swift; sourceTree = "<group>"; };
+		0D7C513C294E9C4E007D0D3C /* NextGrowingTextView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NextGrowingTextView.swift; sourceTree = "<group>"; };
+		0D7C513D294E9C4E007D0D3C /* SizingContainerView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SizingContainerView.swift; sourceTree = "<group>"; };
+		0D7C5142294EA3C7007D0D3C /* UIView+firstResponderGet.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIView+firstResponderGet.swift"; sourceTree = "<group>"; };
+		0D7C5146294F7B0A007D0D3C /* MyProfileQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = MyProfileQuery.graphql.swift; path = ApolloCodegen/MyProfileQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5148294F7B1A007D0D3C /* StaticDangerQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticDangerQuery.graphql.swift; path = ApolloCodegen/StaticDangerQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5149294F7B1A007D0D3C /* StaticHobbyQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticHobbyQuery.graphql.swift; path = ApolloCodegen/StaticHobbyQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C514A294F7B1A007D0D3C /* SendResetMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendResetMutation.graphql.swift; path = ApolloCodegen/SendResetMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C514B294F7B1A007D0D3C /* RefreshTokenMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = RefreshTokenMutation.graphql.swift; path = ApolloCodegen/RefreshTokenMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C514C294F7B1A007D0D3C /* ResetPasswordMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ResetPasswordMutation.graphql.swift; path = ApolloCodegen/ResetPasswordMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C514D294F7B1A007D0D3C /* LoginUserMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = LoginUserMutation.graphql.swift; path = ApolloCodegen/LoginUserMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C514E294F7B1A007D0D3C /* StaticSpecialQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticSpecialQuery.graphql.swift; path = ApolloCodegen/StaticSpecialQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C514F294F7B1A007D0D3C /* StaticFeaturesQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticFeaturesQuery.graphql.swift; path = ApolloCodegen/StaticFeaturesQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5150294F7B1A007D0D3C /* StaticReasonQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticReasonQuery.graphql.swift; path = ApolloCodegen/StaticReasonQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5151294F7B1A007D0D3C /* SendCodeMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = SendCodeMutation.graphql.swift; path = ApolloCodegen/SendCodeMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5152294F7B1A007D0D3C /* CreateUserMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = CreateUserMutation.graphql.swift; path = ApolloCodegen/CreateUserMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5153294F7B1A007D0D3C /* ValidateCodeMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = ValidateCodeMutation.graphql.swift; path = ApolloCodegen/ValidateCodeMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5154294F7B1A007D0D3C /* StaticBreedQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticBreedQuery.graphql.swift; path = ApolloCodegen/StaticBreedQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5155294F7B1A007D0D3C /* UpdatePasswordMutation.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = UpdatePasswordMutation.graphql.swift; path = ApolloCodegen/UpdatePasswordMutation.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5156294F7B1A007D0D3C /* StaticColorQuery.graphql.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; name = StaticColorQuery.graphql.swift; path = ApolloCodegen/StaticColorQuery.graphql.swift; sourceTree = SOURCE_ROOT; };
+		0D7C5167294F7BC3007D0D3C /* aidaSPM */ = {isa = PBXFileReference; lastKnownFileType = wrapper; name = aidaSPM; path = ApolloCodegen/aidaSPM; sourceTree = "<group>"; };
+		0D7C516829507A42007D0D3C /* APIService+Auth.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "APIService+Auth.swift"; sourceTree = "<group>"; };
+		0D7C516D29508365007D0D3C /* StaticItemsModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StaticItemsModel.swift; sourceTree = "<group>"; };
 		0D81D0AE28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RecoverPasswordEmailViewController.swift; sourceTree = "<group>"; };
 		0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeViewController.swift; sourceTree = "<group>"; };
 		0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
@@ -186,7 +219,6 @@
 		0DD24897290D57E800311427 /* DefaultPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultPicker.swift; sourceTree = "<group>"; };
 		0DD24899290D758200311427 /* DefaultSegmentedPicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultSegmentedPicker.swift; sourceTree = "<group>"; };
 		0DD2489B290D7B9500311427 /* DefaultDatePicker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultDatePicker.swift; sourceTree = "<group>"; };
-		0DDE7EFB292FB3F0006CEE22 /* aidaSPM */ = {isa = PBXFileReference; lastKnownFileType = wrapper; path = aidaSPM; sourceTree = "<group>"; };
 		0DDE7F06292FBFF5006CEE22 /* APIService.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = APIService.swift; sourceTree = "<group>"; };
 		0DDE7F0B2933C98D006CEE22 /* BaseError.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseError.swift; sourceTree = "<group>"; };
 		0DDE7F112933D649006CEE22 /* MyProfileViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MyProfileViewModel.swift; sourceTree = "<group>"; };
@@ -235,7 +267,7 @@
 		0D15F8752948D3720081AD4A /* MyProfile */ = {
 			isa = PBXGroup;
 			children = (
-				0D15F8782948E1AF0081AD4A /* MyProfileQuery.graphql.swift */,
+				0D7C5146294F7B0A007D0D3C /* MyProfileQuery.graphql.swift */,
 			);
 			name = MyProfile;
 			sourceTree = "<group>";
@@ -289,6 +321,8 @@
 				0D3C520928F4A17900F91D0C /* UIImage+assets.swift */,
 				0D3C521728F582CF00F91D0C /* UIViewController+hideKeyboard.swift */,
 				0D3C521E28F58C2000F91D0C /* UIView+parentVC.swift */,
+				0D7C5142294EA3C7007D0D3C /* UIView+firstResponderGet.swift */,
+				0D7C5131294E77D2007D0D3C /* NotificationNamesExtension.swift */,
 				0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */,
 				0DD24893290BEB7C00311427 /* UIViewController+embedInNavigation.swift */,
 				0D15F86F2947DF3F0081AD4A /* UIWindow+topVC.swift */,
@@ -317,19 +351,17 @@
 			children = (
 				0D15F87D2949A0FD0081AD4A /* Tutorial */,
 				0D15F87A2948F57C0081AD4A /* Auth */,
+				0D7C5135294E83A3007D0D3C /* ProfileEdit */,
 				0D7113E02906A918005AB9F9 /* AgreementViewController.swift */,
 				0D227BCA28F9D7180026CDAA /* DefaultAlertViewController.swift */,
-				0D2014362903F4B5008C2C90 /* ProfileViewController.swift */,
-				0D13FD6B2905A52600A86E62 /* DogProfileViewController.swift */,
-				0D7113E92906FC8C005AB9F9 /* PersonProfileViewController.swift */,
 				0D7113E72906F2D5005AB9F9 /* TestVCViewController.swift */,
 				0DD24891290BEB5F00311427 /* DefaultNavigationViewController.swift */,
-				0DD2488F290BDF5E00311427 /* ListSearchViewController.swift */,
 				0D13FD6929058C2400A86E62 /* MapViewController.swift */,
 				0D6C0D23290EC22900BF4A14 /* InvisibleZoneConfigurateViewController.swift */,
 				0DEC9CEF2912AC89001A8CDA /* ProfileSmallViewController.swift */,
 				0DEC9CF12912B46F001A8CDA /* ProfileBigViewController.swift */,
 				0DDE7F132933DB00006CEE22 /* MyProfileViewController.swift */,
+				0D7C516F29508EB3007D0D3C /* Pickers */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -392,6 +424,7 @@
 		0D50E5EB28E85B9D006DB37A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0D7C5141294E9C54007D0D3C /* GrowingTextView */,
 				0D495BB1294C95720052187F /* Cells */,
 				0DE2D02B2910064800CA1F91 /* SearchFieldMapView.swift */,
 				0D15F8712947F2DD0081AD4A /* SearchFieldView.swift */,
@@ -435,8 +468,53 @@
 				0D7113D529067616005AB9F9 /* AuthViewModel.swift */,
 				0D15F87B2949A0850081AD4A /* TutorialViewModel.swift */,
 				0DDE7F112933D649006CEE22 /* MyProfileViewModel.swift */,
+				0D7C5133294E8103007D0D3C /* ProfileEditViewModel.swift */,
+				0D7C516D29508365007D0D3C /* StaticItemsModel.swift */,
 			);
 			path = ViewModels;
+			sourceTree = "<group>";
+		};
+		0D7C5135294E83A3007D0D3C /* ProfileEdit */ = {
+			isa = PBXGroup;
+			children = (
+				0D2014362903F4B5008C2C90 /* ProfileEditViewController.swift */,
+				0D7113E92906FC8C005AB9F9 /* PersonEditViewController.swift */,
+				0D13FD6B2905A52600A86E62 /* DogProfileViewController.swift */,
+			);
+			path = ProfileEdit;
+			sourceTree = "<group>";
+		};
+		0D7C5141294E9C54007D0D3C /* GrowingTextView */ = {
+			isa = PBXGroup;
+			children = (
+				0D7C513B294E9C4E007D0D3C /* InternalTextView.swift */,
+				0D7C513C294E9C4E007D0D3C /* NextGrowingTextView.swift */,
+				0D7C513D294E9C4E007D0D3C /* SizingContainerView.swift */,
+			);
+			path = GrowingTextView;
+			sourceTree = "<group>";
+		};
+		0D7C5166294F7B2E007D0D3C /* Static */ = {
+			isa = PBXGroup;
+			children = (
+				0D7C5154294F7B1A007D0D3C /* StaticBreedQuery.graphql.swift */,
+				0D7C5156294F7B1A007D0D3C /* StaticColorQuery.graphql.swift */,
+				0D7C5148294F7B1A007D0D3C /* StaticDangerQuery.graphql.swift */,
+				0D7C514F294F7B1A007D0D3C /* StaticFeaturesQuery.graphql.swift */,
+				0D7C5149294F7B1A007D0D3C /* StaticHobbyQuery.graphql.swift */,
+				0D7C5150294F7B1A007D0D3C /* StaticReasonQuery.graphql.swift */,
+				0D7C514E294F7B1A007D0D3C /* StaticSpecialQuery.graphql.swift */,
+			);
+			name = Static;
+			sourceTree = "<group>";
+		};
+		0D7C516F29508EB3007D0D3C /* Pickers */ = {
+			isa = PBXGroup;
+			children = (
+				0DD2488F290BDF5E00311427 /* ListSearchViewController.swift */,
+				0D7C5136294E8D22007D0D3C /* ListSearchViewControllerMany.swift */,
+			);
+			path = Pickers;
 			sourceTree = "<group>";
 		};
 		0DD0AB062915A7A700E44F80 /* TagView */ = {
@@ -452,7 +530,7 @@
 		0DDE7EFA292FB3F0006CEE22 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
-				0DDE7EFB292FB3F0006CEE22 /* aidaSPM */,
+				0D7C5167294F7BC3007D0D3C /* aidaSPM */,
 			);
 			name = Packages;
 			sourceTree = "<group>";
@@ -467,6 +545,7 @@
 		0DDE7F02292FB51D006CEE22 /* ServiceGraphQLApollo */ = {
 			isa = PBXGroup;
 			children = (
+				0D7C5166294F7B2E007D0D3C /* Static */,
 				0DDE7F29293419FB006CEE22 /* Auth */,
 				0D15F8752948D3720081AD4A /* MyProfile */,
 			);
@@ -479,6 +558,7 @@
 			children = (
 				0DDE7F02292FB51D006CEE22 /* ServiceGraphQLApollo */,
 				0DDE7F06292FBFF5006CEE22 /* APIService.swift */,
+				0D7C516829507A42007D0D3C /* APIService+Auth.swift */,
 				0DDE7F2A29341EA5006CEE22 /* TokenInterceptor.swift */,
 				0DDE7F0B2933C98D006CEE22 /* BaseError.swift */,
 			);
@@ -488,14 +568,14 @@
 		0DDE7F29293419FB006CEE22 /* Auth */ = {
 			isa = PBXGroup;
 			children = (
-				0D3C7C9B293AC6BB00C4C2F9 /* CreateUserMutation.graphql.swift */,
-				0D3C7C9A293AC6BB00C4C2F9 /* LoginUserMutation.graphql.swift */,
-				0D3C7C96293AC6BB00C4C2F9 /* ResetPasswordMutation.graphql.swift */,
-				0D3C7C95293AC6BB00C4C2F9 /* SendCodeMutation.graphql.swift */,
-				0D3C7C97293AC6BB00C4C2F9 /* SendResetMutation.graphql.swift */,
-				0D3C7C99293AC6BB00C4C2F9 /* UpdatePasswordMutation.graphql.swift */,
-				0D3C7C98293AC6BB00C4C2F9 /* ValidateCodeMutation.graphql.swift */,
-				0D15F8762948DB070081AD4A /* RefreshTokenMutation.graphql.swift */,
+				0D7C5152294F7B1A007D0D3C /* CreateUserMutation.graphql.swift */,
+				0D7C514D294F7B1A007D0D3C /* LoginUserMutation.graphql.swift */,
+				0D7C514B294F7B1A007D0D3C /* RefreshTokenMutation.graphql.swift */,
+				0D7C514C294F7B1A007D0D3C /* ResetPasswordMutation.graphql.swift */,
+				0D7C5151294F7B1A007D0D3C /* SendCodeMutation.graphql.swift */,
+				0D7C514A294F7B1A007D0D3C /* SendResetMutation.graphql.swift */,
+				0D7C5155294F7B1A007D0D3C /* UpdatePasswordMutation.graphql.swift */,
+				0D7C5153294F7B1A007D0D3C /* ValidateCodeMutation.graphql.swift */,
 			);
 			name = Auth;
 			sourceTree = "<group>";
@@ -605,46 +685,52 @@
 				0DF25ACB29169C4500A279A0 /* ContactsTableViewCell.swift in Sources */,
 				0D13FD6A29058C2500A86E62 /* MapViewController.swift in Sources */,
 				0DF25ACD2916C4ED00A279A0 /* DogProfileTableViewCell.swift in Sources */,
+				0D7C5159294F7B1A007D0D3C /* SendResetMutation.graphql.swift in Sources */,
 				0D0B1300293CF1A2003D5751 /* ActivityIndicator.swift in Sources */,
 				0D3C521A28F5836500F91D0C /* AppRootViewController.swift in Sources */,
+				0D7C5140294E9C4E007D0D3C /* SizingContainerView.swift in Sources */,
 				0D50E5D428E8593C006DB37A /* AuthViewController.swift in Sources */,
 				0D13FD6C2905A52600A86E62 /* DogProfileViewController.swift in Sources */,
+				0D7C5134294E8103007D0D3C /* ProfileEditViewModel.swift in Sources */,
 				0D81D0B328F8734000AB33D3 /* NewPasswordViewController.swift in Sources */,
-				0D3C7CA0293AC6BB00C4C2F9 /* UpdatePasswordMutation.graphql.swift in Sources */,
 				0D7113E82906F2D5005AB9F9 /* TestVCViewController.swift in Sources */,
 				0DF25AD529179D6D00A279A0 /* DogProfileCollectionViewCell.swift in Sources */,
 				0DD0AB1A29165F7A00E44F80 /* CloseButton.swift in Sources */,
+				0D7C515C294F7B1A007D0D3C /* LoginUserMutation.graphql.swift in Sources */,
 				0D20143129005AC9008C2C90 /* TutorialContentModel.swift in Sources */,
 				0D15F8722947F2DD0081AD4A /* SearchFieldView.swift in Sources */,
 				0DD24894290BEB7C00311427 /* UIViewController+embedInNavigation.swift in Sources */,
 				0D81D0AF28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift in Sources */,
+				0D7C515B294F7B1A007D0D3C /* ResetPasswordMutation.graphql.swift in Sources */,
 				0D6C0D24290EC22900BF4A14 /* InvisibleZoneConfigurateViewController.swift in Sources */,
-				0D3C7CA1293AC6BB00C4C2F9 /* LoginUserMutation.graphql.swift in Sources */,
+				0D7C5157294F7B1A007D0D3C /* StaticDangerQuery.graphql.swift in Sources */,
 				0D7113D429066FF6005AB9F9 /* Utils.swift in Sources */,
 				0DEC9CF02912AC89001A8CDA /* ProfileSmallViewController.swift in Sources */,
 				0DF25ADB2917FB6800A279A0 /* ResultTableViewCell.swift in Sources */,
+				0D7C5137294E8D22007D0D3C /* ListSearchViewControllerMany.swift in Sources */,
 				0DD24896290C1AFE00311427 /* ListTableViewCell.swift in Sources */,
 				0DDE7F142933DB00006CEE22 /* MyProfileViewController.swift in Sources */,
 				0DF25AD12916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift in Sources */,
 				0DF25AD32916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift in Sources */,
+				0D7C5132294E77D2007D0D3C /* NotificationNamesExtension.swift in Sources */,
 				0DD24892290BEB5F00311427 /* DefaultNavigationViewController.swift in Sources */,
 				0DF25ACF2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift in Sources */,
 				0DDE7F122933D649006CEE22 /* MyProfileViewModel.swift in Sources */,
 				0D2016D328E89789003E673E /* UIFont+customFont.swift in Sources */,
-				0D3C7C9C293AC6BB00C4C2F9 /* SendCodeMutation.graphql.swift in Sources */,
+				0D7C5160294F7B1A007D0D3C /* SendCodeMutation.graphql.swift in Sources */,
+				0D7C5163294F7B1A007D0D3C /* StaticBreedQuery.graphql.swift in Sources */,
 				0D3C520A28F4A17900F91D0C /* UIImage+assets.swift in Sources */,
-				0D3C7C9E293AC6BB00C4C2F9 /* SendResetMutation.graphql.swift in Sources */,
-				0D15F8772948DB070081AD4A /* RefreshTokenMutation.graphql.swift in Sources */,
+				0D7C515A294F7B1A007D0D3C /* RefreshTokenMutation.graphql.swift in Sources */,
 				0DDE7F1A2933E9FF006CEE22 /* Coordinatable.swift in Sources */,
+				0D7C5143294EA3C7007D0D3C /* UIView+firstResponderGet.swift in Sources */,
 				0DD0AB1C29165F7A00E44F80 /* TagView.swift in Sources */,
 				0D50E5D028E8593C006DB37A /* AppDelegate.swift in Sources */,
+				0D7C516929507A42007D0D3C /* APIService+Auth.swift in Sources */,
 				0DD2489C290D7B9500311427 /* DefaultDatePicker.swift in Sources */,
 				0D20143B290402EC008C2C90 /* SnapCenterLayout.swift in Sources */,
-				0D3C7CA2293AC6BB00C4C2F9 /* CreateUserMutation.graphql.swift in Sources */,
 				0D7113E12906A918005AB9F9 /* AgreementViewController.swift in Sources */,
 				0D3C521228F4B42D00F91D0C /* Label.swift in Sources */,
 				0D3C520E28F4A88500F91D0C /* DefaultTextField.swift in Sources */,
-				0D15F8792948E1AF0081AD4A /* MyProfileQuery.graphql.swift in Sources */,
 				0DD24898290D57E800311427 /* DefaultPicker.swift in Sources */,
 				0D20142C290017B7008C2C90 /* AttributedString+markdown.swift in Sources */,
 				0D3C521F28F58C2000F91D0C /* UIView+parentVC.swift in Sources */,
@@ -655,34 +741,44 @@
 				0D3C520828F4A17000F91D0C /* UIColor+assets.swift in Sources */,
 				0DD24890290BDF5E00311427 /* ListSearchViewController.swift in Sources */,
 				0D20142A290015A8008C2C90 /* TutorialPageContentViewController.swift in Sources */,
+				0D7C5162294F7B1A007D0D3C /* ValidateCodeMutation.graphql.swift in Sources */,
 				0D2014392903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift in Sources */,
 				0DF25AD72917BB1C00A279A0 /* MapButton.swift in Sources */,
+				0D7C516E29508365007D0D3C /* StaticItemsModel.swift in Sources */,
 				0DD0AAF6291599C700E44F80 /* TagsTableViewCell.swift in Sources */,
-				0D7113EA2906FC8C005AB9F9 /* PersonProfileViewController.swift in Sources */,
+				0D7113EA2906FC8C005AB9F9 /* PersonEditViewController.swift in Sources */,
 				0D3C521428F56DEB00F91D0C /* DefaultButton.swift in Sources */,
 				0D3C521028F4AF9100F91D0C /* LabelButton.swift in Sources */,
 				0D227BCB28F9D7180026CDAA /* DefaultAlertViewController.swift in Sources */,
 				0DD0AAF0291546D000E44F80 /* BirthDateTableViewCell.swift in Sources */,
-				0D2014372903F4B5008C2C90 /* ProfileViewController.swift in Sources */,
+				0D2014372903F4B5008C2C90 /* ProfileEditViewController.swift in Sources */,
 				0D7113D629067616005AB9F9 /* AuthViewModel.swift in Sources */,
-				0D3C7C9F293AC6BB00C4C2F9 /* ValidateCodeMutation.graphql.swift in Sources */,
 				0DD2489A290D758200311427 /* DefaultSegmentedPicker.swift in Sources */,
+				0D7C515D294F7B1A007D0D3C /* StaticSpecialQuery.graphql.swift in Sources */,
 				0D3C521828F582CF00F91D0C /* UIViewController+hideKeyboard.swift in Sources */,
+				0D7C515F294F7B1A007D0D3C /* StaticReasonQuery.graphql.swift in Sources */,
 				0D495BB3294C9DFC0052187F /* UITableViewCell+identifier.swift in Sources */,
 				0DD0AB1B29165F7A00E44F80 /* TagListView.swift in Sources */,
-				0D3C7C9D293AC6BB00C4C2F9 /* ResetPasswordMutation.graphql.swift in Sources */,
+				0D7C5161294F7B1A007D0D3C /* CreateUserMutation.graphql.swift in Sources */,
 				0D81D0B528F883F000AB33D3 /* RegistrationViewController.swift in Sources */,
 				0D15F87C2949A0850081AD4A /* TutorialViewModel.swift in Sources */,
+				0D7C515E294F7B1A007D0D3C /* StaticFeaturesQuery.graphql.swift in Sources */,
 				0DF25AC929168A6F00A279A0 /* DescriptionTableViewCell.swift in Sources */,
+				0D7C5164294F7B1A007D0D3C /* UpdatePasswordMutation.graphql.swift in Sources */,
 				0D3C521628F57C1200F91D0C /* PasswordTextField.swift in Sources */,
 				0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */,
 				0D5BD10628F5CA1700DD1496 /* ScalableImageView.swift in Sources */,
 				0DDE7F182933E6C1006CEE22 /* Coordinator.swift in Sources */,
 				0D5E66CF28F09D770094C949 /* SplashPresenter.swift in Sources */,
 				0D5E66CE28F09D770094C949 /* SplashViewController.swift in Sources */,
+				0D7C5165294F7B1A007D0D3C /* StaticColorQuery.graphql.swift in Sources */,
+				0D7C513E294E9C4E007D0D3C /* InternalTextView.swift in Sources */,
+				0D7C5147294F7B0A007D0D3C /* MyProfileQuery.graphql.swift in Sources */,
+				0D7C5158294F7B1A007D0D3C /* StaticHobbyQuery.graphql.swift in Sources */,
 				0DDE7F07292FBFF5006CEE22 /* APIService.swift in Sources */,
 				0D3C521D28F585A900F91D0C /* TextFieldNextable.swift in Sources */,
 				0D15F8702947DF3F0081AD4A /* UIWindow+topVC.swift in Sources */,
+				0D7C513F294E9C4E007D0D3C /* NextGrowingTextView.swift in Sources */,
 				0DD0AAEE291535CF00E44F80 /* PersonTableViewCell.swift in Sources */,
 				0DDE7F0C2933C98D006CEE22 /* BaseError.swift in Sources */,
 				0D5E66CD28F09D770094C949 /* SplashAnimator.swift in Sources */,

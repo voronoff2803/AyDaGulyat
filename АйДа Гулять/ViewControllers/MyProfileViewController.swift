@@ -13,7 +13,7 @@ import CombineCocoa
 
 class MyProfileViewController: AppRootViewController {
     private var subscriptions = Set<AnyCancellable>()
-    private var viewModel: MyProfileViewModel!
+    var viewModel: MyProfileViewModel!
     
     var isUserDrag = false
     
@@ -36,6 +36,7 @@ class MyProfileViewController: AppRootViewController {
         super.viewDidLoad()
         
         self.setupUI()
+        self.setupBindings()
         
         tableView.register(PersonTableViewCell.self, forCellReuseIdentifier: PersonTableViewCell.identifier)
         
@@ -43,8 +44,9 @@ class MyProfileViewController: AppRootViewController {
         tableView.rowHeight = UITableView.automaticDimension
 
         tableView.dataSource = viewModel
+        
+        viewModel.fetchData(context: self)
     }
-    
     
     override func viewDidAppear(_ animated: Bool) {
         super.viewDidAppear(animated)
@@ -57,7 +59,13 @@ class MyProfileViewController: AppRootViewController {
         self.navigationController?.setNavigationBarHidden(false, animated: true)
     }
 
-    
+    func setupBindings() {
+        NotificationCenter.default.publisher(for: .userProfileUpdate)
+            .sink(receiveValue: { _ in
+                self.viewModel.fetchData(context: self)
+            })
+            .store(in: &subscriptions)
+    }
     
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
