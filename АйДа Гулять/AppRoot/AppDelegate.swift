@@ -15,11 +15,27 @@ class AppDelegate: UIResponder, UIApplicationDelegate {
     let coordinator = Coordinator()
 
     func application(_ application: UIApplication, didFinishLaunchingWithOptions launchOptions: [UIApplication.LaunchOptionsKey: Any]?) -> Bool {
+        
+        let navigationBarAppearance = UINavigationBarAppearance()
+        navigationBarAppearance.configureWithDefaultBackground()
+        navigationBarAppearance.titleTextAttributes = [NSAttributedString.Key.font: UIFont.montserratSemiBold(size: 16)]
+        navigationBarAppearance.shadowColor = .clear
+        navigationBarAppearance.backgroundColor = .appColor(.backgroundFirst)
+        navigationBarAppearance.setBackIndicatorImage(.appImage(.backArrow), transitionMaskImage: .appImage(.backArrow))
+        
+        
+        UINavigationBar.appearance().standardAppearance = navigationBarAppearance
+        UINavigationBar.appearance().compactAppearance = navigationBarAppearance
+        UINavigationBar.appearance().scrollEdgeAppearance = navigationBarAppearance
+        
         window?.rootViewController = coordinator.createRootVC()
         window?.makeKeyAndVisible()
         window?.overrideUserInterfaceStyle = .light
         
-        coordinator.start()
+        DispatchQueue.main.asyncAfter(deadline: .now() + 1.0) {
+            self.coordinator.start()
+        }
+        
         
         present()
         

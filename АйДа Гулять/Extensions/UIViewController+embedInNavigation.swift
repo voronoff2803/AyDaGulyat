@@ -14,7 +14,7 @@ extension UIViewController {
     }
     
     func embeddedInHiddenNavigation() -> UIViewController {
-        let navigationHiddenViewController = UINavigationController(rootViewController: self)
+        let navigationHiddenViewController = DefaultNavigationViewController(rootViewController: self)
         navigationHiddenViewController.isNavigationBarHidden = true
        
         return navigationHiddenViewController

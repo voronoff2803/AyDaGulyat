@@ -106,7 +106,7 @@ class RegistrationViewController: AppRootViewController, TextFieldNextable {
         loginButton.addTarget(self, action: #selector(authAction), for: .touchUpInside)
         
         descriptionLabel.handleCustomTap(for: descriptionLabel.enabledTypes.first!) { _ in
-            print("show license")
+            self.viewModel.coordinator.route(context: self, to: .userAgreement, parameters: nil)
         }
         
         passwordTextField.action = {

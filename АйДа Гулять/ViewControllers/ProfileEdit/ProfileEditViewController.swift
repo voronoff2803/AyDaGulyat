@@ -15,6 +15,8 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
         case personProfile
     }
     
+    let personEditViewModel: PersonEditViewModel
+    
     var state: ProfileEditViewController.State = .personProfile {
         didSet {
             switch self.state {
@@ -180,6 +182,16 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
         }
     }
     
+    init(personEditViewModel: PersonEditViewModel) {
+        self.personEditViewModel = personEditViewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         dogsCollectionView.register(DogAvatarCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
@@ -211,7 +223,7 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
         
         state = { self.state }()
         
-        pageViewController.setViewControllers([PersonEditViewController()], direction: .forward, animated: false)
+        pageViewController.setViewControllers([PersonEditViewController(viewModel: personEditViewModel)], direction: .forward, animated: false)
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -265,7 +277,7 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
         if state == .personProfile { return }
         
         state = .personProfile
-        pageViewController.setViewControllers([PersonEditViewController()], direction: .reverse, animated: true)
+        pageViewController.setViewControllers([PersonEditViewController(viewModel: personEditViewModel)], direction: .reverse, animated: true)
     }
     
     func updateCellsLayout()  {
@@ -456,7 +468,7 @@ extension ProfileEditViewController: UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
         if viewController is PersonEditViewController { return nil }
         
-        return PersonEditViewController()
+        return PersonEditViewController(viewModel: personEditViewModel)
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {

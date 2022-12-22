@@ -38,6 +38,9 @@ enum AssetsImage: String {
     case tabProfile
     case tabProfileSelected
     case tabMapSelected
+    case searchNavBar
+    case closeNavBar
+    case checkCircle
 }
 
 extension UIImage {

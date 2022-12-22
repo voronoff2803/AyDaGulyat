@@ -24,6 +24,7 @@ public enum SchemaMetadata: ApolloAPI.SchemaMetadata {
     switch typename {
     case "Query": return Aida.Objects.Query
     case "Profile": return Aida.Objects.Profile
+    case "Page": return Aida.Objects.Page
     case "Mutation": return Aida.Objects.Mutation
     case "CreateUser": return Aida.Objects.CreateUser
     case "LoginUser": return Aida.Objects.LoginUser

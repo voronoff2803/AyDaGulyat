@@ -1,0 +1,8 @@
+query PageByAlias($alias: String) {
+  pageByAlias(alias: $alias) {
+    id
+    valueRu
+    alias
+    group
+  }
+}

@@ -1,15 +1,12 @@
 {
   "images" : [
     {
-      "filename" : "Group 11015-2.pdf",
+      "filename" : "Done, Check.pdf",
       "idiom" : "universal"
     }
   ],
   "info" : {
     "author" : "xcode",
     "version" : 1
-  },
-  "properties" : {
-    "template-rendering-intent" : "template"
   }
 }

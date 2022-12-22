@@ -31,6 +31,9 @@ class APIService {
             return UserDefaults.standard.string(forKey: "access_token") ?? ""
         }
         set {
+            if newValue != UserDefaults.standard.string(forKey: "access_token") {
+                NotificationCenter.default.post(name: .userProfileUpdate, object: nil)
+            }
             UserDefaults.standard.set(newValue, forKey: "access_token")
         }
     }
@@ -105,6 +108,23 @@ class APIService {
     
     func getHobby() -> AnyPublisher<StaticHobbyQuery.Data, BaseError> {
         client.fetchPublisher(query: StaticHobbyQuery(), cachePolicy: .returnCacheDataAndFetch)
+            .tryMap { res in
+                guard let data = res.data else {
+                    throw BaseError(message: res.errors?.first?.localizedDescription ?? "\(#function) method error")
+                }
+                return data
+            }
+            .mapError({ error in
+                self.processError(error: error)
+            })
+            .receive(on: DispatchQueue.main)
+            .eraseToAnyPublisher()
+    }
+    
+    // Pages
+    
+    func getPageByAlias(alias: String) -> AnyPublisher<PageByAliasQuery.Data, BaseError> {
+        client.fetchPublisher(query: PageByAliasQuery(alias: GraphQLNullable.some(alias)))
             .tryMap { res in
                 guard let data = res.data else {
                     throw BaseError(message: res.errors?.first?.localizedDescription ?? "\(#function) method error")

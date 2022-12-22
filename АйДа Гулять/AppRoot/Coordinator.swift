@@ -7,6 +7,7 @@
 
 import Foundation
 import UIKit
+import BottomSheet
 
 typealias ActionCallback = (Coordinator.Route) -> ()
 
@@ -23,6 +24,10 @@ class Coordinator {
         case forgotPassword
         case tutorial
         case profileEdit
+        case userAgreement
+        case selectDogs
+        case knowledgeCollection
+        case empty
     }
     
     enum ViewModel {
@@ -63,7 +68,6 @@ class Coordinator {
     
     func present(context: UIViewController, viewController: UIViewController, breakNavigation: Bool = false, modalPresentationStyle: UIModalPresentationStyle = .fullScreen) {
         viewController.modalPresentationStyle = modalPresentationStyle
-        
         if breakNavigation {
             context.present(viewController, animated: true)
         } else {
@@ -93,6 +97,11 @@ class Coordinator {
                     nav.popToRootViewController(animated: true)
                 }
                 
+            case .empty:
+                let knowledgeCollection = KnowledgeCollectionsViewController(viewModel: KnowledgeCollectionViewModel(coordinator: self))
+                let new = UIViewController()
+                self.present(context: context, viewController: knowledgeCollection)
+                
                 // Tutorial
             case .tutorial:
                 let tutuorialViewController = TutorialViewController(viewModel: TutorialViewModel())
@@ -119,12 +128,27 @@ class Coordinator {
                 let recoverEmailViewController = RecoverPasswordEmailViewController(viewModel: self.authViewModel)
                 self.present(context: context, viewController: recoverEmailViewController)
                 
+            case .userAgreement:
+                let userAgreementViewController = AgreementViewController(coordinator: self)
+                self.present(context: context, viewController: userAgreementViewController)
+                
                 
                 // MyProfile
             case .profileEdit:
-                let profileEditViewController = ProfileEditViewController()
+                let profileEditViewController = ProfileEditViewController(personEditViewModel: PersonEditViewModel(coordinator: self))
                 self.present(context: context, viewController: profileEditViewController, breakNavigation: true, modalPresentationStyle: .pageSheet)
+                
+            case .selectDogs:
+                let selectDogsViewController = SelectDogsViewController(viewModel: SelectDogsViewModel(coordinator: self))
+                context.presentBottomSheet(viewController: selectDogsViewController, configuration: .default)
+                
+                
+                //Knowledge
+            case .knowledgeCollection:
+                let knowledgeCollection = KnowledgeCollectionsViewController(viewModel: KnowledgeCollectionViewModel(coordinator: self))
+                self.present(context: context, viewController: knowledgeCollection.embeddedInNavigation())
             }
+            
         }
     }
     
@@ -134,6 +158,8 @@ class Coordinator {
     }
     
     func start() {
+        print(rootViewController.presentedViewController)
+        route(context: rootViewController, to: .knowledgeCollection, parameters: nil)
         //showAuthIfNeed()
         //showTutorial()
     }
@@ -155,6 +181,7 @@ class Coordinator {
         tabVC.heroTabBarAnimationType = .auto
         tabVC.isHeroEnabled = true
         tabVC.tabBar.items?.forEach({$0.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -8, right: 0)})
+        tabVC.selectedIndex = 1
         
         if #available(iOS 15.0, *) {
             let appearance = UITabBarAppearance()

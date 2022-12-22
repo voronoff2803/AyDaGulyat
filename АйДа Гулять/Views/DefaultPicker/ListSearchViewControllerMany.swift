@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class ListSearchViewControllerMany: UIViewController, TextFieldNextable {
+class ListSearchViewControllerMany: AppRootViewController, TextFieldNextable, Reloadable {
     var items: [(Int, String)] {
         didSet {
             self.resultTableView.reloadData()
@@ -48,24 +48,7 @@ class ListSearchViewControllerMany: UIViewController, TextFieldNextable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var selectedIndexes: Set<Int> {
-        willSet{
-//            if let selectedIndex = self.displayedItems.firstIndex(where: {selectedIndexes.contains($0.0)}) {
-//                (resultTableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0)) as? ListTableViewCell)?.isCurrent = false
-//            }
-//
-//            if let selectedIndex = self.displayedItems.firstIndex(where: {selectedIndexes.contains($0.0)}) {
-//                (resultTableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0)) as? ListTableViewCell)?.isCurrent = true
-//            }
-            resultTableView.reloadData()
-        }
-    }
-    
-    let textField = DefaultTextField().then {
-        $0.autocorrectionType = .no
-        $0.placeholder = "Поиск"
-        $0.setLeftImage(image: .appImage(.searchIcon).withTintColor(.appColor(.grayEmpty)))
-    }
+    @Published var selectedIndexes: Set<Int>
     
     let emptyLabelView = UILabel().then {
         $0.text =
@@ -84,6 +67,11 @@ class ListSearchViewControllerMany: UIViewController, TextFieldNextable {
         $0.backgroundColor = .clear
     }
     
+    func reload(values: [String]) {
+        self.items = values.enumerated().map({ ($0.offset, $0.element) })
+        resultTableView.reloadData()
+    }
+    
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         self.handler(selectedIndexes)
         
@@ -93,43 +81,40 @@ class ListSearchViewControllerMany: UIViewController, TextFieldNextable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dismissButton = UIBarButtonItem(image: .appImage(.dismiss), style: .done, target: self, action: #selector(dismissAction)).then {
-            $0.tintColor = .appColor(.black)
-        }
         
-        navigationItem.setRightBarButton(dismissButton, animated: false)
+        if let close = self.navigationController?.getTabBarItem(type: .back),
+           let search = self.navigationController?.getTabBarItem(type: .search) {
+            navigationItem.setRightBarButtonItems([search], animated: true)
+            navigationItem.setLeftBarButtonItems([close], animated: true)
+        }
+        navigationController?.backButton?.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         
         resultTableView.register(ListTableViewCell.self, forCellReuseIdentifier: "cell")
         resultTableView.delegate = self
         resultTableView.dataSource = self
         resultTableView.separatorStyle = .none
         
-        textField.textPublisher.sink { text in
+        navigationController?.searchBarField.textPublisher.sink { text in
             self.searchString = text ?? ""
         }.store(in: &subscriptions)
         
         setupUI()
+        
     }
     
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
         
-        [textField, resultTableView, emptyLabelView].forEach({ self.view.addSubview($0) })
-        
-        textField.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
-            make.top.equalTo(self.view.safeAreaLayoutGuide).inset(10)
-        }
+        [resultTableView, emptyLabelView].forEach({ self.view.addSubview($0) })
         
         resultTableView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
-            make.top.equalTo(textField.snp.bottom)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.bottom.top.equalTo(self.view.safeAreaLayoutGuide)
         }
         
         emptyLabelView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
-            make.top.equalTo(textField.snp.bottom).offset(28)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(40)
         }
     }
     
@@ -153,7 +138,10 @@ extension ListSearchViewControllerMany: UITableViewDelegate {
             selectedIndexes.insert(selectedIndex)
         }
         
+        (resultTableView.cellForRow(at: indexPath) as? ListTableViewCell)?.isCurrent = selectedIndexes.contains(selectedIndex)
+        
         self.view.endEditing(false)
+        self.navigationController?.view.endEditing(true)
     }
 }
 
@@ -165,15 +153,17 @@ extension ListSearchViewControllerMany: UITableViewDataSource {
     
     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
         let cell = tableView.dequeueReusableCell(withIdentifier: "cell", for: indexPath) as! ListTableViewCell
-        cell.contentLabel.text = self.displayedItems[indexPath.row].1
         
-        let displayedIndexes = displayedItems.filter({selectedIndexes.contains($0.0)})
+        let item = self.displayedItems[indexPath.row]
         
-        if displayedIndexes.contains(where: {$0.0 == indexPath.row}) {
+        cell.contentLabel.text = item.1
+        
+        if selectedIndexes.contains(item.0) {
             cell.isCurrent = true
         } else {
             cell.isCurrent = false
         }
+        
         return cell
     }
 }

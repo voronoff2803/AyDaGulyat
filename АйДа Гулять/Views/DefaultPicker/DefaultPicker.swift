@@ -6,11 +6,22 @@
 //
 
 import UIKit
+import Combine
 
 class DefaultPicker: UIControl {
+    var subscriptions = Set<AnyCancellable>()
+    var reloadble: Reloadable?
     var isManySelectable: Bool
-    var values: [String] = []
-    var selectedIndex: Int? = nil {
+    var values: [String] = [] {
+        didSet {
+            reloadble?.reload(values: values)
+            
+            if let index = selectedIndex, index >= 0, index < values.count {
+                self.currentTextLabel.text = values[index]
+            }
+        }
+    }
+    @Published var selectedIndex: Int? = nil {
         didSet {
             if let index = selectedIndex, index >= 0, index < values.count {
                 self.currentTextLabel.text = values[index]
@@ -18,7 +29,7 @@ class DefaultPicker: UIControl {
         }
     }
     
-    var selectedIndexes: Set<Int> = [] {
+    @Published var selectedIndexes: Set<Int> = [] {
         didSet {
             if !selectedIndexes.isEmpty {
                 self.currentTextLabel.text = "(\(selectedIndexes.count))"
@@ -117,13 +128,17 @@ class DefaultPicker: UIControl {
             let selectorViewController = ListSearchViewControllerMany(items: self.values, selectedIndexes: self.selectedIndexes) { indexes in
                 self.selectedIndexes = indexes
             }
-            
             selectorViewController.title = textLabel.text
+            self.reloadble = selectorViewController
+            
+            selectorViewController.$selectedIndexes.sink { res in
+                self.selectedIndexes = res
+            }
+            .store(in: &subscriptions)
             
             self.parentViewController?.present(selectorViewController.embeddedInNavigation().then {
                 $0.modalPresentationStyle = .overFullScreen
             }, animated: true)
-            
         } else {
             
             let selectorViewController = ListSearchViewController(items: self.values, selectedIndex: selectedIndex) { index in
@@ -131,6 +146,12 @@ class DefaultPicker: UIControl {
             }
             
             selectorViewController.title = textLabel.text
+            self.reloadble = selectorViewController
+            
+            selectorViewController.$selectedIndex.sink { res in
+                self.selectedIndex = res
+            }
+            .store(in: &subscriptions)
             
             self.parentViewController?.present(selectorViewController.embeddedInNavigation().then {
                 $0.modalPresentationStyle = .overFullScreen
@@ -138,4 +159,9 @@ class DefaultPicker: UIControl {
             
         }
     }
+}
+
+
+protocol Reloadable {
+    func reload(values: [String])
 }

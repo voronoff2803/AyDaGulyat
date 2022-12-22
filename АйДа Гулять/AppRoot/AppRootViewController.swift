@@ -12,6 +12,10 @@ class AppRootViewController: UIViewController {
     var keyboardAvoidView: UIView?
     private var keyboardConstraint: Constraint?
     
+    override var navigationController: DefaultNavigationViewController? {
+        return super.navigationController as? DefaultNavigationViewController
+    }
+    
     var isKeyboardHidden = true
     
     override func viewDidLoad() {
@@ -90,18 +94,5 @@ class AppRootViewController: UIViewController {
                 ])
             }
         }
-    }
-    
-    lazy var searchBar: UITextField = SearchFieldView()
-    
-    func showSearch() {
-        searchBar.placeholder = "Что будем искать?"
-        
-        self.navigationController?.navigationBar.topItem?.titleView = searchBar
-        let backButton = UIBarButtonItem()
-        backButton.image = UIImage.appImage(.backArrow)
-        backButton.tintColor = .appColor(.black)
-        
-        self.navigationController?.navigationBar.topItem?.leftBarButtonItem = backButton
     }
 }

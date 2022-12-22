@@ -6,9 +6,14 @@
 //
 
 import UIKit
+import Combine
 
 
 class PersonEditViewController: AppRootViewController, TextFieldNextable {
+    private var subscriptions = Set<AnyCancellable>()
+    
+    let viewModel: PersonEditViewModel
+    
     let scrollView = UIScrollView().then {
         $0.showsVerticalScrollIndicator = false
         $0.showsHorizontalScrollIndicator = false
@@ -51,7 +56,7 @@ class PersonEditViewController: AppRootViewController, TextFieldNextable {
     
     let privacyPicker = DefaultPicker(titleText: "Конфедициальность", isManySelectable: true)
     
-    let hobbiesPicker = DefaultPicker(titleText: "Увлечения")
+    let hobbiesPicker = DefaultPicker(titleText: "Увлечения", isManySelectable: true)
     
     let addTextField = NextGrowingTextView().then {
         $0.configuration = .init(minLines: 6,
@@ -66,15 +71,23 @@ class PersonEditViewController: AppRootViewController, TextFieldNextable {
         $0.setTitle("Сохранить", for: .normal)
     }
 
-
+    init(viewModel: PersonEditViewModel) {
+        self.viewModel = viewModel
+        
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        privacyPicker.setupValues(values: ["Аффенпинчер", "Бишон фризе", "Бордер-терьер", "Бостон-терьер", "Брюссельский грифон", "Вельштерьер", "Джек-рассел-терьер", "Йоркширский терьер"])
-        
-        tagListView.addTags(["🏃‍♂️  Бег с собакой", "🎨  Рисование", "📘  Чтение книг", "💩  Политика"])
+        privacyPicker.setupValues(values: ["Прятать номер телефона", "Прятать дату рождения"])
 
         setupUI()
+        setupBindings()
         
         genderControl.setupValues(values: ["Мальчик", "Девочка"], selectedIndex: 0)
         scrollView.delegate = self
@@ -105,6 +118,33 @@ class PersonEditViewController: AppRootViewController, TextFieldNextable {
 //        dogTypePicker.snp.makeConstraints { make in
 //            make.height.equalTo(55.0)
 //        }
+    }
+    
+    func setupBindings() {
+        self.hobbiesPicker.selectedIndexes = Set(self.viewModel.selectedHobbyIds.compactMap({ id in self.viewModel.staticItemsModel.hobbyItems.firstIndex(where: {$0.0 == id})
+        }))
+        
+        self.viewModel.staticItemsModel.$hobbyItems
+            .sink { self.hobbiesPicker.values = $0.map{$0.1}}
+            .store(in: &subscriptions)
+        
+        self.viewModel.$selectedHobbyIds
+            .map { idList in
+                idList.compactMap { id in
+                    self.viewModel.staticItemsModel.hobbyItems.first(where: {id == $0.0})?.1
+                }
+            }
+            .sink { res in
+                self.tagListView.removeAllTags()
+                self.tagListView.addTags(res)
+            }
+            .store(in: &subscriptions)
+        self.hobbiesPicker.$selectedIndexes
+            .map { indexesList in
+                indexesList.map({ self.viewModel.staticItemsModel.hobbyItems[$0].0 })
+            }
+            .sink { self.viewModel.selectedHobbyIds = $0 }
+            .store(in: &subscriptions)
     }
 }
 

@@ -8,7 +8,7 @@
 import UIKit
 import Combine
 
-class ListSearchViewController: UIViewController, TextFieldNextable {
+class ListSearchViewController: AppRootViewController, TextFieldNextable, Reloadable {
     private var subscriptions = Set<AnyCancellable>()
     
     var items: [(Int, String)] {
@@ -48,7 +48,7 @@ class ListSearchViewController: UIViewController, TextFieldNextable {
         fatalError("init(coder:) has not been implemented")
     }
     
-    var selectedIndex: Int? {
+    @Published var selectedIndex: Int? {
         willSet{
             if let selectedIndex = self.displayedItems.firstIndex(where: {$0.0 == selectedIndex}) {
                 (resultTableView.cellForRow(at: IndexPath(row: selectedIndex, section: 0)) as? ListTableViewCell)?.isCurrent = false
@@ -83,6 +83,11 @@ class ListSearchViewController: UIViewController, TextFieldNextable {
         $0.backgroundColor = .clear
     }
     
+    func reload(values: [String]) {
+        self.items = values.enumerated().map({ ($0.offset, $0.element) })
+        resultTableView.reloadData()
+    }
+    
     override func dismiss(animated flag: Bool, completion: (() -> Void)? = nil) {
         self.handler(selectedIndex)
         
@@ -92,11 +97,12 @@ class ListSearchViewController: UIViewController, TextFieldNextable {
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        let dismissButton = UIBarButtonItem(image: .appImage(.dismiss), style: .done, target: self, action: #selector(dismissAction)).then {
-            $0.tintColor = .appColor(.black)
+        if let close = self.navigationController?.getTabBarItem(type: .back),
+           let search = self.navigationController?.getTabBarItem(type: .search) {
+            navigationItem.setRightBarButtonItems([search], animated: true)
+            navigationItem.setLeftBarButtonItems([close], animated: true)
         }
-        
-        navigationItem.setRightBarButton(dismissButton, animated: false)
+        navigationController?.backButton?.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         
         resultTableView.register(ListTableViewCell.self, forCellReuseIdentifier: "cell")
         resultTableView.delegate = self
@@ -128,7 +134,7 @@ class ListSearchViewController: UIViewController, TextFieldNextable {
         
         emptyLabelView.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
-            make.top.equalTo(textField.snp.bottom).offset(28)
+            make.top.equalTo(self.view.safeAreaLayoutGuide).offset(40)
         }
     }
     
@@ -147,6 +153,7 @@ extension ListSearchViewController: UITableViewDelegate {
         selectedIndex = displayedItems[indexPath.row].0
         
         self.view.endEditing(false)
+        self.navigationController?.view.endEditing(true)
         
         DispatchQueue.main.asyncAfter(deadline: .now() + 0.15) {
             self.dismiss(animated: true, completion: nil)

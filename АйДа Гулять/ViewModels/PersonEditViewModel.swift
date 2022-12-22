@@ -1,5 +1,5 @@
 //
-//  ProfileEditViewModel.swift
+//  PersonEditViewModel.swift
 //  АйДа Гулять
 //
 //  Created by Alexey Voronov on 18.12.2022.
@@ -9,12 +9,15 @@ import UIKit
 import Combine
 import Apollo
 import ApolloCombine
+import Aida
 
 
-class ProfileEditViewModel: ObservableObject {
+class PersonEditViewModel: ObservableObject {
     var subscriptions = Set<AnyCancellable>()
     
     let staticItemsModel = StaticItemsModel(requiredItems: [.hobby])
+    
+    @Published var selectedHobbyIds: [Aida.UUID] = []
     
     private let activityIndicator = ActivityIndicator()
     private let errorIndicator = ErrorIndicator()

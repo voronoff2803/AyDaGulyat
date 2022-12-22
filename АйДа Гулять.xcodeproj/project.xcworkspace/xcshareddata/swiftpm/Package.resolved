@@ -38,6 +38,15 @@
         }
       },
       {
+        "package": "BottomSheet",
+        "repositoryURL": "https://github.com/joomcode/BottomSheet",
+        "state": {
+          "branch": null,
+          "revision": "2397f22fa1828169dbb233a9ad9d83ed72b6a236",
+          "version": "2.0.1"
+        }
+      },
+      {
         "package": "CombineCocoa",
         "repositoryURL": "https://github.com/CombineCommunity/CombineCocoa",
         "state": {
@@ -80,6 +89,15 @@
           "branch": null,
           "revision": "5056f3305d3499f44d8815530d560b87082e0cf5",
           "version": "1.7.1"
+        }
+      },
+      {
+        "package": "MarkdownView",
+        "repositoryURL": "https://github.com/keitaoouchi/MarkdownView",
+        "state": {
+          "branch": null,
+          "revision": "5e62a27f1002cd63c350ef1a4c640ddcd1f1ed48",
+          "version": "1.9.1"
         }
       },
       {
