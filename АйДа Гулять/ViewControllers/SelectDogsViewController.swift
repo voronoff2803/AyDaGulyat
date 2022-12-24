@@ -19,7 +19,7 @@ class SelectDogsViewController: UIViewController, ScrollableBottomSheetPresented
     private let activityIndicator = ActivityIndicator()
     private let errorIndicator = ErrorIndicator()
     
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewCenteredFlowLayout().then({
+    let collectionView = DynamicCollectionView(frame: .zero, collectionViewLayout: CollectionViewCenteredFlowLayout().then({
         $0.itemSize = CGSize(width: 128, height: 170)
         $0.scrollDirection = .vertical
     }))
@@ -72,10 +72,10 @@ class SelectDogsViewController: UIViewController, ScrollableBottomSheetPresented
         collectionView.snp.makeConstraints { make in
             make.top.equalTo(titleLabel.snp.bottom).offset(30)
             make.horizontalEdges.equalToSuperview().inset(50)
-            make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
         
         continueButton.snp.makeConstraints { make in
+            make.top.equalTo(collectionView.snp.bottom)
             make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
             make.bottom.equalTo(view.safeAreaLayoutGuide)
         }
@@ -86,7 +86,11 @@ class SelectDogsViewController: UIViewController, ScrollableBottomSheetPresented
     
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        
-        preferredContentSize = CGSize(width: collectionView.contentSize.width, height: collectionView.contentSize.height + 180)
+        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+    }
+    
+    override func viewWillLayoutSubviews() {
+        super.viewWillLayoutSubviews()
+        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
     }
 }

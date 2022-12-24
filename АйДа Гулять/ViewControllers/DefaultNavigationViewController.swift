@@ -79,6 +79,8 @@ class DefaultNavigationViewController: UINavigationController {
     lazy var searchBarField: UITextField = SearchFieldView().then {
         $0.placeholder = "Что будем искать?"
         $0.delegate = self
+        $0.autocorrectionType = .no
+        $0.autocapitalizationType = .sentences
     }
     
     func showSearchBar() {

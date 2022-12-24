@@ -11,7 +11,7 @@ import BottomSheet
 
 typealias ActionCallback = (Coordinator.Route) -> ()
 
-class Coordinator {
+class Coordinator: NSObject {
     enum Route {
         case dismiss
         case back
@@ -28,13 +28,15 @@ class Coordinator {
         case selectDogs
         case knowledgeCollection
         case empty
+        case menu
     }
     
     enum ViewModel {
         case auth
     }
     
-    init() {
+    override init() {
+        super.init()
         APIService.shared.delegate = self
     }
     
@@ -100,7 +102,8 @@ class Coordinator {
             case .empty:
                 let knowledgeCollection = KnowledgeCollectionsViewController(viewModel: KnowledgeCollectionViewModel(coordinator: self))
                 let new = UIViewController()
-                self.present(context: context, viewController: knowledgeCollection)
+                new.view.backgroundColor = .appColor(.backgroundFirst)
+                self.present(context: context, viewController: new)
                 
                 // Tutorial
             case .tutorial:
@@ -147,7 +150,12 @@ class Coordinator {
             case .knowledgeCollection:
                 let knowledgeCollection = KnowledgeCollectionsViewController(viewModel: KnowledgeCollectionViewModel(coordinator: self))
                 self.present(context: context, viewController: knowledgeCollection.embeddedInNavigation())
+                
+            case .menu:
+                let menuViewController = MenuViewController(coordinator: self)
+                context.presentBottomSheet(viewController: menuViewController, configuration: .default)
             }
+            
             
         }
     }
@@ -158,8 +166,7 @@ class Coordinator {
     }
     
     func start() {
-        print(rootViewController.presentedViewController)
-        route(context: rootViewController, to: .knowledgeCollection, parameters: nil)
+        //route(context: rootViewController, to: .selectDogs, parameters: nil)
         //showAuthIfNeed()
         //showTutorial()
     }
@@ -175,11 +182,11 @@ class Coordinator {
     }
     
     private func setupTabBarVC() -> UITabBarController {
-        let tabVC = UITabBarController()
+        let tabVC = DefaultTabBarController(coordinator: self)
         tabVC.viewControllers = setpViewControllers()
         
-        tabVC.heroTabBarAnimationType = .auto
-        tabVC.isHeroEnabled = true
+        //tabVC.heroTabBarAnimationType = .auto
+        //tabVC.isHeroEnabled = true
         tabVC.tabBar.items?.forEach({$0.imageInsets = UIEdgeInsets(top: 8, left: 0, bottom: -8, right: 0)})
         tabVC.selectedIndex = 1
         
@@ -197,11 +204,15 @@ class Coordinator {
     private func setpViewControllers() -> [UIViewController] {
         let mapViewController = MapViewController()
         let profileViewController = MyProfileViewController(viewModel: MyProfileViewModel(coordinator: self)).embeddedInNavigation()
+        let dummyViewController = UIViewController().then {
+            $0.title = "dummy"
+        }
         
         mapViewController.tabBarItem = UITabBarItem(title: nil, image: .appImage(.tabMap), selectedImage: .appImage(.tabMapSelected))
         profileViewController.tabBarItem = UITabBarItem(title: nil, image: .appImage(.tabProfile), selectedImage: .appImage(.tabProfileSelected))
+        dummyViewController.tabBarItem = UITabBarItem(title: nil, image: .appImage(.tabMenu), tag: 1)
         
-        return [profileViewController, mapViewController]
+        return [profileViewController, mapViewController, dummyViewController]
     }
 }
 

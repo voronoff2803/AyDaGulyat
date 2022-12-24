@@ -125,7 +125,12 @@
 		0DE418C529549C5C00862FBD /* KnowledgeCollectionsViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418C429549C5C00862FBD /* KnowledgeCollectionsViewController.swift */; };
 		0DE418C729549D4400862FBD /* KnowledgeCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418C629549D4400862FBD /* KnowledgeCollectionCell.swift */; };
 		0DE418C92954A16D00862FBD /* KnowledgeCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418C82954A16D00862FBD /* KnowledgeCollectionViewModel.swift */; };
-		0DE418CB2954ACC500862FBD /* DefaultNavigationBar.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418CA2954ACC500862FBD /* DefaultNavigationBar.swift */; };
+		0DE418D329566D7000862FBD /* DefaultTabBarController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418D229566D7000862FBD /* DefaultTabBarController.swift */; };
+		0DE418D52956781C00862FBD /* MenuViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418D42956781C00862FBD /* MenuViewController.swift */; };
+		0DE418D72956797200862FBD /* DynamicCollectionView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418D62956797200862FBD /* DynamicCollectionView.swift */; };
+		0DE418D9295682FC00862FBD /* MenuCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418D8295682FC00862FBD /* MenuCell.swift */; };
+		0DE418DB295683F300862FBD /* DynamicTableView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418DA295683F300862FBD /* DynamicTableView.swift */; };
+		0DE418DD29568D0E00862FBD /* CGSize.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DE418DC29568D0E00862FBD /* CGSize.swift */; };
 		0DEC9CEE2912AB91001A8CDA /* Hero in Frameworks */ = {isa = PBXBuildFile; productRef = 0DEC9CED2912AB91001A8CDA /* Hero */; };
 		0DEC9CF02912AC89001A8CDA /* ProfileSmallViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEC9CEF2912AC89001A8CDA /* ProfileSmallViewController.swift */; };
 		0DEC9CF22912B46F001A8CDA /* ProfileBigViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DEC9CF12912B46F001A8CDA /* ProfileBigViewController.swift */; };
@@ -248,7 +253,12 @@
 		0DE418C429549C5C00862FBD /* KnowledgeCollectionsViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeCollectionsViewController.swift; sourceTree = "<group>"; };
 		0DE418C629549D4400862FBD /* KnowledgeCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeCollectionCell.swift; sourceTree = "<group>"; };
 		0DE418C82954A16D00862FBD /* KnowledgeCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeCollectionViewModel.swift; sourceTree = "<group>"; };
-		0DE418CA2954ACC500862FBD /* DefaultNavigationBar.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNavigationBar.swift; sourceTree = "<group>"; };
+		0DE418D229566D7000862FBD /* DefaultTabBarController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTabBarController.swift; sourceTree = "<group>"; };
+		0DE418D42956781C00862FBD /* MenuViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuViewController.swift; sourceTree = "<group>"; };
+		0DE418D62956797200862FBD /* DynamicCollectionView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicCollectionView.swift; sourceTree = "<group>"; };
+		0DE418D8295682FC00862FBD /* MenuCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuCell.swift; sourceTree = "<group>"; };
+		0DE418DA295683F300862FBD /* DynamicTableView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DynamicTableView.swift; sourceTree = "<group>"; };
+		0DE418DC29568D0E00862FBD /* CGSize.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CGSize.swift; sourceTree = "<group>"; };
 		0DEC9CEF2912AC89001A8CDA /* ProfileSmallViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileSmallViewController.swift; sourceTree = "<group>"; };
 		0DEC9CF12912B46F001A8CDA /* ProfileBigViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ProfileBigViewController.swift; sourceTree = "<group>"; };
 		0DF25AC829168A6F00A279A0 /* DescriptionTableViewCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DescriptionTableViewCell.swift; sourceTree = "<group>"; };
@@ -350,6 +360,7 @@
 				0D20142B290017B7008C2C90 /* AttributedString+markdown.swift */,
 				0DD24893290BEB7C00311427 /* UIViewController+embedInNavigation.swift */,
 				0D15F86F2947DF3F0081AD4A /* UIWindow+topVC.swift */,
+				0DE418DC29568D0E00862FBD /* CGSize.swift */,
 				0D495BB2294C9DFC0052187F /* UITableViewCell+identifier.swift */,
 			);
 			path = Extensions;
@@ -366,6 +377,8 @@
 				0D3C521C28F585A900F91D0C /* TextFieldNextable.swift */,
 				0D0B12FF293CF1A2003D5751 /* ActivityIndicator.swift */,
 				0D0B1301293CF64D003D5751 /* ErrorIndicator.swift */,
+				0DE418D62956797200862FBD /* DynamicCollectionView.swift */,
+				0DE418DA295683F300862FBD /* DynamicTableView.swift */,
 				0DDE7F192933E9FF006CEE22 /* Coordinatable.swift */,
 				0D7C51852953C1F3007D0D3C /* CollectionViewCenteredFlowLayout.swift */,
 			);
@@ -381,6 +394,7 @@
 				0D7C517F2953AEED007D0D3C /* SelectDogsViewController.swift */,
 				0D7113E02906A918005AB9F9 /* AgreementViewController.swift */,
 				0D227BCA28F9D7180026CDAA /* DefaultAlertViewController.swift */,
+				0DE418D229566D7000862FBD /* DefaultTabBarController.swift */,
 				0D7113E72906F2D5005AB9F9 /* TestVCViewController.swift */,
 				0DD24891290BEB5F00311427 /* DefaultNavigationViewController.swift */,
 				0D13FD6929058C2400A86E62 /* MapViewController.swift */,
@@ -389,6 +403,7 @@
 				0DEC9CF12912B46F001A8CDA /* ProfileBigViewController.swift */,
 				0DDE7F132933DB00006CEE22 /* MyProfileViewController.swift */,
 				0DE418C429549C5C00862FBD /* KnowledgeCollectionsViewController.swift */,
+				0DE418D42956781C00862FBD /* MenuViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -408,6 +423,7 @@
 				0DF25ACE2916CA9900A279A0 /* DogProfileSpecsTableViewCell.swift */,
 				0DF25AD02916CB8D00A279A0 /* DogProfileFeaturesTableViewCell.swift */,
 				0DF25AD22916CC1A00A279A0 /* DogProfileDescriptionTableViewCell.swift */,
+				0DE418D8295682FC00862FBD /* MenuCell.swift */,
 				0DF25AD429179D6D00A279A0 /* DogProfileCollectionViewCell.swift */,
 				0DF25ADA2917FB6800A279A0 /* ResultTableViewCell.swift */,
 				0DE418C629549D4400862FBD /* KnowledgeCollectionCell.swift */,
@@ -467,7 +483,6 @@
 				0D3C521328F56DEB00F91D0C /* DefaultButton.swift */,
 				0DF25AD62917BB1C00A279A0 /* MapButton.swift */,
 				0D5BD10528F5CA1700DD1496 /* ScalableImageView.swift */,
-				0DE418CA2954ACC500862FBD /* DefaultNavigationBar.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -750,12 +765,14 @@
 				0DD24894290BEB7C00311427 /* UIViewController+embedInNavigation.swift in Sources */,
 				0D81D0AF28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift in Sources */,
 				0D7C515B294F7B1A007D0D3C /* ResetPasswordMutation.graphql.swift in Sources */,
+				0DE418DB295683F300862FBD /* DynamicTableView.swift in Sources */,
 				0D6C0D24290EC22900BF4A14 /* InvisibleZoneConfigurateViewController.swift in Sources */,
 				0D7C5157294F7B1A007D0D3C /* StaticDangerQuery.graphql.swift in Sources */,
 				0DE418C92954A16D00862FBD /* KnowledgeCollectionViewModel.swift in Sources */,
 				0D7113D429066FF6005AB9F9 /* Utils.swift in Sources */,
 				0DEC9CF02912AC89001A8CDA /* ProfileSmallViewController.swift in Sources */,
 				0DF25ADB2917FB6800A279A0 /* ResultTableViewCell.swift in Sources */,
+				0DE418D329566D7000862FBD /* DefaultTabBarController.swift in Sources */,
 				0D7C5137294E8D22007D0D3C /* ListSearchViewControllerMany.swift in Sources */,
 				0DD24896290C1AFE00311427 /* ListTableViewCell.swift in Sources */,
 				0D7C51802953AEED007D0D3C /* SelectDogsViewController.swift in Sources */,
@@ -770,6 +787,7 @@
 				0DDE7F122933D649006CEE22 /* MyProfileViewModel.swift in Sources */,
 				0D7C51822953B19A007D0D3C /* SelectDogsViewModel.swift in Sources */,
 				0D2016D328E89789003E673E /* UIFont+customFont.swift in Sources */,
+				0DE418D9295682FC00862FBD /* MenuCell.swift in Sources */,
 				0D7C5160294F7B1A007D0D3C /* SendCodeMutation.graphql.swift in Sources */,
 				0D7C5163294F7B1A007D0D3C /* StaticBreedQuery.graphql.swift in Sources */,
 				0D7C51842953BE74007D0D3C /* BeautifulGridLayout.swift in Sources */,
@@ -782,6 +800,7 @@
 				0D7C516929507A42007D0D3C /* APIService+Auth.swift in Sources */,
 				0DD2489C290D7B9500311427 /* DefaultDatePicker.swift in Sources */,
 				0D20143B290402EC008C2C90 /* SnapCenterLayout.swift in Sources */,
+				0DE418D72956797200862FBD /* DynamicCollectionView.swift in Sources */,
 				0D7113E12906A918005AB9F9 /* AgreementViewController.swift in Sources */,
 				0D3C521228F4B42D00F91D0C /* Label.swift in Sources */,
 				0D3C520E28F4A88500F91D0C /* DefaultTextField.swift in Sources */,
@@ -809,11 +828,11 @@
 				0D7113D629067616005AB9F9 /* AuthViewModel.swift in Sources */,
 				0DD2489A290D758200311427 /* DefaultSegmentedPicker.swift in Sources */,
 				0D7C515D294F7B1A007D0D3C /* StaticSpecialQuery.graphql.swift in Sources */,
-				0DE418CB2954ACC500862FBD /* DefaultNavigationBar.swift in Sources */,
 				0D3C521828F582CF00F91D0C /* UIViewController+hideKeyboard.swift in Sources */,
 				0D7C515F294F7B1A007D0D3C /* StaticReasonQuery.graphql.swift in Sources */,
 				0D495BB3294C9DFC0052187F /* UITableViewCell+identifier.swift in Sources */,
 				0DD0AB1B29165F7A00E44F80 /* TagListView.swift in Sources */,
+				0DE418D52956781C00862FBD /* MenuViewController.swift in Sources */,
 				0D7C5161294F7B1A007D0D3C /* CreateUserMutation.graphql.swift in Sources */,
 				0D81D0B528F883F000AB33D3 /* RegistrationViewController.swift in Sources */,
 				0D15F87C2949A0850081AD4A /* TutorialViewModel.swift in Sources */,
@@ -823,6 +842,7 @@
 				0D7C5164294F7B1A007D0D3C /* UpdatePasswordMutation.graphql.swift in Sources */,
 				0D3C521628F57C1200F91D0C /* PasswordTextField.swift in Sources */,
 				0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */,
+				0DE418DD29568D0E00862FBD /* CGSize.swift in Sources */,
 				0D5BD10628F5CA1700DD1496 /* ScalableImageView.swift in Sources */,
 				0DDE7F182933E6C1006CEE22 /* Coordinator.swift in Sources */,
 				0D5E66CF28F09D770094C949 /* SplashPresenter.swift in Sources */,

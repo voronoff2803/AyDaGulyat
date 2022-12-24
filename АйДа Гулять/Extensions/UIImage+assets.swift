@@ -41,6 +41,14 @@ enum AssetsImage: String {
     case searchNavBar
     case closeNavBar
     case checkCircle
+    case tabMenu
+    case menuWalks
+    case menuTutor
+    case menuShelters
+    case menuSettings
+    case menuQR
+    case menuKnowledge
+    case menuFinds
 }
 
 extension UIImage {

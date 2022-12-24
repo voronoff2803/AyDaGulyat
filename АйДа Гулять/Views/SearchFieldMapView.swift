@@ -145,7 +145,7 @@ class SearchFieldMapView: UITextField {
     override var intrinsicContentSize: CGSize {
         var result = super.intrinsicContentSize
         result.height = 55
-        result.width = .infinity
+        result.width = UIView.noIntrinsicMetric
         return result
     }
     
