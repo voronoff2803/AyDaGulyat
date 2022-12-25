@@ -39,6 +39,8 @@ extension KnowledgeCollectionViewModel: UICollectionViewDataSource {
 extension KnowledgeCollectionViewModel: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let parentViewController = collectionView.parentViewController else { return }
-        coordinator.route(context: parentViewController, to: .empty, parameters: nil)
+        coordinator.route(context: parentViewController, to: .knowledgeDetailsCollection, parameters: nil)
     }
 }
+
+

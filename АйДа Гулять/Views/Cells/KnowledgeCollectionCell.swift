@@ -14,6 +14,22 @@ class KnowledgeCollectionCell: UICollectionViewCell {
         }
     }
     
+    let counterBackgroudView = UIView().then {
+        $0.backgroundColor = .appColor(.backgroundFirst)
+        $0.layer.cornerRadius = 4.0
+    }
+    
+    let counterTitleLabel = UILabel().then {
+        $0.textColor = .appColor(.black)
+        $0.font = .montserratRegular(size: 14)
+        $0.text = "12"
+    }
+    
+    let counterStatusIndicator = UIView().then {
+        $0.backgroundColor = .appColor(.green)
+        $0.layer.cornerRadius = 3.5
+    }
+    
     let imageView = UIImageView().then {
         $0.clipsToBounds = true
         $0.contentMode = .scaleAspectFill
@@ -43,8 +59,17 @@ class KnowledgeCollectionCell: UICollectionViewCell {
         self.image = .appImage(.content2)
         self.layer.cornerRadius = 4
         
-        self.contentView.addSubview(imageView)
-        self.contentView.addSubview(titleLabel)
+        let counterStatusIndicatorBG = UIView()
+        counterStatusIndicatorBG.addSubview(counterStatusIndicator)
+        
+        let counterStackView = UIStackView(arrangedSubviews: [counterTitleLabel, counterStatusIndicatorBG]).then {
+            $0.axis = .horizontal
+            $0.spacing = 5.0
+            
+        }
+        
+        [imageView, titleLabel, counterBackgroudView].forEach({self.contentView.addSubview($0)})
+        counterBackgroudView.addSubview(counterStackView)
         
         imageView.snp.makeConstraints { make in
             make.top.horizontalEdges.equalToSuperview().inset(8.0)
@@ -55,10 +80,28 @@ class KnowledgeCollectionCell: UICollectionViewCell {
             make.horizontalEdges.equalToSuperview()
             make.top.equalTo(imageView.snp.bottom).offset(8)
         }
+        counterStatusIndicatorBG.setContentCompressionResistancePriority(.defaultLow, for: .horizontal)
+        
+        counterBackgroudView.snp.makeConstraints { make in
+            make.height.equalTo(28)
+            make.width.equalTo(42)
+            make.right.bottom.equalTo(imageView).inset(10)
+        }
+        
+        counterStackView.snp.makeConstraints { make in
+            make.center.equalToSuperview()
+        }
+        
+        counterStatusIndicator.snp.makeConstraints { make in
+            make.height.width.equalTo(7.0)
+            make.horizontalEdges.equalToSuperview()
+            make.centerY.equalToSuperview()
+        }
     }
     
     
     func setup() {
+        
     }
     
     override func layoutSubviews() {

@@ -17,7 +17,7 @@ class MenuViewController: AppRootViewController, ScrollableBottomSheetPresentedC
                                   MenuItem(route: .auth, icon: .appImage(.menuWalks), title: "Мои прогулки"),
                                   MenuItem(route: .auth, icon: .appImage(.menuFinds), title: "Потерялись | Нашлись"),
                                   MenuItem(route: .auth, icon: .appImage(.menuShelters), title: "Приюты"),
-                                  MenuItem(route: .auth, icon: .appImage(.menuKnowledge), title: "База знаний"),
+                                  MenuItem(route: .knowledgeCollection, icon: .appImage(.menuKnowledge), title: "База знаний"),
                                   MenuItem(route: .auth, icon: .appImage(.menuTutor), title: "Туториал"),
                                   MenuItem(route: .auth, icon: .appImage(.menuSettings), title: "Настройки"),]
     

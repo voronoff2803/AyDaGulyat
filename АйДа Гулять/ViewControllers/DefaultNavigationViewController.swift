@@ -41,6 +41,8 @@ class DefaultNavigationViewController: UINavigationController {
         navigationBar.tintColor = .appColor(.black)
         
         navigationBar.prefersLargeTitles = false
+        
+        self.delegate = self
     }
     
     
@@ -178,4 +180,35 @@ extension DefaultNavigationViewController: UITextFieldDelegate {
         self.hideSearchBar()
         return true
     }
+}
+
+
+extension DefaultNavigationViewController: UINavigationControllerDelegate {
+ 
+    func navigationController(
+        _ navigationController: UINavigationController,
+        animationControllerFor operation: UINavigationController.Operation,
+        from fromVC: UIViewController,
+        to toVC: UIViewController
+    ) -> UIViewControllerAnimatedTransitioning? {
+        // 3
+        return CSCardTransition.navigationController(
+            navigationController,
+            animationControllerFor: operation,
+            from: fromVC,
+            to: toVC
+        )
+    }
+    
+    func navigationController(
+        _ navigationController: UINavigationController,
+        interactionControllerFor animationController: UIViewControllerAnimatedTransitioning
+    ) -> UIViewControllerInteractiveTransitioning? {
+        // 4
+        return CSCardTransition.navigationController(
+            navigationController,
+            interactionControllerFor: animationController
+        )
+    }
+    
 }

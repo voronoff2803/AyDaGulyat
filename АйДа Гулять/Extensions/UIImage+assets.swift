@@ -49,6 +49,7 @@ enum AssetsImage: String {
     case menuQR
     case menuKnowledge
     case menuFinds
+    case content4
 }
 
 extension UIImage {

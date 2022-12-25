@@ -1,27 +1,29 @@
 //
-//  KnowledgeCollectionsViewController.swift
+//  KnowledgeDetailsCollectionViewController.swift
 //  АйДа Гулять
 //
-//  Created by Alexey Voronov on 22.12.2022.
+//  Created by Alexey Voronov on 25.12.2022.
 //
 
 import UIKit
 import Combine
 import SnapKit
 
-class KnowledgeCollectionsViewController: AppRootViewController {
+class KnowledgeDetailsCollectionViewController: AppRootViewController {
     private var subscriptions = Set<AnyCancellable>()
-    let viewModel: KnowledgeCollectionViewModel
+    let viewModel: KnowledgeDetailsCollectionViewModel
+    
+    lazy var cardTransitionInteractor: CSCardTransitionInteractor? = CSCardTransitionInteractor(viewController: self)
     
     private let activityIndicator = ActivityIndicator()
     private let errorIndicator = ErrorIndicator()
     
-    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: CollectionViewCenteredFlowLayout().then({
+    let collectionView = UICollectionView(frame: .zero, collectionViewLayout: UICollectionViewFlowLayout().then({
         $0.itemSize = CGSize(width: 180, height: 230)
         $0.scrollDirection = .vertical
     }))
     
-    init(viewModel: KnowledgeCollectionViewModel) {
+    init(viewModel: KnowledgeDetailsCollectionViewModel ) {
         self.viewModel = viewModel
         super.init(nibName: nil, bundle: nil)
     }
@@ -40,28 +42,21 @@ class KnowledgeCollectionsViewController: AppRootViewController {
         collectionView.dataSource = viewModel
         collectionView.delegate = viewModel
         collectionView.register(KnowledgeCollectionCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(KnowledgeDetailHeaderView.self,
+                                forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
+                                withReuseIdentifier: KnowledgeDetailHeaderView.identifier)
         
-        if let search = self.navigationController?.getTabBarItem(type: .search),
-           let close = self.navigationController?.getTabBarItem(type: .back){
+        if let search = self.navigationController?.getTabBarItem(type: .search) {
             navigationItem.setRightBarButtonItems([search], animated: true)
-            navigationItem.setLeftBarButtonItems([close], animated: true)
         }
-        navigationController?.backButton?.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
-        
-        
-        // Do any additional setup after loading the view.
-    }
-    
-    @objc func dismissAction() {
-        self.viewModel.coordinator.route(context: self, to: .dismiss, parameters: nil)
     }
     
     func setupUI() {
-        self.title = "База знаний"
+        self.title = "Уход за шерстью собаки"
         
         self.view.backgroundColor = .appColor(.backgroundFirst)
         self.collectionView.backgroundColor = .clear
-        self.collectionView.contentInset = UIEdgeInsets(top: 20, left: 0, bottom: 20, right: 0)
+        self.collectionView.contentInset = UIEdgeInsets(top: 20, left: 10, bottom: 20, right: 10)
         
         [collectionView].forEach({ view.addSubview($0) })
         
@@ -73,3 +68,11 @@ class KnowledgeCollectionsViewController: AppRootViewController {
     func setupBindings() {
     }
 }
+
+
+
+//extension KnowledgeDetailsCollectionViewController: CSCardPresentedView {
+//    var cardTransitionInteractor: CSCardTransitionInteractor? {
+//        //
+//    }
+//}

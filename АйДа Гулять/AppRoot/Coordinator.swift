@@ -27,6 +27,7 @@ class Coordinator: NSObject {
         case userAgreement
         case selectDogs
         case knowledgeCollection
+        case knowledgeDetailsCollection
         case empty
         case menu
     }
@@ -150,6 +151,10 @@ class Coordinator: NSObject {
             case .knowledgeCollection:
                 let knowledgeCollection = KnowledgeCollectionsViewController(viewModel: KnowledgeCollectionViewModel(coordinator: self))
                 self.present(context: context, viewController: knowledgeCollection.embeddedInNavigation())
+                
+            case .knowledgeDetailsCollection:
+                let knowledgeCollection = KnowledgeDetailsCollectionViewController(viewModel: KnowledgeDetailsCollectionViewModel(coordinator: self))
+                self.present(context: context, viewController: knowledgeCollection)
                 
             case .menu:
                 let menuViewController = MenuViewController(coordinator: self)
