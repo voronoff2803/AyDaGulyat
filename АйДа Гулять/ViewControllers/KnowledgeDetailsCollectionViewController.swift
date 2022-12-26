@@ -41,7 +41,7 @@ class KnowledgeDetailsCollectionViewController: AppRootViewController {
         
         collectionView.dataSource = viewModel
         collectionView.delegate = viewModel
-        collectionView.register(KnowledgeCollectionCell.self, forCellWithReuseIdentifier: "cell")
+        collectionView.register(KnowledgeDetailsCollectionCell.self, forCellWithReuseIdentifier: "cell")
         collectionView.register(KnowledgeDetailHeaderView.self,
                                 forSupplementaryViewOfKind: UICollectionView.elementKindSectionHeader,
                                 withReuseIdentifier: KnowledgeDetailHeaderView.identifier)

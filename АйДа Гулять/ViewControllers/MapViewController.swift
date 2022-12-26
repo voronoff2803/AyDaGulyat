@@ -18,6 +18,8 @@ class MapViewController: UIViewController, TextFieldNextable {
     
     private var subscriptions = Set<AnyCancellable>()
     
+    let walkViewModel: WalkViewModel
+    
     var searchResultCount = 0
     
     var bottomMapPositionButton: Constraint!
@@ -26,6 +28,8 @@ class MapViewController: UIViewController, TextFieldNextable {
     let searchButton = UIButton(type: .system).then {
         $0.setImage(.appImage(.searchButton), for: .normal)
     }
+    
+    lazy var walkSatusButton = WalkStatusViewButton(viewModel: walkViewModel)
     
     let searchField = SearchFieldMapView().then {
         $0.autocorrectionType = .no
@@ -136,6 +140,15 @@ class MapViewController: UIViewController, TextFieldNextable {
         }
     }
     
+    init(walkViewModel: WalkViewModel) {
+        self.walkViewModel = walkViewModel
+        super.init(nibName: nil, bundle: nil)
+    }
+    
+    required init?(coder: NSCoder) {
+        fatalError("init(coder:) has not been implemented")
+    }
+    
     override func viewDidLoad() {
         super.viewDidLoad()
         
@@ -191,7 +204,7 @@ class MapViewController: UIViewController, TextFieldNextable {
         
         [mapView, searchField, searchButton, collectionView, resultTableView].forEach({ self.view.addSubview($0) })
         
-        [callToActionButton, mapPositionButton].forEach({mapView.addSubview($0)})
+        [callToActionButton, mapPositionButton, walkSatusButton].forEach({mapView.addSubview($0)})
         
         searchField.snp.makeConstraints { make in
             make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(16)
@@ -226,6 +239,11 @@ class MapViewController: UIViewController, TextFieldNextable {
             make.top.equalTo(searchField.snp.bottom)
             make.horizontalEdges.equalToSuperview().inset(16)
             make.bottom.equalToSuperview()
+        }
+        
+        walkSatusButton.snp.makeConstraints { make in
+            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(25)
+            make.centerX.equalToSuperview()
         }
     }
     

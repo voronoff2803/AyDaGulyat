@@ -30,6 +30,7 @@ class Coordinator: NSObject {
         case knowledgeDetailsCollection
         case empty
         case menu
+        case walkDone
     }
     
     enum ViewModel {
@@ -159,8 +160,11 @@ class Coordinator: NSObject {
             case .menu:
                 let menuViewController = MenuViewController(coordinator: self)
                 context.presentBottomSheet(viewController: menuViewController, configuration: .default)
+                
+            case .walkDone:
+                let walkDoneViewController = WalkDoneViewController(viewModel: WalkViewModel(coordinator: self))
+                context.presentBottomSheet(viewController: walkDoneViewController, configuration: .default)
             }
-            
             
         }
     }
@@ -207,7 +211,7 @@ class Coordinator: NSObject {
     }
     
     private func setpViewControllers() -> [UIViewController] {
-        let mapViewController = MapViewController()
+        let mapViewController = MapViewController(walkViewModel: WalkViewModel(coordinator: self))
         let profileViewController = MyProfileViewController(viewModel: MyProfileViewModel(coordinator: self)).embeddedInNavigation()
         let dummyViewController = UIViewController().then {
             $0.title = "dummy"

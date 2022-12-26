@@ -50,6 +50,9 @@ enum AssetsImage: String {
     case menuKnowledge
     case menuFinds
     case content4
+    case content5
+    case logoWhite
+    case stopWalk
 }
 
 extension UIImage {

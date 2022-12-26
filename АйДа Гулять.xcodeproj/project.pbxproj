@@ -97,6 +97,13 @@
 		0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */; };
 		0D81D0B328F8734000AB33D3 /* NewPasswordViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */; };
 		0D81D0B528F883F000AB33D3 /* RegistrationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D81D0B428F883F000AB33D3 /* RegistrationViewController.swift */; };
+		0D87E22E29588CA4004A9646 /* KnowledgeDetailsCollectionCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E22D29588CA4004A9646 /* KnowledgeDetailsCollectionCell.swift */; };
+		0D87E2302959031A004A9646 /* WalkDoneViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E22F2959031A004A9646 /* WalkDoneViewController.swift */; };
+		0D87E2322959097A004A9646 /* WalkViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E2312959097A004A9646 /* WalkViewModel.swift */; };
+		0D87E23429590D01004A9646 /* WalkStatusViewButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E23329590D01004A9646 /* WalkStatusViewButton.swift */; };
+		0D87E236295919B3004A9646 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E235295919B3004A9646 /* TimeInterval.swift */; };
+		0D87E23829591CB2004A9646 /* UIFont+monospaceDigits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E23729591CB2004A9646 /* UIFont+monospaceDigits.swift */; };
+		0D87E23A29592159004A9646 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E23929592159004A9646 /* CustomSegmentedControl.swift */; };
 		0D8D81352957D12100F90B1B /* KnowledgeDetailsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8D81342957D12100F90B1B /* KnowledgeDetailsCollectionViewController.swift */; };
 		0D8D81372957D18B00F90B1B /* KnowledgeDetailsCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8D81362957D18B00F90B1B /* KnowledgeDetailsCollectionViewModel.swift */; };
 		0D8D81392957D3BA00F90B1B /* KnowledgeDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8D81382957D3BA00F90B1B /* KnowledgeDetailHeaderView.swift */; };
@@ -238,6 +245,13 @@
 		0D81D0B028F840B600AB33D3 /* EmailCodeViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = EmailCodeViewController.swift; sourceTree = "<group>"; };
 		0D81D0B228F8734000AB33D3 /* NewPasswordViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewPasswordViewController.swift; sourceTree = "<group>"; };
 		0D81D0B428F883F000AB33D3 /* RegistrationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = RegistrationViewController.swift; sourceTree = "<group>"; };
+		0D87E22D29588CA4004A9646 /* KnowledgeDetailsCollectionCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailsCollectionCell.swift; sourceTree = "<group>"; };
+		0D87E22F2959031A004A9646 /* WalkDoneViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkDoneViewController.swift; sourceTree = "<group>"; };
+		0D87E2312959097A004A9646 /* WalkViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkViewModel.swift; sourceTree = "<group>"; };
+		0D87E23329590D01004A9646 /* WalkStatusViewButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = WalkStatusViewButton.swift; sourceTree = "<group>"; };
+		0D87E235295919B3004A9646 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
+		0D87E23729591CB2004A9646 /* UIFont+monospaceDigits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+monospaceDigits.swift"; sourceTree = "<group>"; };
+		0D87E23929592159004A9646 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
 		0D8D81342957D12100F90B1B /* KnowledgeDetailsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailsCollectionViewController.swift; sourceTree = "<group>"; };
 		0D8D81362957D18B00F90B1B /* KnowledgeDetailsCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailsCollectionViewModel.swift; sourceTree = "<group>"; };
 		0D8D81382957D3BA00F90B1B /* KnowledgeDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -381,6 +395,8 @@
 				0D15F86F2947DF3F0081AD4A /* UIWindow+topVC.swift */,
 				0DE418DC29568D0E00862FBD /* CGSize.swift */,
 				0D495BB2294C9DFC0052187F /* UITableViewCell+identifier.swift */,
+				0D87E235295919B3004A9646 /* TimeInterval.swift */,
+				0D87E23729591CB2004A9646 /* UIFont+monospaceDigits.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -424,6 +440,7 @@
 				0DE418C429549C5C00862FBD /* KnowledgeCollectionsViewController.swift */,
 				0D8D81342957D12100F90B1B /* KnowledgeDetailsCollectionViewController.swift */,
 				0DE418D42956781C00862FBD /* MenuViewController.swift */,
+				0D87E22F2959031A004A9646 /* WalkDoneViewController.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -447,6 +464,7 @@
 				0DF25AD429179D6D00A279A0 /* DogProfileCollectionViewCell.swift */,
 				0DF25ADA2917FB6800A279A0 /* ResultTableViewCell.swift */,
 				0DE418C629549D4400862FBD /* KnowledgeCollectionCell.swift */,
+				0D87E22D29588CA4004A9646 /* KnowledgeDetailsCollectionCell.swift */,
 			);
 			path = Cells;
 			sourceTree = "<group>";
@@ -505,6 +523,8 @@
 				0DF25AD62917BB1C00A279A0 /* MapButton.swift */,
 				0D5BD10528F5CA1700DD1496 /* ScalableImageView.swift */,
 				0D8D81382957D3BA00F90B1B /* KnowledgeDetailHeaderView.swift */,
+				0D87E23329590D01004A9646 /* WalkStatusViewButton.swift */,
+				0D87E23929592159004A9646 /* CustomSegmentedControl.swift */,
 			);
 			path = Views;
 			sourceTree = "<group>";
@@ -540,6 +560,7 @@
 				0D7C51812953B19A007D0D3C /* SelectDogsViewModel.swift */,
 				0DE418C82954A16D00862FBD /* KnowledgeCollectionViewModel.swift */,
 				0D8D81362957D18B00F90B1B /* KnowledgeDetailsCollectionViewModel.swift */,
+				0D87E2312959097A004A9646 /* WalkViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -798,7 +819,9 @@
 				0DF25AD529179D6D00A279A0 /* DogProfileCollectionViewCell.swift in Sources */,
 				0DD0AB1A29165F7A00E44F80 /* CloseButton.swift in Sources */,
 				0D7C515C294F7B1A007D0D3C /* LoginUserMutation.graphql.swift in Sources */,
+				0D87E2322959097A004A9646 /* WalkViewModel.swift in Sources */,
 				0D20143129005AC9008C2C90 /* TutorialContentModel.swift in Sources */,
+				0D87E236295919B3004A9646 /* TimeInterval.swift in Sources */,
 				0D15F8722947F2DD0081AD4A /* SearchFieldView.swift in Sources */,
 				0DD24894290BEB7C00311427 /* UIViewController+embedInNavigation.swift in Sources */,
 				0D81D0AF28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift in Sources */,
@@ -844,6 +867,7 @@
 				0DE418D72956797200862FBD /* DynamicCollectionView.swift in Sources */,
 				0D7113E12906A918005AB9F9 /* AgreementViewController.swift in Sources */,
 				0D3C521228F4B42D00F91D0C /* Label.swift in Sources */,
+				0D87E23429590D01004A9646 /* WalkStatusViewButton.swift in Sources */,
 				0D3C520E28F4A88500F91D0C /* DefaultTextField.swift in Sources */,
 				0DD24898290D57E800311427 /* DefaultPicker.swift in Sources */,
 				0D20142C290017B7008C2C90 /* AttributedString+markdown.swift in Sources */,
@@ -871,6 +895,7 @@
 				0D7113D629067616005AB9F9 /* AuthViewModel.swift in Sources */,
 				0DD2489A290D758200311427 /* DefaultSegmentedPicker.swift in Sources */,
 				0D7C515D294F7B1A007D0D3C /* StaticSpecialQuery.graphql.swift in Sources */,
+				0D87E23A29592159004A9646 /* CustomSegmentedControl.swift in Sources */,
 				0D3C521828F582CF00F91D0C /* UIViewController+hideKeyboard.swift in Sources */,
 				0D7C515F294F7B1A007D0D3C /* StaticReasonQuery.graphql.swift in Sources */,
 				0D495BB3294C9DFC0052187F /* UITableViewCell+identifier.swift in Sources */,
@@ -890,6 +915,8 @@
 				0D81D0B128F840B600AB33D3 /* EmailCodeViewController.swift in Sources */,
 				0DE418DD29568D0E00862FBD /* CGSize.swift in Sources */,
 				0D5BD10628F5CA1700DD1496 /* ScalableImageView.swift in Sources */,
+				0D87E2302959031A004A9646 /* WalkDoneViewController.swift in Sources */,
+				0D87E22E29588CA4004A9646 /* KnowledgeDetailsCollectionCell.swift in Sources */,
 				0DDE7F182933E6C1006CEE22 /* Coordinator.swift in Sources */,
 				0D5E66CF28F09D770094C949 /* SplashPresenter.swift in Sources */,
 				0D5E66CE28F09D770094C949 /* SplashViewController.swift in Sources */,
@@ -903,6 +930,7 @@
 				0D7C513F294E9C4E007D0D3C /* NextGrowingTextView.swift in Sources */,
 				0DD0AAEE291535CF00E44F80 /* PersonTableViewCell.swift in Sources */,
 				0DDE7F0C2933C98D006CEE22 /* BaseError.swift in Sources */,
+				0D87E23829591CB2004A9646 /* UIFont+monospaceDigits.swift in Sources */,
 				0D5E66CD28F09D770094C949 /* SplashAnimator.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
