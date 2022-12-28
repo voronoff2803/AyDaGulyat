@@ -104,6 +104,11 @@
 		0D87E236295919B3004A9646 /* TimeInterval.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E235295919B3004A9646 /* TimeInterval.swift */; };
 		0D87E23829591CB2004A9646 /* UIFont+monospaceDigits.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E23729591CB2004A9646 /* UIFont+monospaceDigits.swift */; };
 		0D87E23A29592159004A9646 /* CustomSegmentedControl.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E23929592159004A9646 /* CustomSegmentedControl.swift */; };
+		0D87E23C295A601F004A9646 /* ReaderViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E23B295A601F004A9646 /* ReaderViewController.swift */; };
+		0D87E23E295A6477004A9646 /* ReaderPageViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E23D295A6477004A9646 /* ReaderPageViewController.swift */; };
+		0D87E240295BB7CC004A9646 /* CreateMarkerPanel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E23F295BB7CC004A9646 /* CreateMarkerPanel.swift */; };
+		0D87E243295BBD1C004A9646 /* FloatingPanel in Frameworks */ = {isa = PBXBuildFile; productRef = 0D87E242295BBD1C004A9646 /* FloatingPanel */; };
+		0D87E247295BC48D004A9646 /* TrayFloatingPanelLayout.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D87E246295BC48D004A9646 /* TrayFloatingPanelLayout.swift */; };
 		0D8D81352957D12100F90B1B /* KnowledgeDetailsCollectionViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8D81342957D12100F90B1B /* KnowledgeDetailsCollectionViewController.swift */; };
 		0D8D81372957D18B00F90B1B /* KnowledgeDetailsCollectionViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8D81362957D18B00F90B1B /* KnowledgeDetailsCollectionViewModel.swift */; };
 		0D8D81392957D3BA00F90B1B /* KnowledgeDetailHeaderView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D8D81382957D3BA00F90B1B /* KnowledgeDetailHeaderView.swift */; };
@@ -252,6 +257,10 @@
 		0D87E235295919B3004A9646 /* TimeInterval.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeInterval.swift; sourceTree = "<group>"; };
 		0D87E23729591CB2004A9646 /* UIFont+monospaceDigits.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+monospaceDigits.swift"; sourceTree = "<group>"; };
 		0D87E23929592159004A9646 /* CustomSegmentedControl.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CustomSegmentedControl.swift; sourceTree = "<group>"; };
+		0D87E23B295A601F004A9646 /* ReaderViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderViewController.swift; sourceTree = "<group>"; };
+		0D87E23D295A6477004A9646 /* ReaderPageViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ReaderPageViewController.swift; sourceTree = "<group>"; };
+		0D87E23F295BB7CC004A9646 /* CreateMarkerPanel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMarkerPanel.swift; sourceTree = "<group>"; };
+		0D87E246295BC48D004A9646 /* TrayFloatingPanelLayout.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TrayFloatingPanelLayout.swift; sourceTree = "<group>"; };
 		0D8D81342957D12100F90B1B /* KnowledgeDetailsCollectionViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailsCollectionViewController.swift; sourceTree = "<group>"; };
 		0D8D81362957D18B00F90B1B /* KnowledgeDetailsCollectionViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailsCollectionViewModel.swift; sourceTree = "<group>"; };
 		0D8D81382957D3BA00F90B1B /* KnowledgeDetailHeaderView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = KnowledgeDetailHeaderView.swift; sourceTree = "<group>"; };
@@ -311,6 +320,7 @@
 			buildActionMask = 2147483647;
 			files = (
 				0D50E5E528E85A9C006DB37A /* SnapKit in Frameworks */,
+				0D87E243295BBD1C004A9646 /* FloatingPanel in Frameworks */,
 				0DB4D9CD292FACA40098307C /* ApolloWebSocket in Frameworks */,
 				0D7C517529535BCB007D0D3C /* MarkdownKit in Frameworks */,
 				0D50E5EE28E85CEE006DB37A /* Then in Frameworks */,
@@ -416,6 +426,7 @@
 				0DE418DA295683F300862FBD /* DynamicTableView.swift */,
 				0DDE7F192933E9FF006CEE22 /* Coordinatable.swift */,
 				0D7C51852953C1F3007D0D3C /* CollectionViewCenteredFlowLayout.swift */,
+				0D87E246295BC48D004A9646 /* TrayFloatingPanelLayout.swift */,
 			);
 			path = AppRoot;
 			sourceTree = "<group>";
@@ -441,6 +452,9 @@
 				0D8D81342957D12100F90B1B /* KnowledgeDetailsCollectionViewController.swift */,
 				0DE418D42956781C00862FBD /* MenuViewController.swift */,
 				0D87E22F2959031A004A9646 /* WalkDoneViewController.swift */,
+				0D87E23B295A601F004A9646 /* ReaderViewController.swift */,
+				0D87E23D295A6477004A9646 /* ReaderPageViewController.swift */,
+				0D87E23F295BB7CC004A9646 /* CreateMarkerPanel.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -727,6 +741,7 @@
 				0D7C517429535BCB007D0D3C /* MarkdownKit */,
 				0D7C517729537941007D0D3C /* MarkdownView */,
 				0D7C517D29538A0A007D0D3C /* BottomSheet */,
+				0D87E242295BBD1C004A9646 /* FloatingPanel */,
 			);
 			productName = "АйДа Гулять";
 			productReference = 0D50E5CC28E8593C006DB37A /* АйДа Гулять.app */;
@@ -770,6 +785,7 @@
 				0D7C517329535BCA007D0D3C /* XCRemoteSwiftPackageReference "MarkdownKit" */,
 				0D7C517629537941007D0D3C /* XCRemoteSwiftPackageReference "MarkdownView" */,
 				0D7C517C29538A0A007D0D3C /* XCRemoteSwiftPackageReference "BottomSheet" */,
+				0D87E241295BBD1C004A9646 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
 			);
 			productRefGroup = 0D50E5CD28E8593C006DB37A /* Products */;
 			projectDirPath = "";
@@ -808,6 +824,7 @@
 				0D0B1300293CF1A2003D5751 /* ActivityIndicator.swift in Sources */,
 				0D3C521A28F5836500F91D0C /* AppRootViewController.swift in Sources */,
 				0D7C5140294E9C4E007D0D3C /* SizingContainerView.swift in Sources */,
+				0D87E23E295A6477004A9646 /* ReaderPageViewController.swift in Sources */,
 				0D8D81372957D18B00F90B1B /* KnowledgeDetailsCollectionViewModel.swift in Sources */,
 				0D50E5D428E8593C006DB37A /* AuthViewController.swift in Sources */,
 				0D13FD6C2905A52600A86E62 /* DogProfileViewController.swift in Sources */,
@@ -873,6 +890,7 @@
 				0D20142C290017B7008C2C90 /* AttributedString+markdown.swift in Sources */,
 				0D3C521F28F58C2000F91D0C /* UIView+parentVC.swift in Sources */,
 				0D0B1302293CF64D003D5751 /* ErrorIndicator.swift in Sources */,
+				0D87E247295BC48D004A9646 /* TrayFloatingPanelLayout.swift in Sources */,
 				0DE2D02C2910064800CA1F91 /* SearchFieldMapView.swift in Sources */,
 				0D8D81462957DFDE00F90B1B /* CSCardTransitionableView.swift in Sources */,
 				0D20142829001440008C2C90 /* TutorialViewController.swift in Sources */,
@@ -898,6 +916,7 @@
 				0D87E23A29592159004A9646 /* CustomSegmentedControl.swift in Sources */,
 				0D3C521828F582CF00F91D0C /* UIViewController+hideKeyboard.swift in Sources */,
 				0D7C515F294F7B1A007D0D3C /* StaticReasonQuery.graphql.swift in Sources */,
+				0D87E240295BB7CC004A9646 /* CreateMarkerPanel.swift in Sources */,
 				0D495BB3294C9DFC0052187F /* UITableViewCell+identifier.swift in Sources */,
 				0D8D81472957DFDE00F90B1B /* CSCardTransitionHelpers.swift in Sources */,
 				0DD0AB1B29165F7A00E44F80 /* TagListView.swift in Sources */,
@@ -921,6 +940,7 @@
 				0D5E66CF28F09D770094C949 /* SplashPresenter.swift in Sources */,
 				0D5E66CE28F09D770094C949 /* SplashViewController.swift in Sources */,
 				0D7C5165294F7B1A007D0D3C /* StaticColorQuery.graphql.swift in Sources */,
+				0D87E23C295A601F004A9646 /* ReaderViewController.swift in Sources */,
 				0D7C513E294E9C4E007D0D3C /* InternalTextView.swift in Sources */,
 				0D7C5147294F7B0A007D0D3C /* MyProfileQuery.graphql.swift in Sources */,
 				0D7C5158294F7B1A007D0D3C /* StaticHobbyQuery.graphql.swift in Sources */,
@@ -1078,8 +1098,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1107,8 +1126,7 @@
 				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
 				INFOPLIST_KEY_UILaunchStoryboardName = LaunchScreen;
 				INFOPLIST_KEY_UISupportedInterfaceOrientations = UIInterfaceOrientationPortrait;
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
-				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown";
 				IPHONEOS_DEPLOYMENT_TARGET = 13.0;
 				LD_RUNPATH_SEARCH_PATHS = (
 					"$(inherited)",
@@ -1227,6 +1245,14 @@
 				minimumVersion = 2.0.0;
 			};
 		};
+		0D87E241295BBD1C004A9646 /* XCRemoteSwiftPackageReference "FloatingPanel" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/scenee/FloatingPanel";
+			requirement = {
+				kind = upToNextMajorVersion;
+				minimumVersion = 2.0.0;
+			};
+		};
 		0DB4D9C9292FACA40098307C /* XCRemoteSwiftPackageReference "apollo-ios" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/apollographql/apollo-ios.git";
@@ -1303,6 +1329,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0D7C517C29538A0A007D0D3C /* XCRemoteSwiftPackageReference "BottomSheet" */;
 			productName = BottomSheet;
+		};
+		0D87E242295BBD1C004A9646 /* FloatingPanel */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0D87E241295BBD1C004A9646 /* XCRemoteSwiftPackageReference "FloatingPanel" */;
+			productName = FloatingPanel;
 		};
 		0DB4D9CA292FACA40098307C /* Apollo */ = {
 			isa = XCSwiftPackageProductDependency;

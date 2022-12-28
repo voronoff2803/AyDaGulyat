@@ -20,7 +20,7 @@ class MenuViewController: AppRootViewController, ScrollableBottomSheetPresentedC
                                   MenuItem(route: .knowledgeCollection, icon: .appImage(.menuKnowledge), title: "База знаний"),
                                   MenuItem(route: .auth, icon: .appImage(.menuTutor), title: "Туториал"),
                                   MenuItem(route: .auth, icon: .appImage(.menuSettings), title: "Настройки"),
-                                  MenuItem(route: .walkDone, icon: .appImage(.closeEye), title: "Зав Прогулк"),]
+                                  MenuItem(route: .profileEdit, icon: .appImage(.closeEye), title: "Создать метку"),]
     
     let tableView = DynamicTableView()
     

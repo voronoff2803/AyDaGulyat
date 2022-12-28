@@ -31,8 +31,6 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
             UIView.animate(withDuration: 0.1) {
                 switch self.state {
                 case .dogProfile:
-                    self.dogProfileSelectedConstraint?.isActive = true
-                    self.personProfileSelectedConstraint?.isActive = false
                     self.dogsCollectionView.isHidden = false
                     self.pageControlView.isHidden = false
                     self.dogsCollectionView.alpha = 1.0
@@ -42,8 +40,6 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
                     self.dogsCollectionView.transform = .identity
                     self.profileImageView.transform = .init(translationX: -50, y: 0)
                 case .personProfile:
-                    self.dogProfileSelectedConstraint?.isActive = false
-                    self.personProfileSelectedConstraint?.isActive = true
                     self.dogsCollectionView.alpha = 0.0
                     self.pageControlView.alpha = 0.0
                     self.shadowView.isHidden = false
@@ -53,7 +49,6 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
                     self.dogsCollectionView.transform = .init(translationX: 50, y: 0)
                     self.profileImageView.transform = .identity
                 }
-                self.modeSelector.layoutSubviews()
             } completion: { _ in
                 switch self.state {
                 case .dogProfile:
@@ -95,28 +90,6 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
         $0.tintColor = .appColor(.grayEmpty)
     }
     
-    let selectPersonButton = LabelButton().then {
-        $0.setTitle("Хозяин", for: .normal)
-        $0.setTitleColor(.appColor(.black), for: .normal)
-    }
-    
-    let selectDogButton = LabelButton().then {
-        $0.setTitle("Собака", for: .normal)
-        $0.setTitleColor(.appColor(.black), for: .normal)
-    }
-    
-    let modeSelector = UIStackView().then {
-        $0.axis = .horizontal
-        $0.distribution = .fillEqually
-    }
-    
-    let selectedLineView = UIView().then {
-        $0.backgroundColor = .appColor(.black)
-    }
-    
-    let selectedLineViewBackground = UIView().then {
-        $0.backgroundColor = .appColor(.lightGray)
-    }
     
     let profileImageView = UIImageView().then {
         $0.clipsToBounds = false
@@ -125,6 +98,8 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
         $0.isHidden = true
         $0.image = .appImage(.emptyProfile)
     }
+    
+    let segmentedSelector = CustomSegmentedControl(frame: .zero, buttonTitle: ["Хозяин", "Собака"])
     
     
     var shadowView = UIView().then {
@@ -142,9 +117,6 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
         $0.layer.insertSublayer(shadowLayer, at: 0)
         $0.isHidden = true
     }
-    
-    var dogProfileSelectedConstraint: Constraint?
-    var personProfileSelectedConstraint: Constraint?
     
     let pageViewController = UIPageViewController(transitionStyle: .scroll, navigationOrientation: .horizontal)
     lazy var pageView: UIView! = {
@@ -213,17 +185,13 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
         
         self.dogs = [.empty]
         
-        modeSelector.addArrangedSubview(selectPersonButton)
-        modeSelector.addArrangedSubview(selectDogButton)
-        
-        selectDogButton.addTarget(self, action: #selector(selectDogAction), for: .touchUpInside)
-        selectPersonButton.addTarget(self, action: #selector(selectPersonAction), for: .touchUpInside)
-    
         setupUI()
         
         state = { self.state }()
         
         pageViewController.setViewControllers([PersonEditViewController(viewModel: personEditViewModel)], direction: .forward, animated: false)
+        
+        segmentedSelector.delegate = self
     }
     
     override func viewWillAppear(_ animated: Bool) {
@@ -336,29 +304,26 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
     func setupUI() {
         self.view.addSubview(contentView)
         
-        [dogsCollectionView, pageControlView, dismissButton, pageView, modeSelector, shadowView, profileImageView].forEach({self.view.addSubview($0)})
-        
-        modeSelector.addSubview(selectedLineViewBackground)
-        modeSelector.addSubview(selectedLineView)
+        [dogsCollectionView, pageControlView, dismissButton, pageView, shadowView, profileImageView, segmentedSelector].forEach({self.view.addSubview($0)})
         
         self.profileImageView.addSubview(cameraButton)
         
         self.view.backgroundColor = .clear
-        
-        modeSelector.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview().inset(28)
-            make.top.equalTo(pageControlView.snp.bottom).offset(0)
-            make.height.equalTo(60)
-        }
         
         cameraButton.snp.makeConstraints { make in
             make.centerX.equalTo(self.profileImageView)
             make.centerY.equalTo(self.profileImageView.snp.bottom)
         }
         
+        segmentedSelector.snp.makeConstraints { make in
+            make.top.equalTo(dogsCollectionView.snp.bottom).offset(30)
+            make.horizontalEdges.equalToSuperview().inset(28)
+            make.height.equalTo(50)
+        }
+        
         pageView.snp.makeConstraints { make in
             make.horizontalEdges.equalToSuperview()
-            make.top.equalTo(modeSelector.snp.bottom)
+            make.top.equalTo(segmentedSelector.snp.bottom)
             make.bottom.equalTo(view.safeAreaLayoutGuide).priority(.low)
         }
         
@@ -383,20 +348,6 @@ class ProfileEditViewController: AppRootViewController, TextFieldNextable {
         
         dismissButton.snp.makeConstraints { make in
             make.right.top.equalTo(contentView).inset(16)
-        }
-        
-        selectedLineView.snp.makeConstraints { make in
-            make.height.equalTo(2)
-            make.bottom.equalTo(modeSelector)
-            
-            dogProfileSelectedConstraint = make.horizontalEdges.equalTo(selectDogButton).constraint
-            personProfileSelectedConstraint = make.horizontalEdges.equalTo(selectPersonButton).priority(.low).constraint
-        }
-        
-        selectedLineViewBackground.snp.makeConstraints { make in
-            make.height.equalTo(2)
-            make.bottom.equalTo(modeSelector)
-            make.horizontalEdges.equalTo(modeSelector)
         }
         
         profileImageView.snp.makeConstraints { make in
@@ -485,8 +436,24 @@ extension ProfileEditViewController: UIPageViewControllerDelegate {
         
         if contentViewController is DogProfileViewController {
             self.state = .dogProfile
+            self.segmentedSelector.setIndex(index: 1)
         } else {
             self.state = .personProfile
+            self.segmentedSelector.setIndex(index: 0)
+        }
+    }
+}
+
+
+extension ProfileEditViewController: CustomSegmentedControlDelegate {
+    func change(to index: Int) {
+        switch index {
+        case 0:
+            selectPersonAction()
+        case 1:
+            selectDogAction()
+        default:
+            selectPersonAction()
         }
     }
 }

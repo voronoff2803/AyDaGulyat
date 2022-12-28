@@ -20,7 +20,7 @@ class CustomSegmentedControl: UIView {
     var selectorViewColor: UIColor = .black
     var selectorTextColor: UIColor = .black
     
-    weak var delegate:CustomSegmentedControlDelegate?
+    weak var delegate: CustomSegmentedControlDelegate?
     
     public private(set) var selectedIndex : Int = 0
     
@@ -58,7 +58,7 @@ class CustomSegmentedControl: UIView {
                 let selectorPosition = frame.width/CGFloat(buttonTitles.count) * CGFloat(buttonIndex)
                 selectedIndex = buttonIndex
                 delegate?.change(to: selectedIndex)
-                UIView.animate(withDuration: 0.3) {
+                UIView.animate(withDuration: 0.2) {
                     self.selectorView.frame.origin.x = selectorPosition
                 }
                 btn.setTitleColor(selectorTextColor, for: .normal)

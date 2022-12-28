@@ -8,6 +8,7 @@
 import Foundation
 import UIKit
 import BottomSheet
+import FloatingPanel
 
 typealias ActionCallback = (Coordinator.Route) -> ()
 
@@ -31,6 +32,8 @@ class Coordinator: NSObject {
         case empty
         case menu
         case walkDone
+        case reader
+        case createMarker
     }
     
     enum ViewModel {
@@ -84,7 +87,7 @@ class Coordinator: NSObject {
     }
     
     func route(context: UIViewController, to route: Coordinator.Route, parameters: Any?) {
-        DispatchQueue.main.async {
+        DispatchQueue.main.async { [self] in
             switch route {
             case .done:
                 context.dismiss(animated: true)
@@ -157,6 +160,10 @@ class Coordinator: NSObject {
                 let knowledgeCollection = KnowledgeDetailsCollectionViewController(viewModel: KnowledgeDetailsCollectionViewModel(coordinator: self))
                 self.present(context: context, viewController: knowledgeCollection)
                 
+            case .reader:
+                let readerPageViewController = ReaderPageViewController()
+                self.present(context: context, viewController: readerPageViewController)
+                
             case .menu:
                 let menuViewController = MenuViewController(coordinator: self)
                 context.presentBottomSheet(viewController: menuViewController, configuration: .default)
@@ -164,9 +171,25 @@ class Coordinator: NSObject {
             case .walkDone:
                 let walkDoneViewController = WalkDoneViewController(viewModel: WalkViewModel(coordinator: self))
                 context.presentBottomSheet(viewController: walkDoneViewController, configuration: .default)
+                
+            case .createMarker:
+                let createMarkerPanel = CreateMarkerPanel(viewModel: WalkViewModel(coordinator: self))
+                self.presentOnPanel(context: context, viewController: createMarkerPanel)
             }
             
+            
         }
+    }
+    
+    func presentOnPanel(context: UIViewController, viewController: UIViewController) {
+        let fpc = FloatingPanelController()
+        let contentVC = viewController
+        fpc.set(contentViewController: contentVC)
+        fpc.layout = TrayFloatingPanelLayout()
+
+        fpc.isRemovalInteractionEnabled = true // Optional: Let it removable by a swipe-down
+
+        context.present(fpc, animated: true, completion: nil)
     }
     
     func createRootVC() -> UIViewController {
@@ -179,6 +202,7 @@ class Coordinator: NSObject {
         //showAuthIfNeed()
         //showTutorial()
     }
+    
     
     func showAuthIfNeed() {
         if !APIService.shared.isAuthenticated {

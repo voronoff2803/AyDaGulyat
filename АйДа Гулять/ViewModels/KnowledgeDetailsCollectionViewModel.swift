@@ -39,7 +39,7 @@ extension KnowledgeDetailsCollectionViewModel: UICollectionViewDataSource {
 extension KnowledgeDetailsCollectionViewModel: UICollectionViewDelegate {
     func collectionView(_ collectionView: UICollectionView, didSelectItemAt indexPath: IndexPath) {
         guard let parentViewController = collectionView.parentViewController else { return }
-        coordinator.route(context: parentViewController, to: .empty, parameters: nil)
+        coordinator.route(context: parentViewController, to: .reader, parameters: nil)
     }
     
     func collectionView(_ collectionView: UICollectionView, viewForSupplementaryElementOfKind kind: String, at indexPath: IndexPath) -> UICollectionReusableView {

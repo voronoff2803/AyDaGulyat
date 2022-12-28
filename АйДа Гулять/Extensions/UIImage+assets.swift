@@ -53,6 +53,10 @@ enum AssetsImage: String {
     case content5
     case logoWhite
     case stopWalk
+    case share
+    case bookmark
+    case longArrowRight
+    case longArrowLeft
 }
 
 extension UIImage {

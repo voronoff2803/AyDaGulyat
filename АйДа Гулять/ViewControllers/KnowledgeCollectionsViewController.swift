@@ -44,8 +44,8 @@ class KnowledgeCollectionsViewController: AppRootViewController {
         if let search = self.navigationController?.getTabBarItem(type: .search),
            let close = self.navigationController?.getTabBarItem(type: .back){
             navigationItem.setRightBarButtonItems([search], animated: true)
-            //navigationItem.setLeftBarButtonItems([close], animated: true)
-            self.navigationController?.navigationBar.topItem?.backBarButtonItem = close
+            navigationItem.setLeftBarButtonItems([close], animated: true)
+            //self.navigationController?.navigationBar.topItem?.backBarButtonItem = close
             //navigationItem.backBarButtonItem = close
             //navigationItem.setHidesBackButton(false, animated: true)
         }
