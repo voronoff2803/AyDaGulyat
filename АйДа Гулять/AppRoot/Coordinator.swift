@@ -138,7 +138,7 @@ class Coordinator: NSObject {
                 
             case .userAgreement:
                 let userAgreementViewController = AgreementViewController(coordinator: self)
-                self.present(context: context, viewController: userAgreementViewController)
+                self.present(context: context, viewController: userAgreementViewController, breakNavigation: true, modalPresentationStyle: .pageSheet)
                 
                 
                 // MyProfile
@@ -173,7 +173,7 @@ class Coordinator: NSObject {
                 context.presentBottomSheet(viewController: walkDoneViewController, configuration: .default)
                 
             case .createMarker:
-                let createMarkerPanel = CreateMarkerPanel(viewModel: WalkViewModel(coordinator: self))
+                let createMarkerPanel = CreateMarkerPanel(viewModel: CreateMarkerViewModel(coordinator: self))
                 self.presentOnPanel(context: context, viewController: createMarkerPanel)
             }
             
@@ -186,10 +186,30 @@ class Coordinator: NSObject {
         let contentVC = viewController
         fpc.set(contentViewController: contentVC)
         fpc.layout = TrayFloatingPanelLayout()
-
+        
         fpc.isRemovalInteractionEnabled = true // Optional: Let it removable by a swipe-down
+        
+        let appearance = SurfaceAppearance()
+
+        let shadow = SurfaceAppearance.Shadow()
+        shadow.color = UIColor.black
+        shadow.offset = CGSize(width: 0, height: 16)
+        shadow.radius = 16
+        shadow.spread = 8
+        appearance.shadows = [shadow]
+
+        appearance.cornerRadius = 10.0
+        appearance.backgroundColor = .clear
+
+        fpc.surfaceView.appearance = appearance
 
         context.present(fpc, animated: true, completion: nil)
+
+        if let vc = contentVC as? ScrollViewProvider {
+            if let scrollView = vc.provideScrollView {
+                fpc.track(scrollView: scrollView)
+            }
+        }
     }
     
     func createRootVC() -> UIViewController {

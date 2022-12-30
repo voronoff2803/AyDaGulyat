@@ -60,12 +60,6 @@ class ListSearchViewController: AppRootViewController, TextFieldNextable, Reload
         }
     }
     
-    let textField = DefaultTextField().then {
-        $0.autocorrectionType = .no
-        $0.placeholder = "Поиск"
-        $0.setLeftImage(image: .appImage(.searchIcon).withTintColor(.appColor(.grayEmpty)))
-    }
-    
     let emptyLabelView = UILabel().then {
         $0.text =
         """
@@ -97,19 +91,18 @@ class ListSearchViewController: AppRootViewController, TextFieldNextable, Reload
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        if let close = self.navigationController?.getTabBarItem(type: .back),
+        if let close = self.navigationController?.getTabBarItem(type: .close),
            let search = self.navigationController?.getTabBarItem(type: .search) {
-            navigationItem.setRightBarButtonItems([search], animated: true)
-            navigationItem.setLeftBarButtonItems([close], animated: true)
+            navigationItem.setRightBarButtonItems([close, search], animated: true)
         }
-        navigationController?.backButton?.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        navigationController?.closeButton?.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         
         resultTableView.register(ListTableViewCell.self, forCellReuseIdentifier: "cell")
         resultTableView.delegate = self
         resultTableView.dataSource = self
         resultTableView.separatorStyle = .none
         
-        textField.textPublisher.sink { text in
+        navigationController?.searchBarField.textPublisher.sink { text in
             self.searchString = text ?? ""
         }.store(in: &subscriptions)
         
@@ -119,17 +112,10 @@ class ListSearchViewController: AppRootViewController, TextFieldNextable, Reload
     func setupUI() {
         self.view.backgroundColor = .appColor(.backgroundFirst)
         
-        [textField, resultTableView, emptyLabelView].forEach({ self.view.addSubview($0) })
-        
-        textField.snp.makeConstraints { make in
-            make.horizontalEdges.equalTo(self.view.safeAreaLayoutGuide).inset(28)
-            make.top.equalTo(self.view.safeAreaLayoutGuide).inset(10)
-        }
+        [resultTableView, emptyLabelView].forEach({ self.view.addSubview($0) })
         
         resultTableView.snp.makeConstraints { make in
-            make.horizontalEdges.equalToSuperview()
-            make.top.equalTo(textField.snp.bottom)
-            make.bottom.equalTo(self.view.safeAreaLayoutGuide)
+            make.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
         
         emptyLabelView.snp.makeConstraints { make in

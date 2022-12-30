@@ -79,7 +79,7 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
     
     override func viewDidLoad() {
         super.viewDidLoad()
-
+        
         setupUI()
         setupBindings()
         
@@ -90,17 +90,17 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
     
     func updateTime(seconds: Int) {
         let attributedString = NSMutableAttributedString(string: "Запросить новый код\nможно через \(seconds) сек")
-
+        
         let attributes0: [NSAttributedString.Key : Any] = [
             .foregroundColor: UIColor.appColor(.grayEmpty)
         ]
         attributedString.addAttributes(attributes0, range: NSRange(location: 0, length: 31))
-
+        
         let attributes1: [NSAttributedString.Key : Any] = [
             .foregroundColor: UIColor.appColor(.blue)
         ]
         let posfixCount = attributedString.length
-
+        
         attributedString.addAttributes(attributes1, range: NSRange(location: 31, length: posfixCount - 31))
         
         descriptionLabel.attributedText = attributedString
@@ -173,6 +173,14 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
             .sink(receiveValue: { value in
                 self.viewModel.code = value ?? ""
             })
+            .store(in: &subscriptions)
+        viewModel.$code
+            .removeDuplicates()
+            .sink { value in
+                if value.count >= 6 {
+                    self.viewModel.sendCode(context: self)
+                }
+            }
             .store(in: &subscriptions)
     }
     

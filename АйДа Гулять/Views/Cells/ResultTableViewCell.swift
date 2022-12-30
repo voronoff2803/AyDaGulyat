@@ -54,7 +54,7 @@ class ResultTableViewCell: UITableViewCell {
         
         arrowIcon.snp.makeConstraints { make in
             make.centerY.equalToSuperview()
-            make.right.equalToSuperview().inset(27)
+            make.right.equalToSuperview().inset(16)
             make.left.greaterThanOrEqualTo(titleLabel.snp.right).offset(10)
         }
     }

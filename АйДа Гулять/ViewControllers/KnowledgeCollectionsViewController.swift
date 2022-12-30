@@ -42,14 +42,15 @@ class KnowledgeCollectionsViewController: AppRootViewController {
         collectionView.register(KnowledgeCollectionCell.self, forCellWithReuseIdentifier: "cell")
         
         if let search = self.navigationController?.getTabBarItem(type: .search),
-           let close = self.navigationController?.getTabBarItem(type: .back){
-            navigationItem.setRightBarButtonItems([search], animated: true)
-            navigationItem.setLeftBarButtonItems([close], animated: true)
+           let close = self.navigationController?.getTabBarItem(type: .close){
+            navigationItem.setRightBarButtonItems([close, search], animated: true)
+            //navigationItem.setLeftBarButtonItems([close], animated: true)
+            //navigationItem.leftBarButtonItem = close
             //self.navigationController?.navigationBar.topItem?.backBarButtonItem = close
             //navigationItem.backBarButtonItem = close
             //navigationItem.setHidesBackButton(false, animated: true)
         }
-        navigationController?.backButton?.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        navigationController?.closeButton?.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         
         
         // Do any additional setup after loading the view.

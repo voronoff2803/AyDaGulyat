@@ -127,18 +127,10 @@ class RecoverPasswordEmailViewController: AppRootViewController, TextFieldNextab
                 self.viewModel.email = value ?? ""
             }
             .store(in: &subscriptions)
-        viewModel.$code
-            .removeDuplicates()
-            .sink { value in
-                if value.count >= 6 {
-                    self.viewModel.sendCode(context: self)
-                }
-            }
-            .store(in: &subscriptions)
     }
     
     @objc func sendAction() {
-        viewModel.sendCodeEmail(context: self)
+        viewModel.recoverPassword(context: self)
     }
     
     @objc func backAction() {

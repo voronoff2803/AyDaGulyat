@@ -57,6 +57,7 @@ enum AssetsImage: String {
     case bookmark
     case longArrowRight
     case longArrowLeft
+    case deleteIcon
 }
 
 extension UIImage {

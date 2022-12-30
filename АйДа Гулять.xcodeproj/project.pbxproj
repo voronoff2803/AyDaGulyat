@@ -26,6 +26,11 @@
 		0D2016D128E896D0003E673E /* Montserrat-Regular.ttf in Resources */ = {isa = PBXBuildFile; fileRef = 0D2016CB28E8962D003E673E /* Montserrat-Regular.ttf */; };
 		0D2016D328E89789003E673E /* UIFont+customFont.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D2016D228E89789003E673E /* UIFont+customFont.swift */; };
 		0D227BCB28F9D7180026CDAA /* DefaultAlertViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D227BCA28F9D7180026CDAA /* DefaultAlertViewController.swift */; };
+		0D372E9B295DEBD7007D1443 /* ScrollViewProvider.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D372E9A295DEBD7007D1443 /* ScrollViewProvider.swift */; };
+		0D372E9E295E27FF007D1443 /* DangerCreateMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D372E9D295E27FF007D1443 /* DangerCreateMarker.swift */; };
+		0D372EA0295E2959007D1443 /* CreateMarkerViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D372E9F295E2959007D1443 /* CreateMarkerViewModel.swift */; };
+		0D372EA2295E54E1007D1443 /* PhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D372EA1295E54E1007D1443 /* PhotoCell.swift */; };
+		0D372EA4295E5F38007D1443 /* AddPhotoCell.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D372EA3295E5F38007D1443 /* AddPhotoCell.swift */; };
 		0D3C520828F4A17000F91D0C /* UIColor+assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C520728F4A17000F91D0C /* UIColor+assets.swift */; };
 		0D3C520A28F4A17900F91D0C /* UIImage+assets.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C520928F4A17900F91D0C /* UIImage+assets.swift */; };
 		0D3C520E28F4A88500F91D0C /* DefaultTextField.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0D3C520D28F4A88500F91D0C /* DefaultTextField.swift */; };
@@ -186,6 +191,11 @@
 		0D2016CD28E8963F003E673E /* Montserrat-SemiBold.ttf */ = {isa = PBXFileReference; lastKnownFileType = file; path = "Montserrat-SemiBold.ttf"; sourceTree = "<group>"; };
 		0D2016D228E89789003E673E /* UIFont+customFont.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIFont+customFont.swift"; sourceTree = "<group>"; };
 		0D227BCA28F9D7180026CDAA /* DefaultAlertViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultAlertViewController.swift; sourceTree = "<group>"; };
+		0D372E9A295DEBD7007D1443 /* ScrollViewProvider.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ScrollViewProvider.swift; sourceTree = "<group>"; };
+		0D372E9D295E27FF007D1443 /* DangerCreateMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DangerCreateMarker.swift; sourceTree = "<group>"; };
+		0D372E9F295E2959007D1443 /* CreateMarkerViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CreateMarkerViewModel.swift; sourceTree = "<group>"; };
+		0D372EA1295E54E1007D1443 /* PhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = PhotoCell.swift; sourceTree = "<group>"; };
+		0D372EA3295E5F38007D1443 /* AddPhotoCell.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AddPhotoCell.swift; sourceTree = "<group>"; };
 		0D3C520728F4A17000F91D0C /* UIColor+assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIColor+assets.swift"; sourceTree = "<group>"; };
 		0D3C520928F4A17900F91D0C /* UIImage+assets.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIImage+assets.swift"; sourceTree = "<group>"; };
 		0D3C520D28F4A88500F91D0C /* DefaultTextField.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultTextField.swift; sourceTree = "<group>"; };
@@ -390,6 +400,15 @@
 			path = Resources;
 			sourceTree = "<group>";
 		};
+		0D372E9C295E2795007D1443 /* CreateMarker */ = {
+			isa = PBXGroup;
+			children = (
+				0D87E23F295BB7CC004A9646 /* CreateMarkerPanel.swift */,
+				0D372E9D295E27FF007D1443 /* DangerCreateMarker.swift */,
+			);
+			path = CreateMarker;
+			sourceTree = "<group>";
+		};
 		0D3C520B28F4A50D00F91D0C /* Extensions */ = {
 			isa = PBXGroup;
 			children = (
@@ -427,6 +446,7 @@
 				0DDE7F192933E9FF006CEE22 /* Coordinatable.swift */,
 				0D7C51852953C1F3007D0D3C /* CollectionViewCenteredFlowLayout.swift */,
 				0D87E246295BC48D004A9646 /* TrayFloatingPanelLayout.swift */,
+				0D372E9A295DEBD7007D1443 /* ScrollViewProvider.swift */,
 			);
 			path = AppRoot;
 			sourceTree = "<group>";
@@ -436,6 +456,7 @@
 			children = (
 				0D15F87D2949A0FD0081AD4A /* Tutorial */,
 				0D15F87A2948F57C0081AD4A /* Auth */,
+				0D372E9C295E2795007D1443 /* CreateMarker */,
 				0D7C5135294E83A3007D0D3C /* ProfileEdit */,
 				0D7C517F2953AEED007D0D3C /* SelectDogsViewController.swift */,
 				0D7113E02906A918005AB9F9 /* AgreementViewController.swift */,
@@ -454,7 +475,6 @@
 				0D87E22F2959031A004A9646 /* WalkDoneViewController.swift */,
 				0D87E23B295A601F004A9646 /* ReaderViewController.swift */,
 				0D87E23D295A6477004A9646 /* ReaderPageViewController.swift */,
-				0D87E23F295BB7CC004A9646 /* CreateMarkerPanel.swift */,
 			);
 			path = ViewControllers;
 			sourceTree = "<group>";
@@ -463,6 +483,8 @@
 			isa = PBXGroup;
 			children = (
 				0D7C51872953C3C7007D0D3C /* SelectDogCollectionViewCell.swift */,
+				0D372EA1295E54E1007D1443 /* PhotoCell.swift */,
+				0D372EA3295E5F38007D1443 /* AddPhotoCell.swift */,
 				0D2014382903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift */,
 				0DD24895290C1AFE00311427 /* ListTableViewCell.swift */,
 				0DD0AAED291535CF00E44F80 /* PersonTableViewCell.swift */,
@@ -575,6 +597,7 @@
 				0DE418C82954A16D00862FBD /* KnowledgeCollectionViewModel.swift */,
 				0D8D81362957D18B00F90B1B /* KnowledgeDetailsCollectionViewModel.swift */,
 				0D87E2312959097A004A9646 /* WalkViewModel.swift */,
+				0D372E9F295E2959007D1443 /* CreateMarkerViewModel.swift */,
 			);
 			path = ViewModels;
 			sourceTree = "<group>";
@@ -872,6 +895,7 @@
 				0D7C5160294F7B1A007D0D3C /* SendCodeMutation.graphql.swift in Sources */,
 				0D7C5163294F7B1A007D0D3C /* StaticBreedQuery.graphql.swift in Sources */,
 				0D7C51842953BE74007D0D3C /* BeautifulGridLayout.swift in Sources */,
+				0D372EA2295E54E1007D1443 /* PhotoCell.swift in Sources */,
 				0D3C520A28F4A17900F91D0C /* UIImage+assets.swift in Sources */,
 				0D7C515A294F7B1A007D0D3C /* RefreshTokenMutation.graphql.swift in Sources */,
 				0DDE7F1A2933E9FF006CEE22 /* Coordinatable.swift in Sources */,
@@ -890,6 +914,7 @@
 				0D20142C290017B7008C2C90 /* AttributedString+markdown.swift in Sources */,
 				0D3C521F28F58C2000F91D0C /* UIView+parentVC.swift in Sources */,
 				0D0B1302293CF64D003D5751 /* ErrorIndicator.swift in Sources */,
+				0D372E9E295E27FF007D1443 /* DangerCreateMarker.swift in Sources */,
 				0D87E247295BC48D004A9646 /* TrayFloatingPanelLayout.swift in Sources */,
 				0DE2D02C2910064800CA1F91 /* SearchFieldMapView.swift in Sources */,
 				0D8D81462957DFDE00F90B1B /* CSCardTransitionableView.swift in Sources */,
@@ -898,8 +923,10 @@
 				0D3C520828F4A17000F91D0C /* UIColor+assets.swift in Sources */,
 				0DD24890290BDF5E00311427 /* ListSearchViewController.swift in Sources */,
 				0D20142A290015A8008C2C90 /* TutorialPageContentViewController.swift in Sources */,
+				0D372EA4295E5F38007D1443 /* AddPhotoCell.swift in Sources */,
 				0D7C5162294F7B1A007D0D3C /* ValidateCodeMutation.graphql.swift in Sources */,
 				0D8D81442957DFDE00F90B1B /* CSCardTransition.swift in Sources */,
+				0D372EA0295E2959007D1443 /* CreateMarkerViewModel.swift in Sources */,
 				0D2014392903FB3B008C2C90 /* DogAvatarCollectionViewCell.swift in Sources */,
 				0DF25AD72917BB1C00A279A0 /* MapButton.swift in Sources */,
 				0D7C516E29508365007D0D3C /* StaticItemsModel.swift in Sources */,
@@ -907,6 +934,7 @@
 				0D7113EA2906FC8C005AB9F9 /* PersonEditViewController.swift in Sources */,
 				0D3C521428F56DEB00F91D0C /* DefaultButton.swift in Sources */,
 				0D3C521028F4AF9100F91D0C /* LabelButton.swift in Sources */,
+				0D372E9B295DEBD7007D1443 /* ScrollViewProvider.swift in Sources */,
 				0D227BCB28F9D7180026CDAA /* DefaultAlertViewController.swift in Sources */,
 				0DD0AAF0291546D000E44F80 /* BirthDateTableViewCell.swift in Sources */,
 				0D2014372903F4B5008C2C90 /* ProfileEditViewController.swift in Sources */,

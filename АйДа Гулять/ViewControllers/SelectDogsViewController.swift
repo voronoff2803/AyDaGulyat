@@ -55,7 +55,7 @@ class SelectDogsViewController: UIViewController, ScrollableBottomSheetPresented
         collectionView.register(SelectDogCollectionViewCell.self, forCellWithReuseIdentifier: "cell")
         // Do any additional setup after loading the view.
         
-        scrollView = collectionView.scrollView
+        scrollView = collectionView.parentScrollView
     }
     
     func setupUI() {

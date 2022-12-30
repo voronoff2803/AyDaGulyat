@@ -82,12 +82,11 @@ class ListSearchViewControllerMany: AppRootViewController, TextFieldNextable, Re
         super.viewDidLoad()
         
         
-        if let close = self.navigationController?.getTabBarItem(type: .back),
+        if let close = self.navigationController?.getTabBarItem(type: .close),
            let search = self.navigationController?.getTabBarItem(type: .search) {
-            navigationItem.setRightBarButtonItems([search], animated: true)
-            navigationItem.setLeftBarButtonItems([close], animated: true)
+            navigationItem.setRightBarButtonItems([close, search], animated: true)
         }
-        navigationController?.backButton?.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
+        navigationController?.closeButton?.addTarget(self, action: #selector(dismissAction), for: .touchUpInside)
         
         resultTableView.register(ListTableViewCell.self, forCellReuseIdentifier: "cell")
         resultTableView.delegate = self

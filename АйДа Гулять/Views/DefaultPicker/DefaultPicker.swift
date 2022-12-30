@@ -46,14 +46,14 @@ class DefaultPicker: UIControl {
     
     let currentTextLabel = UILabel().then {
         $0.font = .montserratRegular(size: 16)
-        $0.textColor = .appColor(.black)
+        $0.textColor = .appColor(.grayEmpty)
         $0.numberOfLines = 1
         $0.textAlignment = .right
     }
     
     let chevronIconView = UIImageView().then {
         $0.image = UIImage.appImage(.chevron)
-        $0.tintColor = .appColor(.black)
+        $0.tintColor = .appColor(.grayEmpty)
     }
     
     private let bottomBorder = UIView().then {

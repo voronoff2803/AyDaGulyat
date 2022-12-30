@@ -43,6 +43,8 @@ class DefaultNavigationViewController: UINavigationController {
         navigationBar.prefersLargeTitles = false
         
         self.delegate = self
+        
+        interactivePopGestureRecognizer?.delegate = self
     }
     
     
@@ -211,4 +213,11 @@ extension DefaultNavigationViewController: UINavigationControllerDelegate {
         )
     }
     
+}
+
+
+extension DefaultNavigationViewController: UIGestureRecognizerDelegate {
+    public func gestureRecognizerShouldBegin(_ gestureRecognizer: UIGestureRecognizer) -> Bool {
+        return viewControllers.count > 1
+    }
 }

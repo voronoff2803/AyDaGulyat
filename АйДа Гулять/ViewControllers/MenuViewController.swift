@@ -53,7 +53,7 @@ class MenuViewController: AppRootViewController, ScrollableBottomSheetPresentedC
     override func viewDidLoad() {
         super.viewDidLoad()
         
-        scrollView = tableView.scrollView
+        scrollView = tableView.parentScrollView
         
         view.backgroundColor = .appColor(.backgroundFirst)
         

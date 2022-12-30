@@ -174,6 +174,17 @@ class AuthViewModel: ObservableObject {
             .store(in: &subscriptions)
     }
     
+    func recoverPassword(context: UIViewController) {
+        APIService.shared.authResetCodeSend(email: email)
+            .trackActivity(activityIndicator)
+            .trackError(errorIndicator)
+            .sink(receiveValue: { res in
+                self.userID = res
+                self.coordinator.route(context: context, to: .code, parameters: nil)
+            })
+            .store(in: &subscriptions)
+    }
+    
     func sendCode(context: UIViewController) {
         APIService.shared.authValidateCode(code: code, id: userID)
             .trackActivity(activityIndicator)

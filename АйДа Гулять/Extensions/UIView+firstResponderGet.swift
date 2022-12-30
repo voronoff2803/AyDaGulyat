@@ -22,14 +22,28 @@ extension UIView {
     }
 }
 
+extension UIView {
+    var childScrollView: UIScrollView? {
+        if let scView = self as? UIScrollView { return scView }
+
+        for subview in subviews {
+            if let scView = subview.childScrollView {
+                return scView
+            }
+        }
+
+        return nil
+    }
+}
+
 
 extension UIView {
-    var scrollView: UIScrollView? {
+    var parentScrollView: UIScrollView? {
         if let scView = self as? UIScrollView {
             return scView
         }
         
-        if let scView = superview?.scrollView {
+        if let scView = superview?.parentScrollView {
             return scView
         }
 

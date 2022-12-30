@@ -45,6 +45,7 @@ class MapViewController: UIViewController, TextFieldNextable {
     
     let callToActionButton = MapButton(rightIcon: .appImage(.richArrow)).then {
         $0.setTitle("Кто рядом", for: .normal)
+        $0.isHidden = true
     }
     
     let mapPositionButton = UIButton(type: .system).then {
@@ -77,6 +78,7 @@ class MapViewController: UIViewController, TextFieldNextable {
             if oldValue == currentState { return }
             switch currentState {
             case .search:
+                callToActionButton.isHidden = true
                 self.searchButton.isHidden = true
                 self.searchField.isHidden = false
                 
@@ -94,6 +96,7 @@ class MapViewController: UIViewController, TextFieldNextable {
                 resultTableView.isHidden = false
                 resultTableView.reloadData()
             case .normal:
+                callToActionButton.isHidden = true
                 if searchButton.isHidden == true {
                     self.searchButton.isHidden = false
                     
@@ -113,6 +116,7 @@ class MapViewController: UIViewController, TextFieldNextable {
                 
                 resultTableView.isHidden = true
             case .showDogs:
+                callToActionButton.isHidden = false
                 if oldValue == .search {
                     self.searchButton.isHidden = false
                     
@@ -167,9 +171,15 @@ class MapViewController: UIViewController, TextFieldNextable {
             self.collectionView.scrollToItem(at: IndexPath(row: 0, section: 0), at: .centeredHorizontally, animated: false)
         }
         
-        currentState = {currentState}()
+        currentState = { currentState }()
         
         callToActionButton.addTarget(self, action: #selector(callToAction), for: .touchUpInside)
+        
+        let tapGesture = UITapGestureRecognizer(target: self, action: #selector(callToAction))
+        mapView.addGestureRecognizer(tapGesture)
+        
+        let longTapGesture = UILongPressGestureRecognizer(target: self, action: #selector(longTapAction))
+        mapView.addGestureRecognizer(longTapGesture)
         
         resultTableView.register(ResultTableViewCell.self, forCellReuseIdentifier: "cell")
         resultTableView.dataSource = self
@@ -247,9 +257,15 @@ class MapViewController: UIViewController, TextFieldNextable {
         }
     }
     
-    
     @objc func callToAction() {
         currentState = (currentState == .showDogs) ? .normal : .showDogs
+    }
+    
+    @objc func longTapAction(sender: UILongPressGestureRecognizer) {
+        if sender.state == .began {
+            currentState = .normal
+            walkViewModel.coordinator.route(context: self, to: .createMarker, parameters: nil)
+        }
     }
     
     func showMyProfile() {
@@ -295,6 +311,10 @@ class MapViewController: UIViewController, TextFieldNextable {
     
     @objc func setStateSearch() {
         self.currentState = .search
+    }
+    
+    @objc func showDog() {
+        
     }
     
     

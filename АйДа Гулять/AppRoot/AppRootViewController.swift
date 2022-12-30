@@ -26,6 +26,7 @@ class AppRootViewController: UIViewController {
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillShow), name: UIResponder.keyboardWillShowNotification, object: nil)
         NotificationCenter.default.addObserver(self, selector: #selector(keyboardWillHide), name: UIResponder.keyboardWillHideNotification, object: nil)
 
+        view.tintColor = .appColor(.black)
     }
     
     override func touchesBegan(_ touches: Set<UITouch>, with event: UIEvent?) {
@@ -56,7 +57,7 @@ class AppRootViewController: UIViewController {
                 self.view.layoutIfNeeded()
             } completion: { _ in
                 if let firstResponder = self.view.firstResponder {
-                    if let scView = firstResponder.scrollView {
+                    if let scView = firstResponder.parentScrollView {
                         scView.scrollRectToVisible(firstResponder.frame.insetBy(dx: .zero, dy: -30), animated: true)
                     }
                 }
