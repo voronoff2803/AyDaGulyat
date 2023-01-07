@@ -131,6 +131,11 @@
 		0DD0AB1A29165F7A00E44F80 /* CloseButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD0AB1729165F7900E44F80 /* CloseButton.swift */; };
 		0DD0AB1B29165F7A00E44F80 /* TagListView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD0AB1829165F7900E44F80 /* TagListView.swift */; };
 		0DD0AB1C29165F7A00E44F80 /* TagView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD0AB1929165F7A00E44F80 /* TagView.swift */; };
+		0DD1DD982968A8930043F4BA /* Carbon in Frameworks */ = {isa = PBXBuildFile; productRef = 0DD1DD972968A8930043F4BA /* Carbon */; };
+		0DD1DD9A2968AA170043F4BA /* LostDogCreateMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1DD992968AA170043F4BA /* LostDogCreateMarker.swift */; };
+		0DD1DD9C2968ABA20043F4BA /* FoundDogCreateMarker.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1DD9B2968ABA20043F4BA /* FoundDogCreateMarker.swift */; };
+		0DD1DD9E2968DC1C0043F4BA /* MenuItem.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1DD9D2968DC1C0043F4BA /* MenuItem.swift */; };
+		0DD1DDA02968DDBA0043F4BA /* UITableView+cancelTouches.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD1DD9F2968DDBA0043F4BA /* UITableView+cancelTouches.swift */; };
 		0DD24890290BDF5E00311427 /* ListSearchViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD2488F290BDF5E00311427 /* ListSearchViewController.swift */; };
 		0DD24892290BEB5F00311427 /* DefaultNavigationViewController.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD24891290BEB5F00311427 /* DefaultNavigationViewController.swift */; };
 		0DD24894290BEB7C00311427 /* UIViewController+embedInNavigation.swift in Sources */ = {isa = PBXBuildFile; fileRef = 0DD24893290BEB7C00311427 /* UIViewController+embedInNavigation.swift */; };
@@ -287,6 +292,10 @@
 		0DD0AB1729165F7900E44F80 /* CloseButton.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = CloseButton.swift; sourceTree = "<group>"; };
 		0DD0AB1829165F7900E44F80 /* TagListView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagListView.swift; sourceTree = "<group>"; };
 		0DD0AB1929165F7A00E44F80 /* TagView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = TagView.swift; sourceTree = "<group>"; };
+		0DD1DD992968AA170043F4BA /* LostDogCreateMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = LostDogCreateMarker.swift; sourceTree = "<group>"; };
+		0DD1DD9B2968ABA20043F4BA /* FoundDogCreateMarker.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FoundDogCreateMarker.swift; sourceTree = "<group>"; };
+		0DD1DD9D2968DC1C0043F4BA /* MenuItem.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MenuItem.swift; sourceTree = "<group>"; };
+		0DD1DD9F2968DDBA0043F4BA /* UITableView+cancelTouches.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UITableView+cancelTouches.swift"; sourceTree = "<group>"; };
 		0DD2488F290BDF5E00311427 /* ListSearchViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ListSearchViewController.swift; sourceTree = "<group>"; };
 		0DD24891290BEB5F00311427 /* DefaultNavigationViewController.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = DefaultNavigationViewController.swift; sourceTree = "<group>"; };
 		0DD24893290BEB7C00311427 /* UIViewController+embedInNavigation.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = "UIViewController+embedInNavigation.swift"; sourceTree = "<group>"; };
@@ -338,6 +347,7 @@
 				0D50E5E828E85ABC006DB37A /* Alamofire in Frameworks */,
 				0D7113ED29070663005AB9F9 /* ShowTime in Frameworks */,
 				0DB4D9CB292FACA40098307C /* Apollo in Frameworks */,
+				0DD1DD982968A8930043F4BA /* Carbon in Frameworks */,
 				0D7113DB29067E94005AB9F9 /* CombineCocoa in Frameworks */,
 				0D5E66D228F0BB220094C949 /* Lottie in Frameworks */,
 				0D7C517E29538A0A007D0D3C /* BottomSheet in Frameworks */,
@@ -404,6 +414,8 @@
 			isa = PBXGroup;
 			children = (
 				0D87E23F295BB7CC004A9646 /* CreateMarkerPanel.swift */,
+				0DD1DD992968AA170043F4BA /* LostDogCreateMarker.swift */,
+				0DD1DD9B2968ABA20043F4BA /* FoundDogCreateMarker.swift */,
 				0D372E9D295E27FF007D1443 /* DangerCreateMarker.swift */,
 			);
 			path = CreateMarker;
@@ -426,6 +438,7 @@
 				0D495BB2294C9DFC0052187F /* UITableViewCell+identifier.swift */,
 				0D87E235295919B3004A9646 /* TimeInterval.swift */,
 				0D87E23729591CB2004A9646 /* UIFont+monospaceDigits.swift */,
+				0DD1DD9F2968DDBA0043F4BA /* UITableView+cancelTouches.swift */,
 			);
 			path = Extensions;
 			sourceTree = "<group>";
@@ -544,6 +557,7 @@
 		0D50E5EB28E85B9D006DB37A /* Views */ = {
 			isa = PBXGroup;
 			children = (
+				0DD1DDD12968EF120043F4BA /* Items */,
 				0D7C5141294E9C54007D0D3C /* GrowingTextView */,
 				0D495BB1294C95720052187F /* Cells */,
 				0D7C516F29508EB3007D0D3C /* DefaultPicker */,
@@ -678,6 +692,14 @@
 			path = TagView;
 			sourceTree = "<group>";
 		};
+		0DD1DDD12968EF120043F4BA /* Items */ = {
+			isa = PBXGroup;
+			children = (
+				0DD1DD9D2968DC1C0043F4BA /* MenuItem.swift */,
+			);
+			path = Items;
+			sourceTree = "<group>";
+		};
 		0DDE7EFA292FB3F0006CEE22 /* Packages */ = {
 			isa = PBXGroup;
 			children = (
@@ -765,6 +787,7 @@
 				0D7C517729537941007D0D3C /* MarkdownView */,
 				0D7C517D29538A0A007D0D3C /* BottomSheet */,
 				0D87E242295BBD1C004A9646 /* FloatingPanel */,
+				0DD1DD972968A8930043F4BA /* Carbon */,
 			);
 			productName = "АйДа Гулять";
 			productReference = 0D50E5CC28E8593C006DB37A /* АйДа Гулять.app */;
@@ -809,6 +832,7 @@
 				0D7C517629537941007D0D3C /* XCRemoteSwiftPackageReference "MarkdownView" */,
 				0D7C517C29538A0A007D0D3C /* XCRemoteSwiftPackageReference "BottomSheet" */,
 				0D87E241295BBD1C004A9646 /* XCRemoteSwiftPackageReference "FloatingPanel" */,
+				0DD1DD962968A8930043F4BA /* XCRemoteSwiftPackageReference "Carbon" */,
 			);
 			productRefGroup = 0D50E5CD28E8593C006DB37A /* Products */;
 			projectDirPath = "";
@@ -864,6 +888,7 @@
 				0D87E236295919B3004A9646 /* TimeInterval.swift in Sources */,
 				0D15F8722947F2DD0081AD4A /* SearchFieldView.swift in Sources */,
 				0DD24894290BEB7C00311427 /* UIViewController+embedInNavigation.swift in Sources */,
+				0DD1DD9C2968ABA20043F4BA /* FoundDogCreateMarker.swift in Sources */,
 				0D81D0AF28F83D2A00AB33D3 /* RecoverPasswordEmailViewController.swift in Sources */,
 				0D7C515B294F7B1A007D0D3C /* ResetPasswordMutation.graphql.swift in Sources */,
 				0DE418DB295683F300862FBD /* DynamicTableView.swift in Sources */,
@@ -933,6 +958,7 @@
 				0DD0AAF6291599C700E44F80 /* TagsTableViewCell.swift in Sources */,
 				0D7113EA2906FC8C005AB9F9 /* PersonEditViewController.swift in Sources */,
 				0D3C521428F56DEB00F91D0C /* DefaultButton.swift in Sources */,
+				0DD1DD9E2968DC1C0043F4BA /* MenuItem.swift in Sources */,
 				0D3C521028F4AF9100F91D0C /* LabelButton.swift in Sources */,
 				0D372E9B295DEBD7007D1443 /* ScrollViewProvider.swift in Sources */,
 				0D227BCB28F9D7180026CDAA /* DefaultAlertViewController.swift in Sources */,
@@ -979,7 +1005,9 @@
 				0DD0AAEE291535CF00E44F80 /* PersonTableViewCell.swift in Sources */,
 				0DDE7F0C2933C98D006CEE22 /* BaseError.swift in Sources */,
 				0D87E23829591CB2004A9646 /* UIFont+monospaceDigits.swift in Sources */,
+				0DD1DD9A2968AA170043F4BA /* LostDogCreateMarker.swift in Sources */,
 				0D5E66CD28F09D770094C949 /* SplashAnimator.swift in Sources */,
+				0DD1DDA02968DDBA0043F4BA /* UITableView+cancelTouches.swift in Sources */,
 			);
 			runOnlyForDeploymentPostprocessing = 0;
 		};
@@ -1289,6 +1317,14 @@
 				minimumVersion = 1.0.0;
 			};
 		};
+		0DD1DD962968A8930043F4BA /* XCRemoteSwiftPackageReference "Carbon" */ = {
+			isa = XCRemoteSwiftPackageReference;
+			repositoryURL = "https://github.com/ra1028/Carbon";
+			requirement = {
+				branch = master;
+				kind = branch;
+			};
+		};
 		0DDE7F082931392E006CEE22 /* XCRemoteSwiftPackageReference "ApolloCombine" */ = {
 			isa = XCRemoteSwiftPackageReference;
 			repositoryURL = "https://github.com/joel-perry/ApolloCombine";
@@ -1372,6 +1408,11 @@
 			isa = XCSwiftPackageProductDependency;
 			package = 0DB4D9C9292FACA40098307C /* XCRemoteSwiftPackageReference "apollo-ios" */;
 			productName = ApolloWebSocket;
+		};
+		0DD1DD972968A8930043F4BA /* Carbon */ = {
+			isa = XCSwiftPackageProductDependency;
+			package = 0DD1DD962968A8930043F4BA /* XCRemoteSwiftPackageReference "Carbon" */;
+			productName = Carbon;
 		};
 		0DDE7EFF292FB4B5006CEE22 /* Aida */ = {
 			isa = XCSwiftPackageProductDependency;

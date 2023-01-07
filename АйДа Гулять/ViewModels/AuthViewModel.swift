@@ -169,7 +169,7 @@ class AuthViewModel: ObservableObject {
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
                 self.userID = res
-                self.coordinator.route(context: context, to: .code, parameters: nil)
+                self.sendCodeEmail(context: context)
             })
             .store(in: &subscriptions)
     }
@@ -180,7 +180,7 @@ class AuthViewModel: ObservableObject {
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
                 self.userID = res
-                self.coordinator.route(context: context, to: .code, parameters: nil)
+                self.sendCodeEmail(context: context)
             })
             .store(in: &subscriptions)
     }
@@ -199,7 +199,7 @@ class AuthViewModel: ObservableObject {
             .store(in: &subscriptions)
     }
     
-    func sendCodeEmail(context: UIViewController) {
+    func sendCodeEmail(context: UIViewController, isAgain: Bool = false) {
         timerSeconds = 120
         self.codeState = .codeInput
         APIService.shared.authSendCode(email: email)
@@ -207,8 +207,9 @@ class AuthViewModel: ObservableObject {
             .trackError(errorIndicator)
             .sink(receiveValue: { res in
                 self.userID = res
-                
-                self.coordinator.route(context: context, to: .code, parameters: nil)
+                if !isAgain {
+                    self.coordinator.route(context: context, to: .code, parameters: nil)
+                }
             })
             .store(in: &subscriptions)
     }

@@ -185,7 +185,7 @@ class EmailCodeViewController: AppRootViewController, TextFieldNextable {
     }
     
     @objc func requestCodeAgainAction() {
-        viewModel.sendCodeEmail(context: self)
+        viewModel.sendCodeEmail(context: self, isAgain: true)
     }
     
     func setState(newState: EmailCodeViewController.State) {

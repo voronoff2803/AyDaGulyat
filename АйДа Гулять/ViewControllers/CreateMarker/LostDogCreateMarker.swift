@@ -1,15 +1,15 @@
 //
-//  DangerCreateMarker.swift
+//  LostDogCreateMarker.swift
 //  АйДа Гулять
 //
-//  Created by Alexey Voronov on 29.12.2022.
+//  Created by Alexey Voronov on 06.01.2023.
 //
 
 import UIKit
 import Combine
 
 
-class DangerCreateMarker: AppRootViewController, TextFieldNextable {
+class LostDogCreateMarker: AppRootViewController, TextFieldNextable {
     private var subscriptions = Set<AnyCancellable>()
     
     let viewModel: CreateMarkerViewModel
@@ -37,7 +37,7 @@ class DangerCreateMarker: AppRootViewController, TextFieldNextable {
         $0.backgroundColor = .clear
     }
     
-    let privacyPicker = DefaultPicker(titleText: "Тип опасности", isManySelectable: false)
+    let privacyPicker = DefaultPicker(titleText: "Собака потерялась", isManySelectable: false)
     
     
     let addTextField = NextGrowingTextView().then {
@@ -115,14 +115,14 @@ class DangerCreateMarker: AppRootViewController, TextFieldNextable {
 }
 
 
-extension DangerCreateMarker: UIScrollViewDelegate {
+extension LostDogCreateMarker: UIScrollViewDelegate {
     func scrollViewWillBeginDragging(_ scrollView: UIScrollView) {
         view.endEditing(true)
     }
 }
 
 
-extension DangerCreateMarker: UITextViewDelegate {
+extension LostDogCreateMarker: UITextViewDelegate {
     func textView(_ textView: UITextView, shouldChangeTextIn range: NSRange, replacementText text: String) -> Bool {
         if(text == "\n") {
             textView.resignFirstResponder()

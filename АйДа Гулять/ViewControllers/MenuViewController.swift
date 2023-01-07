@@ -7,22 +7,27 @@
 
 import UIKit
 import BottomSheet
+import Carbon
 
 class MenuViewController: AppRootViewController, ScrollableBottomSheetPresentedController {
     var scrollView: UIScrollView?
     
     let coordinator: Coordinator
     
-    let menuItems: [MenuItem] = [ MenuItem(route: .auth, icon: .appImage(.menuQR), title: "Моя визитка"),
-                                  MenuItem(route: .auth, icon: .appImage(.menuWalks), title: "Мои прогулки"),
-                                  MenuItem(route: .auth, icon: .appImage(.menuFinds), title: "Потерялись | Нашлись"),
-                                  MenuItem(route: .auth, icon: .appImage(.menuShelters), title: "Приюты"),
-                                  MenuItem(route: .knowledgeCollection, icon: .appImage(.menuKnowledge), title: "База знаний"),
-                                  MenuItem(route: .auth, icon: .appImage(.menuTutor), title: "Туториал"),
-                                  MenuItem(route: .auth, icon: .appImage(.menuSettings), title: "Настройки"),
-                                  MenuItem(route: .profileEdit, icon: .appImage(.closeEye), title: "Создать метку"),]
+    lazy var menuItems: [MenuItem] = [ MenuItem(route: .auth, icon: .appImage(.menuQR), title: "Моя визитка", menuViewController: self),
+                                  MenuItem(route: .selectDogs, icon: .appImage(.menuWalks), title: "Мои прогулки", menuViewController: self),
+                                  MenuItem(route: .walkDone, icon: .appImage(.menuFinds), title: "Потерялись | Нашлись", menuViewController: self),
+                                  MenuItem(route: .profileEdit, icon: .appImage(.menuShelters), title: "Приюты", menuViewController: self),
+                                  MenuItem(route: .knowledgeCollection, icon: .appImage(.menuKnowledge), title: "База знаний", menuViewController: self),
+                                  MenuItem(route: .auth, icon: .appImage(.menuTutor), title: "Туториал", menuViewController: self),
+                                  MenuItem(route: .bigProfile, icon: .appImage(.menuSettings), title: "Настройки", menuViewController: self)]
     
     let tableView = DynamicTableView()
+    
+    let renderer = Renderer(
+        adapter: UITableViewAdapter(),
+        updater: UITableViewUpdater()
+    )
     
     let titleLabel = UILabel().then {
         $0.textColor = .appColor(.black)
@@ -52,21 +57,24 @@ class MenuViewController: AppRootViewController, ScrollableBottomSheetPresentedC
     
     override func viewDidLoad() {
         super.viewDidLoad()
-        
         scrollView = tableView.parentScrollView
-        
         view.backgroundColor = .appColor(.backgroundFirst)
         
-        tableView.dataSource = self
-        tableView.delegate = self
-        
-        tableView.register(MenuCell.self, forCellReuseIdentifier: "cell")
         setupUI()
+        
+        renderer.target = tableView
+        renderer.render {
+            Group(of: menuItems) { item in
+                item
+            }
+        }
     }
     
 
     func setupUI() {
         [titleLabel, descriptionLabel, switchView, tableView].forEach({self.view.addSubview($0)})
+        
+        tableView.backgroundColor = .appColor(.backgroundFirst)
         
         tableView.snp.makeConstraints { make in
             make.bottom.equalTo(view.safeAreaLayoutGuide)
@@ -84,6 +92,7 @@ class MenuViewController: AppRootViewController, ScrollableBottomSheetPresentedC
             make.top.equalTo(titleLabel.snp.bottom).offset(8)
             make.left.equalToSuperview().inset(28)
             make.right.equalTo(switchView.snp.left).offset(-28)
+            make.height.equalTo(52)
         }
         
         switchView.snp.makeConstraints { make in
@@ -97,12 +106,14 @@ class MenuViewController: AppRootViewController, ScrollableBottomSheetPresentedC
 
     override func viewDidLayoutSubviews() {
         super.viewDidLayoutSubviews()
-        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize) -
+        CGSize(width: 0, height: view.safeAreaInsets.bottom - 10)
     }
     
     override func viewWillLayoutSubviews() {
         super.viewWillLayoutSubviews()
-        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize)
+        preferredContentSize = view.systemLayoutSizeFitting(UIView.layoutFittingCompressedSize) -
+        CGSize(width: 0, height: view.safeAreaInsets.bottom - 10)
     }
 }
 
@@ -126,10 +137,4 @@ extension MenuViewController: UITableViewDelegate {
         
         self.coordinator.route(context: self, to: menuItem.route, parameters: nil)
     }
-}
-
-struct MenuItem {
-    let route: Coordinator.Route
-    let icon: UIImage
-    let title: String
 }

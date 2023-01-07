@@ -25,6 +25,33 @@ class ProfileBigViewController: UIViewController {
         
         self.setupUI()
         
+        tableView.register(PersonTableViewCell.self,
+                           forCellReuseIdentifier: PersonTableViewCell.identifier)
+        
+        tableView.register(BirthDateTableViewCell.self,
+                           forCellReuseIdentifier: BirthDateTableViewCell.reusableID)
+        
+        tableView.register(TagsTableViewCell.self,
+                           forCellReuseIdentifier: TagsTableViewCell.reusableID)
+        
+        tableView.register(DescriptionTableViewCell.self,
+                           forCellReuseIdentifier: DescriptionTableViewCell.reusableID)
+        
+        tableView.register(ContactsTableViewCell.self,
+                           forCellReuseIdentifier: ContactsTableViewCell.reusableID)
+        
+        tableView.register(DogProfileTableViewCell.self,
+                           forCellReuseIdentifier: DogProfileTableViewCell.reusableID)
+        
+        tableView.register(DogProfileSpecsTableViewCell.self,
+                           forCellReuseIdentifier: DogProfileSpecsTableViewCell.reusableID)
+        
+        tableView.register(DogProfileFeaturesTableViewCell.self,
+                           forCellReuseIdentifier: DogProfileFeaturesTableViewCell.reusableID)
+        
+        tableView.register(DogProfileDescriptionTableViewCell.self,
+                           forCellReuseIdentifier: DogProfileDescriptionTableViewCell.reusableID)
+        
         tableView.estimatedRowHeight = 100
         tableView.rowHeight = UITableView.automaticDimension
 
@@ -56,17 +83,6 @@ class ProfileBigViewController: UIViewController {
         tableView.snp.makeConstraints { make in
             make.edges.equalTo(self.view.safeAreaLayoutGuide)
         }
-    }
-}
-
-
-extension ProfileBigViewController: UITableViewDataSource {
-    func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
-        return UITableViewCell()
-    }
-
-    func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
-        return 9
     }
 }
 
@@ -126,3 +142,59 @@ extension ProfileBigViewController: UIScrollViewDelegate {
 //        }
     }
 }
+
+
+extension ProfileBigViewController: UITableViewDataSource {
+     func tableView(_ tableView: UITableView, cellForRowAt indexPath: IndexPath) -> UITableViewCell {
+         let index = indexPath.row
+         switch index {
+         case 0:
+             let cell = tableView.dequeueReusableCell(withIdentifier: PersonTableViewCell.identifier,
+                                                         for: indexPath)
+             return cell
+         case 1:
+             let cell = tableView.dequeueReusableCell(withIdentifier:BirthDateTableViewCell.reusableID,
+                                                           for: indexPath)
+             return cell
+         case 2:
+             let cell = tableView.dequeueReusableCell(withIdentifier:TagsTableViewCell.reusableID,
+                                                           for: indexPath) as! TagsTableViewCell
+             cell.tableViewWidth = tableView.frame.width
+             return cell
+         case 3:
+             let cell = tableView.dequeueReusableCell(withIdentifier:DescriptionTableViewCell.reusableID,
+                                                           for: indexPath)
+             return cell
+         case 4:
+             let cell = tableView.dequeueReusableCell(withIdentifier:ContactsTableViewCell.reusableID,
+                                                           for: indexPath)
+             return cell
+         case 5:
+             let cell = tableView.dequeueReusableCell(withIdentifier:DogProfileTableViewCell.reusableID,
+                                                           for: indexPath)
+             return cell
+         case 6:
+             let cell = tableView.dequeueReusableCell(withIdentifier:DogProfileSpecsTableViewCell.reusableID,
+                                                           for: indexPath) as! DogProfileSpecsTableViewCell
+             cell.tableViewWidth = tableView.frame.width
+             return cell
+         case 7:
+             let cell = tableView.dequeueReusableCell(withIdentifier:DogProfileFeaturesTableViewCell.reusableID,
+                                                           for: indexPath) as! DogProfileFeaturesTableViewCell
+             cell.tableViewWidth = tableView.frame.width
+             return cell
+         case 8:
+             let cell = tableView.dequeueReusableCell(withIdentifier:DogProfileDescriptionTableViewCell.reusableID,
+                                                           for: indexPath) as! DogProfileDescriptionTableViewCell
+             return cell
+         default:
+             let cell = tableView.dequeueReusableCell(withIdentifier:BirthDateTableViewCell.reusableID,
+                                                           for: indexPath)
+             return cell
+         }
+     }
+
+     func tableView(_ tableView: UITableView, numberOfRowsInSection section: Int) -> Int {
+         return 9
+     }
+ }

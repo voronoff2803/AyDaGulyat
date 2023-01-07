@@ -186,6 +186,10 @@ class MapViewController: UIViewController, TextFieldNextable {
         resultTableView.delegate = self
         
         self.hero.isEnabled = true
+        
+        DispatchQueue.main.asyncAfter(deadline: .now() + 2.0) {
+            self.showInisibleZoneConfigurator()
+        }
     }
     
     func setupBindings() {

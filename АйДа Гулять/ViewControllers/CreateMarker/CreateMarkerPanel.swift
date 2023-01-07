@@ -20,15 +20,16 @@ class CreateMarkerPanel: AppRootViewController, TextFieldNextable, ScrollViewPro
     
     let viewModel: CreateMarkerViewModel
     
+    var lastIndex = 0
     var state: CreateMarkerPanel.State = .danger {
         didSet {
             switch state {
             case .danger:
-                break
-            case .lost:
-                break
+                segmentedSelector.setIndex(index: 0)
             case .found:
-                break
+                segmentedSelector.setIndex(index: 1)
+            case .lost:
+                segmentedSelector.setIndex(index: 2)
             }
         }
     }
@@ -45,7 +46,7 @@ class CreateMarkerPanel: AppRootViewController, TextFieldNextable, ScrollViewPro
         $0.textAlignment = .center
     }
     
-    let segmentedSelector = CustomSegmentedControl(frame: .zero, buttonTitle: ["Опасность", "Потерял", "Нашёл"])
+    let segmentedSelector = CustomSegmentedControl(frame: .zero, buttonTitle: ["Опасность", "Нашёл", "Потерял"])
     
     
     let continueButton = DefaultButton().then {
@@ -120,6 +121,25 @@ class CreateMarkerPanel: AppRootViewController, TextFieldNextable, ScrollViewPro
 //            make.bottom.equalTo(view.safeAreaLayoutGuide).inset(20)
 //        }
     }
+    
+    
+    func changePage() {
+        let isForward = lastIndex < segmentedSelector.selectedIndex
+        
+        switch state {
+        case .danger:
+            pageViewController.setViewControllers([DangerCreateMarker(viewModel: viewModel)],
+                                                  direction: isForward ? .forward : .reverse, animated: true)
+        case .found:
+            pageViewController.setViewControllers([FoundDogCreateMarker(viewModel: viewModel)],
+                                                  direction: isForward ? .forward : .reverse, animated: true)
+        case .lost:
+            pageViewController.setViewControllers([LostDogCreateMarker(viewModel: viewModel)],
+                                                  direction: isForward ? .forward : .reverse, animated: true)
+        }
+        
+        lastIndex = segmentedSelector.selectedIndex
+    }
 }
 
 
@@ -135,18 +155,49 @@ extension CreateMarkerPanel: CustomSegmentedControlDelegate {
         default:
             break
         }
+        
+        changePage()
     }
 }
 
 
 extension CreateMarkerPanel: UIPageViewControllerDelegate, UIPageViewControllerDataSource {
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerAfter viewController: UIViewController) -> UIViewController? {
-        return nil
+        switch state {
+        case .danger:
+            return FoundDogCreateMarker(viewModel: viewModel)
+        case .found:
+            return LostDogCreateMarker(viewModel: viewModel)
+        case .lost:
+            return nil
+        }
     }
     
     func pageViewController(_ pageViewController: UIPageViewController, viewControllerBefore viewController: UIViewController) -> UIViewController? {
-        return nil
+        switch state {
+        case .danger:
+            return nil
+        case .found:
+            return DangerCreateMarker(viewModel: viewModel)
+        case .lost:
+            return FoundDogCreateMarker(viewModel: viewModel)
+        }
     }
     
-    
+    func pageViewController(_ pageViewController: UIPageViewController, didFinishAnimating finished: Bool, previousViewControllers: [UIViewController], transitionCompleted completed: Bool) {
+        guard completed, let contentViewController = pageViewController.viewControllers?.first else { return }
+        
+        switch contentViewController {
+        case is DangerCreateMarker:
+            self.state = .danger
+        case is FoundDogCreateMarker:
+            self.state = .found
+        case is LostDogCreateMarker:
+            self.state = .lost
+        default:
+            break
+        }
+        
+        lastIndex = segmentedSelector.selectedIndex
+    }
 }

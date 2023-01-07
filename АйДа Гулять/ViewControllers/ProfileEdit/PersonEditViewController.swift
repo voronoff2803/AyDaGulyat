@@ -89,7 +89,7 @@ class PersonEditViewController: AppRootViewController, TextFieldNextable {
         setupUI()
         setupBindings()
         
-        genderControl.setupValues(values: ["Мальчик", "Девочка"], selectedIndex: 0)
+        genderControl.setupValues(values: ["Мужской", "Женский"], selectedIndex: 0)
         scrollView.delegate = self
         addTextField.textView.delegate = self
     }

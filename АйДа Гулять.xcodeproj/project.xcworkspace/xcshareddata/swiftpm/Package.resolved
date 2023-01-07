@@ -47,12 +47,30 @@
         }
       },
       {
+        "package": "Carbon",
+        "repositoryURL": "https://github.com/ra1028/Carbon",
+        "state": {
+          "branch": "master",
+          "revision": "9e572593e02ce77e54932d46d130054a13e2a056",
+          "version": null
+        }
+      },
+      {
         "package": "CombineCocoa",
         "repositoryURL": "https://github.com/CombineCommunity/CombineCocoa",
         "state": {
           "branch": null,
           "revision": "7300c75ff9e072aa7fd0fccefcc88f74aae9bf56",
           "version": "0.4.1"
+        }
+      },
+      {
+        "package": "DifferenceKit",
+        "repositoryURL": "https://github.com/ra1028/DifferenceKit.git",
+        "state": {
+          "branch": null,
+          "revision": "14c66681e12a38b81045f44c6c29724a0d4b0e72",
+          "version": "1.1.5"
         }
       },
       {

@@ -34,6 +34,7 @@ class Coordinator: NSObject {
         case walkDone
         case reader
         case createMarker
+        case bigProfile
     }
     
     enum ViewModel {
@@ -86,7 +87,7 @@ class Coordinator: NSObject {
         }
     }
     
-    func route(context: UIViewController, to route: Coordinator.Route, parameters: Any?) {
+    func route(context: UIViewController, to route: Coordinator.Route, parameters: [String: Any]?) {
         DispatchQueue.main.async { [self] in
             switch route {
             case .done:
@@ -175,9 +176,11 @@ class Coordinator: NSObject {
             case .createMarker:
                 let createMarkerPanel = CreateMarkerPanel(viewModel: CreateMarkerViewModel(coordinator: self))
                 self.presentOnPanel(context: context, viewController: createMarkerPanel)
+                
+            case .bigProfile:
+                let big = ProfileBigViewController()
+                self.present(context: context, viewController: big, breakNavigation: true)
             }
-            
-            
         }
     }
     
@@ -221,6 +224,8 @@ class Coordinator: NSObject {
         //route(context: rootViewController, to: .selectDogs, parameters: nil)
         //showAuthIfNeed()
         //showTutorial()
+        
+        //route(context: rootViewController, to: .createMarker, parameters: nil)
     }
     
     
